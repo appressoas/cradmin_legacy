@@ -25,7 +25,13 @@ setup(
         'future',
         'html2text',
         'htmls',
+        'fire'
     ],
+    entry_points={
+        "console_scripts": [
+            'cradmin_legacy_refactor_from_django_cradmin = cradmin_legacy.refactor_from_django_cradmin.cli:main'
+        ]
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
