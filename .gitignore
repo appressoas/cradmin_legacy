@@ -1,0 +1,32 @@
+*.o
+*.pyc
+*.pyo
+*.tmp
+.*.swp
+.*.swo
+*~
+.DS_Store
+*.egg-info/
+/dist/
+.tox
+
+# Ignore user-specific pycharm settings
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dictionaries/
+
+# Files created when running tests and demos
+/django_media_root/
+/django_static_root/
+/test_django_media_root/
+/cradmin_demo/django_media_root/
+/cradmin_demo/test_django_media_root/
+/cache/
+
+# coverage.py
+/.coverage
+/htmlcov/
+
+*.sqlite3

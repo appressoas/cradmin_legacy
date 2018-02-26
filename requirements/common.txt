@@ -1,0 +1,58 @@
+#Django==1.8.4
+#Django==1.9.7
+#Django==1.10b1
+Django==1.11.5
+
+django-crispy-forms==1.7.0
+Pillow==2.8.1
+sorl-thumbnail==12.3
+pytz==2014.10
+html2text==2015.6.21
+
+# For HTML5 file uploads with the multiple attribute
+django-multiupload==0.3
+
+# Required by sphinx
+Sphinx==1.3.1
+sphinxcontrib-napoleon==0.3.3
+sphinx_rtd_theme==0.1.7
+appresso_sphinx_extensions==1.0.0
+
+# For test/CI automation
+flake8==2.4.0
+tox==1.9.2
+
+# For testing HTML output in tests
+htmls==0.9.6
+
+# For mocking tests
+mock-django==0.6.10
+
+# Better Django shell and other utils for development
+django-extensions==1.5.2
+python-dateutil==2.3
+ipython==3.1.0
+
+# For making code compatible with both python2 and python3
+future==0.14.3
+
+# For translations
+transifex-client==0.11b3
+
+# For automating development tasks
+invoke==0.10.1
+
+# For model creation in tests
+model_mommy==1.2.6
+
+coverage==4.0
+
+# For building styles
+vitalstyles==1.1.4
+
+ievv_opensource==0.2.17
+
+# Pull inn development packages from GIT
+-r develop.gitpackages.txt
+
+-e .
