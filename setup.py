@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='django-cradmin',
-    description='A role based admin UI for Django that produces a user friendly and beautiful UI.',
-    version='1.2.3',
-    url='https://github.com/appressoas/django_cradmin',
+    name='cradmin-legacy',
+    description='Legacy 1.x fork of django_cradmin.',
+    version='1.3.0',
+    url='https://github.com/appressoas/cradmin_legacy',
     author='Espen Angell Kristiansen, Tor Johansen, Vegard Angell, Magne Westlie',
     author_email='post@appresso.no',
     license='BSD',
