@@ -2,9 +2,9 @@ import difflib
 import fnmatch
 import os
 import re
+import sys
 
 import fire
-import sys
 
 from cradmin_legacy.refactor_from_django_cradmin import colorize
 
@@ -25,7 +25,7 @@ class StringReplace(AbstractReplace):
 
 class RegexReplace(AbstractReplace):
     def __init__(self, pattern, replacement):
-        self.pattern = re.compile(pattern)
+        self.pattern = re.compile(pattern, re.MULTILINE)
         self.replacement = replacement
 
     def replace(self, string):
@@ -182,6 +182,41 @@ class Cli(object):
                                   verbose=verbose, pretend=pretend)
         self.refactor_rst_code(directory=directory, exclude_directories=exclude_directories,
                                verbose=verbose, pretend=pretend)
+
+    # def detect_dangerous_code(self, directory, cradmin_version, exclude_directories=tuple()):
+    #     """
+    #     Detect dangerous code that requires some special handling.
+    #
+    #     Prints out warning messages for detected dangerous code.
+    #
+    #     --directory
+    #         The directory to detect code in. Typically the root directory of the repository
+    #         of a project using django-cradmin.
+    #     --cradmin-version
+    #         The version of django-cradmin that the codebase you are checking is using.
+    #         Examples:
+    #             --cradmin-version "1.2.3"
+    #             --cradmin-version "2.3.1"
+    #     --exclude-directories
+    #         Add extra fnmatch/glob exclude patterns for directories.
+    #         The default exclude patterns are ['**/node_modules', '.git', '**/.git'].
+    #
+    #         Example: ``--exclude-directories "('libs/*', 'extrastuff/*')"``.
+    #
+    #         We do not follow symlinks when refactoring, so you do not
+    #         have to exclude symlinked directories.
+    #     """
+    #     for filepath in self.__iter_walk_directory(
+    #             toplevel_directory=directory,
+    #             filepatterns=['*.rst', '*.py'],
+    #             include_files=True,
+    #             exclude_directories=exclude_directories):
+    #         if filepath.endswith('.py'):
+    #             detector = detect_dangerous_code.DetectDangerousPythonCode(
+    #                 filepath=filepath,
+    #                 cradmin_version=cradmin_version
+    #             )
+    #             detector.print_messages()
 
 
 def main():
