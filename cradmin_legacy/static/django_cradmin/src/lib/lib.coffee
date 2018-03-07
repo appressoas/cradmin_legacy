@@ -8,7 +8,7 @@ angular.module('djangoCradmin', [
   'djangoCradmin.menu'
   'djangoCradmin.objecttable'
   'djangoCradmin.acemarkdown'
-  'djangoCradmin.bulkfileupload'
+  # 'djangoCradmin.bulkfileupload'  # TODO: We have to fix this! Commented out because it crashes everything!
   'djangoCradmin.iosaddtohomescreen'
 #  'djangoCradmin.wysihtml'
   'djangoCradmin.imagepreview'
