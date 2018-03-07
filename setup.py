@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cradmin-legacy',
-    description='Legacy 1.x fork of django_cradmin.',
+    description='Legacy 1.x fork of django cradmin.',
     version='1.3.0',
     url='https://github.com/appressoas/cradmin_legacy',
     author='Espen Angell Kristiansen, Tor Johansen, Vegard Angell, Magne Westlie',
