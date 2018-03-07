@@ -2,9 +2,10 @@
   // ievv-coderefactor already excludes .git, but we also want to exclude
   // some more directories
   "extra_exclude_directories": [
-    "node_modules$",
-    "bower_components",
-    "cradmin_legacy/static/django_cradmin/dist$"
+    "^.*/node_modules$",
+    "^.*/bower_components$",
+    "^.*/django_cradmin/dist$",
+    "^/refactor_from_django_cradmin$"
   ],
   "refactor_files": [
     // Refactor common stuff in most code files (python, javascript, less, ...)
