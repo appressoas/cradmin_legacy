@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
-from django_cradmin.renderable import AbstractRenderableWithCss
+from cradmin_legacy.renderable import AbstractRenderableWithCss
 
 
 class FilterListChildMixin(object):
     """
     Mixin class for adding the methods in addition to
-    the methods in :class:`django_cradmin.renderable.AbstractRenderableWithCss`
+    the methods in :class:`cradmin_legacy.renderable.AbstractRenderableWithCss`
     required to be added as a child of
-    :class:`~django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
+    :class:`~cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
 
     You can use this if you have an existing AbstractRenderableWithCss
     that you want to add to an AbstractFilterList. This means that you
@@ -19,7 +19,7 @@ class FilterListChildMixin(object):
         Set ``self.filterlist = filterlist``.
 
         This method is called by
-        :class:`~django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList.append`
+        :class:`~cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList.append`
         to give the child a way to access the filterlist.
         """
         self.filterlist = filterlist
@@ -28,7 +28,7 @@ class FilterListChildMixin(object):
 class AbstractFilterListChild(AbstractRenderableWithCss, FilterListChildMixin):
     """
     Base class for anything that can be added as a child of
-    :class:`~django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
+    :class:`~cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
     """
     def __init__(self):
         self.filterlist = None

@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.views.generic.detail import DetailView as DjangoDetailView
-from django_cradmin.viewhelpers.mixins import QuerysetForRoleMixin
+from cradmin_legacy.viewhelpers.mixins import QuerysetForRoleMixin
 
 
 class DetailView(QuerysetForRoleMixin, DjangoDetailView):

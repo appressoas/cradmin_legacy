@@ -1,8 +1,8 @@
-from django_cradmin import crapp
-from django_cradmin.superuserui.views import createview
-from django_cradmin.superuserui.views import deleteview
-from django_cradmin.superuserui.views import editview
-from django_cradmin.superuserui.views import listview
+from cradmin_legacy import crapp
+from cradmin_legacy.superuserui.views import createview
+from cradmin_legacy.superuserui.views import deleteview
+from cradmin_legacy.superuserui.views import editview
+from cradmin_legacy.superuserui.views import listview
 
 
 class DjangoModelCrApp(crapp.App):
@@ -11,10 +11,10 @@ class DjangoModelCrApp(crapp.App):
     for a Django model.
     """
 
-    #: The :class:`django_cradmin.superuserui.superuserui_registry.ModelConfig` this
+    #: The :class:`cradmin_legacy.superuserui.superuserui_registry.ModelConfig` this
     #: app belongs to.
     #: This is set automatically in
-    #: :meth:`django_cradmin.superuserui.superuserui_registry.ModelConfig.make_crapp_class`
+    #: :meth:`cradmin_legacy.superuserui.superuserui_registry.ModelConfig.make_crapp_class`
     modelconfig = None
 
     @classmethod

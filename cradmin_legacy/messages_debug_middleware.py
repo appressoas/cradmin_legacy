@@ -3,7 +3,7 @@ from django.contrib import messages
 
 class MessagesDebugMiddleware(object):
     """
-    Add ``django_cradmin.messages_debug_middleware.MessagesDebugMiddleware``
+    Add ``cradmin_legacy.messages_debug_middleware.MessagesDebugMiddleware``
     to your MIDDLEWARE_CLASSES setting to debug Django messages
     rendering/styling. Will add one of each message type to the request.
     """

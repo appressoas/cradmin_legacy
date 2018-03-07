@@ -8,15 +8,15 @@ from django.http import HttpResponse
 from django.utils.encoding import force_str
 from django.shortcuts import resolve_url
 
-from django_cradmin.registry import cradmin_instance_registry
+from cradmin_legacy.registry import cradmin_instance_registry
 
 
 def has_access_to_cradmin_instance(view_function, redirect_field_name=REDIRECT_FIELD_NAME, login_url=None):
     """
-    Decorator for django_cradmin views.
+    Decorator for cradmin_legacy views.
 
     Makes it impossible to access the view unless the
-    :meth:`django_cradmin.crinstance.BaseCrAdminInstance.has_access` method
+    :meth:`cradmin_legacy.crinstance.BaseCrAdminInstance.has_access` method
     returns ``True``.
 
     Adds the following variables to the request:
@@ -43,7 +43,7 @@ def has_access_to_cradmin_instance(view_function, redirect_field_name=REDIRECT_F
 
 def cradminview(view_function):
     """
-    Decorator for django_cradmin views.
+    Decorator for cradmin_legacy views.
 
     Protects the view, making it impossible to access unless the requesting user
     has the role defined by the named url variable ``roleid``.

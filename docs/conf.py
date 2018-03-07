@@ -19,7 +19,7 @@ import os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.insert(0, os.path.abspath('.'))
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_cradmin.demo.project.settingsproxy")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cradmin_legacy.demo.project.settingsproxy")
 import django
 django.setup()
 
@@ -47,10 +47,10 @@ extensions = [
 ]
 
 extlinks = {
-    'issue': ('https://github.com/appressoas/django_cradmin/issues/%s', 'issue '),
-    'wikipage': ('https://github.com/appressoas/django_cradmin/wiki/%s', 'Wiki page: '),
-    'github_folder': ('https://github.com/appressoas/django_cradmin/tree/master/%s', 'git folder '),
-    'github_file': ('https://github.com/appressoas/django_cradmin/blob/master/%s', 'git file ')
+    'issue': ('https://github.com/appressoas/cradmin_legacy/issues/%s', 'issue '),
+    'wikipage': ('https://github.com/appressoas/cradmin_legacy/wiki/%s', 'Wiki page: '),
+    'github_folder': ('https://github.com/appressoas/cradmin_legacy/tree/master/%s', 'git folder '),
+    'github_file': ('https://github.com/appressoas/cradmin_legacy/blob/master/%s', 'git file ')
 }
 
 # Add any paths that contain templates here, relative to this directory.

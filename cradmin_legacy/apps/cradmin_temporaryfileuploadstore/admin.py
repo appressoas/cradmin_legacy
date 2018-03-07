@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib import admin
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
 
 
 class TemporaryFileInline(admin.StackedInline):

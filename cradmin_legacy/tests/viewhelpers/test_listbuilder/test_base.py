@@ -1,9 +1,9 @@
 from django.test import TestCase
 import htmls
 
-from django_cradmin.renderable import AbstractRenderableWithCss
-from django_cradmin.viewhelpers import listbuilder
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.renderable import AbstractRenderableWithCss
+from cradmin_legacy.viewhelpers import listbuilder
+from cradmin_legacy.python2_compatibility import mock
 
 
 class MinimalRenderable(AbstractRenderableWithCss):
@@ -29,7 +29,7 @@ class TestItemValueRenderer(TestCase):
         rendered = listbuilder.base.ItemValueRenderer(value='testvalue').render()
         selector = htmls.S(rendered)
         self.assertEqual('testvalue',
-                         selector.one('.django-cradmin-listbuilder-itemvalue').alltext_normalized)
+                         selector.one('.cradmin-legacy-listbuilder-itemvalue').alltext_normalized)
 
 
 class TestItemFrameRenderer(TestCase):
@@ -37,9 +37,9 @@ class TestItemFrameRenderer(TestCase):
         rendered = listbuilder.base.ItemFrameRenderer(
             inneritem=listbuilder.base.ItemValueRenderer(value='testvalue')).render(request=mock.MagicMock())
         selector = htmls.S(rendered)
-        self.assertTrue(selector.exists('.django-cradmin-listbuilder-itemframe'))
+        self.assertTrue(selector.exists('.cradmin-legacy-listbuilder-itemframe'))
         self.assertEqual('testvalue',
-                         selector.one('.django-cradmin-listbuilder-itemvalue').alltext_normalized)
+                         selector.one('.cradmin-legacy-listbuilder-itemvalue').alltext_normalized)
 
 
 class TestList(TestCase):

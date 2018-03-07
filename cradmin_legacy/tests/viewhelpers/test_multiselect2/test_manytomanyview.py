@@ -3,8 +3,8 @@ import mock
 from django import test
 from django.http import QueryDict
 
-from django_cradmin.viewhelpers import listbuilder
-from django_cradmin.viewhelpers.multiselect2 import manytomanyview
+from cradmin_legacy.viewhelpers import listbuilder
+from cradmin_legacy.viewhelpers.multiselect2 import manytomanyview
 
 
 class TestViewMixin(test.TestCase):
@@ -191,7 +191,7 @@ class TestListBuilderViewMixin(test.TestCase):
         view.get_selected_objects = mock.MagicMock(return_value=['testvalue'])
         selector = htmls.S(view.get_listbuilder_list(context={}).render())
         self.assertTrue('testvalue',
-                        selector.one('.django-cradmin-listbuilder-itemvalue').alltext_normalized)
+                        selector.one('.cradmin-legacy-listbuilder-itemvalue').alltext_normalized)
 
 
 class ListBuilderFilterListViewMixin(test.TestCase):

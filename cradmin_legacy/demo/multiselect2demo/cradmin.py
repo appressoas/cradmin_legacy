@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
-from django_cradmin import crinstance, crmenu, crapp
-from django_cradmin.demo.multiselect2demo.views import productlist
+from cradmin_legacy import crinstance, crmenu, crapp
+from cradmin_legacy.demo.multiselect2demo.views import productlist
 
 
 class Menu(crmenu.Menu):

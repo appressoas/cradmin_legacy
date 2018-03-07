@@ -2,9 +2,9 @@ import htmls
 from django import test
 from django.http import QueryDict
 
-from django_cradmin import python2_compatibility
-from django_cradmin.python2_compatibility import mock
-from django_cradmin.viewhelpers.multiselect2 import manytomanywidget
+from cradmin_legacy import python2_compatibility
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.viewhelpers.multiselect2 import manytomanywidget
 
 
 class TestWidget(test.TestCase):
@@ -24,7 +24,7 @@ class TestWidget(test.TestCase):
         ).render(name='testname', value=None, attrs={'id': 'testid'}))
         self.assertTrue(
             selector.one('#id_cradmin_modelmultichoicefieldwrapper_testname').hasclass(
-                'django-cradmin-modelmultichoicefield-wrapper'))
+                'cradmin-legacy-modelmultichoicefield-wrapper'))
 
     def test_wrapper_angularjs_directive_value(self):
         mockqueryset = mock.MagicMock()
@@ -33,7 +33,7 @@ class TestWidget(test.TestCase):
             selectview_url='/test'
         ).render(name='testname', value=[1, 2], attrs={'id': 'testid'}))
         directive_value = selector.one('#id_cradmin_modelmultichoicefieldwrapper_testname')[
-            'django-cradmin-model-choice-field-wrapper']
+            'cradmin-legacy-model-choice-field-wrapper']
         path, querydictstring = directive_value.split('?')
         querydict = QueryDict(querydictstring)
         self.assertEqual('/test', path)
@@ -122,7 +122,7 @@ class TestWidget(test.TestCase):
             queryset=mockqueryset,
             selectview_url='/test'
         ).render(name='testname', value=None, attrs={'id': 'testid'}))
-        self.assertTrue(selector.exists('.django-cradmin-multiselect2-preview-list'))
+        self.assertTrue(selector.exists('.cradmin-legacy-multiselect2-preview-list'))
 
     def test_preview_list_angularjs_directive(self):
         mockqueryset = mock.MagicMock()
@@ -132,8 +132,8 @@ class TestWidget(test.TestCase):
             selectview_url='/test'
         ).render(name='testname', value=None, attrs={'id': 'testid'}))
         self.assertTrue(
-            selector.one('.django-cradmin-multiselect2-preview-list').hasattribute(
-                'django-cradmin-model-choice-field-preview'))
+            selector.one('.cradmin-legacy-multiselect2-preview-list').hasattribute(
+                'cradmin-legacy-model-choice-field-preview'))
 
     def test_preview_list_without_value(self):
         mockqueryset = mock.MagicMock()
@@ -144,7 +144,7 @@ class TestWidget(test.TestCase):
         ).render(name='testname', value=None, attrs={'id': 'testid'}))
         self.assertEqual(
             0,
-            selector.count('.django-cradmin-multiselect2-preview-list li'))
+            selector.count('.cradmin-legacy-multiselect2-preview-list li'))
 
     def test_preview_list_with_value(self):
         mockqueryset = mock.MagicMock()
@@ -160,11 +160,11 @@ class TestWidget(test.TestCase):
         ).render(name='testname', value=None, attrs={'id': 'testid'}))
         self.assertEqual(
             1,
-            selector.count('.django-cradmin-multiselect2-preview-list li'))
+            selector.count('.cradmin-legacy-multiselect2-preview-list li'))
         self.assertEqual(
             'testvalue',
-            selector.one('.django-cradmin-multiselect2-preview-list '
-                         '.django-cradmin-multiselect2-preview-list-value').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-preview-list '
+                         '.cradmin-legacy-multiselect2-preview-list-value').alltext_normalized)
 
     def test_selectbutton_angularjs_directive(self):
         mockqueryset = mock.MagicMock()
@@ -174,7 +174,7 @@ class TestWidget(test.TestCase):
         ).render(name='testname', value=None, attrs={'id': 'testid'}))
         self.assertTrue(
             selector.one('button').hasattribute(
-                'django-cradmin-model-choice-field-changebegin-button'))
+                'cradmin-legacy-model-choice-field-changebegin-button'))
 
     def test_selectbutton_css_class(self):
         mockqueryset = mock.MagicMock()

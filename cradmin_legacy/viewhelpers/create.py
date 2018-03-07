@@ -11,13 +11,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.views.generic import CreateView as DjangoCreateView
 
-from django_cradmin.crispylayouts import PrimarySubmit
-from django_cradmin.crispylayouts import DefaultSubmit
+from cradmin_legacy.crispylayouts import PrimarySubmit
+from cradmin_legacy.crispylayouts import DefaultSubmit
 from .crudbase import CreateUpdateViewMixin
 
 
 class CreateView(CreateUpdateViewMixin, DjangoCreateView):
-    template_name = 'django_cradmin/viewhelpers/create.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/create.django.html'
 
     #: If this is ``True`` (default), we go into foreignkey select mode
     #: if ``foreignkey_select_mode=1`` is in the querystring.
@@ -98,7 +98,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
 
     def get_formhelper(self):
         helper = super(CreateView, self).get_formhelper()
-        helper.form_id = 'django_cradmin_createform'
+        helper.form_id = 'cradmin_legacy_createform'
         return helper
 
     def is_in_foreignkey_select_mode(self):

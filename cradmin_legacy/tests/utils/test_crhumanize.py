@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.test import TestCase
-from django_cradmin.utils import crhumanize
+from cradmin_legacy.utils import crhumanize
 
 
 class TestHumanReadableFileSize(TestCase):

@@ -2,12 +2,12 @@ from django import test
 from django.core.files.base import ContentFile
 from future.utils import python_2_unicode_compatible
 
-from django_cradmin.apps.cradmin_imagearchive.tests.helpers import create_image
+from cradmin_legacy.apps.cradmin_imagearchive.tests.helpers import create_image
 import htmls
 from model_mommy import mommy
 
-from django_cradmin.viewhelpers import listbuilder
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.viewhelpers import listbuilder
+from cradmin_legacy.python2_compatibility import mock
 
 
 class TestTitleDescription(test.TestCase):
@@ -17,14 +17,14 @@ class TestTitleDescription(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'testvalue',
-            selector.one('.django-cradmin-listbuilder-itemvalue-titledescription-title').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-titledescription-title').alltext_normalized)
 
     def test_without_description(self):
         rendered = listbuilder.itemvalue.TitleDescription(value='testvalue')\
             .render(request=mock.MagicMock())
         selector = htmls.S(rendered)
         self.assertFalse(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-titledescription-description'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-titledescription-description'))
 
     def test_with_description(self):
         class MyEditDelete(listbuilder.itemvalue.TitleDescription):
@@ -35,7 +35,7 @@ class TestTitleDescription(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'The description',
-            selector.one('.django-cradmin-listbuilder-itemvalue-titledescription-description').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-titledescription-description').alltext_normalized)
 
 
 @python_2_unicode_compatible
@@ -67,14 +67,14 @@ class TestUseThis(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'testvalue',
-            selector.one('.django-cradmin-listbuilder-itemvalue-titledescription-title').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-titledescription-title').alltext_normalized)
 
     def test_without_description(self):
         rendered = listbuilder.itemvalue.UseThis(value=self.__make_mock_value('testvalue'))\
             .render(request=self.__make_mock_request())
         selector = htmls.S(rendered)
         self.assertFalse(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-titledescription-description'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-titledescription-description'))
 
     def test_with_description(self):
         class MyEditDelete(listbuilder.itemvalue.UseThis):
@@ -85,7 +85,7 @@ class TestUseThis(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'The description',
-            selector.one('.django-cradmin-listbuilder-itemvalue-titledescription-description').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-titledescription-description').alltext_normalized)
 
     def test_preview_label(self):
         rendered = listbuilder.itemvalue.UseThis(value=self.__make_mock_value('testvalue'))\
@@ -93,7 +93,7 @@ class TestUseThis(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'Select',
-            selector.one('.django-cradmin-listbuilder-itemvalue-usethis-usethis-button').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-usethis-usethis-button').alltext_normalized)
 
     def test_preview_aria_label(self):
         rendered = listbuilder.itemvalue.UseThis(value=self.__make_mock_value('testvalue'))\
@@ -101,7 +101,7 @@ class TestUseThis(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'Select "testvalue"',
-            selector.one('.django-cradmin-listbuilder-itemvalue-usethis-usethis-button')['aria-label'])
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-usethis-usethis-button')['aria-label'])
 
 
 class TestEditDelete(test.TestCase):
@@ -111,14 +111,14 @@ class TestEditDelete(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'testvalue',
-            selector.one('.django-cradmin-listbuilder-itemvalue-titledescription-title').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-titledescription-title').alltext_normalized)
 
     def test_without_description(self):
         rendered = listbuilder.itemvalue.EditDelete(value='testvalue')\
             .render(request=mock.MagicMock())
         selector = htmls.S(rendered)
         self.assertFalse(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-titledescription-description'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-titledescription-description'))
 
     def test_with_description(self):
         class MyEditDelete(listbuilder.itemvalue.EditDelete):
@@ -129,7 +129,7 @@ class TestEditDelete(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'The description',
-            selector.one('.django-cradmin-listbuilder-itemvalue-titledescription-description').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-titledescription-description').alltext_normalized)
 
     def test_edit_label(self):
         rendered = listbuilder.itemvalue.EditDelete(value='testvalue')\
@@ -137,7 +137,7 @@ class TestEditDelete(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'Edit',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-editbutton').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-editbutton').alltext_normalized)
 
     def test_edit_aria_label(self):
         rendered = listbuilder.itemvalue.EditDelete(value='testvalue')\
@@ -145,7 +145,7 @@ class TestEditDelete(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'Edit "testvalue"',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-editbutton')['aria-label'])
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-editbutton')['aria-label'])
 
     def test_delete_label(self):
         rendered = listbuilder.itemvalue.EditDelete(value='testvalue')\
@@ -153,7 +153,7 @@ class TestEditDelete(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'Delete',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-deletebutton').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-deletebutton').alltext_normalized)
 
     def test_delete_aria_label(self):
         rendered = listbuilder.itemvalue.EditDelete(value='testvalue')\
@@ -161,14 +161,14 @@ class TestEditDelete(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'Delete "testvalue"',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-deletebutton')['aria-label'])
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-deletebutton')['aria-label'])
 
     def test_viewbutton_not_rendered(self):
         rendered = listbuilder.itemvalue.EditDelete(value='testvalue')\
             .render(request=mock.MagicMock())
         selector = htmls.S(rendered)
         self.assertFalse(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-editdelete-viewbutton'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-editdelete-viewbutton'))
 
 
 class TestEditDeleteWithPreview(test.TestCase):
@@ -180,7 +180,7 @@ class TestEditDeleteWithPreview(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'View',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-previewbutton').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-previewbutton').alltext_normalized)
 
     def test_preview_aria_label(self):
         mockrequest = mock.MagicMock()
@@ -190,7 +190,7 @@ class TestEditDeleteWithPreview(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'View "testvalue"',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-previewbutton')['aria-label'])
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-previewbutton')['aria-label'])
 
 
 class TestEditDeleteWithArchiveImage(test.TestCase):
@@ -202,7 +202,7 @@ class TestEditDeleteWithArchiveImage(test.TestCase):
             .render(request=mock.MagicMock())
         selector = htmls.S(rendered)
         self.assertFalse(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-editdelete-imagewrapper'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-editdelete-imagewrapper'))
 
     def test_with_archiveimage(self):
         class MyEditDeleteWithArchiveImage(listbuilder.itemvalue.EditDeleteWithArchiveImage):
@@ -217,7 +217,7 @@ class TestEditDeleteWithArchiveImage(test.TestCase):
             .render(request=mockrequest)
         selector = htmls.S(rendered)
         self.assertTrue(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-editdelete-imagewrapper'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-editdelete-imagewrapper'))
 
 
 class TestEditDeleteWithArchiveImageAndView(test.TestCase):
@@ -232,7 +232,7 @@ class TestEditDeleteWithArchiveImageAndView(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'View',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-previewbutton').alltext_normalized)
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-previewbutton').alltext_normalized)
 
     def test_preview_aria_label(self):
         class MyEditDeleteWithArchiveImageAndView(listbuilder.itemvalue.EditDeleteWithArchiveImageAndPreview):
@@ -245,7 +245,7 @@ class TestEditDeleteWithArchiveImageAndView(test.TestCase):
         selector = htmls.S(rendered)
         self.assertEqual(
             'View "testvalue"',
-            selector.one('.django-cradmin-listbuilder-itemvalue-editdelete-previewbutton')['aria-label'])
+            selector.one('.cradmin-legacy-listbuilder-itemvalue-editdelete-previewbutton')['aria-label'])
 
     def test_without_archiveimage(self):
         class MyEditDeleteWithArchiveImageAndView(listbuilder.itemvalue.EditDeleteWithArchiveImageAndPreview):
@@ -255,7 +255,7 @@ class TestEditDeleteWithArchiveImageAndView(test.TestCase):
             .render(request=mock.MagicMock())
         selector = htmls.S(rendered)
         self.assertFalse(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-editdelete-imagewrapper'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-editdelete-imagewrapper'))
 
     def test_with_archiveimage(self):
         class MyEditDeleteWithArchiveImageAndView(listbuilder.itemvalue.EditDeleteWithArchiveImageAndPreview):
@@ -270,4 +270,4 @@ class TestEditDeleteWithArchiveImageAndView(test.TestCase):
             .render(request=mockrequest)
         selector = htmls.S(rendered)
         self.assertTrue(
-            selector.exists('.django-cradmin-listbuilder-itemvalue-editdelete-imagewrapper'))
+            selector.exists('.cradmin-legacy-listbuilder-itemvalue-editdelete-imagewrapper'))

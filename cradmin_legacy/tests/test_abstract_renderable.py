@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from django_cradmin.renderable import AbstractRenderable
+from cradmin_legacy.renderable import AbstractRenderable
 
 
 class MinimalRenderable(AbstractRenderable):

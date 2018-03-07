@@ -1,13 +1,13 @@
 from django.utils.translation import ugettext_lazy, pgettext, pgettext_lazy
 
-from django_cradmin.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
 
 
 class AbstractInputFilter(AbstractFilter):
     """
     Abstract base class for any filter that uses a single text input field.
     """
-    template_name = 'django_cradmin/viewhelpers/listfilter/django/single/textinput/base.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/single/textinput/base.django.html'
 
     #: The text used in URLs as placeholder for the value of this filter.
     #: The AngularJS directive replaces this with the actual value.
@@ -34,7 +34,7 @@ class AbstractInputFilter(AbstractFilter):
 
     def get_base_css_classes_list(self):
         css_classes = super(AbstractInputFilter, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listfilter-filter-single-input')
+        css_classes.append('cradmin-legacy-listfilter-filter-single-input')
         return css_classes
 
     def get_placeholder(self):
@@ -111,14 +111,14 @@ class AbstractSearch(AbstractInputFilter):
     Abstract search filter.
 
     Subclasses only need to implement
-    :meth:`django_cradmin.viewhelpers.listfilter.base.abstractfilter.AbstractFilter.filter`.
+    :meth:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilter.AbstractFilter.filter`.
 
-    See :class:`django_cradmin.viewhelpers.listfilter.django.single.textinput.Search`
+    See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.textinput.Search`
     for a Django ORM implementation.
     """
     def get_base_css_classes_list(self):
         css_classes = super(AbstractSearch, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listfilter-filter-single-input-search')
+        css_classes.append('cradmin-legacy-listfilter-filter-single-input-search')
         return css_classes
 
     def get_placeholder(self):

@@ -3,10 +3,10 @@ from datetime import datetime, timedelta
 from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
-from django_cradmin.python2_compatibility import mock
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, generate_token, \
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, generate_token, \
     get_expiration_datetime_for_app
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestGenericTokenWithMetadata(TestCase):
@@ -34,7 +34,7 @@ class TestGenericTokenWithMetadata(TestCase):
     def test_generate_handle_not_unique(self):
         self._create_generic_token_with_metadata(user=create_user('testuser1'), app='testapp1', token='taken')
         tokens = iter(['taken', 'free'])
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models.generate_token',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.generate_token',
                         lambda: next(tokens)):
             unique_user_token = GenericTokenWithMetadata.objects.generate(
                 content_object=create_user('testuser2'), app='testapp2',
@@ -71,7 +71,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=create_user('testuser2'), token='test-token2',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().count(), 1)
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().first(),
@@ -85,7 +85,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=create_user('testuser2'), token='test-token2',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().count(), 1)
             self.assertEquals(GenericTokenWithMetadata.objects.filter_not_expired().first(),
@@ -105,7 +105,7 @@ class TestGenericTokenWithMetadata(TestCase):
             app='testapp', token='test-token3',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.filter_has_expired().count(), 1)
             self.assertEquals(GenericTokenWithMetadata.objects.filter_has_expired().first(),
@@ -117,7 +117,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=testuser, token='test-token',
             expiration_datetime=datetime(2015, 1, 1, 14, 30))
 
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertEquals(GenericTokenWithMetadata.objects.pop(app='testapp', token='test-token').content_object,
                               testuser)
@@ -128,7 +128,7 @@ class TestGenericTokenWithMetadata(TestCase):
             app='testapp', token='test-token',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             with self.assertRaises(GenericTokenWithMetadata.DoesNotExist):
                 GenericTokenWithMetadata.objects.pop(app='testapp', token='test-token')
@@ -142,7 +142,7 @@ class TestGenericTokenWithMetadata(TestCase):
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 2)
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             GenericTokenWithMetadata.objects.delete_expired()
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 1)
@@ -158,7 +158,7 @@ class TestGenericTokenWithMetadata(TestCase):
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 2)
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             call_command('cradmin_generic_token_with_metadata_delete_expired')
         self.assertEquals(GenericTokenWithMetadata.objects.count(), 1)
@@ -173,7 +173,7 @@ class TestGenericTokenWithMetadata(TestCase):
             user=create_user('testuser2'), token='test-token2',
             expiration_datetime=datetime(2015, 1, 1, 13, 30))
 
-        with mock.patch('django_cradmin.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
+        with mock.patch('cradmin_legacy.apps.cradmin_generic_token_with_metadata.models._get_current_datetime',
                         lambda: datetime(2015, 1, 1, 14)):
             self.assertFalse(unexpired_generic_token_with_metadata.is_expired())
             self.assertTrue(expired_generic_token_with_metadata.is_expired())

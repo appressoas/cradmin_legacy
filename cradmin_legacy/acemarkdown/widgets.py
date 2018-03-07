@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 
 class AceMarkdownWidget(forms.widgets.Textarea):
-    template_name = 'django_cradmin/acemarkdown/widget.django.html'
+    template_name = 'cradmin_legacy/acemarkdown/widget.django.html'
     directiveconfig = {
         # 'showTextarea': False,
         # 'theme': 'tomorrow'
@@ -15,13 +15,13 @@ class AceMarkdownWidget(forms.widgets.Textarea):
     def media(self):
         return forms.Media(
             js=[
-                'django_cradmin/dist/vendor/js/ace-editor/ace.js',
+                'cradmin_legacy/dist/vendor/js/ace-editor/ace.js',
             ]
         )
 
     def get_context(self, name, value, attrs):
         attrs = attrs.copy()
-        attrs['textarea django-cradmin-acemarkdown-textarea'] = ''
+        attrs['textarea cradmin-legacy-acemarkdown-textarea'] = ''
         if 'required' in attrs:
             attrs['required'] = False
         return {

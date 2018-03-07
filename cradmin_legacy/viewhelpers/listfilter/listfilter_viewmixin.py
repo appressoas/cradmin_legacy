@@ -1,18 +1,18 @@
 from __future__ import unicode_literals
-from django_cradmin.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers import listfilter
 
 
 class ViewMixin(object):
     """
     Mixin class for views using filterlist.
 
-    See :class:`django_cradmin.viewhelpers.listbuilderview.FilterListMixin`
-    and :class:`django_cradmin.viewhelpers.objecttable.FilterListMixin`
+    See :class:`cradmin_legacy.viewhelpers.listbuilderview.FilterListMixin`
+    and :class:`cradmin_legacy.viewhelpers.objecttable.FilterListMixin`
     for implementation examples.
     """
-    #: The :class:`django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`
+    #: The :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`
     #: subclass to use.
-    #: Defaults to :class:`django_cradmin.viewhelpers.listfilter.lists.Vertical`.
+    #: Defaults to :class:`cradmin_legacy.viewhelpers.listfilter.lists.Vertical`.
     filterlist_class = listfilter.lists.Vertical
 
     def get_filterlist_url(self, filters_string):
@@ -38,7 +38,7 @@ class ViewMixin(object):
 
     def filterlist_urlbuilder(self, filters_string):
         """
-        Get an urlbuilder for :class:`django_cradmin.viewhelpers.listfilter.base.AbstractFilterList`.
+        Get an urlbuilder for :class:`cradmin_legacy.viewhelpers.listfilter.base.AbstractFilterList`.
 
         You should not override this. Override :meth:`.get_filterlist_url` instead.
         If you override this, you have to ensure you handle querystring correctly.
@@ -59,7 +59,7 @@ class ViewMixin(object):
     def get_filters_string(self):
         """
         Get the ``filters_string`` for
-        :meth:`~django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList.set_filters_string`.
+        :meth:`~cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList.set_filters_string`.
 
         Defaults to ``kwargs.get('filters_string', '')``, which means that this just
         works as long as you use an URL pattern that looks something like this::
@@ -93,7 +93,7 @@ class ViewMixin(object):
         Get the filterlist class.
 
         Should return a subclass of
-        :class:`django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
+        :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
 
         Defaults to :obj:`.ViewMixin.filterlist_class`.
         """
@@ -102,7 +102,7 @@ class ViewMixin(object):
     def get_label_is_screenreader_only_by_default(self):
         """
         Defines the default value of
-        :meth:`.django_cradmin.viewhelpers.listfilter.base.abstractfilter.AbstractFilter.get_label_is_screenreader_only`
+        :meth:`.cradmin_legacy.viewhelpers.listfilter.base.abstractfilter.AbstractFilter.get_label_is_screenreader_only`
         for all filters in the filterlist.
 
         This is mostly useful if you want to not show labels in your filterlist.
@@ -125,7 +125,7 @@ class ViewMixin(object):
         You should not need to override this unless you create
         a filterlist with extra parameters, since we have methods
         for overriding all the parameters for
-        :class:`django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
+        :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
         Override the methods listed above instead.
 
         Note that :meth:`.filterlist_urlbuilder` should
@@ -162,7 +162,7 @@ class ViewMixin(object):
 
         Parameters:
             filterlist: An object of a subclass of
-                :class:`django_cradmin.viewhelpers.listfilter.base.AbstractFilterList`.
+                :class:`cradmin_legacy.viewhelpers.listfilter.base.AbstractFilterList`.
         """
         pass
 
@@ -197,7 +197,7 @@ class ViewMixin(object):
 
         The supported values are defined in the mixins implemented
         in the various modules that support filterlist
-        (such as :class:`django_cradmin.viewhelpers.listbuilderview.FilterListMixin`).
+        (such as :class:`cradmin_legacy.viewhelpers.listbuilderview.FilterListMixin`).
         """
         raise NotImplementedError()
 
@@ -207,7 +207,7 @@ class ViewMixin(object):
 
         You will want to call this from the ``get_template_names`` method.
         This is just the interface, refer to the mixins implemented in
-        various modules (such as :class:`django_cradmin.viewhelpers.listbuilderview.FilterListMixin`)
+        various modules (such as :class:`cradmin_legacy.viewhelpers.listbuilderview.FilterListMixin`)
         for details on how to use this method.
         """
         raise NotImplementedError()

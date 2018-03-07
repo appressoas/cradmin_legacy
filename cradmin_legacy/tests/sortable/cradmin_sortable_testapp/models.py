@@ -4,8 +4,8 @@ An example app using Sortable.
 from __future__ import unicode_literals
 from django.db import models
 from future.utils import python_2_unicode_compatible
-from django_cradmin.sortable.models import SortableBase
-from django_cradmin.sortable.models import SortableManagerBase
+from cradmin_legacy.sortable.models import SortableBase
+from cradmin_legacy.sortable.models import SortableManagerBase
 
 
 @python_2_unicode_compatible

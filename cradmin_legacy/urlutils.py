@@ -43,7 +43,7 @@ def update_querystring(url, querystringargs, ignore_none_values=True):
 
         Add querystring argument::
 
-            from django_cradmin import urlutils
+            from cradmin_legacy import urlutils
             urlutils.update_querystring('http://example.com', {'search': 'test'})
 
         Update querystring argument::

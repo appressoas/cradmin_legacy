@@ -6,7 +6,7 @@ from invoke_extras.context_managers import cd
 LANGUAGE_CODES = ['en', 'nb']
 SQLITE_DATABASE = 'db.sqlite3'
 SQL_DUMP_FILE = os.path.join(
-    'django_cradmin', 'demo', 'project', 'dumps', 'dev', 'data.sql')
+    'cradmin_legacy', 'demo', 'project', 'dumps', 'dev', 'data.sql')
 
 
 def _manage(args, echo=True, cwd=None, **kwargs):
@@ -30,12 +30,12 @@ def makemessages():
                 '-i "node_modules/*" '
                 '-i "demo/*" '
                 '-i "static/*"'.format(languagecode),
-                cwd='django_cradmin')
+                cwd='cradmin_legacy')
 
 
 @task
 def compilemessages():
-    _manage('compilemessages', cwd='django_cradmin')
+    _manage('compilemessages', cwd='cradmin_legacy')
 
 
 @task
@@ -90,7 +90,7 @@ def _load_devdb_sqldump():
 @task
 def dump_current_db_to_sql():
     """
-    Dump current db into ``django_cradmin/demo/project/dumps/dev/data.sql``.
+    Dump current db into ``cradmin_legacy/demo/project/dumps/dev/data.sql``.
     """
     result = run('sqlite3 db.sqlite3 ".dump"', echo=False)
     with open(SQL_DUMP_FILE, 'wb') as outfile:

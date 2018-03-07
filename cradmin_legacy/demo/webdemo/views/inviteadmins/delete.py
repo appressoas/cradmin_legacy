@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.template import defaultfilters
 
-from django_cradmin.viewhelpers import delete
+from cradmin_legacy.viewhelpers import delete
 from .mixins import QuerysetForRoleMixin
 
 

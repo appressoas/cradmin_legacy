@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django import forms
-from django_cradmin.crispylayouts import PrimarySubmitLg
+from cradmin_legacy.crispylayouts import PrimarySubmitLg
 
 
 class AbstractCreateAccountForm(forms.ModelForm):
@@ -86,9 +86,9 @@ class AbstractCreateAccountForm(forms.ModelForm):
         """
         Returns the ID to set on the DOM element for the form.
 
-        Defaults to `"django_cradmin_register_account_form"`.
+        Defaults to `"cradmin_legacy_register_account_form"`.
         """
-        return 'django_cradmin_register_account_form'
+        return 'cradmin_legacy_register_account_form'
 
     def get_field_layout(self):
         """

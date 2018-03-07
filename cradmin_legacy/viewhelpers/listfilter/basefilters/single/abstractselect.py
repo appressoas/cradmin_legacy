@@ -4,7 +4,7 @@ import datetime
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy, pgettext_lazy
 
-from django_cradmin.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
 
 
 class AbstractSelectFilter(AbstractFilter):
@@ -14,7 +14,7 @@ class AbstractSelectFilter(AbstractFilter):
     You only have to override :meth:`~AbstractSelectFilter.get_choices` and
     :meth:`~AbstractCheckboxFilter.filter`.
     """
-    template_name = 'django_cradmin/viewhelpers/listfilter/django/single/select/base.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/single/select/base.django.html'
 
     def get_choices(self):
         """
@@ -76,7 +76,7 @@ class AbstractSelectFilter(AbstractFilter):
 
         - ``url``: The URL to load when making a choice.
           This is generated using
-          :meth:`~django_cradmin.viewhelpers.listfilter.base.AbstractFilter.build_set_values_url`
+          :meth:`~cradmin_legacy.viewhelpers.listfilter.base.AbstractFilter.build_set_values_url`
           with the value from :meth:`.get_choices` as input.
         - ``label``: The label to show (taken directly from :meth:`.get_choices`.
         - ``is_selected`` (boolean): If the current value matches the value of a choice,
@@ -118,9 +118,9 @@ class AbstractBoolean(AbstractSelectFilter):
     Abstract boolean filter.
 
     Subclasses should only need to implement
-    :meth:`django_cradmin.viewhelpers.listfilter.basefilters.single.select.AbstractSelectFilter.filter`.
+    :meth:`cradmin_legacy.viewhelpers.listfilter.basefilters.single.select.AbstractSelectFilter.filter`.
 
-    See :class:`django_cradmin.viewhelpers.listfilter.django.single.select.Boolean`
+    See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.select.Boolean`
     for a Django ORM implementation.
     """
     def get_do_not_apply_label(self):
@@ -157,7 +157,7 @@ class AbstractDateTime(AbstractSelectFilter):
     Subclasses should only need to implement
     :meth:`~.DateTime.filter_datetime_range`.
 
-    See :class:`django_cradmin.viewhelpers.listfilter.django.single.select.DateTime`
+    See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.select.DateTime`
     for a Django ORM implementation.
     """
     def get_do_not_apply_label(self):
@@ -261,7 +261,7 @@ class AbstractDateTime(AbstractSelectFilter):
         Filter out all items ``>= start_datetime`` and ``< end_datetime``.
 
         Parameters:
-            queryobject: See :meth:`~django_cradmin.viewhelpers.listfilter.base.abstractfilter.AbstractFilter.filter`.
+            queryobject: See :meth:`~cradmin_legacy.viewhelpers.listfilter.base.abstractfilter.AbstractFilter.filter`.
             start_datetime (datetime.datetime): Start datetime.
             end_datetime (datetime.datetime): End datetime.
         """
@@ -367,9 +367,9 @@ class AbstractOrderBy(AbstractSelectFilter):
     Abstract order by filter --- lets the user select how the queryobject should be ordered.
 
     Subclasses should only need to implement
-    :meth:`django_cradmin.viewhelpers.listfilter.basefilters.single.select.AbstractSelectFilter.filter`.
+    :meth:`cradmin_legacy.viewhelpers.listfilter.basefilters.single.select.AbstractSelectFilter.filter`.
 
-    See :class:`django_cradmin.viewhelpers.listfilter.django.single.select.AbstractOrderBy`
+    See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.select.AbstractOrderBy`
     for a Django ORM implementation.
     """
     def __init__(self, *args, **kwargs):

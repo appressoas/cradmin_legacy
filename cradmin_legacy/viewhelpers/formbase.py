@@ -7,8 +7,8 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView as DjangoFormView
 
-from django_cradmin import crapp
-from django_cradmin.crispylayouts import CradminFormHelper
+from cradmin_legacy import crapp
+from cradmin_legacy.crispylayouts import CradminFormHelper
 
 
 class PreviewMixin(object):
@@ -18,7 +18,7 @@ class PreviewMixin(object):
     You must override :meth:`.serialize_preview`, :meth:`.deserialize_preview` and :meth:`.get_preview_url`,
     and you must call :meth:`.store_preview_in_session` before opening the preview.
 
-    You must also ensure your template extends ``django_cradmin/viewhelpers/formview_base.django.html``.
+    You must also ensure your template extends ``cradmin_legacy/viewhelpers/formview_base.django.html``.
 
     Preview data is added to a Django session using :meth:`.store_preview_in_session`,
     and popped (fetched and removed) from the session in the preview view using
@@ -27,7 +27,7 @@ class PreviewMixin(object):
 
         class MyFormView(formbase.PreviewMixin, formbase.FormView):
 
-            # Ensure this extends django_cradmin/viewhelpers/formview_base.django.html
+            # Ensure this extends cradmin_legacy/viewhelpers/formview_base.django.html
             template_name = 'myapp/mytemplate.django.html'
 
 
@@ -115,7 +115,7 @@ class PreviewMixin(object):
         Get the session key used for preview. You should not
         need to override this.
         """
-        sessionkey = 'django_cradmin__{module}.{classname}'.format(
+        sessionkey = 'cradmin_legacy__{module}.{classname}'.format(
             module=cls.__module__,
             classname=cls.__name__)
         return sessionkey
@@ -157,7 +157,7 @@ class FormViewMixin(PreviewMixin):
 
     #: Get the view name for the listing page.
     #: You can set this, or implement :meth:`.get_listing_url`.
-    #: Defaults to :obj:`django_cradmin.crapp.INDEXVIEW_NAME`.
+    #: Defaults to :obj:`cradmin_legacy.crapp.INDEXVIEW_NAME`.
     listing_viewname = crapp.INDEXVIEW_NAME
 
     #: Used to add custom attributes like angularjs directives to the form.
@@ -172,7 +172,7 @@ class FormViewMixin(PreviewMixin):
 
     #: Enable support for modelchoicefield?
     #: If this is ``False``, you will not be able to use
-    #: :class:`django_cradmin.widgets.modelchoice.ModelChoiceWidget`
+    #: :class:`cradmin_legacy.widgets.modelchoice.ModelChoiceWidget`
     #: in the form.
     enable_modelchoicefield_support = False
 
@@ -316,11 +316,11 @@ class FormViewMixin(PreviewMixin):
         Get the button layout. This is added to the crispy form layout.
 
         Defaults to a :class:`crispy_forms.layout.Div` with css class
-        ``django_cradmin_submitrow`` containing all the buttons
+        ``cradmin_legacy_submitrow`` containing all the buttons
         returned by :meth:`.get_buttons`.
         """
         return [
-            layout.Div(*self.get_buttons(), css_class="django_cradmin_submitrow")
+            layout.Div(*self.get_buttons(), css_class="cradmin_legacy_submitrow")
         ]
 
     def get_form_attributes(self):
@@ -346,7 +346,7 @@ class FormViewMixin(PreviewMixin):
         form styles.
         """
         form_css_classes = [
-            'django-cradmin-form'
+            'cradmin-legacy-form'
         ]
         form_css_classes.extend(self.get_extra_form_css_classes())
         return form_css_classes
@@ -454,7 +454,7 @@ class FormView(FormViewMixin, DjangoFormView):
 
             from django import forms
             from django.http import HttpResponseRedirect
-            from django_cradmin.crispylayouts import PrimarySubmit
+            from cradmin_legacy.crispylayouts import PrimarySubmit
 
             class MyForm(forms.Form):
                 first_name = forms.CharField(max_length=50)
@@ -479,4 +479,4 @@ class FormView(FormViewMixin, DjangoFormView):
                     # ... do something with the form ...
                     return HttpResponseRedirect('/some/view')
     """
-    template_name = 'django_cradmin/viewhelpers/formview_base.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/formview_base.django.html'

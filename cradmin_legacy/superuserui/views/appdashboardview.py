@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from django_cradmin.viewhelpers import listbuilder
+from cradmin_legacy.viewhelpers import listbuilder
 
 
 class ItemFrameModel(listbuilder.itemframe.Link):
@@ -12,11 +12,11 @@ class ItemFrameModel(listbuilder.itemframe.Link):
 
 class ItemValueModel(listbuilder.itemvalue.FocusBox):
     valuealias = 'modelconfig'
-    template_name = 'django_cradmin/superuserui/listbuilder/itemvalue-model.django.html'
+    template_name = 'cradmin_legacy/superuserui/listbuilder/itemvalue-model.django.html'
 
 
 class View(TemplateView):
-    template_name = 'django_cradmin/superuserui/appdashboard.django.html'
+    template_name = 'cradmin_legacy/superuserui/appdashboard.django.html'
 
     def get_models_listbuilder_list(self):
         return listbuilder.lists.RowList.from_value_iterable(

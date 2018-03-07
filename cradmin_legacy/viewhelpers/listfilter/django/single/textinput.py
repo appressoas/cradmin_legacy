@@ -1,7 +1,7 @@
 from django.db import models
 
-from django_cradmin.viewhelpers.listfilter.basefilters.single import abstracttextinput
-from django_cradmin.viewhelpers.listfilter.django.base import DjangoOrmFilterMixin
+from cradmin_legacy.viewhelpers.listfilter.basefilters.single import abstracttextinput
+from cradmin_legacy.viewhelpers.listfilter.django.base import DjangoOrmFilterMixin
 
 
 class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
@@ -25,7 +25,7 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
     def __init__(self, *args, **kwargs):
         """
         Parameters are the same as for
-        :class:`django_cradmin.viewhelpers.listfilter.base.abstractfilter.AbstractFilter`,
+        :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilter.AbstractFilter`,
         but you can specify one extra parameter:
 
             - modelfields: List of model fields to search on.

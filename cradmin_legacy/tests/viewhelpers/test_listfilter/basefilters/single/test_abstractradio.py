@@ -4,9 +4,9 @@ from django.test import TestCase
 from future import standard_library
 import htmls
 
-from django_cradmin.python2_compatibility import mock
-from django_cradmin.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
-from django_cradmin.viewhelpers.listfilter.basefilters.single.abstractradio import AbstractRadioFilter
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
+from cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractradio import AbstractRadioFilter
 
 standard_library.install_aliases()
 
@@ -25,8 +25,8 @@ class TestAbstractRadioFilter(TestCase):
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertTrue(selector.exists('#django_cradmin_listfilter_test.django-cradmin-listfilter-filter'))
-        self.assertTrue(selector.exists('#django_cradmin_listfilter_test_input'))
+        self.assertTrue(selector.exists('#cradmin_legacy_listfilter_test.cradmin-legacy-listfilter-filter'))
+        self.assertTrue(selector.exists('#cradmin_legacy_listfilter_test_input'))
         self.assertEqual(3, selector.count('input[type="radio"]'))
 
     def test_render_add_value(self):
@@ -58,7 +58,7 @@ class TestAbstractRadioFilter(TestCase):
         selector = htmls.S(testfilter.render())
         self.assertEqual(
             'Test',
-            selector.one('#django_cradmin_listfilter_test_input_somevalue_wrapper').alltext_normalized)
+            selector.one('#cradmin_legacy_listfilter_test_input_somevalue_wrapper').alltext_normalized)
 
     def test_render_radio_unchecked(self):
         class MyRadioFilter(AbstractRadioFilter):
@@ -101,7 +101,7 @@ class TestAbstractRadioFilter(TestCase):
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertFalse(selector.exists('label#django_cradmin_listfilter_test_label'))
+        self.assertFalse(selector.exists('label#cradmin_legacy_listfilter_test_label'))
 
     def test_render_label_has_label(self):
         class MyRadioFilter(AbstractRadioFilter):
@@ -115,7 +115,7 @@ class TestAbstractRadioFilter(TestCase):
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
         self.assertEqual('A label',
-                         selector.one('label#django_cradmin_listfilter_test_label').alltext_normalized)
+                         selector.one('label#cradmin_legacy_listfilter_test_label').alltext_normalized)
 
     def test_render_label_get_label_is_screenreader_only_true(self):
         class MyRadioFilter(AbstractRadioFilter):
@@ -131,5 +131,5 @@ class TestAbstractRadioFilter(TestCase):
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertTrue(selector.exists('label#django_cradmin_listfilter_test_label'))
-        self.assertTrue(selector.one('label#django_cradmin_listfilter_test_label').hasclass('sr-only'))
+        self.assertTrue(selector.exists('label#cradmin_legacy_listfilter_test_label'))
+        self.assertTrue(selector.one('label#cradmin_legacy_listfilter_test_label').hasclass('sr-only'))

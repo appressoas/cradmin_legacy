@@ -11,10 +11,10 @@ from django.views.generic import FormView
 
 from crispy_forms.helper import FormHelper
 
-from django_cradmin.apps.cradmin_email import emailutils
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from cradmin_legacy.apps.cradmin_email import emailutils
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     get_expiration_datetime_for_app
-from django_cradmin.crispylayouts import PrimarySubmitLg
+from cradmin_legacy.crispylayouts import PrimarySubmitLg
 
 
 class PasswordResetEmail(emailutils.AbstractEmail):
@@ -47,7 +47,7 @@ class BeginPasswordResetView(FormView):
     def get_formhelper(self):
         helper = FormHelper()
         helper.form_action = '#'
-        helper.form_id = 'django_cradmin_resetpassword_begin_form'
+        helper.form_id = 'cradmin_legacy_resetpassword_begin_form'
         helper.form_show_labels = False
         helper.layout = layout.Layout(
             layout.Field('email', css_class='input-lg', placeholder=_('Email'), focusonme='focusonme'),

@@ -8,11 +8,11 @@ from django.http import HttpResponse
 from django.test import TestCase, RequestFactory
 from django.utils import timezone
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
-from django_cradmin.apps.cradmin_invite.baseviews.accept import AbstractAcceptInviteView
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.apps.cradmin_invite.baseviews.accept import AbstractAcceptInviteView
+from cradmin_legacy.tests.helpers import create_user
 
 
 class AcceptInviteView(AbstractAcceptInviteView):
@@ -46,9 +46,9 @@ class TestAbstractAcceptInviteView(TestCase):
         request = self.factory.get('/test')
         response = AcceptInviteView.as_view()(request, token='valid-token')
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('#django_cradmin_invite_expired_message'))
+        self.assertTrue(selector.exists('#cradmin_legacy_invite_expired_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_invite_expired_message').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_expired_message').alltext_normalized,
             'This invite link has expired.')
 
     def test_get_invalid_token(self):
@@ -57,9 +57,9 @@ class TestAbstractAcceptInviteView(TestCase):
         request = self.factory.get('/test')
         response = AcceptInviteView.as_view()(request, token='invalid-token')
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('#django_cradmin_invite_invalid_token_message'))
+        self.assertTrue(selector.exists('#cradmin_legacy_invite_invalid_token_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_invite_invalid_token_message').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_invalid_token_message').alltext_normalized,
             'Invalid invite URL. Are you sure you copied the entire URL from the email?')
 
     def test_get_render(self):
@@ -73,7 +73,7 @@ class TestAbstractAcceptInviteView(TestCase):
         self.assertEqual(selector.one('title').alltext_normalized, 'Accept invite')
         self.assertEqual(selector.one('.page-header h1').alltext_normalized, 'Accept invite')
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_description').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_accept_description').alltext_normalized,
             'TODO: Set a description_template for your AbstractAcceptInviteView subclass.')
 
     def test_get_render_is_authenticated(self):
@@ -85,23 +85,23 @@ class TestAbstractAcceptInviteView(TestCase):
         self.assertEqual(response.status_code, 200)
         response.render()
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('button#django_cradmin_invite_accept_as_button'))
+        self.assertTrue(selector.exists('button#cradmin_legacy_invite_accept_as_button'))
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_register_account_button')['href'],
+            selector.one('#cradmin_legacy_invite_accept_register_account_button')['href'],
             '/cradmin_register_account/begin?next=http%3A%2F%2Ftestserver%2Ftest')
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_login_as_different_user_button')['href'],
+            selector.one('#cradmin_legacy_invite_accept_login_as_different_user_button')['href'],
             '/cradmin_authenticate/logout?'
             'next=%2Faccounts%2Flogin%2F%3Fnext%3Dhttp%253A%252F%252Ftestserver%252Ftest')
 
         self.assertEqual(
-            selector.one('button#django_cradmin_invite_accept_as_button').alltext_normalized,
+            selector.one('button#cradmin_legacy_invite_accept_as_button').alltext_normalized,
             'Accept as testuser')
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_register_account_button').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_accept_register_account_button').alltext_normalized,
             'Sign up for Testsite')
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_login_as_different_user_button').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_accept_login_as_different_user_button').alltext_normalized,
             'Sign in as another user')
 
     def test_get_render_not_authenticated(self):
@@ -114,17 +114,17 @@ class TestAbstractAcceptInviteView(TestCase):
         response.render()
         selector = htmls.S(response.content)
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_login_button')['href'],
+            selector.one('#cradmin_legacy_invite_accept_login_button')['href'],
             '/accounts/login/?next=http%3A%2F%2Ftestserver%2Ftest')
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_register_account_button')['href'],
+            selector.one('#cradmin_legacy_invite_accept_register_account_button')['href'],
             '/cradmin_register_account/begin?next=http%3A%2F%2Ftestserver%2Ftest')
 
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_login_button').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_accept_login_button').alltext_normalized,
             'Sign in')
         self.assertEqual(
-            selector.one('#django_cradmin_invite_accept_register_account_button').alltext_normalized,
+            selector.one('#cradmin_legacy_invite_accept_register_account_button').alltext_normalized,
             'Sign up for Testsite')
 
     def test_post_not_authenticated(self):

@@ -1,8 +1,8 @@
 from django import test
 from model_mommy import mommy
 
-from django_cradmin.demo.webdemo.views import pages
-from django_cradmin import cradmin_testhelpers
+from cradmin_legacy.demo.webdemo.views import pages
+from cradmin_legacy import cradmin_testhelpers
 
 
 class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
@@ -26,7 +26,7 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         # When updating the view, the url needs a parameter, here the pk of the page to update.
         # According to the views/pages.py class Apps ('^edit/(?P<pk>\d+)$').
         mockresponse = self.mock_http200_getrequest_htmls(cradmin_role=site, viewkwargs={'pk': page.id})
-        view_title = mockresponse.selector.one('.django-cradmin-page-header-inner').alltext_normalized
+        view_title = mockresponse.selector.one('.cradmin-legacy-page-header-inner').alltext_normalized
         # mockresponse.selector.prettyprint()
 
         self.assertEquals('Edit Page', view_title)

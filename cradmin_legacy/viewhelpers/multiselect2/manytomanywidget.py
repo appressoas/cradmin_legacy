@@ -6,7 +6,7 @@ from django.utils.datastructures import MultiValueDict
 from django.utils.translation import pgettext_lazy
 from future import standard_library
 
-from django_cradmin.viewhelpers.multiselect2 import widget_preview_renderer
+from cradmin_legacy.viewhelpers.multiselect2 import widget_preview_renderer
 
 standard_library.install_aliases()
 import urllib.request
@@ -23,7 +23,7 @@ class Widget(widgets.TextInput):
     to select values for many-to-many and one-to-many fields.
     """
     #: The template used to render the widget.
-    template_name = 'django_cradmin/viewhelpers/multiselect2/manytomanywidget/widget.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/widget.django.html'
 
     #: Do not override this (if you set this to hidden, the widget is not rendered correctly).
     input_type = 'text'
@@ -101,7 +101,7 @@ class Widget(widgets.TextInput):
     def get_preview_renderer_list_class(self):
         """
         Returns:
-            django_cradmin.viewhelpers.multiselect2.widget_preview_renderer.List: The listbuilder
+            cradmin_legacy.viewhelpers.multiselect2.widget_preview_renderer.List: The listbuilder
             list class used to render the previews.
         """
         return widget_preview_renderer.List
@@ -115,7 +115,7 @@ class Widget(widgets.TextInput):
             values: See :meth:`.get_selected_values_queryset`.
 
         Returns:
-            django_cradmin.viewhelpers.multiselect2.widget_preview_renderer.List: An object
+            cradmin_legacy.viewhelpers.multiselect2.widget_preview_renderer.List: An object
             of the :meth:`.get_preview_renderer_list_class` class.
         """
         return self.get_preview_renderer_list_class()\

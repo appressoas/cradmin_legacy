@@ -4,10 +4,10 @@ from builtins import next
 from django.core import mail
 
 from django.test import TestCase
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 
-from django_cradmin.apps.cradmin_invite.invite_url import InviteUrl
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.apps.cradmin_invite.invite_url import InviteUrl
+from cradmin_legacy.tests.helpers import create_user
 
 
 class InviteUrlMock(InviteUrl):

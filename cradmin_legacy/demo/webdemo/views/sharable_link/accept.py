@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
-from django_cradmin.apps.cradmin_invite.baseviews.accept import AbstractAcceptInviteView
+from cradmin_legacy.apps.cradmin_invite.baseviews.accept import AbstractAcceptInviteView
 
 
 class AcceptPublicSiteAdminInviteView(AbstractAcceptInviteView):

@@ -1,9 +1,9 @@
 from django.test import TestCase
 from model_mommy import mommy
 
-from django_cradmin.cradmin_testhelpers import TestCaseMixin
-from django_cradmin.viewhelpers import listbuilderview
-from django_cradmin.django_cradmin_testapp import models as testmodels
+from cradmin_legacy.cradmin_testhelpers import TestCaseMixin
+from cradmin_legacy.viewhelpers import listbuilderview
+from cradmin_legacy.cradmin_legacy_testapp import models as testmodels
 
 
 class ListBuilderViewWithoutPaging(listbuilderview.View):
@@ -22,52 +22,52 @@ class TestListBuilderView(TestCase, TestCaseMixin):
 
     def test_empty(self):
         mockresponse = self.mock_http200_getrequest_htmls()
-        self.assertFalse(mockresponse.selector.exists('.django-cradmin-listbuilder-list'))
+        self.assertFalse(mockresponse.selector.exists('.cradmin-legacy-listbuilder-list'))
         self.assertEquals(
-            mockresponse.selector.one('.django-cradmin-listbuilderview-no-items-message').alltext_normalized,
+            mockresponse.selector.one('.cradmin-legacy-listbuilderview-no-items-message').alltext_normalized,
             'No some items')
 
     def test_not_empty(self):
-        mommy.make('django_cradmin_testapp.SomeItem',
+        mommy.make('cradmin_legacy_testapp.SomeItem',
                    name='Test name')
         mockresponse = self.mock_http200_getrequest_htmls()
-        self.assertFalse(mockresponse.selector.exists('.django-cradmin-listbuilderview-no-items-message'))
-        self.assertTrue(mockresponse.selector.exists('.django-cradmin-listbuilder-list'))
+        self.assertFalse(mockresponse.selector.exists('.cradmin-legacy-listbuilderview-no-items-message'))
+        self.assertTrue(mockresponse.selector.exists('.cradmin-legacy-listbuilder-list'))
 
     def test_item_rendering(self):
-        mommy.make('django_cradmin_testapp.SomeItem',
+        mommy.make('cradmin_legacy_testapp.SomeItem',
                    name='Test name')
         mockresponse = self.mock_http200_getrequest_htmls()
         # mockresponse.selector.prettyprint()
-        self.assertEqual(1, mockresponse.selector.count('.django-cradmin-listbuilder-list li'))
+        self.assertEqual(1, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
         self.assertEqual('Test name',
-                         mockresponse.selector.one('.django-cradmin-listbuilder-list li').alltext_normalized)
+                         mockresponse.selector.one('.cradmin-legacy-listbuilder-list li').alltext_normalized)
 
 
 class TestListBuilderPaginationView(TestCase, TestCaseMixin):
     viewclass = ListBuilderViewWithPaging
 
     def test_paginate_by_singlepage(self):
-        mommy.make('django_cradmin_testapp.SomeItem', _quantity=3)
+        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=3)
         mockresponse = self.mock_http200_getrequest_htmls()
-        self.assertEqual(3, mockresponse.selector.count('.django-cradmin-listbuilder-list li'))
-        self.assertFalse(mockresponse.selector.exists('#django_cradmin_contentwrapper .django-cradmin-loadmorepager'))
+        self.assertEqual(3, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
+        self.assertFalse(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))
 
     def test_paginate_by_firstpage(self):
-        mommy.make('django_cradmin_testapp.SomeItem', _quantity=8)
+        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
         mockresponse = self.mock_http200_getrequest_htmls()
-        # mockresponse.selector.one('#django_cradmin_contentwrapper').prettyprint()
-        self.assertEqual(3, mockresponse.selector.count('.django-cradmin-listbuilder-list li'))
-        self.assertTrue(mockresponse.selector.exists('#django_cradmin_contentwrapper .django-cradmin-loadmorepager'))
+        # mockresponse.selector.one('#cradmin_legacy_contentwrapper').prettyprint()
+        self.assertEqual(3, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
+        self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))
 
     def test_paginate_by_middlepage(self):
-        mommy.make('django_cradmin_testapp.SomeItem', _quantity=8)
+        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
         mockresponse = self.mock_http200_getrequest_htmls(requestkwargs={'data': {'page': 2}})
-        self.assertEqual(3, mockresponse.selector.count('.django-cradmin-listbuilder-list li'))
-        self.assertTrue(mockresponse.selector.exists('#django_cradmin_contentwrapper .django-cradmin-loadmorepager'))
+        self.assertEqual(3, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
+        self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))
 
     def test_paginate_by_lastpage(self):
-        mommy.make('django_cradmin_testapp.SomeItem', _quantity=8)
+        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
         mockresponse = self.mock_http200_getrequest_htmls(requestkwargs={'data': {'page': 3}})
-        self.assertEqual(2, mockresponse.selector.count('.django-cradmin-listbuilder-list li'))
-        self.assertFalse(mockresponse.selector.exists('#django_cradmin_contentwrapper .django-cradmin-loadmorepager'))
+        self.assertEqual(2, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
+        self.assertFalse(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))

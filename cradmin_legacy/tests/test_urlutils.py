@@ -2,7 +2,7 @@ from django.http import QueryDict
 from django.test import TestCase
 from future.standard_library import install_aliases
 
-from django_cradmin import urlutils
+from cradmin_legacy import urlutils
 
 install_aliases()
 

@@ -3,7 +3,7 @@ from django.test import RequestFactory
 import htmls
 from model_mommy import mommy
 
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 
 
 class MockRequestResponse(object):
@@ -42,7 +42,7 @@ class TestCaseMixin(object):
 
         Minimalistic::
 
-            from django_cradmin import cradmin_testhelpers
+            from cradmin_legacy import cradmin_testhelpers
 
             class TestMyView(TestCase, cradmin_testhelpers.TestCaseMixin):
                 viewclass = MyView
@@ -63,7 +63,7 @@ class TestCaseMixin(object):
 
         Views that take arguments::
 
-            from django_cradmin import cradmin_testhelpers
+            from cradmin_legacy import cradmin_testhelpers
 
             class TestMyView(TestCase, cradmin_testhelpers.TestCaseMixin):
                 viewclass = MyView
@@ -75,7 +75,7 @@ class TestCaseMixin(object):
 
         Views that use a querystring (GET)::
 
-            from django_cradmin import cradmin_testhelpers
+            from cradmin_legacy import cradmin_testhelpers
 
             class TestMyView(TestCase, cradmin_testhelpers.TestCaseMixin):
                 viewclass = MyView
@@ -91,7 +91,7 @@ class TestCaseMixin(object):
 
         Using a real user object::
 
-            from django_cradmin import cradmin_testhelpers
+            from cradmin_legacy import cradmin_testhelpers
 
             class TestMyView(TestCase, cradmin_testhelpers.TestCaseMixin):
                 viewclass = MyView
@@ -102,7 +102,7 @@ class TestCaseMixin(object):
 
         Mocking Django messages framework messages::
 
-            from django_cradmin import cradmin_testhelpers
+            from cradmin_legacy import cradmin_testhelpers
 
             class TestMyView(TestCase, cradmin_testhelpers.TestCaseMixin):
                 viewclass = MyView

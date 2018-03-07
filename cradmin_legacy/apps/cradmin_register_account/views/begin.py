@@ -5,7 +5,7 @@ from django.utils.module_loading import import_string
 
 from django.views.generic import FormView
 
-from django_cradmin.apps.cradmin_activate_account.utils import ActivationEmail
+from cradmin_legacy.apps.cradmin_activate_account.utils import ActivationEmail
 
 
 class BeginRegisterAccountView(FormView):

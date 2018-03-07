@@ -6,10 +6,10 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from django.utils import timezone
 import htmls
-from django_cradmin.python2_compatibility import mock
-from django_cradmin.apps.cradmin_resetpassword.views.reset import ResetPasswordView
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.apps.cradmin_resetpassword.views.reset import ResetPasswordView
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestResetPasswordView(TestCase):
@@ -35,7 +35,7 @@ class TestResetPasswordView(TestCase):
         self.assertEqual(
             selector.one('h1').alltext_normalized,
             'Reset your password testuser')
-        self.assertTrue(selector.exists('form#django_cradmin_resetpassword_reset_form'))
+        self.assertTrue(selector.exists('form#cradmin_legacy_resetpassword_reset_form'))
         self.assertTrue(selector.exists('input[type="password"][name="password1"]'))
         self.assertTrue(selector.exists('input[type="password"][name="password2"]'))
 
@@ -45,10 +45,10 @@ class TestResetPasswordView(TestCase):
             expiration_datetime=datetime(2014, 1, 1))
         response = self.client.get(self.__get_url('valid-token'))
         selector = htmls.S(response.content)
-        self.assertFalse(selector.exists('form#django_cradmin_resetpassword_reset_form'))
-        self.assertTrue(selector.exists('#django_cradmin_resetpassword_reset_expired_message'))
+        self.assertFalse(selector.exists('form#cradmin_legacy_resetpassword_reset_form'))
+        self.assertTrue(selector.exists('#cradmin_legacy_resetpassword_reset_expired_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_resetpassword_reset_expired_message').alltext_normalized,
+            selector.one('#cradmin_legacy_resetpassword_reset_expired_message').alltext_normalized,
             'This password reset link has expired.')
 
     def test_get_invalid_token(self):
@@ -56,10 +56,10 @@ class TestResetPasswordView(TestCase):
             token='valid-token', user=self.testuser)
         response = self.client.get(self.__get_url('invalid-token'))
         selector = htmls.S(response.content)
-        self.assertFalse(selector.exists('form#django_cradmin_resetpassword_reset_form'))
-        self.assertTrue(selector.exists('#django_cradmin_resetpassword_reset_invalid_token_message'))
+        self.assertFalse(selector.exists('form#cradmin_legacy_resetpassword_reset_form'))
+        self.assertTrue(selector.exists('#cradmin_legacy_resetpassword_reset_invalid_token_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_resetpassword_reset_invalid_token_message').alltext_normalized,
+            selector.one('#cradmin_legacy_resetpassword_reset_invalid_token_message').alltext_normalized,
             'Invalid password reset URL. Are you sure you copied the entire URL from the email?')
 
     def test_post_passwords_not_matching(self):
@@ -71,7 +71,7 @@ class TestResetPasswordView(TestCase):
         selector = htmls.S(response.content)
         self.assertIn(
             'The passwords do not match',
-            selector.one('form#django_cradmin_resetpassword_reset_form').alltext_normalized)
+            selector.one('form#cradmin_legacy_resetpassword_reset_form').alltext_normalized)
 
     def test_post_expired_token(self):
         self._create_generic_token_with_metadata(
@@ -82,10 +82,10 @@ class TestResetPasswordView(TestCase):
             'password2': 'secret',
         })
         selector = htmls.S(response.content)
-        self.assertFalse(selector.exists('form#django_cradmin_resetpassword_reset_form'))
-        self.assertTrue(selector.exists('#django_cradmin_resetpassword_reset_expired_message'))
+        self.assertFalse(selector.exists('form#cradmin_legacy_resetpassword_reset_form'))
+        self.assertTrue(selector.exists('#cradmin_legacy_resetpassword_reset_expired_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_resetpassword_reset_expired_message').alltext_normalized,
+            selector.one('#cradmin_legacy_resetpassword_reset_expired_message').alltext_normalized,
             'This password reset link has expired.')
 
     def test_post_invalid_token(self):
@@ -96,10 +96,10 @@ class TestResetPasswordView(TestCase):
             'password2': 'secret',
         })
         selector = htmls.S(response.content)
-        self.assertFalse(selector.exists('form#django_cradmin_resetpassword_reset_form'))
-        self.assertTrue(selector.exists('#django_cradmin_resetpassword_reset_invalid_token_message'))
+        self.assertFalse(selector.exists('form#cradmin_legacy_resetpassword_reset_form'))
+        self.assertTrue(selector.exists('#cradmin_legacy_resetpassword_reset_invalid_token_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_resetpassword_reset_invalid_token_message').alltext_normalized,
+            selector.one('#cradmin_legacy_resetpassword_reset_invalid_token_message').alltext_normalized,
             'Invalid password reset URL. Are you sure you copied the entire URL from the email?')
 
     def test_post(self):

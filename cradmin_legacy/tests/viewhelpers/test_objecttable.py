@@ -2,12 +2,12 @@ from __future__ import unicode_literals
 from builtins import str
 from builtins import range
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 from django.test import TestCase, RequestFactory
 
-from django_cradmin.tests.viewhelpers.cradmin_viewhelpers_testapp.models import TestModel
-from django_cradmin.viewhelpers import objecttable
-from django_cradmin.django_cradmin_testapp import models as testmodels
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import TestModel
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.cradmin_legacy_testapp import models as testmodels
 
 
 class TestColumn(TestCase):
@@ -243,7 +243,7 @@ class TestObjectTableView(TestCase):
         response = MyObjectTableView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        # selector.one('#django_cradmin_contentwrapper').prettyprint()
+        # selector.one('#cradmin_legacy_contentwrapper').prettyprint()
         self.assertFalse(selector.exists('#objecttableview-table'))
         self.assertEquals(
             selector.one('#objecttableview-no-items-message').alltext_normalized,
@@ -280,9 +280,9 @@ class TestObjectTableView(TestCase):
         response = MyObjectTableView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        # selector.one('#django_cradmin_contentwrapper').prettyprint()
+        # selector.one('#cradmin_legacy_contentwrapper').prettyprint()
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 4)
-        self.assertFalse(selector.exists('#django_cradmin_contentwrapper .pager'))
+        self.assertFalse(selector.exists('#cradmin_legacy_contentwrapper .pager'))
 
     def test_paginate_by_firstpage(self):
         testmodels.SomeItem.objects.bulk_create(
@@ -301,10 +301,10 @@ class TestObjectTableView(TestCase):
         response.render()
         selector = htmls.S(response.content)
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 4)
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager'))
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager .previous.disabled'))
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager .next'))
-        self.assertFalse(selector.exists('#django_cradmin_contentwrapper .pager .next.disabled'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager .previous.disabled'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager .next'))
+        self.assertFalse(selector.exists('#cradmin_legacy_contentwrapper .pager .next.disabled'))
 
     def test_paginate_by_lastpage(self):
         testmodels.SomeItem.objects.bulk_create(
@@ -325,10 +325,10 @@ class TestObjectTableView(TestCase):
         response.render()
         selector = htmls.S(response.content)
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 1)
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager'))
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager .previous'))
-        self.assertFalse(selector.exists('#django_cradmin_contentwrapper .pager .previous.disabled'))
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager .next.disabled'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager .previous'))
+        self.assertFalse(selector.exists('#cradmin_legacy_contentwrapper .pager .previous.disabled'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager .next.disabled'))
 
     def test_paginate_by_middlepage(self):
         testmodels.SomeItem.objects.bulk_create(
@@ -348,13 +348,13 @@ class TestObjectTableView(TestCase):
         response = MyObjectTableView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        # selector.one('#django_cradmin_contentwrapper').prettyprint()
+        # selector.one('#cradmin_legacy_contentwrapper').prettyprint()
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 4)
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager'))
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager .previous'))
-        self.assertTrue(selector.exists('#django_cradmin_contentwrapper .pager .next'))
-        self.assertFalse(selector.exists('#django_cradmin_contentwrapper .pager .previous.disabled'))
-        self.assertFalse(selector.exists('#django_cradmin_contentwrapper .pager .next.disabled'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager .previous'))
+        self.assertTrue(selector.exists('#cradmin_legacy_contentwrapper .pager .next'))
+        self.assertFalse(selector.exists('#cradmin_legacy_contentwrapper .pager .previous.disabled'))
+        self.assertFalse(selector.exists('#cradmin_legacy_contentwrapper .pager .next.disabled'))
 
     def test_render_single_simple_column(self):
         testmodels.SomeItem.objects.create(name='Item One')
@@ -467,7 +467,7 @@ class TestObjectTableView(TestCase):
         response = MyObjectTableView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        # selector.one('#django_cradmin_contentwrapper thead').prettyprint()
+        # selector.one('#cradmin_legacy_contentwrapper thead').prettyprint()
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 3)
         self.assertEquals(
@@ -500,7 +500,7 @@ class TestObjectTableView(TestCase):
         response = MyObjectTableView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        # selector.one('#django_cradmin_contentwrapper thead').prettyprint()
+        # selector.one('#cradmin_legacy_contentwrapper thead').prettyprint()
 
         self.assertEquals(selector.count('#objecttableview-table>thead>tr>th'), 2),
         self.assertEquals(

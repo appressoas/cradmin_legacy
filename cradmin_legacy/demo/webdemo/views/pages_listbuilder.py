@@ -3,14 +3,14 @@ from __future__ import unicode_literals
 from django.contrib.auth import get_user_model
 from future import standard_library
 
-from django_cradmin.demo.webdemo.views.pages import PagesQuerySetForRoleMixin, PageCreateView, PageUpdateView, \
+from cradmin_legacy.demo.webdemo.views.pages import PagesQuerySetForRoleMixin, PageCreateView, PageUpdateView, \
     PageDeleteView, PreviewPageView
-from django_cradmin.viewhelpers import listbuilderview
-from django_cradmin.viewhelpers import listfilter
-from django_cradmin.viewhelpers import listbuilder
-from django_cradmin import crapp
-from django_cradmin.demo.webdemo.models import Page, PageTag
-from django_cradmin.viewhelpers.listfilter.basefilters.single import abstractradio
+from cradmin_legacy.viewhelpers import listbuilderview
+from cradmin_legacy.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers import listbuilder
+from cradmin_legacy import crapp
+from cradmin_legacy.demo.webdemo.models import Page, PageTag
+from cradmin_legacy.viewhelpers.listfilter.basefilters.single import abstractradio
 
 standard_library.install_aliases()
 

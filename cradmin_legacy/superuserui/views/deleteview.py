@@ -1,5 +1,5 @@
-from django_cradmin.superuserui.views import mixins
-from django_cradmin.viewhelpers import delete
+from cradmin_legacy.superuserui.views import mixins
+from cradmin_legacy.viewhelpers import delete
 
 
 class View(mixins.QuerySetForRoleMixin, delete.DeleteView):

@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms import layout
 
-from django_cradmin.crispylayouts import PrimarySubmit
-from django_cradmin.viewhelpers import update
-from django_cradmin import crapp
+from cradmin_legacy.crispylayouts import PrimarySubmit
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy import crapp
 
 
 class EditUserView(update.UpdateRoleView):

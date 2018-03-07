@@ -2,9 +2,9 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from django_cradmin.apps.cradmin_register_account.forms.auth_user import AuthUserCreateAccountForm, \
+from cradmin_legacy.apps.cradmin_register_account.forms.auth_user import AuthUserCreateAccountForm, \
     AuthUserCreateAccountAutoUsernameForm
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestAuthUserCreateAccountForm(TestCase):

@@ -11,7 +11,7 @@ def human_readable_filesize(size_in_bytes):
 
     Examples:
 
-        >>> from django_cradmin.utils import crhumanize
+        >>> from cradmin_legacy.utils import crhumanize
         >>> crhumanize.human_readable_filesize(1)
         '1B'
         >>> crhumanize.human_readable_filesize(2344234345)
@@ -40,7 +40,7 @@ def dehumanize_readable_filesize(humanized_size):
 
     Examples:
 
-        >>> from django_cradmin.utils import crhumanize
+        >>> from cradmin_legacy.utils import crhumanize
         >>> crhumanize.dehumanize_readable_filesize('999B')
         999
         >>> crhumanize.dehumanize_readable_filesize('2.34GB')

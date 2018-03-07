@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from future.utils import python_2_unicode_compatible
 
-from django_cradmin import crsettings
+from cradmin_legacy import crsettings
 
 
 def archiveimage_upload_to(archiveimage, filename):
@@ -137,7 +137,7 @@ class ArchiveImage(models.Model):
                 'height': 300
             }
         }
-        return render_to_string('django_cradmin/apps/cradmin_imagearchive/preview.django.html',
+        return render_to_string('cradmin_legacy/apps/cradmin_imagearchive/preview.django.html',
                                 context, request=request)
 
     @property

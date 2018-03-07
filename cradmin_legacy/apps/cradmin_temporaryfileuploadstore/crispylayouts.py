@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
-from django_cradmin.crispylayouts import CradminSubmitButton
+from cradmin_legacy.crispylayouts import CradminSubmitButton
 
 
 class BulkFileUploadSubmit(CradminSubmitButton):
-    template = 'django_cradmin/apps/cradmin_temporaryfileuploadstore/bulkfileupload-submit.django.html'
+    template = 'cradmin_legacy/apps/cradmin_temporaryfileuploadstore/bulkfileupload-submit.django.html'
     extra_button_attributes = {
-        'django-cradmin-bulkfileupload-submit': ''
+        'cradmin-legacy-bulkfileupload-submit': ''
     }
 
     def __init__(self, name, value, uploading_text=None, uploading_icon_cssclass=None, **kwargs):

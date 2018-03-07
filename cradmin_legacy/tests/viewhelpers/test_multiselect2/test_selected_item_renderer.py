@@ -1,9 +1,9 @@
 import htmls
 from django import test
 
-from django_cradmin import python2_compatibility
-from django_cradmin.viewhelpers.multiselect2 import selected_item_renderer
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy import python2_compatibility
+from cradmin_legacy.viewhelpers.multiselect2 import selected_item_renderer
+from cradmin_legacy.python2_compatibility import mock
 
 
 class TestSelectedItem(test.TestCase):
@@ -16,14 +16,14 @@ class TestSelectedItem(test.TestCase):
             value=mockvalue).render())
         self.assertEqual(
             'testvalue',
-            selector.one('.django-cradmin-multiselect2-target-selected-item-title').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-selected-item-title').alltext_normalized)
 
     def test_no_description(self):
         mockvalue = mock.MagicMock()
         selector = htmls.S(selected_item_renderer.SelectedItem(
             value=mockvalue).render())
         self.assertFalse(
-            selector.exists('.django-cradmin-multiselect2-target-selected-item-description'))
+            selector.exists('.cradmin-legacy-multiselect2-target-selected-item-description'))
 
     def test_has_description(self):
         class MySelectedItem(selected_item_renderer.SelectedItem):
@@ -34,7 +34,7 @@ class TestSelectedItem(test.TestCase):
         selector = htmls.S(MySelectedItem(value=mockvalue).render())
         self.assertEqual(
             'test description',
-            selector.one('.django-cradmin-multiselect2-target-selected-item-description').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-selected-item-description').alltext_normalized)
 
     def test_input_field(self):
         mockvalue = mock.MagicMock()

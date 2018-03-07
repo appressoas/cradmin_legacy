@@ -12,7 +12,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 import math
-from django_cradmin.utils import crhumanize
+from cradmin_legacy.utils import crhumanize
 
 
 class TemporaryFileCollectionQuerySet(models.query.QuerySet):

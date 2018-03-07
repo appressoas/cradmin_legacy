@@ -7,11 +7,11 @@ from crispy_forms import layout
 from crispy_forms.helper import FormHelper
 from crispy_forms.utils import flatatt
 from django.template.loader import render_to_string
-from django_cradmin.templatetags.cradmin_icon_tags import cradmin_icon
+from cradmin_legacy.templatetags.cradmin_legacy_icon_tags import cradmin_icon
 
 
 class CradminSubmitButton(layout.Submit):
-    template = 'django_cradmin/crispylayouts/submitbutton.django.html'
+    template = 'cradmin_legacy/crispylayouts/submitbutton.django.html'
     extra_button_attributes = {}
     button_css_classes = 'btn btn-default'
 
@@ -54,7 +54,7 @@ class DefaultSubmitBlock(CradminSubmitButton):
 
 
 class CollapsedSectionLayout(layout.Div):
-    wrapper_template_name = 'django_cradmin/crispylayouts/collapsed-section-layout.django.html'
+    wrapper_template_name = 'cradmin_legacy/crispylayouts/collapsed-section-layout.django.html'
 
     def __init__(self, *args, **kwargs):
         self.show_label = kwargs.pop('show_label', _('Show'))
@@ -81,4 +81,4 @@ class CollapsedSectionLayout(layout.Div):
 
 
 class CradminFormHelper(FormHelper):
-    template = 'django_cradmin/crispylayouts/cradmin_form_helper.django.html'
+    template = 'cradmin_legacy/crispylayouts/cradmin_form_helper.django.html'

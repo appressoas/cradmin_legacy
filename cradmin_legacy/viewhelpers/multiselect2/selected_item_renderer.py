@@ -2,19 +2,19 @@ from builtins import str
 
 from django.utils.translation import pgettext_lazy
 
-from django_cradmin import renderable
+from cradmin_legacy import renderable
 
 
 class SelectedItem(renderable.AbstractRenderableWithCss):
     """
     Renders a selected item. This is rendered by
-    :class:`django_cradmin.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`,
-    and added to a :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.Target`
+    :class:`cradmin_legacy.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`,
+    and added to a :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`
     when the "select"-button in the ItemValue is clicked.
     """
 
     #: The template used to render this selected item.
-    template_name = 'django_cradmin/viewhelpers/multiselect2/selected_item_renderer/selected-item.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/multiselect2/selected_item_renderer/selected-item.django.html'
 
     #: If this is specified, we will add an attribute with this name
     #: for the value as an attribute of the object.
@@ -36,7 +36,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
             setattr(self, self.valuealias, self.value)
 
     def get_base_css_classes_list(self):
-        return ['django-cradmin-multiselect2-selected-item']
+        return ['cradmin-legacy-multiselect2-selected-item']
 
     def get_title(self):
         """
@@ -83,7 +83,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
         :meth:`.get_deselect_button_extra_cssclasses_list` instead.
         """
         return [
-            'django-cradmin-multiselect2-target-selected-item-deselectbutton'
+            'cradmin-legacy-multiselect2-target-selected-item-deselectbutton'
         ]
 
     def get_deselect_button_extra_cssclasses_list(self):
@@ -108,7 +108,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
         return [
             'btn',
             'btn-default',
-            'django-cradmin-multiselect2-target-selected-item-deselectbutton'
+            'cradmin-legacy-multiselect2-target-selected-item-deselectbutton'
         ]
 
     def get_deselect_button_cssclasses_string(self):

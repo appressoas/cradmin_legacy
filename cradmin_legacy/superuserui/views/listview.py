@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy
 
-from django_cradmin.superuserui.views import mixins
-from django_cradmin.viewhelpers import listbuilder
-from django_cradmin.viewhelpers import listbuilderview
-from django_cradmin.viewhelpers import listfilter
-from django_cradmin.viewhelpers import multiselect2
+from cradmin_legacy.superuserui.views import mixins
+from cradmin_legacy.viewhelpers import listbuilder
+from cradmin_legacy.viewhelpers import listbuilderview
+from cradmin_legacy.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers import multiselect2
 
 
 class BaseView(mixins.ListFilterQuerySetForRoleMixin,

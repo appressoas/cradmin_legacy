@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 from django.template.defaultfilters import truncatechars
 from django.utils.translation import ugettext_lazy as _
 
-from django_cradmin import crinstance, crmenu
-from django_cradmin.demo.login_not_required_demo.views import dashboard
-from django_cradmin.demo.webdemo.models import Site
+from cradmin_legacy import crinstance, crmenu
+from cradmin_legacy.demo.login_not_required_demo.views import dashboard
+from cradmin_legacy.demo.webdemo.models import Site
 
 
 class Menu(crmenu.Menu):

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.generic import View
 
-from django_cradmin.apps.cradmin_email import emailutils
+from cradmin_legacy.apps.cradmin_email import emailutils
 
 
 class DemoEmail(emailutils.AbstractEmail):

@@ -4,7 +4,7 @@ from builtins import object
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from django_cradmin.utils.nulls_last_queryset import NullsLastManager, NullsLastQuerySet
+from cradmin_legacy.utils.nulls_last_queryset import NullsLastManager, NullsLastQuerySet
 
 
 class SortableQuerySetBase(NullsLastQuerySet):

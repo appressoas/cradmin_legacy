@@ -1,6 +1,6 @@
 from django.core import mail
 from django.test import TestCase
-from django_cradmin.apps.cradmin_email import emailutils
+from cradmin_legacy.apps.cradmin_email import emailutils
 
 
 class TestConvertHtmlToPlaintext(TestCase):

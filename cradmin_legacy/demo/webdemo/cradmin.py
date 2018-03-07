@@ -1,16 +1,16 @@
 from __future__ import unicode_literals
 from django.template.defaultfilters import truncatechars
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin import crinstance, crmenu
-from django_cradmin.apps.cradmin_imagearchive import cradminviews as imagearchive
+from cradmin_legacy import crinstance, crmenu
+from cradmin_legacy.apps.cradmin_imagearchive import cradminviews as imagearchive
 
-from django_cradmin.demo.webdemo.models import Site
-from django_cradmin.demo.webdemo.views import pages_listbuilder
-from django_cradmin.demo.webdemo.views import dashboard
-from django_cradmin.demo.webdemo.views import pages
-from django_cradmin.demo.webdemo.views import formutils
-from django_cradmin.demo.webdemo.views import inviteadmins
-from django_cradmin.demo.webdemo.views import sharable_link
+from cradmin_legacy.demo.webdemo.models import Site
+from cradmin_legacy.demo.webdemo.views import pages_listbuilder
+from cradmin_legacy.demo.webdemo.views import dashboard
+from cradmin_legacy.demo.webdemo.views import pages
+from cradmin_legacy.demo.webdemo.views import formutils
+from cradmin_legacy.demo.webdemo.views import inviteadmins
+from cradmin_legacy.demo.webdemo.views import sharable_link
 
 
 class Menu(crmenu.Menu):

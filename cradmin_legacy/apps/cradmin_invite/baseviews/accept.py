@@ -8,14 +8,14 @@ from django.shortcuts import render
 from django.utils.http import urlencode
 from django.views.generic import TemplateView
 
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     GenericTokenExpiredError
 
 
 class AbstractAcceptInviteView(TemplateView):
     """
     Base class for views that accept invites from
-    :class:`~django_cradmin.apps.cradmin_invite.invite_url.InviteUrl`.
+    :class:`~cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl`.
 
     You have to override:
 
@@ -87,7 +87,7 @@ class AbstractAcceptInviteView(TemplateView):
         requests.
 
         If the token is valid, we set ``self.generic_token`` to the
-        :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
+        :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
 
         If the token is invalid, we respond with :meth:`.token_error_response`.
         """
@@ -140,7 +140,7 @@ class AbstractAcceptInviteView(TemplateView):
         the user has been created.
 
         Defaults to the ``cradmin-register-account-begin`` view in
-        ``django_cradmin.apps.cradmin_register_account``.
+        ``cradmin_legacy.apps.cradmin_register_account``.
         """
         return self.add_next_argument_to_url(reverse('cradmin-register-account-begin'))
 
@@ -162,7 +162,7 @@ class AbstractAcceptInviteView(TemplateView):
         Should have some way of returning the user to this view after
         login is complete.
 
-        Defaults to the ``cradmin-authenticate-logout`` view in ``django_cradmin.apps.cradmin_authenticate``
+        Defaults to the ``cradmin-authenticate-logout`` view in ``cradmin_legacy.apps.cradmin_authenticate``
         with the next-argument set to the ``cradmin-authenticate-login`` view in the same app, with the next
         argument of the ``cradmin-authenticate-login`` view set to the current url.
         """
@@ -198,8 +198,8 @@ class AbstractAcceptInviteView(TemplateView):
     def get_appname(self):
         """
         Get the name of the appname. Must match the appname returned by the
-        :class:`~django_cradmin.apps.cradmin_invite.invite_url.InviteUrl.get_appname`
-        method of your :class:`~django_cradmin.apps.cradmin_invite.invite_url.InviteUrl`
+        :class:`~cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl.get_appname`
+        method of your :class:`~cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl`
         subclass.
         """
         raise NotImplementedError()

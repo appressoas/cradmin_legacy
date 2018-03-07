@@ -8,9 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.views.generic import FormView
 
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     GenericTokenExpiredError
-from django_cradmin.crispylayouts import PrimarySubmitLg
+from cradmin_legacy.crispylayouts import PrimarySubmitLg
 
 
 class RepeatPasswordForm(forms.Form):
@@ -38,7 +38,7 @@ class ResetPasswordView(FormView):
     def get_formhelper(self):
         helper = FormHelper()
         helper.form_action = '#'
-        helper.form_id = 'django_cradmin_resetpassword_reset_form'
+        helper.form_id = 'cradmin_legacy_resetpassword_reset_form'
         helper.layout = layout.Layout(
             layout.Field('password1', focusonme='focusonme', css_class='input-lg'),
             layout.Field('password2', css_class='input-lg'),

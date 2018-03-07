@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.db import models
 from django.views.generic.edit import FormMixin
 
-from django_cradmin.viewhelpers import listbuilderview
-from django_cradmin.viewhelpers import multiselect2
+from cradmin_legacy.viewhelpers import listbuilderview
+from cradmin_legacy.viewhelpers import multiselect2
 
 
 class ViewMixin(FormMixin):
@@ -20,10 +20,10 @@ class ViewMixin(FormMixin):
         """
         Get the target renderer class.
 
-        Must return :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.Target`
+        Must return :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`
         or a subclass of that class.
 
-        Defaults to returning :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.Target`.
+        Defaults to returning :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`.
         """
         return multiselect2.target_renderer.Target
 
@@ -43,7 +43,7 @@ class ViewMixin(FormMixin):
         """
         Get the target renderer object.
 
-        Must return an object of :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.Target`
+        Must return an object of :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`
         or a subclass of that class.
 
         .. note:: You normally do not override this method, but instead
@@ -59,7 +59,7 @@ class ViewMixin(FormMixin):
 
     def get_selectall_directive_dict(self):
         """
-        Get options for the ``django-cradmin-multiselect2-selectall`` angularjs
+        Get options for the ``cradmin-legacy-multiselect2-selectall`` angularjs
         directive.
 
         Returns:
@@ -403,7 +403,7 @@ class ListbuilderView(ViewMixin, listbuilderview.View):
     """
     Multiselect2 listbuilder view.
     """
-    template_name = 'django_cradmin/viewhelpers/multiselect2view/listbuilderview.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/multiselect2view/listbuilderview.django.html'
     value_renderer_class = multiselect2.listbuilder_itemvalues.ItemValue
 
 
@@ -411,7 +411,7 @@ class ListbuilderFilterView(ViewMixin, listbuilderview.FilterListMixin, listbuil
     """
     Multiselect2 listbuilder view with filters.
     """
-    template_name = 'django_cradmin/viewhelpers/multiselect2view/listbuilderfilterview.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/multiselect2view/listbuilderfilterview.django.html'
     value_renderer_class = multiselect2.listbuilder_itemvalues.ItemValue
 
     def get_filterlist_template_name(self):

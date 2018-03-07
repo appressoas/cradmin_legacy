@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from collections import OrderedDict
 import urllib
-from django_cradmin.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
+from cradmin_legacy.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
 from future import standard_library
 
 standard_library.install_aliases()

@@ -2,14 +2,14 @@ from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 from django.utils.translation import pgettext
-from django_cradmin.viewhelpers.listfilter.base.abstractfilterlistchild import AbstractFilterListChild
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlistchild import AbstractFilterListChild
 
 
 class AbstractFilter(AbstractFilterListChild):
     """
     Abstract base class for all filters.
     """
-    template_name = 'django_cradmin/viewhelpers/listfilter/base/abstractfilter.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listfilter/base/abstractfilter.django.html'
 
     def __init__(self, slug=None, label=None, label_is_screenreader_only=None):
         """
@@ -74,7 +74,7 @@ class AbstractFilter(AbstractFilterListChild):
         (see :class:`.AbstractFilter`). If ``label_is_screenreader_only`` is ``None``,
         this defaults to the return value of the ``get_label_is_screenreader_only_by_default()``
         method of
-        :class:`django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
+        :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
         """
         if self.label_is_screenreader_only is None:
             return self.filterlist.get_label_is_screenreader_only_by_default()
@@ -203,7 +203,7 @@ class AbstractFilter(AbstractFilterListChild):
         return self.filterlist.filtershandler.build_filter_url(changed_filterobject=copy)
 
     def get_base_css_classes_list(self):
-        return ['django-cradmin-listfilter-filter']
+        return ['cradmin-legacy-listfilter-filter']
 
     def filter(self, queryobject):
         """
@@ -250,7 +250,7 @@ class AbstractFilter(AbstractFilterListChild):
         """
         Get the DOM id of the target of the filter.
         This is just a shortcut to access
-        :meth:`django_cradmin.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList.get_target_dom_id`.
+        :meth:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList.get_target_dom_id`.
         """
         return self.filterlist.get_target_dom_id()
 

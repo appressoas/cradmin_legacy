@@ -3,14 +3,14 @@ import mock
 from django import test
 from django import forms
 
-from django_cradmin.viewhelpers.multiselect2 import target_renderer
+from cradmin_legacy.viewhelpers.multiselect2 import target_renderer
 
 
 class TestTarget(test.TestCase):
     def test_dom_id_default(self):
         selector = htmls.S(target_renderer.Target(form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
-            'django_cradmin_multiselect2_select_target',
+            'cradmin_legacy_multiselect2_select_target',
             selector.one('form')['id'])
 
     def test_dom_id_custom(self):
@@ -49,7 +49,7 @@ class TestTarget(test.TestCase):
         selector = htmls.S(target_renderer.Target(form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             '',
-            selector.one('.django-cradmin-multiselect2-target-without-items-content').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-without-items-content').alltext_normalized)
 
     def test_without_items_text_custom_parameter(self):
         selector = htmls.S(target_renderer.Target(
@@ -57,7 +57,7 @@ class TestTarget(test.TestCase):
             form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             'Please make a selection',
-            selector.one('.django-cradmin-multiselect2-target-without-items-content').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-without-items-content').alltext_normalized)
 
     def test_without_items_text_override(self):
         class MyTarget(target_renderer.Target):
@@ -67,13 +67,13 @@ class TestTarget(test.TestCase):
         selector = htmls.S(MyTarget(form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             'No items selected',
-            selector.one('.django-cradmin-multiselect2-target-without-items-content').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-without-items-content').alltext_normalized)
 
     def test_with_items_title_default(self):
         selector = htmls.S(target_renderer.Target(form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             'Selected items',
-            selector.one('.django-cradmin-multiselect2-target-title').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-title').alltext_normalized)
 
     def test_with_items_title_custom_parameter(self):
         selector = htmls.S(target_renderer.Target(
@@ -81,7 +81,7 @@ class TestTarget(test.TestCase):
             form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             'Test title',
-            selector.one('.django-cradmin-multiselect2-target-title').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-title').alltext_normalized)
 
     def test_with_items_title_override(self):
         class MyTarget(target_renderer.Target):
@@ -91,7 +91,7 @@ class TestTarget(test.TestCase):
         selector = htmls.S(MyTarget(form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             'Test title',
-            selector.one('.django-cradmin-multiselect2-target-title').alltext_normalized)
+            selector.one('.cradmin-legacy-multiselect2-target-title').alltext_normalized)
 
     def test_submit_button_text_default(self):
         selector = htmls.S(target_renderer.Target(form=forms.Form()).render(request=mock.MagicMock()))
@@ -124,5 +124,5 @@ class TestManyToManySelectTarget(test.TestCase):
             form=forms.Form()).render(request=mock.MagicMock()))
         self.assertEqual(
             '{"fieldid": "testid"}',
-            selector.one('button')['django-cradmin-multiselect2-use-this']
+            selector.one('button')['cradmin-legacy-multiselect2-use-this']
         )

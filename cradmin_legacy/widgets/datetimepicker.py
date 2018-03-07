@@ -9,15 +9,15 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import pgettext_lazy
 
-from django_cradmin.templatetags.cradmin_icon_tags import cradmin_icon
-from django_cradmin.widgets.selectwidgets import WrappedSelect
+from cradmin_legacy.templatetags.cradmin_legacy_icon_tags import cradmin_icon
+from cradmin_legacy.widgets.selectwidgets import WrappedSelect
 
 
 class DatePickerWidget(widgets.TextInput):
     """
     A Widget for selecting a date.
 
-    This implements a Django widget using ``django-cradmin-datetime-selector``
+    This implements a Django widget using ``cradmin-legacy-datetime-selector``
     AngularJS directive, but defaults to values that makes the directive
     only allows the user to pick a date.
 
@@ -37,15 +37,15 @@ class DatePickerWidget(widgets.TextInput):
 
     You can easily provide your own translation files as explained in the momentjs docs.
     If your template inherits from any of the Django-cradmin templates (which
-    all extend from ``django_cradmin/standalone-base-internal.django.html``, you
+    all extend from ``cradmin_legacy/standalone-base-internal.django.html``, you
     add your momentjs locale by overriding the the ``momentjslocale`` templatate block.
     Remember that this can be overridden for your entire project by providing a
-    ``django_cradmin/standalone-base.django.html`` that overrides the ``momentjslocale``
+    ``cradmin_legacy/standalone-base.django.html`` that overrides the ``momentjslocale``
     block.
     """
 
     #: The template used to render the widget.
-    template_name = 'django_cradmin/widgets/datetimepicker.django.html'
+    template_name = 'cradmin_legacy/widgets/datetimepicker.django.html'
 
     #: The momentjs formatting string to use to format the value
     #: of the hidden field where the actually posted value is
@@ -88,14 +88,14 @@ class DatePickerWidget(widgets.TextInput):
     #: keyword argument for ``__init__``.
     default_usebuttonlabel = pgettext_lazy('Use button text in datetime widget', 'Use')
 
-    #: The iconkey for :func:`.django_cradmin.templatetags.cradmin_icon_tags`
+    #: The iconkey for :func:`.cradmin_legacy.templatetags.cradmin_legacy_icon_tags`
     #: to use for the close button (the X in the top right corner).
     #:
     #: Can be overridden via the ``back_close_iconkey``
     #: keyword argument for ``__init__``.
     default_close_iconkey = 'x'
 
-    #: The iconkey for :func:`.django_cradmin.templatetags.cradmin_icon_tags`
+    #: The iconkey for :func:`.cradmin_legacy.templatetags.cradmin_legacy_icon_tags`
     #: to use for the back arrow button for navigating from the time select
     #: page back to the date picker page.
     #:
@@ -329,7 +329,7 @@ class DatePickerWidget(widgets.TextInput):
     def get_datepicker_config(self, fieldid, triggerbuttonid, previewid,
                               previewtemplateid):
         """
-        Get the configuration for the ``django-cradmin-datetime-selector`` AngularJS directive.
+        Get the configuration for the ``cradmin-legacy-datetime-selector`` AngularJS directive.
 
         This is encoded as json, so all values must be JSON-encodable.
         This means that you need to ensure any lazy translation string is
@@ -472,7 +472,7 @@ class DatePickerWidget(widgets.TextInput):
         Get extra css classes for the wrapper around the field and widget.
 
         Use this if you want to customize the look of a specific widget.
-        If you want to customize all datetime widgets, a custom django-cradmin
+        If you want to customize all datetime widgets, a custom cradmin-legacy
         theme is probably a better solution.
 
         Returns:
@@ -673,7 +673,7 @@ class DatePickerWidget(widgets.TextInput):
         time when the animation css class is removed from the preview
         element.
         """
-        # return 'django-cradmin-datepicker-preview-changeanimate'
+        # return 'cradmin-legacy-datepicker-preview-changeanimate'
         return None
 
     def get_preview_change_animation_duration_milliseconds(self):
@@ -718,9 +718,9 @@ class DateTimePickerWidget(DatePickerWidget):
 class TimePickerWidget(widgets.TimeInput):
     """
     Time picker widget that is wrapped in a div with the
-    ``django-cradmin-timepicker`` css class.
+    ``cradmin-legacy-timepicker`` css class.
     """
-    template_name = 'django_cradmin/widgets/timepicker.django.html'
+    template_name = 'cradmin_legacy/widgets/timepicker.django.html'
 
     def __init__(self, attrs=None, format=None, placeholder=_('hh:mm')):
         if attrs is None:
@@ -762,7 +762,7 @@ class TimePickerWidget(widgets.TimeInput):
 #         return [value, value]
 #
 #     def format_output(self, rendered_widgets):
-#         return u'<div class="django-cradmin-datetimepicker">{}</div>'.format(
+#         return u'<div class="cradmin-legacy-datetimepicker">{}</div>'.format(
 #             u''.join(rendered_widgets))
 #
 #     def value_from_datadict(self, data, files, name):
@@ -783,7 +783,7 @@ class TimePickerWidget(widgets.TimeInput):
 class SplitTimePickerWidget(widgets.MultiWidget):
     """
     Time picker widget that shows a select button is wrapped in a div with the
-    ``django-cradmin-split-timepicker``.
+    ``cradmin-legacy-split-timepicker``.
     """
 
     def __init__(self, attrs=None,
@@ -803,9 +803,9 @@ class SplitTimePickerWidget(widgets.MultiWidget):
         minute_choices = minute_choices or self.get_minute_choices(empty_minute_label)
         _widgets = [
             WrappedSelect(attrs=attrs, choices=hour_choices,
-                          wrapper_css_class='django-cradmin-split-timepicker-hour'),
+                          wrapper_css_class='cradmin-legacy-split-timepicker-hour'),
             WrappedSelect(attrs=attrs, choices=minute_choices,
-                          wrapper_css_class='django-cradmin-split-timepicker-minute'),
+                          wrapper_css_class='cradmin-legacy-split-timepicker-minute'),
         ]
         super(SplitTimePickerWidget, self).__init__(_widgets, attrs)
 
@@ -848,7 +848,7 @@ class SplitTimePickerWidget(widgets.MultiWidget):
             return [None, None]
 
     def format_output(self, rendered_widgets):
-        return u'<div class="django-cradmin-split-timepicker">{}</div>'.format(
+        return u'<div class="cradmin-legacy-split-timepicker">{}</div>'.format(
             u''.join(rendered_widgets))
 
     def value_from_datadict(self, data, files, name):

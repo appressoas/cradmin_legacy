@@ -1,6 +1,6 @@
 {% extends "cradmin_email/html_message_base.django.html" %}
 {% load i18n %}
-{% load cradmin_email_tags %}
+{% load cradmin_legacy_email_tags %}
 {% block contents %}
     {% blocktrans with sitename=DJANGO_CRADMIN_SITENAME user=user %}Click the button below to activate your {{ sitename }} account, {{ user }}.{% endblocktrans %}
 

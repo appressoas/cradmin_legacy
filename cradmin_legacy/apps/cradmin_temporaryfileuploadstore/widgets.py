@@ -5,11 +5,11 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext
-from django_cradmin.utils import crhumanize
+from cradmin_legacy.utils import crhumanize
 
 
 class BulkFileUploadWidget(forms.Widget):
-    template_name = 'django_cradmin/apps/cradmin_temporaryfileuploadstore/bulkfileupload-widget.django.html'
+    template_name = 'cradmin_legacy/apps/cradmin_temporaryfileuploadstore/bulkfileupload-widget.django.html'
 
     def __init__(self,
                  accept=None,
@@ -29,7 +29,7 @@ class BulkFileUploadWidget(forms.Widget):
             apiparameters (dict): Dict of API parameters. Here you can
                 put values for the ``minutes_to_live``, ``accept``, ``max_filename_length``
                 and ``unique_filenames`` attributes of
-                :class:`django_cradmin.apps.cradmin_temporaryfileuploadstore.models.TemporaryFileCollection`.
+                :class:`cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models.TemporaryFileCollection`.
 
                 Example::
 
@@ -54,7 +54,7 @@ class BulkFileUploadWidget(forms.Widget):
                 close the browser window.
 
                 Only used if ``autosubmit`` is ``True``, and the form uses the
-                form uses ``django-cradmin-bulkfileupload-form-overlay="true"``.
+                form uses ``cradmin-legacy-bulkfileupload-form-overlay="true"``.
 
         """
         self.accept = accept
@@ -112,7 +112,7 @@ class BulkFileUploadWidget(forms.Widget):
 
     def get_angularjs_directive_options(self):
         """
-        Get options for the ``django-cradmin-bulkfileupload``
+        Get options for the ``cradmin-legacy-bulkfileupload``
         angularjs directive.
 
         Must return a JSON encodable dict.

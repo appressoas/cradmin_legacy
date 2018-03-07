@@ -3,16 +3,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
 from django.http import HttpResponseRedirect
 
-from django_cradmin.registry import cradmin_instance_registry
+from cradmin_legacy.registry import cradmin_instance_registry
 
 
 class RoleSelectView(ListView):
     paginate_by = 30
-    template_name = 'django_cradmin/roleselect.django.html'
+    template_name = 'cradmin_legacy/roleselect.django.html'
     context_object_name = 'roles'
     pagetitle = _('What would you like to edit?')
     autoredirect_if_single_role = True
-    list_cssclass = 'django-cradmin-roleselect-list django-cradmin-roleselect-list-flat'
+    list_cssclass = 'cradmin-legacy-roleselect-list cradmin-legacy-roleselect-list-flat'
 
     def get_queryset(self):
         cradmin_instance = cradmin_instance_registry.get_current_instance(self.request)
@@ -25,7 +25,7 @@ class RoleSelectView(ListView):
             return HttpResponseRedirect(cradmin_instance.rolefrontpage_url(
                 cradmin_instance.get_roleid(only_role)))
         else:
-            # Add cradmin_instance to request just like django_cradmin.decorators.cradminview.
+            # Add cradmin_instance to request just like cradmin_legacy.decorators.cradminview.
             # Convenient when overriding standalone-base.django.html and using the current
             # CrInstance to distinguish multiple crinstances.
             self.request.cradmin_instance = cradmin_instance

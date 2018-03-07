@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 from crispy_forms import layout
 from future import standard_library
 
-from django_cradmin import crapp
-from django_cradmin.demo.webdemo.views.pages import PageCreateView, PageUpdateView, \
+from cradmin_legacy import crapp
+from cradmin_legacy.demo.webdemo.views.pages import PageCreateView, PageUpdateView, \
     PageDeleteView, PreviewPageView
-from django_cradmin.demo.webdemo.views.pages_listbuilder import PagesListBuilderView
+from cradmin_legacy.demo.webdemo.views.pages_listbuilder import PagesListBuilderView
 
 standard_library.install_aliases()
 

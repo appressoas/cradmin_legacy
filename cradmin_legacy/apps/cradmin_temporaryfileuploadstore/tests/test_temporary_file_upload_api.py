@@ -6,10 +6,10 @@ from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import RequestFactory, TestCase
 
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.views.temporary_file_upload_api import \
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.views.temporary_file_upload_api import \
     UploadTemporaryFilesView
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestUploadTemporaryFilesView(TestCase):

@@ -2,10 +2,10 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 import htmls
-from django_cradmin.apps.cradmin_authenticate.tests.cradmin_authenticate_testapp.models import EmailUser
+from cradmin_legacy.apps.cradmin_authenticate.tests.cradmin_authenticate_testapp.models import EmailUser
 from django.test.utils import override_settings
 
-from django_cradmin.tests.views.helpers import create_testuser
+from cradmin_legacy.tests.views.helpers import create_testuser
 
 
 class TestUsernameLogin(TestCase):

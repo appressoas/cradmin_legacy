@@ -1,8 +1,8 @@
 from django.db import models
 
-from django_cradmin import datetimeutils
-from django_cradmin.viewhelpers.listfilter.basefilters.single import abstractselect
-from django_cradmin.viewhelpers.listfilter.django.base import DjangoOrmFilterMixin
+from cradmin_legacy import datetimeutils
+from cradmin_legacy.viewhelpers.listfilter.basefilters.single import abstractselect
+from cradmin_legacy.viewhelpers.listfilter.django.base import DjangoOrmFilterMixin
 
 
 class Boolean(abstractselect.AbstractBoolean, DjangoOrmFilterMixin):
@@ -122,7 +122,7 @@ class AbstractOrderBy(abstractselect.AbstractOrderBy, DjangoOrmFilterMixin):
     A "filter" that lets the user select how the queryobject should be ordered.
 
     You only have to override the ``get_ordering_options()``-method from
-    :meth:`~django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.AbstractOrderBy`.
+    :meth:`~cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.AbstractOrderBy`.
 
     Examples:
 

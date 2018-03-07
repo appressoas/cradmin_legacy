@@ -3,8 +3,8 @@ from builtins import object
 
 from django.conf import settings
 
-from django_cradmin.apps.cradmin_email import emailutils
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from cradmin_legacy.apps.cradmin_email import emailutils
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     get_expiration_datetime_for_app
 
 
@@ -33,7 +33,7 @@ class InviteUrl(object):
     Example:
         ::
 
-            from django_cradmin.apps.cradmin_invite.utils import InviteUrl
+            from cradmin_legacy.apps.cradmin_invite.utils import InviteUrl
 
             class InviteUrl(InviteUrl):
                 def get_appname(self):
@@ -73,7 +73,7 @@ class InviteUrl(object):
     def get_appname(self):
         """
         Get the appname for
-        :obj:`django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata.app`.
+        :obj:`cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata.app`.
 
         You must override this in subclasses.
         """
@@ -87,7 +87,7 @@ class InviteUrl(object):
 
         Parameters:
             generictoken: A
-                :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`
+                :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`
                 object.
         """
         raise NotImplementedError()
@@ -107,7 +107,7 @@ class InviteUrl(object):
     def get_expiration_datetime(self):
         """
         Get the value to use for the ``expiration_datetime`` attribute of
-        :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
+        :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
 
         Defaults to the expiration_datetime provided via the constructor,
         and falls back to getting the configured expiration datetime for
@@ -149,7 +149,7 @@ class InviteUrl(object):
 
     def get_invite_email_class(self):
         """
-        Must return a subclass of :class:`django_cradmin.apps.cradmin_email.emailutils.AbstractEmail`.
+        Must return a subclass of :class:`cradmin_legacy.apps.cradmin_email.emailutils.AbstractEmail`.
 
         Defaults to :class:`.InviteEmail`.
         """

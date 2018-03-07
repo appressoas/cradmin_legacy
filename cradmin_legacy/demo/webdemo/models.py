@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from future.utils import python_2_unicode_compatible
 
-from django_cradmin.apps.cradmin_imagearchive import models as imagearchivemodels
+from cradmin_legacy.apps.cradmin_imagearchive import models as imagearchivemodels
 
 
 @python_2_unicode_compatible

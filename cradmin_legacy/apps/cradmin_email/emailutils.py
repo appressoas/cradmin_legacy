@@ -19,7 +19,7 @@ class AbstractEmail(object):
 
         Simple example::
 
-            from django_cradmin.apps.cradmin_email import emailutils
+            from cradmin_legacy.apps.cradmin_email import emailutils
 
             class SimpleEmail(emailutils.AbstractEmail):
                 subject_template = 'myapp/subject.django.txt'

@@ -9,4 +9,4 @@ class WysiHtmlTextArea(forms.widgets.Textarea):
         baseVal = super(WysiHtmlTextArea, self).render(name, value, attrs)
 
         # return render_to_string(template, {'textarea': baseVal}) #TODO: implement this instead on the above
-        return u'<div django_cradmin_wysihtml>{}</div>'.format(baseVal)
+        return u'<div cradmin_legacy_wysihtml>{}</div>'.format(baseVal)

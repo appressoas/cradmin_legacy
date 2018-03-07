@@ -7,8 +7,8 @@ from django.shortcuts import render
 from django import http
 from crispy_forms import layout
 
-from django_cradmin import crapp
-from django_cradmin.crispylayouts import CradminFormHelper
+from cradmin_legacy import crapp
+from cradmin_legacy.crispylayouts import CradminFormHelper
 
 
 class MultiSelectView(TemplateView):
@@ -23,7 +23,7 @@ class MultiSelectView(TemplateView):
 
     #: The view name for the success page.
     #: You can set this, or implement :meth:`.get_listing_url`.
-    #: Defaults to :obj:`django_cradmin.crapp.INDEXVIEW_NAME`.
+    #: Defaults to :obj:`cradmin_legacy.crapp.INDEXVIEW_NAME`.
     success_viewname = crapp.INDEXVIEW_NAME
 
     def get_queryset_for_role(self, role):
@@ -87,7 +87,7 @@ class MultiSelectView(TemplateView):
         Called if the form used to validate the selected objects is invalid.
         Must be overridden.
         """
-        return render(self.request, 'django_cradmin/error.django.html', {
+        return render(self.request, 'cradmin_legacy/error.django.html', {
             'error': _(
                 'Invalid selection. This is usually caused by someone else changing '
                 'permissions while you where selecting items to edit.')
@@ -135,7 +135,7 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
 
     You will most likely also want to override :meth:.get_buttons`.
     """
-    template_name = 'django_cradmin/viewhelpers/multiselect/formview.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/multiselect/formview.django.html'
 
     #: The model class to edit. You do not have to specify
     #: this, but if you do not specify this, you have to override
@@ -279,11 +279,11 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
         Get the button layout. This is added to the crispy form layout.
 
         Defaults to a :class:`crispy_forms.layout.Div` with css class
-        ``django_cradmin_submitrow`` containing all the buttons
+        ``cradmin_legacy_submitrow`` containing all the buttons
         returned by :meth:`.get_buttons`.
         """
         return [
-            layout.Div(*self.get_buttons(), css_class="django_cradmin_submitrow")
+            layout.Div(*self.get_buttons(), css_class="cradmin_legacy_submitrow")
         ]
 
     def get_formhelper(self):

@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
 
-from django_cradmin import crinstance, crmenu
-from django_cradmin.demo.no_role_demo.views import dashboard
+from cradmin_legacy import crinstance, crmenu
+from cradmin_legacy.demo.no_role_demo.views import dashboard
 
 
 class Menu(crmenu.Menu):

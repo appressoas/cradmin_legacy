@@ -4,9 +4,9 @@ from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.test import TestCase
 from model_mommy import mommy
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile, \
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile, \
     html_input_accept_match, truncate_filename, make_unique_filename
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestModels(TestCase):

@@ -7,11 +7,11 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, RequestFactory
 from django.utils import timezone
 import htmls
-from django_cradmin.python2_compatibility import mock
-from django_cradmin.apps.cradmin_activate_account.views.activate import ActivateAccountView
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.apps.cradmin_activate_account.views.activate import ActivateAccountView
 
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestActivateAccountView(TestCase):
@@ -40,9 +40,9 @@ class TestActivateAccountView(TestCase):
             expiration_datetime=datetime(2014, 1, 1))
         response = self.client.get(self.__get_url('valid-token'))
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('#django_cradmin_activate_account_expired_message'))
+        self.assertTrue(selector.exists('#cradmin_legacy_activate_account_expired_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_activate_account_expired_message').alltext_normalized,
+            selector.one('#cradmin_legacy_activate_account_expired_message').alltext_normalized,
             'This account activation link has expired.')
 
     def test_get_invalid_token(self):
@@ -50,9 +50,9 @@ class TestActivateAccountView(TestCase):
             token='valid-token', user=self.testuser)
         response = self.client.get(self.__get_url('invalid-token'))
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('#django_cradmin_activate_account_invalid_token_message'))
+        self.assertTrue(selector.exists('#cradmin_legacy_activate_account_invalid_token_message'))
         self.assertEqual(
-            selector.one('#django_cradmin_activate_account_invalid_token_message').alltext_normalized,
+            selector.one('#cradmin_legacy_activate_account_invalid_token_message').alltext_normalized,
             'Invalid account activation URL. Are you sure you copied the entire URL from the email?')
 
     def test_get_redirect_ok(self):

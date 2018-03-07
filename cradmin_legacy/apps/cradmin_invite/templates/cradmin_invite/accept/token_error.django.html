@@ -1,4 +1,4 @@
-{% extends "django_cradmin/layouts/standalone/focused.django.html" %}
+{% extends "cradmin_legacy/layouts/standalone/focused.django.html" %}
 
 {% load crispy_forms_tags %}
 {% load i18n %}
@@ -15,7 +15,7 @@
 
 {% block content %}
     {% if token_does_not_exist %}
-        <div id="django_cradmin_invite_invalid_token_message" class="alert alert-danger">
+        <div id="cradmin_legacy_invite_invalid_token_message" class="alert alert-danger">
             {% block invalid_token_message %}
                 {% trans "Invalid invite URL. Are you sure you copied the entire URL from the email?" %}
             {% endblock invalid_token_message %}
@@ -23,7 +23,7 @@
     {% endif %}
 
     {% if token_expired %}
-        <div id="django_cradmin_invite_expired_message" class="alert alert-warning">
+        <div id="cradmin_legacy_invite_expired_message" class="alert alert-warning">
             {% block expired_token_message %}
                 {% trans "This invite link has expired." %}
             {% endblock expired_token_message %}

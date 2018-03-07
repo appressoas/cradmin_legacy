@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.test import TestCase
 
-from django_cradmin.demo.polls_demo.models import Question
+from cradmin_legacy.demo.polls_demo.models import Question
 
 
 class QuestionMethodTests(TestCase):

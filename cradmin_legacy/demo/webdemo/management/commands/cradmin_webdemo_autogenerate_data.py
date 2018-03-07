@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.webdesign import lorem_ipsum
 from django.core.management.base import BaseCommand
 
-from django_cradmin.demo.webdemo import models as demomodels
+from cradmin_legacy.demo.webdemo import models as demomodels
 
 
 class Command(BaseCommand):

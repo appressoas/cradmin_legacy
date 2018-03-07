@@ -3,19 +3,19 @@ import json
 from django import forms
 from django.views.generic.edit import FormMixin
 
-from django_cradmin.viewhelpers.multiselect2 import listbuilder_itemvalues
-from django_cradmin.viewhelpers.multiselect2 import target_renderer
+from cradmin_legacy.viewhelpers.multiselect2 import listbuilder_itemvalues
+from cradmin_legacy.viewhelpers.multiselect2 import target_renderer
 
 
 class ViewMixin(FormMixin):
     """
     Base class for the mixin classes for views that is shown in an iframe
-    by :class:`django_cradmin.viewhelpers.multiselect2.manytomanywidget.Widget`.
+    by :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
     """
     hide_menu = True
 
     #: The default target renderer task. Should be a subclass of
-    #: :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.ManyToManySelectTarget`.
+    #: :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.ManyToManySelectTarget`.
     target_renderer_class = target_renderer.ManyToManySelectTarget
 
     form_class = forms.Form
@@ -32,7 +32,7 @@ class ViewMixin(FormMixin):
         """
         Make a queryset from :meth:`.get_selected_values_list`.
 
-        Supports :class:`.django_cradmin.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
+        Supports :class:`.cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
         out of the box, so if a ``get_unfiltered_queryset_for_role()``-method is available
         on the class, we use that instead of ``get_queryset_for_role()``.
 
@@ -79,7 +79,7 @@ class ViewMixin(FormMixin):
     def get_target_renderer_class(self):
         """
         Returns:
-            django_cradmin.viewhelpers.multiselect2.target_renderer.ManyToManySelectTarget: The target renderer
+            cradmin_legacy.viewhelpers.multiselect2.target_renderer.ManyToManySelectTarget: The target renderer
             class.
         """
         return self.target_renderer_class
@@ -108,19 +108,19 @@ class ViewMixin(FormMixin):
 class ListBuilderViewMixin(ViewMixin):
     """
     Mixin class for using a listbuilder view as a select view for
-    :class:`django_cradmin.viewhelpers.multiselect2.manytomanywidget.Widget`.
+    :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
 
     You only need to render the target renderable returned by
     :meth:`.ViewMixin.get_target_renderer`. You will typically
     do this by adding it in ``get_context_data()``, and render it with
-    :meth:`django_cradmin.templatetags.cradmin_tags.cradmin_render_renderable`.
+    :meth:`cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_render_renderable`.
 
     Examples:
 
         Simple example::
 
-            from django_cradmin.viewhelpers import listbuilderview
-            from django_cradmin.viewhelpers import multiselect2
+            from cradmin_legacy.viewhelpers import listbuilderview
+            from cradmin_legacy.viewhelpers import multiselect2
 
             class MySelectView(multiselect2.manytomanyview.ListBuilderViewMixin,
                                listbuilderview.FilterListMixin,
@@ -153,20 +153,20 @@ class ListBuilderViewMixin(ViewMixin):
 class ListBuilderFilterListViewMixin(ListBuilderViewMixin):
     """
     Mixin class for using a listbuilder view with filterlist as a select view for
-    :class:`django_cradmin.viewhelpers.multiselect2.manytomanywidget.Widget`.
+    :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
 
     You only need to render the target renderable returned by
     :meth:`.ViewMixin.get_target_renderer`. You will typically
     do this by adding it in ``get_context_data()``, and render it with
-    :meth:`django_cradmin.templatetags.cradmin_tags.cradmin_render_renderable`.
+    :meth:`cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_render_renderable`.
 
 
     Examples:
 
         Simple example::
 
-            from django_cradmin.viewhelpers import listbuilderview
-            from django_cradmin.viewhelpers import multiselect2
+            from cradmin_legacy.viewhelpers import listbuilderview
+            from cradmin_legacy.viewhelpers import multiselect2
 
             class MySelectView(multiselect2.manytomanyview.ListBuilderFilterListViewMixin,
                                listbuilderview.FilterListMixin,
@@ -176,7 +176,7 @@ class ListBuilderFilterListViewMixin(ListBuilderViewMixin):
     """
     def get_filterlist_url(self, filters_string):
         """
-        Implements :meth:`django_cradmin.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin#get_filterlist_url`
+        Implements :meth:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin#get_filterlist_url`
         with a default that assumes you have a view named ``manytomanyselect-filter``
         that takes ``filters_string`` as kwarg.
         """

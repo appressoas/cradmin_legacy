@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 
-from django_cradmin.viewhelpers import delete
-from django_cradmin.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
+from cradmin_legacy.viewhelpers import delete
+from cradmin_legacy.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
 
 
 class DeletePublicInviteView(QuerysetForRoleMixin, delete.DeleteView):

@@ -26,7 +26,7 @@ class Url(object):
             kwargs: Keyword arguments for the view.
             name: The name of the view. This just have to be unique within
                 the :class:`.App` - the actual URL name is generated
-                based on the app name and the :obj:`django_cradmin.crinstance.BaseCrAdminInstance.id`.
+                based on the app name and the :obj:`cradmin_legacy.crinstance.BaseCrAdminInstance.id`.
         """
         self.regex = regex
         self.view = view
@@ -38,8 +38,8 @@ class App(object):
     """
     A cradmin App.
 
-    Added to a :class:`django_cradmin.crinstance.BaseCrAdminInstance`
-    with :obj:`django_cradmin.crinstance.BaseCrAdminInstance.apps`.
+    Added to a :class:`cradmin_legacy.crinstance.BaseCrAdminInstance`
+    with :obj:`cradmin_legacy.crinstance.BaseCrAdminInstance.apps`.
     """
     #: See :meth:`~.App.get_appurls`.
     appurls = []
@@ -93,7 +93,7 @@ class App(object):
     @classmethod
     def build_urls(cls, cradmin_instance_id, appname):
         """
-        Used internally by :meth:`django_cradmin.crinstance.BaseCrAdminInstance.urls`
+        Used internally by :meth:`cradmin_legacy.crinstance.BaseCrAdminInstance.urls`
         to build urls for all views in the app.
         """
         urls = []

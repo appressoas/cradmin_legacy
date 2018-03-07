@@ -1,8 +1,8 @@
 from django import test
 from model_mommy import mommy
 
-from django_cradmin import cradmin_testhelpers
-from django_cradmin.demo.multiselect2demo.views import productlist
+from cradmin_legacy import cradmin_testhelpers
+from cradmin_legacy.demo.multiselect2demo.views import productlist
 
 
 class TestProductListView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
@@ -10,14 +10,14 @@ class TestProductListView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
 
     def test_empty_list(self):
         mockresponse = self.mock_http200_getrequest_htmls()
-        self.assertTrue(mockresponse.selector.exists('.django-cradmin-listing-no-items-message'))
-        self.assertFalse(mockresponse.selector.exists('.django-cradmin-listbuilder-list'))
+        self.assertTrue(mockresponse.selector.exists('.cradmin-legacy-listing-no-items-message'))
+        self.assertFalse(mockresponse.selector.exists('.cradmin-legacy-listbuilder-list'))
 
     def test_nonempty_list(self):
         mommy.make('multiselect2demo.Product')
         mockresponse = self.mock_http200_getrequest_htmls()
-        self.assertFalse(mockresponse.selector.exists('.django-cradmin-listing-no-items-message'))
-        self.assertTrue(mockresponse.selector.exists('.django-cradmin-listbuilder-list'))
+        self.assertFalse(mockresponse.selector.exists('.cradmin-legacy-listing-no-items-message'))
+        self.assertTrue(mockresponse.selector.exists('.cradmin-legacy-listbuilder-list'))
 
     def test_default_ordering(self):
         mommy.make('multiselect2demo.Product', name='A')
@@ -27,12 +27,12 @@ class TestProductListView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         self.assertEqual(
             'A',
             mockresponse.selector.one(
-                '.django-cradmin-listbuilder-list li:nth-child(1) h2').alltext_normalized)
+                '.cradmin-legacy-listbuilder-list li:nth-child(1) h2').alltext_normalized)
         self.assertEqual(
             'B',
             mockresponse.selector.one(
-                '.django-cradmin-listbuilder-list li:nth-child(2) h2').alltext_normalized)
+                '.cradmin-legacy-listbuilder-list li:nth-child(2) h2').alltext_normalized)
         self.assertEqual(
             'C',
             mockresponse.selector.one(
-                '.django-cradmin-listbuilder-list li:nth-child(3) h2').alltext_normalized)
+                '.cradmin-legacy-listbuilder-list li:nth-child(3) h2').alltext_normalized)

@@ -5,11 +5,11 @@ from django import test
 from django.core.files.base import ContentFile
 from model_mommy import mommy
 
-from django_cradmin import automodelform
-from django_cradmin.apps.cradmin_imagearchive.tests.helpers import create_image
-from django_cradmin.tests.test_automodelform.cradmin_automodelform_testapp.models import AutoFormTestModel
-from django_cradmin import datetimeutils
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy import automodelform
+from cradmin_legacy.apps.cradmin_imagearchive.tests.helpers import create_image
+from cradmin_legacy.tests.test_automodelform.cradmin_automodelform_testapp.models import AutoFormTestModel
+from cradmin_legacy import datetimeutils
+from cradmin_legacy.python2_compatibility import mock
 
 
 class TestModelForm(test.TestCase):
@@ -23,7 +23,7 @@ class TestModelForm(test.TestCase):
         self.assertEqual(
             '',
             selector.one('input[type="text"][name="datetimefield_without_default"]').get('value', ''))
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_datetime_field_without_default_with_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -38,7 +38,7 @@ class TestModelForm(test.TestCase):
         self.assertEqual(
             '2015-12-24 12:00:00',
             selector.one('input[type="text"][name="datetimefield_without_default"]')['value'])
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_datetime_field_with_default_no_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -50,7 +50,7 @@ class TestModelForm(test.TestCase):
         self.assertNotEqual(
             '',
             selector.one('input[type="text"][name="datetimefield_with_default"]')['value'])
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_datetime_field_with_default_with_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -65,7 +65,7 @@ class TestModelForm(test.TestCase):
         self.assertEqual(
             '2015-12-24 12:00:00',
             selector.one('input[type="text"][name="datetimefield_with_default"]')['value'])
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_date_field_without_default_no_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -77,7 +77,7 @@ class TestModelForm(test.TestCase):
         self.assertEqual(
             '',
             selector.one('input[type="text"][name="datefield_without_default"]').get('value', ''))
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_date_field_without_default_with_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -92,7 +92,7 @@ class TestModelForm(test.TestCase):
         self.assertEqual(
             '2015-12-24',
             selector.one('input[type="text"][name="datefield_without_default"]')['value'])
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_date_field_with_default_no_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -104,7 +104,7 @@ class TestModelForm(test.TestCase):
         self.assertNotEqual(
             '',
             selector.one('input[type="text"][name="datefield_with_default"]')['value'])
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_date_field_with_default_with_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -119,7 +119,7 @@ class TestModelForm(test.TestCase):
         self.assertEqual(
             '2015-12-24',
             selector.one('input[type="text"][name="datefield_with_default"]')['value'])
-        self.assertTrue(selector.exists('.django-cradmin-datepicker-triggerbutton'))
+        self.assertTrue(selector.exists('.cradmin-legacy-datepicker-triggerbutton'))
 
     def test_file_field_without_default_no_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -129,7 +129,7 @@ class TestModelForm(test.TestCase):
 
         selector = htmls.S(MyModelForm().as_ul())
         self.assertTrue(selector.exists('input[type="file"][name="filefield"]'))
-        self.assertTrue(selector.exists('.django-cradmin-filewidget'))
+        self.assertTrue(selector.exists('.cradmin-legacy-filewidget'))
 
     def test_file_field_without_default_with_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -142,7 +142,7 @@ class TestModelForm(test.TestCase):
             filefield='test.txt')
         selector = htmls.S(MyModelForm(instance=autoformtestmodelobject).as_ul())
         self.assertTrue(selector.exists('input[type="file"][name="filefield"]'))
-        self.assertTrue(selector.exists('.django-cradmin-filewidget'))
+        self.assertTrue(selector.exists('.cradmin-legacy-filewidget'))
 
     def test_image_field_without_default_no_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -152,7 +152,7 @@ class TestModelForm(test.TestCase):
 
         selector = htmls.S(MyModelForm(view=mock.MagicMock()).as_ul())
         self.assertTrue(selector.exists('input[type="file"][name="imagefield"]'))
-        self.assertTrue(selector.exists('.django-cradmin-imagewidget'))
+        self.assertTrue(selector.exists('.cradmin-legacy-imagewidget'))
 
     def test_image_field_without_default_with_instance(self):
         class MyModelForm(automodelform.ModelForm):
@@ -172,4 +172,4 @@ class TestModelForm(test.TestCase):
             selector = htmls.S(MyModelForm(view=mockview,
                                            instance=autoformtestmodelobject).as_ul())
         self.assertTrue(selector.exists('input[type="file"][name="imagefield"]'))
-        self.assertTrue(selector.exists('.django-cradmin-imagewidget'))
+        self.assertTrue(selector.exists('.cradmin-legacy-imagewidget'))

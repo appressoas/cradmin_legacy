@@ -5,10 +5,10 @@ from builtins import str
 from django import forms
 from django.utils.translation import pgettext
 
-from django_cradmin.viewhelpers.multiselect2 import manytomanywidget
-from django_cradmin.widgets import datetimepicker
-from django_cradmin.widgets import filewidgets
-from django_cradmin.widgets import modelchoice
+from cradmin_legacy.viewhelpers.multiselect2 import manytomanywidget
+from cradmin_legacy.widgets import datetimepicker
+from cradmin_legacy.widgets import filewidgets
+from cradmin_legacy.widgets import modelchoice
 
 
 class ModelForm(forms.ModelForm):
@@ -32,7 +32,7 @@ class ModelForm(forms.ModelForm):
         """
         Called by :meth:`.setup_field` if the ``formfield`` is a DateTimeField.
 
-        Sets up :class:`django_cradmin.widgets.datetimepicker.DateTimePickerWidget`
+        Sets up :class:`cradmin_legacy.widgets.datetimepicker.DateTimePickerWidget`
         as the widget.
 
         Parameters:
@@ -47,7 +47,7 @@ class ModelForm(forms.ModelForm):
         """
         Called by :meth:`.setup_field` if the ``formfield`` is a DateField.
 
-        Sets up :class:`django_cradmin.widgets.datetimepicker.DatePickerWidget`
+        Sets up :class:`cradmin_legacy.widgets.datetimepicker.DatePickerWidget`
         as the widget.
 
         Parameters:
@@ -62,7 +62,7 @@ class ModelForm(forms.ModelForm):
         """
         Called by :meth:`.setup_field` if the ``formfield`` is a FileField.
 
-        Sets up :class:`django_cradmin.widgets.filewidgets.FileWidget`
+        Sets up :class:`cradmin_legacy.widgets.filewidgets.FileWidget`
         as the widget.
 
         Parameters:
@@ -77,7 +77,7 @@ class ModelForm(forms.ModelForm):
         """
         Called by :meth:`.setup_field` if the ``formfield`` is an ImageField.
 
-        Sets up :class:`django_cradmin.widgets.filewidgets.ImageWidget`
+        Sets up :class:`cradmin_legacy.widgets.filewidgets.ImageWidget`
         as the widget if the ``view``-argument is provided to the constructor
         of this form, falls back to :meth:`.setup_file_field` if not.
 
@@ -117,7 +117,7 @@ class ModelForm(forms.ModelForm):
         """
         Called by :meth:`.setup_field` if the ``formfield`` is a ModelChoiceField.
 
-        Sets up :class:`django_cradmin.widgets.modelchoice.ModelChoiceWidget`
+        Sets up :class:`cradmin_legacy.widgets.modelchoice.ModelChoiceWidget`
         as the widget if the ``view``-argument is provided to the constructor
         of this form, and if ``view.request.cradmin_instance.get_foreignkeyselectview_url`
         returns a view URL for the model in the ModelChoiceField.
@@ -154,7 +154,7 @@ class ModelForm(forms.ModelForm):
         """
         Called by :meth:`.setup_field` if the ``formfield`` is a ModelMultiChoiceField.
 
-        Sets up :class:`django_cradmin.viewhelpers.multiselect2.manytomanywidget.Widget`
+        Sets up :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`
         as the widget if the ``view``-argument is provided to the constructor
         of this form, and if ``view.request.cradmin_instance.get_manytomanyselectview_url`
         returns a view URL for the model in the ModelMultiChoiceField.

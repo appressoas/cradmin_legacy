@@ -1,7 +1,7 @@
-{% extends "django_cradmin/base.django.html" %}
+{% extends "cradmin_legacy/base.django.html" %}
 {% load static %}
 {% load i18n %}
-{% load cradmin_tags %}
+{% load cradmin_legacy_tags %}
 
 
 {% block title %}
@@ -25,14 +25,14 @@
 {% endblock pageheader-inner %}
 
 {% block content %}
-    <div class="container django-cradmin-container-focus">
+    <div class="container cradmin-legacy-container-focus">
         {% if generictoken %}
             <h2>{% trans "Share" %}</h2>
             <p>
                 {% trans "Share the link below with anyone you want to make an administrator for this site." %}
                 <input type="text" class="form-control"
                        value="{{ url }}"
-                       django-cradmin-select-text-for-copy-on-focus="{{ url }}">
+                       cradmin-legacy-select-text-for-copy-on-focus="{{ url }}">
             </p>
 
             <h2>{% trans "Details" %}</h2>

@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 from django import forms
 from django.contrib.auth import get_user_model
-from django_cradmin.apps.cradmin_register_account.forms.base import AbstractCreateAccountWithPasswordForm
+from cradmin_legacy.apps.cradmin_register_account.forms.base import AbstractCreateAccountWithPasswordForm
 
 
 class AuthUserCreateAccountForm(AbstractCreateAccountWithPasswordForm):
@@ -15,13 +15,13 @@ class AuthUserCreateAccountForm(AbstractCreateAccountWithPasswordForm):
     To use it directly, set the following setting::
 
         DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-            'django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
+            'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
 
     The form only includes username, email and password. To add more fields, simply
     override the Meta-class and the field layout. Lets say we want to make
     a form that includes the ``first_name`` and ``last_name`` fields::
 
-        from django_cradmin.apps.cradmin_register_account.forms.auth_user import AuthUserCreateAccountForm
+        from cradmin_legacy.apps.cradmin_register_account.forms.auth_user import AuthUserCreateAccountForm
 
         class AuthUserCreateAccountWithFullNameForm(AuthUserCreateAccountForm):
             class Meta(AuthUserCreateAccountForm.Meta):
@@ -81,7 +81,7 @@ class AuthUserCreateAccountAutoUsernameForm(AuthUserCreateAccountForm):
     To use it directly, set the following setting::
 
         DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-            'django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm'
+            'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm'
 
     """
     class Meta(AuthUserCreateAccountForm.Meta):

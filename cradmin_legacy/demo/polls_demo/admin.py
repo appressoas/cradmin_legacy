@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib import admin
-from django_cradmin.demo.polls_demo.models import Question, Choice
+from cradmin_legacy.demo.polls_demo.models import Question, Choice
 
 
 class ChoiceInline(admin.TabularInline):

@@ -1,12 +1,12 @@
 from __future__ import unicode_literals
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 import htmls
 from django.test import TestCase
 from django.test.client import RequestFactory
 from django import http
 from django import forms
 
-from django_cradmin.viewhelpers import multiselect
+from cradmin_legacy.viewhelpers import multiselect
 
 
 class TestMultiSelectView(TestCase):
@@ -109,7 +109,7 @@ class TestMultiSelectFormView(TestCase):
         response = SimpleMultiSelectFormView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        self.assertEquals(selector.count('#django_cradmin_contentwrapper form'), 1)
+        self.assertEquals(selector.count('#cradmin_legacy_contentwrapper form'), 1)
         self.assertEquals(selector.one('input[name=selected_objects]')['type'], 'hidden')
         self.assertEquals(selector.one('input[name=selected_objects]')['value'], '1')
         self.assertEquals(selector.count('input[name=data]'), 1)
@@ -142,7 +142,7 @@ class TestMultiSelectFormView(TestCase):
         response = SimpleMultiSelectFormView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        self.assertEquals(selector.count('#django_cradmin_contentwrapper form'), 1)
+        self.assertEquals(selector.count('#cradmin_legacy_contentwrapper form'), 1)
         self.assertEquals(selector.one('input[name=selected_objects]')['type'], 'hidden')
         self.assertEquals(selector.one('input[name=selected_objects]')['value'], '1')
         self.assertEquals(selector.count('input[name=data]'), 1)

@@ -1,4 +1,4 @@
-from django_cradmin.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
 
 
 class AbstractRadioFilter(AbstractFilter):
@@ -8,7 +8,7 @@ class AbstractRadioFilter(AbstractFilter):
     You only have to override :meth:`~AbstractRadioFilter.get_choices` and
     :meth:`~AbstractRadioFilter.filter`.
     """
-    template_name = 'django_cradmin/viewhelpers/listfilter/django/single/radio/base.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/single/radio/base.django.html'
 
     def get_choices(self):
         """
@@ -30,7 +30,7 @@ class AbstractRadioFilter(AbstractFilter):
 
         - ``url``: The URL to load when making a choice.
           This is generated using
-          :meth:`~django_cradmin.viewhelpers.listfilter.base.AbstractFilter.build_set_values_url`
+          :meth:`~cradmin_legacy.viewhelpers.listfilter.base.AbstractFilter.build_set_values_url`
           with the value from :meth:`.get_choices` as input.
         - ``label``: The label to show (taken directly from :meth:`.get_choices`.
         - ``is_selected`` (boolean): If the current value matches the value of a choice,

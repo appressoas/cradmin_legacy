@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from django_cradmin.renderable import AbstractRenderableWithCss
+from cradmin_legacy.renderable import AbstractRenderableWithCss
 
 
 class AbstractItemRenderer(AbstractRenderableWithCss):
@@ -36,13 +36,13 @@ class ItemValueRenderer(AbstractItemRenderer):
     The value renderer renders the value of each item in
     the :class:`.List`.
     """
-    template_name = 'django_cradmin/viewhelpers/listbuilder/base/itemvalue.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/base/itemvalue.django.html'
 
     def get_base_css_classes_list(self):
         """
         Override this to set your own css classes.
         """
-        return ['django-cradmin-listbuilder-itemvalue']
+        return ['cradmin-legacy-listbuilder-itemvalue']
 
 
 class ItemFrameRenderer(AbstractItemRenderer):
@@ -65,7 +65,7 @@ class ItemFrameRenderer(AbstractItemRenderer):
         The renderable this frame wraps - an object of
         :class:`.ItemValueRenderer` or a subclass.
     """
-    template_name = 'django_cradmin/viewhelpers/listbuilder/base/itemframe.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/base/itemframe.django.html'
 
     def __init__(self, inneritem, **kwargs):
         super(ItemFrameRenderer, self).__init__(inneritem.value, **kwargs)
@@ -75,7 +75,7 @@ class ItemFrameRenderer(AbstractItemRenderer):
         """
         Override this to set your own css classes.
         """
-        return ['django-cradmin-listbuilder-itemframe']
+        return ['cradmin-legacy-listbuilder-itemframe']
 
 
 class List(AbstractRenderableWithCss):
@@ -88,13 +88,13 @@ class List(AbstractRenderableWithCss):
     - A subclass of :class:`.ItemValueRenderer` for simple lists.
     - A subclass of :class:`.ItemFrameRenderer` for more complex lists.
 
-    .. note:: Items can be any :class:`django_cradmin.renderable.AbstractRenderableWithCss`, but that does not
+    .. note:: Items can be any :class:`cradmin_legacy.renderable.AbstractRenderableWithCss`, but that does not
         work with the shortcut methods:
 
         - :meth:`.extend_with_values`
         - :meth:`.from_value_iterable`
     """
-    template_name = 'django_cradmin/viewhelpers/listbuilder/base/list.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/base/list.django.html'
 
     def __init__(self):
         self.renderable_list = []
@@ -114,16 +114,16 @@ class List(AbstractRenderableWithCss):
 
     def get_base_css_classes_list(self):
         """
-        Sets ``django-cradmin-listbuilder-list`` as css class for the list.
+        Sets ``cradmin-legacy-listbuilder-list`` as css class for the list.
         """
-        return ['django-cradmin-listbuilder-list']
+        return ['cradmin-legacy-listbuilder-list']
 
     def append(self, renderable):
         """
         Appends an item to the list.
 
         Parameters:
-            renderable: Must implement the :class:`django_cradmin.renderable.AbstractRenderableWithCss` interface,
+            renderable: Must implement the :class:`cradmin_legacy.renderable.AbstractRenderableWithCss` interface,
                 and it is typically a subclass of :class:`.AbstractItemRenderer`.
         """
         self.renderable_list.append(renderable)

@@ -9,20 +9,20 @@ from crispy_forms import layout
 from django.views.generic import TemplateView
 from django.utils import timezone
 
-from django_cradmin.viewhelpers import objecttable
-from django_cradmin.viewhelpers import listfilter
-from django_cradmin.viewhelpers import create
-from django_cradmin.viewhelpers import update
-from django_cradmin.viewhelpers import delete
-from django_cradmin.viewhelpers import multiselect
-from django_cradmin import crapp
-from django_cradmin.acemarkdown.widgets import AceMarkdownWidget
-from django_cradmin.crispylayouts import PrimarySubmit
-from django_cradmin.apps.cradmin_imagearchive.models import ArchiveImage
-from django_cradmin.demo.webdemo.models import Page
-from django_cradmin.widgets import filewidgets
-from django_cradmin.widgets.modelchoice import ModelChoiceWidget
-from django_cradmin.widgets.datetimepicker import DateTimePickerWidget, DatePickerWidget
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers import create
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy.viewhelpers import delete
+from cradmin_legacy.viewhelpers import multiselect
+from cradmin_legacy import crapp
+from cradmin_legacy.acemarkdown.widgets import AceMarkdownWidget
+from cradmin_legacy.crispylayouts import PrimarySubmit
+from cradmin_legacy.apps.cradmin_imagearchive.models import ArchiveImage
+from cradmin_legacy.demo.webdemo.models import Page
+from cradmin_legacy.widgets import filewidgets
+from cradmin_legacy.widgets.modelchoice import ModelChoiceWidget
+from cradmin_legacy.widgets.datetimepicker import DateTimePickerWidget, DatePickerWidget
 
 
 class TitleColumn(objecttable.MultiActionColumn):

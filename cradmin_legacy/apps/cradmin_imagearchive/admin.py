@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.template import defaultfilters
 
-from django_cradmin.apps.cradmin_imagearchive.models import ArchiveImage
+from cradmin_legacy.apps.cradmin_imagearchive.models import ArchiveImage
 
 
 class ArchiveImageAdmin(admin.ModelAdmin):

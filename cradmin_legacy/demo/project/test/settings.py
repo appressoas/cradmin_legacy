@@ -1,5 +1,5 @@
 """
-Django settings for running the django_cradmin tests.
+Django settings for running the cradmin_legacy tests.
 """
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -22,36 +22,36 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django_cradmin',
-    'django_cradmin.django_cradmin_testapp',
+    'cradmin_legacy',
+    'cradmin_legacy.cradmin_legacy_testapp',
 
-    'django_cradmin.apps.cradmin_imagearchive',
-    'django_cradmin.apps.cradmin_temporaryfileuploadstore',
-    'django_cradmin.apps.cradmin_generic_token_with_metadata',
-    'django_cradmin.apps.cradmin_authenticate',
-    'django_cradmin.apps.cradmin_resetpassword',
-    'django_cradmin.apps.cradmin_activate_account',
-    'django_cradmin.apps.cradmin_register_account',
-    'django_cradmin.apps.cradmin_invite',
-    'django_cradmin.apps.cradmin_email',
+    'cradmin_legacy.apps.cradmin_imagearchive',
+    'cradmin_legacy.apps.cradmin_temporaryfileuploadstore',
+    'cradmin_legacy.apps.cradmin_generic_token_with_metadata',
+    'cradmin_legacy.apps.cradmin_authenticate',
+    'cradmin_legacy.apps.cradmin_resetpassword',
+    'cradmin_legacy.apps.cradmin_activate_account',
+    'cradmin_legacy.apps.cradmin_register_account',
+    'cradmin_legacy.apps.cradmin_invite',
+    'cradmin_legacy.apps.cradmin_email',
 
-    'django_cradmin.tests.sortable.cradmin_sortable_testapp',
-    'django_cradmin.tests.viewhelpers.cradmin_viewhelpers_testapp',
-    'django_cradmin.tests.test_automodelform.cradmin_automodelform_testapp',
-    'django_cradmin.apps.cradmin_authenticate.tests.cradmin_authenticate_testapp',
-    'django_cradmin.apps.cradmin_register_account.tests.cradmin_register_account_testapp',
-    'django_cradmin.apps.cradmin_email.tests.cradmin_email_testapp',
+    'cradmin_legacy.tests.sortable.cradmin_sortable_testapp',
+    'cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp',
+    'cradmin_legacy.tests.test_automodelform.cradmin_automodelform_testapp',
+    'cradmin_legacy.apps.cradmin_authenticate.tests.cradmin_authenticate_testapp',
+    'cradmin_legacy.apps.cradmin_register_account.tests.cradmin_register_account_testapp',
+    'cradmin_legacy.apps.cradmin_email.tests.cradmin_email_testapp',
 
     # Required by django cradmin
     'crispy_forms',
     'sorl.thumbnail',  # Required by cradmin_imagearchive
 
     # Demo apps
-    'django_cradmin.demo.webdemo',
-    'django_cradmin.demo.polls_demo',
-    'django_cradmin.demo.usermanagerdemo',
-    'django_cradmin.demo.listfilterdemo',
-    'django_cradmin.demo.multiselect2demo',
+    'cradmin_legacy.demo.webdemo',
+    'cradmin_legacy.demo.polls_demo',
+    'cradmin_legacy.demo.usermanagerdemo',
+    'cradmin_legacy.demo.listfilterdemo',
+    'cradmin_legacy.demo.multiselect2demo',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,14 +81,14 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.request",
-                "django_cradmin.context_processors.cradmin",
+                "cradmin_legacy.context_processors.cradmin",
             ],
         },
     },
 ]
 
 
-# ROOT_URLCONF = 'django_cradmin.demo.project.urls'
+# ROOT_URLCONF = 'cradmin_legacy.demo.project.urls'
 
 # We do not set a name -- the test framework does that.
 DATABASES = {
@@ -116,7 +116,7 @@ STATIC_ROOT = 'test_django_static_root'
 # Django crispy forms:
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-ROOT_URLCONF = 'django_cradmin.demo.project.test.urls'
+ROOT_URLCONF = 'cradmin_legacy.demo.project.test.urls'
 DJANGO_CRADMIN_SITENAME = 'Testsite'
 DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-    'django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
+    'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'

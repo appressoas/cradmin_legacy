@@ -2,10 +2,10 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.template import defaultfilters
 from django.views.generic import ListView
-from django_cradmin.viewhelpers import listbuilder
+from cradmin_legacy.viewhelpers import listbuilder
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin.viewhelpers.listfilter import listfilter_viewmixin
-from django_cradmin.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers.listfilter import listfilter_viewmixin
+from cradmin_legacy.viewhelpers import listfilter
 
 
 class ViewMixin(object):
@@ -25,7 +25,7 @@ class ViewMixin(object):
     - :meth:`.get_listbuilder_list_value_iterable`
     - :meth:`.get_no_items_message`
     """
-    template_name = 'django_cradmin/viewhelpers/listbuilderview/default.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilderview/default.django.html'
 
     #: See :meth:`~ViewMixin.get_listbuilder_class`.
     listbuilder_class = listbuilder.lists.RowList
@@ -71,7 +71,7 @@ class ViewMixin(object):
         """
         If this returns ``True``, we enable previews.
 
-        This is required for the ``django-cradmin-page-preview-open-on-click``
+        This is required for the ``cradmin-legacy-page-preview-open-on-click``
         angularJS directive to work.
 
         Defaults to :obj:`.enable_previews`.
@@ -80,7 +80,7 @@ class ViewMixin(object):
 
     def get_listbuilder_class(self):
         """
-        Get a subclass of :class:`django_cradmin.viewhelpers.listbuilder.base.List`.
+        Get a subclass of :class:`cradmin_legacy.viewhelpers.listbuilder.base.List`.
 
         Defaults to :obj:`.ViewMixin.listbuilder_class`.
         """
@@ -103,7 +103,7 @@ class ViewMixin(object):
         you can still use this.
 
         See the docs for the ``value_and_frame_renderer_kwargs`` argument for
-        :meth:`django_cradmin.viewhelpers.listbuilder.base.List.extend_with_values`
+        :meth:`cradmin_legacy.viewhelpers.listbuilder.base.List.extend_with_values`
         method for more information. HINT: This can also return a callable to generate
         kwargs based on each value in the list!
         """
@@ -111,7 +111,7 @@ class ViewMixin(object):
 
     def get_value_renderer_class(self):
         """
-        Get a subclass of :class:`django_cradmin.viewhelpers.listbuilder.base.ItemValueRenderer`.
+        Get a subclass of :class:`cradmin_legacy.viewhelpers.listbuilder.base.ItemValueRenderer`.
 
         Defaults to :obj:`.ViewMixin.value_renderer_class`.
         """
@@ -119,7 +119,7 @@ class ViewMixin(object):
 
     def get_frame_renderer_class(self):
         """
-        Get a subclass of :class:`django_cradmin.viewhelpers.listbuilder.base.ItemFrameRenderer`.
+        Get a subclass of :class:`cradmin_legacy.viewhelpers.listbuilder.base.ItemFrameRenderer`.
 
         Defaults to :obj:`.ViewMixin.frame_renderer_class`.
         """
@@ -188,7 +188,7 @@ class ViewMixin(object):
         """
         You can return a template to include buttons above the
         listbuilder list here. If you include this template,
-        we will create a ``<p>`` with ``django-cradmin-listbuilderview-buttons``
+        we will create a ``<p>`` with ``cradmin-legacy-listbuilderview-buttons``
         as css class, and include your template within that ``<p>``.
         """
         return None
@@ -212,7 +212,7 @@ class ViewCreateButtonMixin(object):
     create view is named ``"create"``.
     """
     def get_buttons_include_template(self):
-        return "django_cradmin/viewhelpers/listbuilderview/includes/create-button.django.html"
+        return "cradmin_legacy/viewhelpers/listbuilderview/includes/create-button.django.html"
 
 
 class View(ViewMixin, ListView):
@@ -223,7 +223,7 @@ class View(ViewMixin, ListView):
 
         Minimal::
 
-            from django_cradmin.viewhelpers import listbuilderview
+            from cradmin_legacy.viewhelpers import listbuilderview
 
             class MyView(listbuilderview.View):
                 def get_queryset(self):
@@ -312,7 +312,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         - top
 
         Defaults to ``"top"`` if :meth:`.get_filterlist_class` returns
-        :class:`django_cradmin.viewhelpers.listfilter.lists.Horizontal` or a subclass of it,
+        :class:`cradmin_legacy.viewhelpers.listfilter.lists.Horizontal` or a subclass of it,
         otherwise ``"right"``.
         """
         filterlist_class = self.get_filterlist_class()
@@ -327,14 +327,14 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
 
         You will want to call this from the ``get_template_names`` method.
         This is just the interface, refer to the mixins implemented in
-        various modules (such as :class:`django_cradmin.viewhelpers.listbuilderview.FilterListMixin`)
+        various modules (such as :class:`cradmin_legacy.viewhelpers.listbuilderview.FilterListMixin`)
         for details on how to use this method.
         """
         if getattr(self, 'template_name', None):
             return self.template_name
         else:
             position = self.get_filterlist_position()
-            template_name = 'django_cradmin/viewhelpers/listbuilderview/filterlist-{}.django.html'.format(position)
+            template_name = 'cradmin_legacy/viewhelpers/listbuilderview/filterlist-{}.django.html'.format(position)
             return template_name
 
     def get_filter_unprotected_querystring_arguments(self):
@@ -342,7 +342,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         This returns ``{'page'}``, which ensures we go back to
         page 1 when changing a filter.
 
-        See :class:`django_cradmin.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
+        See :class:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
         for more details.
         """
         return {'page'}
@@ -350,10 +350,10 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
     def get_filterlist_target_dom_id(self):
         """
         Overrides
-        :meth:`django_cradmin.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin.get_filterlist_target_dom_id`
-        with a default of ``"django_cradmin_listbuilderview_listwrapper"``.
+        :meth:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin.get_filterlist_target_dom_id`
+        with a default of ``"cradmin_legacy_listbuilderview_listwrapper"``.
 
         You should not need to override this unless you create a completely custom
         template for your view.
         """
-        return 'django_cradmin_listbuilderview_listwrapper'
+        return 'cradmin_legacy_listbuilderview_listwrapper'

@@ -17,7 +17,7 @@ class ModelChoiceWidget(widgets.TextInput):
     to select their foreign key value.
     """
     #: The template used to render the widget.
-    template_name = 'django_cradmin/widgets/modelchoice.django.html'
+    template_name = 'cradmin_legacy/widgets/modelchoice.django.html'
 
     #: Do not override this (if you set this to hidden, the widget is not rendered correctly).
     input_type = 'text'

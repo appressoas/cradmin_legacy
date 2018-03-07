@@ -3,15 +3,15 @@ from __future__ import unicode_literals
 from django.core.files.base import ContentFile
 from django.test import TestCase, RequestFactory
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 from model_mommy import mommy
 
-from django_cradmin import cradmin_testhelpers
-from django_cradmin.apps.cradmin_imagearchive import cradminviews
-from django_cradmin.apps.cradmin_imagearchive.models import ArchiveImage
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
-from django_cradmin.django_cradmin_testapp.models import TstRole
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy import cradmin_testhelpers
+from cradmin_legacy.apps.cradmin_imagearchive import cradminviews
+from cradmin_legacy.apps.cradmin_imagearchive.models import ArchiveImage
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
+from cradmin_legacy.cradmin_legacy_testapp.models import TstRole
+from cradmin_legacy.tests.helpers import create_user
 from .helpers import create_image
 
 
@@ -78,13 +78,13 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
     def test_no_archive_images(self):
         mockresponse = self.mock_http200_getrequest_htmls(
             requestuser=create_user('testuser'),
-            cradmin_role=mommy.make('django_cradmin_testapp.TstRole'))
+            cradmin_role=mommy.make('cradmin_legacy_testapp.TstRole'))
         self.assertEqual(
             mockresponse.selector.one('#objecttableview-no-items-message').alltext_normalized,
             'No archive images')
 
     def test_single_archive_image_sanity(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mommy.make('cradmin_imagearchive.ArchiveImage',
                    name='Test image', description='',
                    role=testrole)
@@ -95,8 +95,8 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
         self.assertEqual(mockresponse.selector.count('#objecttableview-table tbody tr'), 1)
 
     def test_only_owned_by_role(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
-        other_role = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
+        other_role = mommy.make('cradmin_legacy_testapp.TstRole')
         mommy.make('cradmin_imagearchive.ArchiveImage',
                    name='Test image', description='',
                    role=other_role)
@@ -106,7 +106,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
         self.assertTrue(mockresponse.selector.exists('#objecttableview-no-items-message'))
 
     def test_render_single_archive_image_no_description(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mommy.make('cradmin_imagearchive.ArchiveImage',
                    name='Test image', description='',
                    role=testrole)
@@ -123,7 +123,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
             'Set a description')
 
     def test_render_single_archive_image_has_description(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mommy.make('cradmin_imagearchive.ArchiveImage',
                    name='Test image', description='Test description',
                    role=testrole)
@@ -140,18 +140,18 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
             'Edit description')
 
     def test_uploadform_get_render(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mockresponse = self.mock_http200_getrequest_htmls(
             requestuser=create_user('testuser'),
             cradmin_role=testrole)
         self.assertEquals(mockresponse.response.status_code, 200)
-        self.assertTrue(mockresponse.selector.exists('#django_cradmin_imagearchive_bulkadd_form'))
+        self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_imagearchive_bulkadd_form'))
         self.assertTrue(mockresponse.selector.exists('input[type=hidden][name=filecollectionid]'))
         self.assertTrue(mockresponse.selector.exists('#div_id_filecollectionid'))
 
     def test_uploadform_post_no_filecollectionid(self):
         self.assertEqual(ArchiveImage.objects.count(), 0)
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mockresponse = self.mock_http200_postrequest_htmls(
             requestuser=create_user('testuser'),
             cradmin_role=testrole)
@@ -169,7 +169,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
             filename='testfile.png')
         temporaryfile.file.save('testfile.png', ContentFile(testimage))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         cradmin_app = mock.MagicMock()
         cradmin_app.reverse_appurl.return_value = '/success'
         self.assertEqual(ArchiveImage.objects.count(), 0)
@@ -199,7 +199,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
             filename='testfile.png')
         temporaryfile.file.save('testfile.png', ContentFile(testimage))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         self.mock_http302_postrequest(
             requestuser=testuser,
             cradmin_role=testrole,
@@ -224,7 +224,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
             filename='testfile2.png')
         temporaryfile.file.save('testfile2.png', ContentFile(testimage2))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         cradmin_app = mock.MagicMock()
         cradmin_app.reverse_appurl.return_value = '/success'
 
@@ -259,7 +259,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
             filename='testfile.png')
         temporaryfile.file.save('testfile.png', ContentFile(testimage))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         self.mock_http302_postrequest(
             requestuser=testuser,
             cradmin_role=testrole,
@@ -278,13 +278,13 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
     def test_no_archive_images(self):
         mockresponse = self.mock_http200_getrequest_htmls(
             requestuser=create_user('testuser'),
-            cradmin_role=mommy.make('django_cradmin_testapp.TstRole'))
+            cradmin_role=mommy.make('cradmin_legacy_testapp.TstRole'))
         self.assertEqual(
             mockresponse.selector.one('#objecttableview-no-items-message').alltext_normalized,
             'No archive images')
 
     def test_single_archive_image_sanity(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         archiveimage = mommy.make('cradmin_imagearchive.ArchiveImage',
                                   role=testrole)
         archiveimage.image.save('testimage.png', ContentFile(create_image(200, 100)))
@@ -299,8 +299,8 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
         self.assertEqual(mockresponse.selector.count('#objecttableview-table tbody tr'), 1)
 
     def test_only_owned_by_role(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
-        other_role = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
+        other_role = mommy.make('cradmin_legacy_testapp.TstRole')
         mommy.make('cradmin_imagearchive.ArchiveImage',
                    name='Test image', description='',
                    role=other_role)
@@ -310,7 +310,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
         self.assertTrue(mockresponse.selector.exists('#objecttableview-no-items-message'))
 
     def test_render_single_archive_image_no_description(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         archiveimage = mommy.make('cradmin_imagearchive.ArchiveImage',
                                   name='Test image', description='',
                                   role=testrole)
@@ -331,7 +331,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
             'Use this')
 
     def test_render_single_archive_image_has_description(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         archiveimage = mommy.make('cradmin_imagearchive.ArchiveImage',
                                   name='Test image', description='Test description',
                                   role=testrole)
@@ -352,17 +352,17 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
             'Use this')
 
     def test_uploadform_get_render(self):
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mockresponse = self.mock_http200_getrequest_htmls(
             requestuser=create_user('testuser'),
             cradmin_role=testrole)
-        self.assertTrue(mockresponse.selector.exists('#django_cradmin_imagearchive_bulkadd_form'))
+        self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_imagearchive_bulkadd_form'))
         self.assertTrue(mockresponse.selector.exists('input[type=hidden][name=filecollectionid]'))
         self.assertTrue(mockresponse.selector.exists('#div_id_filecollectionid'))
 
     def test_uploadform_post_no_filecollectionid(self):
         self.assertEqual(ArchiveImage.objects.count(), 0)
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         mockresponse = self.mock_http200_postrequest_htmls(
             requestuser=create_user('testuser'),
             cradmin_role=testrole)
@@ -380,7 +380,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
             filename='testfile.png')
         temporaryfile.file.save('testfile.png', ContentFile(testimage))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         cradmin_app = mock.MagicMock()
         self.assertEqual(ArchiveImage.objects.count(), 0)
         mockresponse = self.mock_http302_postrequest(
@@ -410,7 +410,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
             filename='testfile.png')
         temporaryfile.file.save('testfile.png', ContentFile(testimage))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         self.mock_http302_postrequest(
             requestuser=testuser,
             cradmin_role=testrole,
@@ -436,7 +436,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
             filename='testfile2.png')
         temporaryfile.file.save('testfile2.png', ContentFile(testimage2))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         cradmin_app = mock.MagicMock()
         cradmin_app.reverse_appurl.return_value = '/success'
 
@@ -465,7 +465,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
             filename='testfile.png')
         temporaryfile.file.save('testfile.png', ContentFile(testimage))
 
-        testrole = mommy.make('django_cradmin_testapp.TstRole')
+        testrole = mommy.make('cradmin_legacy_testapp.TstRole')
         self.mock_http302_postrequest(
             requestuser=testuser,
             cradmin_role=testrole,

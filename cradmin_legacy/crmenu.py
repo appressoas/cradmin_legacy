@@ -13,7 +13,7 @@ class MenuItem(object):
     menu, you may want to subclass this and override the template
     and/or :meth:`render` method.
     """
-    template_name = 'django_cradmin/menuitem.django.html'
+    template_name = 'cradmin_legacy/menuitem.django.html'
 
     def __init__(self, label, url,
                  active=False,
@@ -43,7 +43,7 @@ class MenuItem(object):
         self.childitems = []
 
     def get_item_css_class(self):
-        return 'django-cradmin-menu-item'
+        return 'cradmin-legacy-menu-item'
 
     def get_link_css_class(self):
         return ''
@@ -124,11 +124,11 @@ class Menu(object):
     Base class for the menu.
 
     You subclass this for your site, and set
-    :obj:`django_cradmin.crinstance.BaseInstance.menuclass`.
+    :obj:`cradmin_legacy.crinstance.BaseInstance.menuclass`.
 
     In advanced cases, you may create multiple subclasses of
     this for your site, and override
-    :obj:`django_cradmin.crinstance.BaseInstance.get_menuclass`
+    :obj:`cradmin_legacy.crinstance.BaseInstance.get_menuclass`
 
     Attributes:
         cradmin_instance (BaseInstance): The current cradmin instance.
@@ -139,12 +139,12 @@ class Menu(object):
 
     #: The name of the template to use for rendering the menu.
     #: Used by :meth:`.get_template_name`.
-    template_name = "django_cradmin/menu.django.html"
+    template_name = "cradmin_legacy/menu.django.html"
 
     def __init__(self, cradmin_instance):
         """
         Parameters:
-            cradmin_instance (django_cradmin.crinstance.BaseInstance):
+            cradmin_instance (cradmin_legacy.crinstance.BaseInstance):
         """
         self.cradmin_instance = cradmin_instance
         self.request = cradmin_instance.request
@@ -265,7 +265,7 @@ class Menu(object):
         """
         Shortcut for ``self.cradmin_instance.appindex_url(...)``.
 
-        See :meth:`django_cradmin.BaseInstance.appindex_url`.
+        See :meth:`cradmin_legacy.BaseInstance.appindex_url`.
         """
         return self.cradmin_instance.appindex_url(appname)
 
@@ -273,7 +273,7 @@ class Menu(object):
         """
         Shortcut for ``self.cradmin_instance.roleselectview_url()``.
 
-        See :meth:`django_cradmin.BaseInstance.roleselectview_url`.
+        See :meth:`cradmin_legacy.BaseInstance.roleselectview_url`.
         """
         return self.cradmin_instance.roleselectview_url()
 

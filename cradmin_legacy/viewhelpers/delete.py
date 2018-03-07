@@ -3,13 +3,13 @@ from builtins import str
 from django.contrib import messages
 from django.views.generic import DeleteView as DjangoDeleteView
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin.viewhelpers.mixins import QuerysetForRoleMixin
+from cradmin_legacy.viewhelpers.mixins import QuerysetForRoleMixin
 
 
 class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
 
     #: The name of the template to use.
-    template_name = 'django_cradmin/viewhelpers/delete.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/delete.django.html'
 
     def get_pagetitle(self):
         """

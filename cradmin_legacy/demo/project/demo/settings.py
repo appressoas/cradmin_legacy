@@ -42,38 +42,38 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # Required by django cradmin
-    'django_cradmin',
-    'django_cradmin.apps.cradmin_imagearchive.apps.ImageArchiveConfig',
-    'django_cradmin.apps.cradmin_temporaryfileuploadstore',
-    'django_cradmin.apps.cradmin_generic_token_with_metadata',
-    'django_cradmin.apps.cradmin_authenticate',
-    'django_cradmin.apps.cradmin_resetpassword',
-    'django_cradmin.apps.cradmin_activate_account',
-    'django_cradmin.apps.cradmin_register_account',
-    'django_cradmin.apps.cradmin_invite',
-    'django_cradmin.apps.cradmin_email',
+    'cradmin_legacy',
+    'cradmin_legacy.apps.cradmin_imagearchive.apps.ImageArchiveConfig',
+    'cradmin_legacy.apps.cradmin_temporaryfileuploadstore',
+    'cradmin_legacy.apps.cradmin_generic_token_with_metadata',
+    'cradmin_legacy.apps.cradmin_authenticate',
+    'cradmin_legacy.apps.cradmin_resetpassword',
+    'cradmin_legacy.apps.cradmin_activate_account',
+    'cradmin_legacy.apps.cradmin_register_account',
+    'cradmin_legacy.apps.cradmin_invite',
+    'cradmin_legacy.apps.cradmin_email',
     'crispy_forms',
     'sorl.thumbnail',  # Required by cradmin_imagearchive
 
     # Just here to get the demo overview view.
-    'django_cradmin.demo.project.demo',
+    'cradmin_legacy.demo.project.demo',
 
     # The advanced demo
-    'django_cradmin.demo.webdemo.apps.WebdemoConfig',
-    'django_cradmin.demo.login_not_required_demo',
-    'django_cradmin.demo.no_role_demo',
+    'cradmin_legacy.demo.webdemo.apps.WebdemoConfig',
+    'cradmin_legacy.demo.login_not_required_demo',
+    'cradmin_legacy.demo.no_role_demo',
 
     # The demo based on the Django tutorial
-    'django_cradmin.demo.polls_demo',
+    'cradmin_legacy.demo.polls_demo',
 
     # Demo for usermanager
-    'django_cradmin.demo.usermanagerdemo.apps.UsermanagerdemoConfig',
+    'cradmin_legacy.demo.usermanagerdemo.apps.UsermanagerdemoConfig',
 
     # Demo for listfilter
-    'django_cradmin.demo.listfilterdemo',
+    'cradmin_legacy.demo.listfilterdemo',
 
     # Demo for multiselect
-    'django_cradmin.demo.multiselect2demo.apps.MultiselectdemoConfig',
+    'cradmin_legacy.demo.multiselect2demo.apps.MultiselectdemoConfig',
 
     # For building docs
     'ievv_opensource.ievvtasks_development',
@@ -86,7 +86,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'django_cradmin.delay_middleware.DelayMiddleware',
+    # 'cradmin_legacy.delay_middleware.DelayMiddleware',
 )
 # DJANGO_CRADMIN_DELAY_MIDDLEWARE_MILLISECONDS = 2000
 
@@ -108,15 +108,15 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.request",
-                "django_cradmin.context_processors.cradmin",
+                "cradmin_legacy.context_processors.cradmin",
             ],
         },
     },
 ]
 
-ROOT_URLCONF = 'django_cradmin.demo.project.demo.urls'
+ROOT_URLCONF = 'cradmin_legacy.demo.project.demo.urls'
 
-# WSGI_APPLICATION = 'django_cradmin.demo.wsgi.application'
+# WSGI_APPLICATION = 'cradmin_legacy.demo.wsgi.application'
 
 
 # Database
@@ -203,22 +203,22 @@ DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL = LOGIN_REDIRECT_URL
 DJANGO_CRADMIN_FORGOTPASSWORD_URL = '/resetpassword/begin'
 
 DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-    'django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm'
+    'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm'
 # DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-#     'django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
+#     'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
 
 
 DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND = True
 
 AUTHENTICATION_BACKENDS = (
-    'django_cradmin.apps.cradmin_authenticate.backends.EmailAuthBackend',
+    'cradmin_legacy.apps.cradmin_authenticate.backends.EmailAuthBackend',
 )
 TIME_INPUT_FORMATS = [
     '%H:%M',        # '14:30'
     '%H:%M:%S',     # '14:30:59'
 ]
 
-# DJANGO_CRADMIN_THEME_PATH = 'django_cradmin/dist/css/cradmin_theme_topmenu/theme.css'
+# DJANGO_CRADMIN_THEME_PATH = 'cradmin_legacy/dist/css/cradmin_theme_topmenu/theme.css'
 DJANGO_CRADMIN_MENU_SCROLL_TOP_FIXED = True
 # DJANGO_CRADMIN_MOMENTJS_LOCALE = 'nb'
 

@@ -1,14 +1,14 @@
 from __future__ import unicode_literals
 
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 
 from django.test import TestCase
 from future import standard_library
 from model_mommy import mommy
 
-from django_cradmin import datetimeutils
-from django_cradmin.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
-from django_cradmin.viewhelpers import listfilter
+from cradmin_legacy import datetimeutils
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
+from cradmin_legacy.viewhelpers import listfilter
 
 standard_library.install_aliases()
 
@@ -120,7 +120,7 @@ class TestDateTime(TestCase):
         testfilter.set_values(values=['today'])
         mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 1, 1))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 1, 2)):
             self.assertFalse(
                 testfilter.filter(queryobject=FilterTestModel.objects.all()).exists())
@@ -130,7 +130,7 @@ class TestDateTime(TestCase):
         testfilter.set_values(values=['today'])
         testitem = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                               mydatetimefield=datetimeutils.default_timezone_datetime(2015, 1, 1))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 1, 1, 12, 30)):
             self.assertEqual(
                 {testitem},
@@ -141,7 +141,7 @@ class TestDateTime(TestCase):
         testfilter.set_values(values=['yesterday'])
         mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 1, 10))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 1, 12)):
             self.assertFalse(
                 testfilter.filter(queryobject=FilterTestModel.objects.all()).exists())
@@ -151,7 +151,7 @@ class TestDateTime(TestCase):
         testfilter.set_values(values=['yesterday'])
         testitem = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                               mydatetimefield=datetimeutils.default_timezone_datetime(2015, 1, 10))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 1, 11, 12, 30)):
             self.assertEqual(
                 {testitem},
@@ -162,7 +162,7 @@ class TestDateTime(TestCase):
         testfilter.set_values(values=['last_seven_days'])
         mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 1, 2))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 1, 10, 12, 30)):
             self.assertFalse(
                 testfilter.filter(queryobject=FilterTestModel.objects.all()).exists())
@@ -172,7 +172,7 @@ class TestDateTime(TestCase):
         testfilter.set_values(values=['last_seven_days'])
         testitem = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                               mydatetimefield=datetimeutils.default_timezone_datetime(2015, 1, 3))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 1, 10, 12, 30)):
             self.assertEqual(
                 {testitem},
@@ -185,7 +185,7 @@ class TestDateTime(TestCase):
                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 11, 29))
         mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 12, 7))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 12, 1, 12, 30)):
             self.assertFalse(
                 testfilter.filter(queryobject=FilterTestModel.objects.all()).exists())
@@ -197,7 +197,7 @@ class TestDateTime(TestCase):
                                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 11, 30))
         end_of_week = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                  mydatetimefield=datetimeutils.default_timezone_datetime(2015, 12, 6, 23))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 12, 1, 12, 30)):
             self.assertEqual(
                 {start_of_week, end_of_week},
@@ -210,7 +210,7 @@ class TestDateTime(TestCase):
                    mydatetimefield=datetimeutils.default_timezone_datetime(2015, 11, 29))
         mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mydatetimefield=datetimeutils.default_timezone_datetime(2016, 1, 1))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 12, 7, 12, 30)):
             self.assertFalse(
                 testfilter.filter(queryobject=FilterTestModel.objects.all()).exists())
@@ -224,7 +224,7 @@ class TestDateTime(TestCase):
                                      mydatetimefield=datetimeutils.default_timezone_datetime(2015, 12, 24))
         end_of_month = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                   mydatetimefield=datetimeutils.default_timezone_datetime(2015, 12, 31, 23))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 12, 7, 12, 30)):
             self.assertEqual(
                 {start_of_month, middle_of_month, end_of_month},
@@ -237,7 +237,7 @@ class TestDateTime(TestCase):
                    mydatetimefield=datetimeutils.default_timezone_datetime(2014, 12, 31))
         mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mydatetimefield=datetimeutils.default_timezone_datetime(2016, 1, 1))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 12, 24)):
             self.assertFalse(
                 testfilter.filter(queryobject=FilterTestModel.objects.all()).exists())
@@ -251,7 +251,7 @@ class TestDateTime(TestCase):
                                     mydatetimefield=datetimeutils.default_timezone_datetime(2015, 6, 1))
         end_of_year = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                  mydatetimefield=datetimeutils.default_timezone_datetime(2015, 12, 31, 23))
-        with mock.patch('django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
+        with mock.patch('cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect.timezone.now',
                         lambda: datetimeutils.default_timezone_datetime(2015, 12, 24)):
             self.assertEqual(
                 {start_of_year, middle_of_year, end_of_year},

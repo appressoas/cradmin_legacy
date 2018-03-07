@@ -18,8 +18,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db import models
-from django_cradmin.viewhelpers import listfilter
-from django_cradmin.viewhelpers.listfilter import listfilter_viewmixin
+from cradmin_legacy.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers.listfilter import listfilter_viewmixin
 
 logger = logging.getLogger(__name__)
 
@@ -341,7 +341,7 @@ class Column(object):
 
 
 class PlainTextColumn(Column):
-    template_name = 'django_cradmin/viewhelpers/objecttable/plaintextcolumn-cell.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/plaintextcolumn-cell.django.html'
 
 
 class DatetimeColumn(PlainTextColumn):
@@ -384,7 +384,7 @@ class SingleActionColumn(Column):
 
     See also: :class:`.MultiActionColumn`.
     """
-    template_name = 'django_cradmin/viewhelpers/objecttable/singleactioncolumn-cell.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/singleactioncolumn-cell.django.html'
 
     def get_actionurl(self, obj):
         raise NotImplementedError()
@@ -407,7 +407,7 @@ class SingleButtonColumn(Column):
 
     See also: :class:`.MultiActionColumn`.
     """
-    template_name = 'django_cradmin/viewhelpers/objecttable/singlebuttoncolumn-cell.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/singlebuttoncolumn-cell.django.html'
 
     def render_value(self, obj):
         return None
@@ -422,7 +422,7 @@ class SingleButtonColumn(Column):
 
 
 class ImagePreviewColumn(Column):
-    template_name = 'django_cradmin/viewhelpers/objecttable/imagepreviewcolumn-cell.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/imagepreviewcolumn-cell.django.html'
 
     #: See :meth:`.ImagePreviewColumn.get_preview_imagetype`.
     preview_imagetype = None
@@ -433,7 +433,7 @@ class ImagePreviewColumn(Column):
     def get_preview_imagetype(self):
         """
         Get the ``imagetype`` to use with
-        :func:`~django_cradmin.templatetags.cradmin_image_tags.cradmin_create_archiveimage_tag`.
+        :func:`~cradmin_legacy.templatetags.cradmin_legacy_image_tags.cradmin_create_archiveimage_tag`.
         to generate the preview.
         """
         return self.preview_imagetype
@@ -456,7 +456,7 @@ class ImagePreviewColumn(Column):
 
 
 class MultiActionColumn(Column):
-    template_name = 'django_cradmin/viewhelpers/objecttable/multiactioncolumn-cell.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/multiactioncolumn-cell.django.html'
 
     def __init__(self, **kwargs):
         super(MultiActionColumn, self).__init__(**kwargs)
@@ -477,7 +477,7 @@ class MultiActionColumn(Column):
 
 
 class UseThisActionColumn(Column):
-    template_name = 'django_cradmin/viewhelpers/objecttable/usethisactioncolumn-cell.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/usethisactioncolumn-cell.django.html'
 
     def __init__(self, **kwargs):
         super(UseThisActionColumn, self).__init__(**kwargs)
@@ -503,7 +503,7 @@ class AbstractButton(object):
     """
 
     #: The django template name/path.
-    template_name = 'django_cradmin/viewhelpers/objecttable/button.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/button.django.html'
 
     #: The HTML element to use for the button.
     button_element = 'a'
@@ -642,7 +642,7 @@ class SubmitButton(NonSubmitButton):
 
 class PagePreviewsButton(AbstractButton):
     """
-    A button variant that uses the ``django-cradmin-page-preview-open-on-click``
+    A button variant that uses the ``cradmin-legacy-page-preview-open-on-click``
     AngularJS directive to open previews in an overlay containing an IFRAME.
 
     Unlike :class:`.PagePreviewButton`, this supports multiple previews
@@ -678,7 +678,7 @@ class PagePreviewsButton(AbstractButton):
     def get_data_attributes(self):
         attributes = super(PagePreviewsButton, self).get_data_attributes()
         attributes.update({
-            'django-cradmin-page-preview-open-on-click': json.dumps({
+            'cradmin-legacy-page-preview-open-on-click': json.dumps({
                 'urls': self.urls
             })
         })
@@ -687,7 +687,7 @@ class PagePreviewsButton(AbstractButton):
 
 class PagePreviewButton(PagePreviewsButton):
     """
-    A button variant that uses the ``django-cradmin-page-preview-open-on-click``
+    A button variant that uses the ``cradmin-legacy-page-preview-open-on-click``
     AngularJS directive to open a preview in an overlay containing an IFRAME.
     Works just like a regular button. The only difference is that the url is
     opened in the IFRAME in the overlay instead of in the current window.
@@ -715,7 +715,7 @@ class UseThisButton(Button):
 
     def get_data_attributes(self):
         attributes = {
-            'django-cradmin-use-this': json.dumps({
+            'cradmin-legacy-use-this': json.dumps({
                 'value': self.obj.pk,
                 'fieldid': self.view.request.GET['foreignkey_select_fieldid'],
                 'preview': self.view.make_foreignkey_preview_for(self.obj)
@@ -869,7 +869,7 @@ class ObjectTableView(ListView):
     they can offer for download. To make a list of all uploaded
     documents, you would do something like this::
 
-        from django_cradmin.viewhelpers.objecttable import ObjectTableView
+        from cradmin_legacy.viewhelpers.objecttable import ObjectTableView
         from myapp.models import Document
 
         class DocumentListView(ObjectTableView):
@@ -885,18 +885,18 @@ class ObjectTableView(ListView):
 
     #: The template used to render the view. You can override this,
     #: but if you override it, you should extend the default template
-    #: (django_cradmin/viewhelpers/objecttable/objecttable.django.html).
-    template_name = 'django_cradmin/viewhelpers/objecttable/objecttable.django.html'
+    #: (cradmin_legacy/viewhelpers/objecttable/objecttable.django.html).
+    template_name = 'cradmin_legacy/viewhelpers/objecttable/objecttable.django.html'
 
     #: The template used to render the no items message.
     #: See :meth:`.get_no_items_message_template_name` and
     #: :meth:`.get_no_items_message`
-    no_items_message_template_name = 'django_cradmin/viewhelpers/objecttable/no-items-message.django.html'
+    no_items_message_template_name = 'cradmin_legacy/viewhelpers/objecttable/no-items-message.django.html'
 
     #: The template used to render the no searchresults message.
     #: See :meth:`.get_no_searchresults_message_template_name` and
     #: :meth:`.get_no_searchresults_message`
-    no_searchresults_message_template_name = 'django_cradmin/viewhelpers/objecttable/' \
+    no_searchresults_message_template_name = 'cradmin_legacy/viewhelpers/objecttable/' \
                                              'no-searchresults-message.django.html'
 
     #: Set this to ``True`` to make the template not render the menu.
@@ -1365,7 +1365,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         - top
 
         Defaults to ``"top"`` if :meth:`.get_filterlist_class` returns
-        :class:`django_cradmin.viewhelpers.listfilter.lists.Horizontal` or a subclass of it,
+        :class:`cradmin_legacy.viewhelpers.listfilter.lists.Horizontal` or a subclass of it,
         otherwise ``"right"``.
         """
         filterlist_class = self.get_filterlist_class()
@@ -1380,11 +1380,11 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
 
         You will want to call this from the ``get_template_names`` method.
         This is just the interface, refer to the mixins implemented in
-        various modules (such as :class:`django_cradmin.viewhelpers.listbuilderview.FilterListMixin`)
+        various modules (such as :class:`cradmin_legacy.viewhelpers.listbuilderview.FilterListMixin`)
         for details on how to use this method.
         """
         position = self.get_filterlist_position()
-        template_name = 'django_cradmin/viewhelpers/objecttable/objecttable-filterlist-{}.django.html'.format(position)
+        template_name = 'cradmin_legacy/viewhelpers/objecttable/objecttable-filterlist-{}.django.html'.format(position)
         return template_name
 
     def get_filter_unprotected_querystring_arguments(self):
@@ -1392,7 +1392,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         This returns ``{'page'}``, which ensures we go back to
         page 1 when changing a filter.
 
-        See :class:`django_cradmin.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
+        See :class:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
         for more details.
         """
         return {'page'}
@@ -1400,10 +1400,10 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
     def get_filterlist_target_dom_id(self):
         """
         Overrides
-        :meth:`django_cradmin.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin.get_filterlist_target_dom_id`
-        with a default of ``"django_cradmin_objecttableview_tablewrapper"``.
+        :meth:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin.get_filterlist_target_dom_id`
+        with a default of ``"cradmin_legacy_objecttableview_tablewrapper"``.
 
         You should not need to override this unless you create a completely custom
         template for your view.
         """
-        return 'django_cradmin_objecttableview_tablewrapper'
+        return 'cradmin_legacy_objecttableview_tablewrapper'

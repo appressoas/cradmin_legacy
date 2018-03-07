@@ -10,18 +10,18 @@ from crispy_forms import layout
 from django import forms
 from django.views.generic.edit import FormMixin
 
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.widgets import BulkFileUploadWidget, SingleFileUploadWidget
-from django_cradmin.utils import crhumanize
-from django_cradmin.viewhelpers import objecttable
-from django_cradmin.viewhelpers import crudbase
-from django_cradmin.viewhelpers import update
-from django_cradmin.viewhelpers import create
-from django_cradmin.viewhelpers import delete
-from django_cradmin.viewhelpers import formbase
-from django_cradmin import crapp
-from django_cradmin import crsettings
-from django_cradmin.apps.cradmin_imagearchive.models import ArchiveImage
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.widgets import BulkFileUploadWidget, SingleFileUploadWidget
+from cradmin_legacy.utils import crhumanize
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.viewhelpers import crudbase
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy.viewhelpers import create
+from cradmin_legacy.viewhelpers import delete
+from cradmin_legacy.viewhelpers import formbase
+from cradmin_legacy import crapp
+from cradmin_legacy import crsettings
+from cradmin_legacy.apps.cradmin_imagearchive.models import ArchiveImage
 
 logger = logging.getLogger(__name__)
 
@@ -167,7 +167,7 @@ class SingleAddForm(forms.Form):
 class AddImageOverlayButton(objecttable.NonSubmitButton):
     def get_html_attributes(self):
         attributes = super(AddImageOverlayButton, self).get_html_attributes()
-        attributes['django-cradmin-bulkfileupload-show-overlay'] = 'filecollectionid'
+        attributes['cradmin-legacy-bulkfileupload-show-overlay'] = 'filecollectionid'
         return attributes
 
 
@@ -178,15 +178,15 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
     model = ArchiveImage
     paginate_by = 15
 
-    form_id = 'django_cradmin_imagearchive_bulkadd_form'
-    extra_form_css_classes = ['django-cradmin-form-noasterisk', 'django-cradmin-bulkfileupload-form-overlay']
-    template_name = 'django_cradmin/apps/cradmin_imagearchive/listview.django.html'
+    form_id = 'cradmin_legacy_imagearchive_bulkadd_form'
+    extra_form_css_classes = ['cradmin-legacy-form-noasterisk', 'cradmin-legacy-bulkfileupload-form-overlay']
+    template_name = 'cradmin_legacy/apps/cradmin_imagearchive/listview.django.html'
 
     def get_form_attributes(self):
         return {
-            'django-cradmin-bulkfileupload-form': '',
-            'django-cradmin-bulkfileupload-form-overlay': 'true',
-            'django-cradmin-bulkfileupload-form-open-overlay-on-window-dragdrop': 'true'
+            'cradmin-legacy-bulkfileupload-form': '',
+            'cradmin-legacy-bulkfileupload-form-overlay': 'true',
+            'cradmin-legacy-bulkfileupload-form-open-overlay-on-window-dragdrop': 'true'
         }
 
     def get_field_layout(self):
@@ -311,7 +311,7 @@ class ArchiveImagesListView(BaseImagesListView):
     # def get_button_layout(self):
     #     return [
     #         layout.Div(PrimarySubmit('save', _('Upload images')),
-    #                    css_class="django_cradmin_submitrow")
+    #                    css_class="cradmin_legacy_submitrow")
     #     ]
 
 
@@ -334,7 +334,7 @@ class ArchiveImagesSingleSelectView(BaseImagesListView):
     # def get_button_layout(self):
     #     return [
     #         layout.Div(PrimarySubmit('save', _('Upload image')),
-    #                    css_class="django_cradmin_submitrow")
+    #                    css_class="cradmin_legacy_submitrow")
     #     ]
 
     def get_success_url(self):

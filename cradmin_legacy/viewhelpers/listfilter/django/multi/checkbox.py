@@ -1,5 +1,5 @@
-from django_cradmin.viewhelpers.listfilter.basefilters.multi import abstractcheckbox
-from django_cradmin.viewhelpers.listfilter.django.base import DjangoOrmFilterMixin
+from cradmin_legacy.viewhelpers.listfilter.basefilters.multi import abstractcheckbox
+from cradmin_legacy.viewhelpers.listfilter.django.base import DjangoOrmFilterMixin
 
 
 class RelatedModelOrFilter(abstractcheckbox.AbstractCheckboxFilter, DjangoOrmFilterMixin):
@@ -11,7 +11,7 @@ class RelatedModelOrFilter(abstractcheckbox.AbstractCheckboxFilter, DjangoOrmFil
     value potentially increases the number of items shown instead of limiting it.
 
     You just have to override
-    :meth:`~django_cradmin.viewhelpers.listfilter.basefilters.multi.abstractcheckbox.AbstractCheckboxFilter.get_choices`
+    :meth:`~cradmin_legacy.viewhelpers.listfilter.basefilters.multi.abstractcheckbox.AbstractCheckboxFilter.get_choices`
     and :meth:`get_filter_attribute`.
 
     Examples:

@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django import forms
 from multiupload.fields import MultiFileField
-from django_cradmin.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile, \
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile, \
     html_input_accept_match, make_unique_filename, validate_max_file_size
 
 

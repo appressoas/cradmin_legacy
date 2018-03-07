@@ -2,11 +2,11 @@ from __future__ import unicode_literals
 from builtins import range
 from django.utils.html import format_html
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 from django.test import TestCase, RequestFactory
 from mock_django.query import QuerySetMock
 
-from django_cradmin.views.roleselect import RoleSelectView
+from cradmin_legacy.views.roleselect import RoleSelectView
 
 
 class TestRoleSelectView(TestCase):
@@ -19,7 +19,7 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             request = self.factory.get('/roleselecttest')
             response = RoleSelectView.as_view()(request)
@@ -31,7 +31,7 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             request = self.factory.get('/roleselecttest')
             response = RoleSelectView.as_view()(request)
@@ -62,10 +62,10 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             with mock.patch(
-                    'django_cradmin.templatetags.cradmin_tags.cradmin_instance_registry',
+                    'cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_instance_registry',
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = CustomRoleSelectView.as_view()(request)
@@ -88,10 +88,10 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             with mock.patch(
-                    'django_cradmin.templatetags.cradmin_tags.cradmin_instance_registry',
+                    'cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_instance_registry',
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = RoleSelectView.as_view()(request)
@@ -99,9 +99,9 @@ class TestRoleSelectView(TestCase):
                 response.render()
                 selector = htmls.S(response.content)
 
-                self.assertEqual(selector.count('.django-cradmin-roleselect-role-title'), 2)
+                self.assertEqual(selector.count('.cradmin-legacy-roleselect-role-title'), 2)
                 titletextlist = [element.alltext_normalized
-                                 for element in selector.list('.django-cradmin-roleselect-role-title')]
+                                 for element in selector.list('.cradmin-legacy-roleselect-role-title')]
                 self.assertEquals(titletextlist, ['Role One', 'Role Two'])
 
     def test_render_list_descriptions(self):
@@ -118,10 +118,10 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             with mock.patch(
-                    'django_cradmin.templatetags.cradmin_tags.cradmin_instance_registry',
+                    'cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_instance_registry',
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = RoleSelectView.as_view()(request)
@@ -129,9 +129,9 @@ class TestRoleSelectView(TestCase):
                 response.render()
                 selector = htmls.S(response.content)
 
-                self.assertEqual(selector.count('.django-cradmin-roleselect-role-description'), 2)
+                self.assertEqual(selector.count('.cradmin-legacy-roleselect-role-description'), 2)
                 titletextlist = [element.alltext_normalized
-                                 for element in selector.list('.django-cradmin-roleselect-role-description')]
+                                 for element in selector.list('.cradmin-legacy-roleselect-role-description')]
                 self.assertEquals(titletextlist, ['Role One desc', 'Role Two desc'])
 
     def test_render_list_urls(self):
@@ -146,10 +146,10 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             with mock.patch(
-                    'django_cradmin.templatetags.cradmin_tags.cradmin_instance_registry',
+                    'cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_instance_registry',
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = RoleSelectView.as_view()(request)
@@ -158,7 +158,7 @@ class TestRoleSelectView(TestCase):
                 selector = htmls.S(response.content)
 
                 urllist = [element['href']
-                           for element in selector.list('.django-cradmin-roleselect-list li a')]
+                           for element in selector.list('.cradmin-legacy-roleselect-list li a')]
                 self.assertEquals(urllist, ['/role/1', '/role/2'])
 
     def test_render_pagination(self):
@@ -176,10 +176,10 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             with mock.patch(
-                    'django_cradmin.templatetags.cradmin_tags.cradmin_instance_registry',
+                    'cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_instance_registry',
                     cradmin_instance_registry):
                 request_page1 = self.factory.get('/roleselecttest')
                 response_page1 = CustomRoleSelectView.as_view()(request_page1)
@@ -195,8 +195,8 @@ class TestRoleSelectView(TestCase):
                 response_page2.render()
                 selector_page2 = htmls.S(response_page2.content)
 
-                self.assertEqual(selector_page1.count('.django-cradmin-roleselect-list li'), 3)
-                self.assertEqual(selector_page2.count('.django-cradmin-roleselect-list li'), 2)
+                self.assertEqual(selector_page1.count('.cradmin-legacy-roleselect-list li'), 3)
+                self.assertEqual(selector_page2.count('.cradmin-legacy-roleselect-list li'), 2)
 
                 self.assertTrue(selector_page1.exists('.pager-container'))
                 self.assertTrue(selector_page1.exists('.pager-container li.previous.disabled'))
@@ -220,10 +220,10 @@ class TestRoleSelectView(TestCase):
         cradmin_instance_registry = mock.MagicMock()
         cradmin_instance_registry.get_current_instance.return_value = cradmin_instance
         with mock.patch(
-                'django_cradmin.views.roleselect.cradmin_instance_registry',
+                'cradmin_legacy.views.roleselect.cradmin_instance_registry',
                 cradmin_instance_registry):
             with mock.patch(
-                    'django_cradmin.templatetags.cradmin_tags.cradmin_instance_registry',
+                    'cradmin_legacy.templatetags.cradmin_legacy_tags.cradmin_instance_registry',
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = CustomRoleSelectView.as_view()(request)
@@ -231,6 +231,6 @@ class TestRoleSelectView(TestCase):
                 response.render()
                 selector = htmls.S(response.content)
 
-                # selector.one('#django_cradmin_roleselect').prettyprint()
-                self.assertEqual(selector.count('.django-cradmin-roleselect-list li'), 3)
+                # selector.one('#cradmin_legacy_roleselect').prettyprint()
+                self.assertEqual(selector.count('.cradmin-legacy-roleselect-list li'), 3)
                 self.assertFalse(selector.exists('.pager-container'))

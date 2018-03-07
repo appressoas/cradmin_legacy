@@ -10,7 +10,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from django.views.generic import FormView
 
-from django_cradmin.crispylayouts import PrimarySubmitLg
+from cradmin_legacy.crispylayouts import PrimarySubmitLg
 
 
 class AbstractLoginForm(forms.Form):
@@ -106,7 +106,7 @@ class UsernameLoginForm(AbstractLoginForm):
 class EmailLoginForm(AbstractLoginForm):
     """
     This form is used for email-based login along with the
-    :class:`django_cradmin.apps.cradmin_authenticate.backends.EmailAuthBackend`.
+    :class:`cradmin_legacy.apps.cradmin_authenticate.backends.EmailAuthBackend`.
 
     This requires adding ``DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND = True`` to your ``settings.py``.
 

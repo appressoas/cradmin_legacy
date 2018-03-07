@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.utils.html import format_html
 
-from django_cradmin.decorators import has_access_to_cradmin_instance
+from cradmin_legacy.decorators import has_access_to_cradmin_instance
 from . import crapp
 from .registry import cradmin_instance_registry
 from .views import roleselect
@@ -53,9 +53,9 @@ def reverse_cradmin_url(instanceid, appname, roleid=None,
 
 class BaseCrAdminInstance(object):
     """
-    Base class for a django_cradmin instance.
+    Base class for a cradmin_legacy instance.
 
-    You define a subclass of this to setup a django_cradmin instance.
+    You define a subclass of this to setup a cradmin_legacy instance.
 
     Attributes:
         request (HttpRequest): The current HttpRequest.
@@ -100,7 +100,7 @@ class BaseCrAdminInstance(object):
     #: Apps within the instance.
     #: Iterable of ``(appname, appclass)`` tuples where ``appname``
     #: is a slug for the app and ``appclass`` is a subclass of
-    #: :class:`django_cradmin.crapp.App`.
+    #: :class:`cradmin_legacy.crapp.App`.
     #: Can also be specified by overriding :meth:`.get_apps`.
     apps = []
 
@@ -187,9 +187,9 @@ class BaseCrAdminInstance(object):
 
         Returns:
             django.http.HttpResponse: Defaults to rendering
-                ``django_cradmin/invalid_roleid.django.html``.
+                ``cradmin_legacy/invalid_roleid.django.html``.
         """
-        return render(self.request, 'django_cradmin/invalid_roleid.django.html', {
+        return render(self.request, 'cradmin_legacy/invalid_roleid.django.html', {
             'roleid': roleid
         })
 
@@ -209,9 +209,9 @@ class BaseCrAdminInstance(object):
 
         Returns:
             django.http.HttpResponse: Defaults to rendering
-                ``django_cradmin/missing_role.django.html``
+                ``cradmin_legacy/missing_role.django.html``
         """
-        return render(self.request, 'django_cradmin/missing_role.django.html', {
+        return render(self.request, 'cradmin_legacy/missing_role.django.html', {
             'role': role
         })
 
@@ -229,11 +229,11 @@ class BaseCrAdminInstance(object):
             user (Django User): The user requesting the menu.
 
         Returns:
-            django_cradmin.crmenu.Menu: An instance of :obj:`~.BaseCrAdminInstance.menuclass` by default, but you can
+            cradmin_legacy.crmenu.Menu: An instance of :obj:`~.BaseCrAdminInstance.menuclass` by default, but you can
             override this method to determine/create the menu dynamically.
 
         See Also:
-            :class:`django_cradmin.crmenu.Menu`.
+            :class:`cradmin_legacy.crmenu.Menu`.
         """
         return self._get_menu()
 
@@ -270,7 +270,7 @@ class BaseCrAdminInstance(object):
         """
         Reverse the url of the landing page for the given app.
 
-        The landing page is the view named :obj:`django_cradmin.crapp.INDEXVIEW_NAME`.
+        The landing page is the view named :obj:`cradmin_legacy.crapp.INDEXVIEW_NAME`.
 
         This would be the same as using :meth:`.reverse_url` with ``viewname=crapp.INDEXVIEW_NAME``.
 
@@ -350,7 +350,7 @@ class BaseCrAdminInstance(object):
         Get many-to-many select view URL for the given model class.
 
         This can be used by many-to-many widgets,
-        like :class:`django_cradmin.widgets.modelmultichoice.ModelMultiChoiceWidget`,
+        like :class:`cradmin_legacy.widgets.modelmultichoice.ModelMultiChoiceWidget`,
         to lookup a view for this model within the current instance.
 
         By default this returns ``None``, so you have to override this
@@ -368,7 +368,7 @@ class BaseCrAdminInstance(object):
 
         Defaults to::
 
-            from django_cradmin.views import roleselect
+            from cradmin_legacy.views import roleselect
             from django.contrib.auth.decorators import login_required
             return login_required(roleselect.RoleSelectView.as_view())
 

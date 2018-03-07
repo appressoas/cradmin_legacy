@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
 
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 
 from django.test import TestCase
 from future import standard_library
 import htmls
 
-from django_cradmin.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
-from django_cradmin.viewhelpers.listfilter.basefilters.single.abstractselect import AbstractSelectFilter
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
+from cradmin_legacy.viewhelpers.listfilter.basefilters.single.abstractselect import AbstractSelectFilter
 
 standard_library.install_aliases()
 
@@ -26,8 +26,8 @@ class TestAbstractSelectFilter(TestCase):
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertTrue(selector.exists('#django_cradmin_listfilter_test.django-cradmin-listfilter-filter'))
-        self.assertTrue(selector.exists('select#django_cradmin_listfilter_test_input'))
+        self.assertTrue(selector.exists('#cradmin_legacy_listfilter_test.cradmin-legacy-listfilter-filter'))
+        self.assertTrue(selector.exists('select#cradmin_legacy_listfilter_test_input'))
         self.assertEqual(3, selector.count('option'))
 
     def test_render_option_value_empty(self):
@@ -134,7 +134,7 @@ class TestAbstractSelectFilter(TestCase):
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
         self.assertEqual('A label', selector.one('label').alltext_normalized)
-        self.assertEqual('django_cradmin_listfilter_test_input', selector.one('label')['for'])
+        self.assertEqual('cradmin_legacy_listfilter_test_input', selector.one('label')['for'])
 
     def test_render_label_get_label_is_screenreader_only_true(self):
         class MySelectFilter(AbstractSelectFilter):

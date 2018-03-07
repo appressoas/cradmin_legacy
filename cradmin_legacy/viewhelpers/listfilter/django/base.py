@@ -10,6 +10,6 @@ class DjangoOrmFilterMixin(object):
         This may not make sense for all filters, but it is a fairly
         common thing to need.
 
-        Defaults to :meth:`django_cradmin.viewhelpers.listfilter.base.AbstractFilter.get_slug`.
+        Defaults to :meth:`cradmin_legacy.viewhelpers.listfilter.base.AbstractFilter.get_slug`.
         """
         return self.get_slug()

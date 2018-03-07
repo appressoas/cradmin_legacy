@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 import htmls
 
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestBeginRegisterAccountView(TestCase):
@@ -15,7 +15,7 @@ class TestBeginRegisterAccountView(TestCase):
     def test_get(self):
         response = self.client.get(self.url)
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('form#django_cradmin_register_account_form'))
+        self.assertTrue(selector.exists('form#cradmin_legacy_register_account_form'))
         self.assertEquals(selector.one('h1').alltext_normalized, 'Create your Testsite account')
         self.assertEquals(selector.one('title').alltext_normalized, 'Create your Testsite account')
         self.assertTrue(selector.exists('input[type="email"][name="email"]'))
@@ -36,7 +36,7 @@ class TestBeginRegisterAccountView(TestCase):
         selector = htmls.S(response.content)
         self.assertIn(
             'Account with this email address already exists',
-            selector.one('form#django_cradmin_register_account_form').alltext_normalized)
+            selector.one('form#cradmin_legacy_register_account_form').alltext_normalized)
 
     def test_post_passwords_not_matching(self):
         response = self.client.post(self.url, {
@@ -49,7 +49,7 @@ class TestBeginRegisterAccountView(TestCase):
         selector = htmls.S(response.content)
         self.assertIn(
             'The passwords do not match',
-            selector.one('form#django_cradmin_register_account_form').alltext_normalized)
+            selector.one('form#cradmin_legacy_register_account_form').alltext_normalized)
 
     def test_post_creates_token(self):
         self.assertEqual(GenericTokenWithMetadata.objects.count(), 0)
@@ -89,7 +89,7 @@ class TestBeginRegisterAccountView(TestCase):
         token = GenericTokenWithMetadata.objects.first()
         self.assertEqual(token.metadata['next_url'], '/next')
 
-    def test_post_next_url_as_django_cradmin_register_account_redirect_url_setting(self):
+    def test_post_next_url_as_cradmin_legacy_register_account_redirect_url_setting(self):
         self.assertEqual(get_user_model().objects.count(), 0)
         with self.settings(DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL='/redirect'):
             self.client.post(self.url, {

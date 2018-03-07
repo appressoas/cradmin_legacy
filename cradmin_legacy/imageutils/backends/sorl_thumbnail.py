@@ -1,7 +1,7 @@
 import logging
 import mimetypes
 from sorl.thumbnail import get_thumbnail
-from django_cradmin.imageutils.backends import backendinterface
+from cradmin_legacy.imageutils.backends import backendinterface
 
 
 logger = logging.getLogger(__name__)
@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class SorlThumbnail(backendinterface.Interface):
     """
-    Sorl-thumbnail backend for ``django_cradmin.imageutils``.
+    Sorl-thumbnail backend for ``cradmin_legacy.imageutils``.
     """
 
     def transform_image(self, imageurl, **options):

@@ -15,7 +15,7 @@ class ImageWidget(forms.ClearableFileInput):
     Can be made un-clearable (for required fields) using the
     ``clearable`` argument for ``__init__``.
     """
-    template_name = 'django_cradmin/filewidgets/imagewidget.django.html'
+    template_name = 'cradmin_legacy/filewidgets/imagewidget.django.html'
 
     #: Comma separated string of filetypes that we should accept.
     #: Added to the file upload field as the accept attribute.
@@ -72,7 +72,7 @@ class ImageWidget(forms.ClearableFileInput):
 
     def render(self, name, value, attrs=None, renderer=None):
         attrs = attrs or {}
-        attrs['django-cradmin-image-preview-filefield'] = ''
+        attrs['cradmin-legacy-image-preview-filefield'] = ''
         if self.accept:
             attrs['accept'] = self.accept
         attrs['cradmin-filefield-value'] = value or ''
@@ -94,7 +94,7 @@ class FileWidget(forms.ClearableFileInput):
     Can be made un-clearable (for required fields) using the
     ``clearable`` argument for ``__init__``.
     """
-    template_name = 'django_cradmin/filewidgets/filewidget.django.html'
+    template_name = 'cradmin_legacy/filewidgets/filewidget.django.html'
 
     #: Comma separated string of filetypes that we should accept.
     #: Added to the file upload field as the accept attribute.

@@ -3,11 +3,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.template import defaultfilters
 
-from django_cradmin import crapp
-from django_cradmin.demo.multiselect2demo.models import Product
-from django_cradmin.viewhelpers import listfilter
-from django_cradmin.viewhelpers import multiselect2
-from django_cradmin.viewhelpers import multiselect2view
+from cradmin_legacy import crapp
+from cradmin_legacy.demo.multiselect2demo.models import Product
+from cradmin_legacy.viewhelpers import listfilter
+from cradmin_legacy.viewhelpers import multiselect2
+from cradmin_legacy.viewhelpers import multiselect2view
 
 
 class SelectedProductsForm(forms.Form):
@@ -54,7 +54,7 @@ class SelectedProductItem(multiselect2.selected_item_renderer.SelectedItem):
 
     This only scratches the surface of all the options you have for
     how selected items are rendered. See
-    :class:`django_cradmin.viewhelpers.multiselect2.selected_item_renderer.SelectedItem`
+    :class:`cradmin_legacy.viewhelpers.multiselect2.selected_item_renderer.SelectedItem`
     for more details.
     """
     valuealias = 'product'
@@ -68,12 +68,12 @@ class SelectableProductItemValue(multiselect2.listbuilder_itemvalues.ItemValue):
     Define how selectable items are rendered.
 
     You do not have to create this class - you can also just use
-    :class:`django_cradmin.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`
+    :class:`cradmin_legacy.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`
     directly if the defaults from that class suites your needs.
 
     This only scratches the surface of all the options you have for
     how selectable items are rendered. See
-    :class:`django_cradmin.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`
+    :class:`cradmin_legacy.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`
     for more details.
     """
     valuealias = 'product'
@@ -96,12 +96,12 @@ class ProductTargetRenderer(multiselect2.target_renderer.Target):
     Define how to render the box containing selected items.
 
     You do not have to create this class - you can also just use
-    :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.Target`
+    :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`
     directly if the defaults from that class suites your needs.
 
     This only scratches the surface of all the options you have for
     how the selected items box is rendered. See
-    :class:`django_cradmin.viewhelpers.multiselect2.target_renderer.Target`
+    :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`
     for more details.
     """
     def get_with_items_title(self):

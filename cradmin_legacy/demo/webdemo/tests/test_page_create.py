@@ -1,8 +1,8 @@
 from django import test
 from model_mommy import mommy
 
-from django_cradmin.demo.webdemo.views import pages
-from django_cradmin import cradmin_testhelpers
+from cradmin_legacy.demo.webdemo.views import pages
+from cradmin_legacy import cradmin_testhelpers
 
 
 class TestPageCreateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
@@ -23,7 +23,7 @@ class TestPageCreateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         site = mommy.make('webdemo.Site')
         mommy.make('webdemo.Page', site=site)
         mockresponse = self.mock_http200_getrequest_htmls(cradmin_role=site)
-        view_title = mockresponse.selector.one('.django-cradmin-page-header-inner').alltext_normalized
+        view_title = mockresponse.selector.one('.cradmin-legacy-page-header-inner').alltext_normalized
 
         self.assertEquals('Create Page', view_title)
 

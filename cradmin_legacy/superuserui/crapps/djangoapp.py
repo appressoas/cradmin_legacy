@@ -1,5 +1,5 @@
-from django_cradmin import crapp
-from django_cradmin.superuserui.views import appdashboardview
+from cradmin_legacy import crapp
+from cradmin_legacy.superuserui.views import appdashboardview
 
 
 class DjangoAppCrApp(crapp.App):
@@ -7,10 +7,10 @@ class DjangoAppCrApp(crapp.App):
     Cradmin App that provides an overview of a Django app.
     """
 
-    #: The :class:`django_cradmin.superuserui.superuserui_registry.DjangoAppConfig` this
+    #: The :class:`cradmin_legacy.superuserui.superuserui_registry.DjangoAppConfig` this
     #: app belongs to.
     #: This is set automatically in
-    #: :meth:`django_cradmin.superuserui.superuserui_registry.DjangoAppConfig.make_crapp_class`
+    #: :meth:`cradmin_legacy.superuserui.superuserui_registry.DjangoAppConfig.make_crapp_class`
     djangoappconfig = None
 
     @classmethod

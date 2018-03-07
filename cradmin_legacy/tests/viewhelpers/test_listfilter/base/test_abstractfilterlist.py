@@ -2,15 +2,15 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 from model_mommy import mommy
 from future import standard_library
 
-from django_cradmin.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
-from django_cradmin.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
-from django_cradmin.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
-from django_cradmin.viewhelpers.listfilter.base.abstractfilterlistchild import AbstractFilterListChild
-from django_cradmin.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlistchild import AbstractFilterListChild
+from cradmin_legacy.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
 
 standard_library.install_aliases()
 

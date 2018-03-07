@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
-from django_cradmin.demo.webdemo.views.inviteadmins.accept import AcceptPrivateSiteAdminInviteView
-from django_cradmin.demo.webdemo.views.sharable_link.accept import AcceptPublicSiteAdminInviteView
+from cradmin_legacy.demo.webdemo.views.inviteadmins.accept import AcceptPrivateSiteAdminInviteView
+from cradmin_legacy.demo.webdemo.views.sharable_link.accept import AcceptPublicSiteAdminInviteView
 
 urlpatterns = [
     url(r'^inviteadmins/(?P<token>.+)$',

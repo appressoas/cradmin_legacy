@@ -4,14 +4,14 @@ from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import UpdateView as DjangoUpdateView
 
-from django_cradmin.crispylayouts import PrimarySubmit
-from django_cradmin.crispylayouts import DefaultSubmit
+from cradmin_legacy.crispylayouts import PrimarySubmit
+from cradmin_legacy.crispylayouts import DefaultSubmit
 from .crudbase import CreateUpdateViewMixin
-from django_cradmin.viewhelpers.mixins import QuerysetForRoleMixin
+from cradmin_legacy.viewhelpers.mixins import QuerysetForRoleMixin
 
 
 class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
-    template_name = 'django_cradmin/viewhelpers/update.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/update.django.html'
 
     def get_pagetitle(self):
         """
@@ -32,7 +32,7 @@ class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
 
     def get_formhelper(self):
         helper = super(UpdateView, self).get_formhelper()
-        helper.form_id = 'django_cradmin_updateform'
+        helper.form_id = 'cradmin_legacy_updateform'
         return helper
 
     def get_success_message(self, object):

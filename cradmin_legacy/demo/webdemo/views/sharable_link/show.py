@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
-from django_cradmin.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
-from django_cradmin.viewhelpers.detail import DetailView
+from cradmin_legacy.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
+from cradmin_legacy.viewhelpers.detail import DetailView
 
 
 class ShowView(QuerysetForRoleMixin, DetailView):

@@ -4,9 +4,9 @@ from xml.sax.saxutils import quoteattr
 from crispy_forms import layout
 from django.utils.translation import pgettext_lazy
 
-from django_cradmin import renderable
-from django_cradmin.crispylayouts import PrimarySubmitBlock, CradminFormHelper
-from django_cradmin.viewhelpers.listfilter.base import abstractfilterlistchild
+from cradmin_legacy import renderable
+from cradmin_legacy.crispylayouts import PrimarySubmitBlock, CradminFormHelper
+from cradmin_legacy.viewhelpers.listfilter.base import abstractfilterlistchild
 
 
 class Target(renderable.AbstractRenderableWithCss,
@@ -19,10 +19,10 @@ class Target(renderable.AbstractRenderableWithCss,
     """
 
     #: The template used to render this renderable.
-    template_name = 'django_cradmin/viewhelpers/multiselect2/target_renderer/target.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/multiselect2/target_renderer/target.django.html'
 
     #: The default for :meth:`.~Target.get_dom_id`.
-    default_target_dom_id = 'django_cradmin_multiselect2_select_target'
+    default_target_dom_id = 'cradmin_legacy_multiselect2_select_target'
 
     #: Used to add custom attributes like angularjs directives to the form.
     #: See :meth:`.get_form_attributes`.
@@ -172,7 +172,7 @@ class Target(renderable.AbstractRenderableWithCss,
 
     def get_angularjs_directive_dict(self):
         """
-        Get options for the ``django-cradmin-multiselect2-target`` angularjs
+        Get options for the ``cradmin-legacy-multiselect2-target`` angularjs
         directive.
 
         Returns:
@@ -206,7 +206,7 @@ class Target(renderable.AbstractRenderableWithCss,
 
         Simple example::
 
-            from django_cradmin.viewhelpers import multiselect2view
+            from cradmin_legacy.viewhelpers import multiselect2view
             from crispy_forms import layout
 
             class MyMultiselect2View(multiselect2view.ListbuilderView):
@@ -239,7 +239,7 @@ class Target(renderable.AbstractRenderableWithCss,
 
         The default is::
 
-            from django_cradmin.crispylayouts import PrimarySubmitBlock
+            from cradmin_legacy.crispylayouts import PrimarySubmitBlock
 
             return [
                 PrimarySubmitBlock('save', self.get_submit_button_text()),
@@ -260,12 +260,12 @@ class Target(renderable.AbstractRenderableWithCss,
         method.
 
         Defaults to a :class:`crispy_forms.layout.Div` with css class
-        ``django-cradmin-multiselect2-target-submitbuttons`` containing all the buttons
+        ``cradmin-legacy-multiselect2-target-submitbuttons`` containing all the buttons
         returned by :meth:`.get_buttons`.
         """
         return [
             layout.Div(*self.get_buttons(),
-                       css_class="django-cradmin-multiselect2-target-submitbuttons")
+                       css_class="cradmin-legacy-multiselect2-target-submitbuttons")
         ]
 
     def get_formhelper_class(self):
@@ -292,7 +292,7 @@ class Target(renderable.AbstractRenderableWithCss,
 class ManyToManySelectTarget(Target):
     """
     Renders a multiselect target form for
-    :class:`django_cradmin.viewhelpers.multiselect2.manytomanywidget.Widget`.
+    :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
     """
     def __init__(self, target_formfield_id, *args, **kwargs):
         """
@@ -313,5 +313,5 @@ class ManyToManySelectTarget(Target):
     def get_buttons(self):
         return [
             PrimarySubmitBlock('usethis', self.get_submit_button_text(),
-                               django_cradmin_multiselect2_use_this=self.get_usethis_directive_json()),
+                               cradmin_legacy_multiselect2_use_this=self.get_usethis_directive_json()),
         ]

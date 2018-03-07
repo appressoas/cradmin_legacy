@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib import admin
-from django_cradmin.demo.listfilterdemo.models import Site, Person
+from cradmin_legacy.demo.listfilterdemo.models import Site, Person
 
 
 class SiteAdmin(admin.ModelAdmin):

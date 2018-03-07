@@ -4,8 +4,8 @@ from django.test import TestCase
 from future import standard_library
 from model_mommy import mommy
 
-from django_cradmin.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
-from django_cradmin.viewhelpers import listfilter
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
+from cradmin_legacy.viewhelpers import listfilter
 
 standard_library.install_aliases()
 

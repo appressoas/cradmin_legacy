@@ -4,10 +4,10 @@ from xml.sax.saxutils import quoteattr
 
 from django.utils.translation import ugettext
 
-from django_cradmin.renderable import AbstractRenderableWithCss
-from django_cradmin.templatetags.cradmin_icon_tags import cradmin_icon
-from django_cradmin.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
-from django_cradmin.viewhelpers.listfilter.base.filtershandler import FiltersHandler
+from cradmin_legacy.renderable import AbstractRenderableWithCss
+from cradmin_legacy.templatetags.cradmin_legacy_icon_tags import cradmin_icon
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
+from cradmin_legacy.viewhelpers.listfilter.base.filtershandler import FiltersHandler
 
 
 class AbstractFilterList(AbstractRenderableWithCss):
@@ -18,11 +18,11 @@ class AbstractFilterList(AbstractRenderableWithCss):
        but it should never be used directly. We provide subclasses that
        provide basis for rendereing, and if you want something totally different,
        you should not use this directly, but create a subclass and override
-       :meth:`~django_cradmin.renderable.AbstractRenderableWithCss.get_base_css_classes_list`
-       or :meth:`~django_cradmin.renderable.AbstractRenderableWithCss.get_extra_css_classes_list`
+       :meth:`~cradmin_legacy.renderable.AbstractRenderableWithCss.get_base_css_classes_list`
+       or :meth:`~cradmin_legacy.renderable.AbstractRenderableWithCss.get_extra_css_classes_list`
        (see their docs for their intended use cases).
     """
-    template_name = 'django_cradmin/viewhelpers/listfilter/base/filterlist.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listfilter/base/filterlist.django.html'
 
     def __init__(self, urlbuilder, target_dom_id, label_is_screenreader_only_by_default=False):
         """
@@ -32,7 +32,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
                 filters change value.
             label_is_screenreader_only_by_default: Defines the default value for
                 ``label_is_screenreader_only`` for all filters within the list.
-                See :class:`django_cradmin.viewhelpers.listfilter.base.abstractfilter.AbstractFilter`
+                See :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilter.AbstractFilter`
         """
         super(AbstractFilterList, self).__init__()
         self.children = []
@@ -120,13 +120,13 @@ class AbstractFilterList(AbstractRenderableWithCss):
         You should not need to override this unless you have multiple filterlists
         in a single page.
 
-        Defaults to ``django-cradmin-listfilter-``.
+        Defaults to ``cradmin-legacy-listfilter-``.
         """
-        return 'django_cradmin_listfilter'
+        return 'cradmin_legacy_listfilter'
 
     def append(self, child):
         """
-        Add subclass of :class:`django_cradmin.renderable.AbstractFilterListChild`
+        Add subclass of :class:`cradmin_legacy.renderable.AbstractFilterListChild`
         to the filterlist.
 
         You will normally add subclasses of :class:`.AbstractFilter`
@@ -140,7 +140,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
             self.filtershandler.add_filter(child)
 
     def get_base_css_classes_list(self):
-        return ['django-cradmin-listfilter-filterlist']
+        return ['cradmin-legacy-listfilter-filterlist']
 
     def iter_renderables(self):
         """

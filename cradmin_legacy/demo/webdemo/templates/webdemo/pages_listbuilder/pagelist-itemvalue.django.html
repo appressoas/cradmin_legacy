@@ -1,6 +1,6 @@
-{% extends "django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete-with-archive-image.django.html" %}
-{% load cradmin_tags %}
-{% load cradmin_image_tags %}
+{% extends "cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete-with-archive-image.django.html" %}
+{% load cradmin_legacy_tags %}
+{% load cradmin_legacy_image_tags %}
 
 {% block description-content %}
     {{ me.get_description|truncatechars:"100" }}

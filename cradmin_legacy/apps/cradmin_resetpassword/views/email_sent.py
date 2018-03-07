@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.views.generic import TemplateView
 
-from django_cradmin.apps.cradmin_resetpassword.views.begin import PasswordResetEmail
+from cradmin_legacy.apps.cradmin_resetpassword.views.begin import PasswordResetEmail
 
 
 class EmailSentView(TemplateView):

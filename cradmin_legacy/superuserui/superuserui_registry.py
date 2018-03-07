@@ -5,15 +5,15 @@ from django.apps import apps
 from django.utils.translation import ugettext_lazy
 from future.utils import python_2_unicode_compatible
 
-from django_cradmin import crinstance
-from django_cradmin import crmenu
-from django_cradmin import crapp
-from django_cradmin.crinstance import reverse_cradmin_url
-from django_cradmin.crsettings import get_setting
-from django_cradmin.decorators import has_access_to_cradmin_instance
-from django_cradmin.superuserui.crapps import djangomodel
-from django_cradmin.superuserui.crapps import djangoapp
-from django_cradmin.superuserui.views import dashboardview
+from cradmin_legacy import crinstance
+from cradmin_legacy import crmenu
+from cradmin_legacy import crapp
+from cradmin_legacy.crinstance import reverse_cradmin_url
+from cradmin_legacy.crsettings import get_setting
+from cradmin_legacy.decorators import has_access_to_cradmin_instance
+from cradmin_legacy.superuserui.crapps import djangomodel
+from cradmin_legacy.superuserui.crapps import djangoapp
+from cradmin_legacy.superuserui.views import dashboardview
 
 
 @python_2_unicode_compatible
@@ -247,4 +247,4 @@ class Registry(object):
 
 
 #: The default superuserui registry.
-default = Registry(id='django_cradmin_superuserui_default')
+default = Registry(id='cradmin_legacy_superuserui_default')

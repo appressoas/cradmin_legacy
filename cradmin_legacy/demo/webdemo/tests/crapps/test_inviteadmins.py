@@ -2,11 +2,11 @@ from __future__ import unicode_literals
 from django.test import TestCase, RequestFactory
 from django.core import mail
 import htmls
-from django_cradmin.python2_compatibility import mock
-from django_cradmin.demo.webdemo.views.inviteadmins.send import SendInvitesView
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.demo.webdemo.views.inviteadmins.send import SendInvitesView
 
-from django_cradmin.demo.webdemo.models import Site
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.demo.webdemo.models import Site
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
 
 
 class TestInviteAdmins(TestCase):

@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib import admin
-from django_cradmin.demo.multiselect2demo.models import Product
+from cradmin_legacy.demo.multiselect2demo.models import Product
 
 
 class ProductAdmin(admin.ModelAdmin):

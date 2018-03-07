@@ -1,7 +1,7 @@
-from django_cradmin import crapp
-from django_cradmin.demo.listfilterdemo.models import Person
-from django_cradmin.viewhelpers import listbuilderview
-from django_cradmin.viewhelpers import listfilter
+from cradmin_legacy import crapp
+from cradmin_legacy.demo.listfilterdemo.models import Person
+from cradmin_legacy.viewhelpers import listbuilderview
+from cradmin_legacy.viewhelpers import listfilter
 
 
 class OrderPersonsFilter(listfilter.django.single.select.AbstractOrderBy):

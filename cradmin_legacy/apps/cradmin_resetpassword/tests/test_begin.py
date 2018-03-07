@@ -4,11 +4,11 @@ from django.core import mail
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
-from django_cradmin.apps.cradmin_resetpassword.views.begin import BeginPasswordResetView
-from django_cradmin.tests.helpers import create_user
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.apps.cradmin_resetpassword.views.begin import BeginPasswordResetView
+from cradmin_legacy.tests.helpers import create_user
 
 
 class TestBeginPasswordResetView(TestCase):
@@ -18,7 +18,7 @@ class TestBeginPasswordResetView(TestCase):
     def test_get(self):
         response = self.client.get(self.url)
         selector = htmls.S(response.content)
-        self.assertTrue(selector.exists('form#django_cradmin_resetpassword_begin_form'))
+        self.assertTrue(selector.exists('form#cradmin_legacy_resetpassword_begin_form'))
         self.assertEquals(selector.one('h1').alltext_normalized, 'Find your account')
         self.assertIn(
             'Type in your email-address',
@@ -32,7 +32,7 @@ class TestBeginPasswordResetView(TestCase):
         selector = htmls.S(response.content)
         self.assertIn(
             'No account with this email address found',
-            selector.one('form#django_cradmin_resetpassword_begin_form').alltext_normalized)
+            selector.one('form#cradmin_legacy_resetpassword_begin_form').alltext_normalized)
 
     def test_post_user_found(self):
         create_user('testuser', email='testuser@example.com')

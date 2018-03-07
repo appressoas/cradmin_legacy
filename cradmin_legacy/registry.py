@@ -23,12 +23,12 @@ class CrAdminInstanceRegistry(object):
     The solution is simple: If we have only a single instance, we do not
     need to do anything except adding it to this registry. If we have
     multiple instances, each of them must implement
-    :meth:`django_cradmin.crinstance.BaseCrAdminInstance.matches_urlpath`.
+    :meth:`cradmin_legacy.crinstance.BaseCrAdminInstance.matches_urlpath`.
 
     Example::
 
-        from django_cradmin.crinstance import BaseCrAdminInstance
-        from django_cradmin.registry import cradmin_instance_registry
+        from cradmin_legacy.crinstance import BaseCrAdminInstance
+        from cradmin_legacy.registry import cradmin_instance_registry
 
         class MyCrAadminInstance(BaseCrAdminInstance):
             # ...
@@ -41,7 +41,7 @@ class CrAdminInstanceRegistry(object):
 
     def get_instanceclass_by_id(self, id):
         """
-        Get a CrAdmin instance class by ID (by :obj:`django_cradmin.crinstance.BaseCrAdminInstance.id`).
+        Get a CrAdmin instance class by ID (by :obj:`cradmin_legacy.crinstance.BaseCrAdminInstance.id`).
         """
         return self._registry[id]
 
@@ -78,7 +78,7 @@ class CrAdminInstanceRegistry(object):
         Add a CrAdmin instance to the registry.
 
         Parameters:
-            cradmin_instance_class: A subclass of :class:`django_cradmin.crinstance.BaseCrAdminInstance`.
+            cradmin_instance_class: A subclass of :class:`cradmin_legacy.crinstance.BaseCrAdminInstance`.
         """
         if cradmin_instance_class.id not in self._registry:
             self._registry[cradmin_instance_class.id] = cradmin_instance_class

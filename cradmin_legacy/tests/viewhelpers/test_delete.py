@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 import htmls
 from django.test import TestCase
 from django.test.client import RequestFactory
 import six
 
-from django_cradmin.viewhelpers import delete
+from cradmin_legacy.viewhelpers import delete
 
 
 class TestDelete(TestCase):
@@ -36,7 +36,7 @@ class TestDelete(TestCase):
 
         self.assertEqual(selector.one('form')['action'], 'http://testserver/test')
         self.assertEqual(
-            selector.one('.django-cradmin-page-header-inner h1').alltext_normalized,
+            selector.one('.cradmin-legacy-page-header-inner h1').alltext_normalized,
             'Delete Simple Test Item')
         self.assertEqual(
             selector.one('#deleteview-preview').alltext_normalized,

@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.humanize.templatetags.humanize import naturaltime
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
 
 
 class GenericTokenWithMetadataAdmin(admin.ModelAdmin):

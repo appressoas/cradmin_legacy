@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
 from builtins import object
-from django_cradmin import crapp
-from django_cradmin.viewhelpers import objecttable
-from django_cradmin.demo.polls_demo import models
-from django_cradmin.viewhelpers import update
-from django_cradmin.viewhelpers import create
-from django_cradmin.viewhelpers import delete
+from cradmin_legacy import crapp
+from cradmin_legacy.viewhelpers import objecttable
+from cradmin_legacy.demo.polls_demo import models
+from cradmin_legacy.viewhelpers import update
+from cradmin_legacy.viewhelpers import create
+from cradmin_legacy.viewhelpers import delete
 
 
 class QuestionTextColumn(objecttable.MultiActionColumn):

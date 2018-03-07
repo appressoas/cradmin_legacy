@@ -4,11 +4,11 @@ from crispy_forms import layout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
-from django_cradmin.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
+from cradmin_legacy.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
 
-from django_cradmin.apps.cradmin_invite.invite_url import InviteUrl
-from django_cradmin.crispylayouts import PrimarySubmit
-from django_cradmin.viewhelpers.formbase import FormView
+from cradmin_legacy.apps.cradmin_invite.invite_url import InviteUrl
+from cradmin_legacy.crispylayouts import PrimarySubmit
+from cradmin_legacy.viewhelpers.formbase import FormView
 
 
 class SharableLinkForm(forms.Form):

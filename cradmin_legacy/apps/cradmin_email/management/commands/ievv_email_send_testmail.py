@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from django_cradmin.apps.cradmin_email import emailutils
+from cradmin_legacy.apps.cradmin_email import emailutils
 
 
 class Command(BaseCommand):

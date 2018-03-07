@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django_cradmin.apps.cradmin_temporaryfileuploadstore.models
+import cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models
 from django.conf import settings
 
 
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
                 ('filename', models.TextField(db_index=True)),
-                ('file', models.FileField(upload_to=django_cradmin.apps.cradmin_temporaryfileuploadstore.models.temporary_file_upload_to)),
+                ('file', models.FileField(upload_to=cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models.temporary_file_upload_to)),
                 ('mimetype', models.TextField(blank=True, default='')),
             ],
             options={

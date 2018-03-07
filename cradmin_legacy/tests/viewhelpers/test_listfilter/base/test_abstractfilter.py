@@ -2,11 +2,11 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 import htmls
-from django_cradmin.python2_compatibility import mock
+from cradmin_legacy.python2_compatibility import mock
 from future import standard_library
 
-from django_cradmin.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
-from django_cradmin.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
 
 standard_library.install_aliases()
 
@@ -153,4 +153,4 @@ class TestAbstractFilter(TestCase):
         stringfilter = AbstractFilter(slug='test')
         stringfilter.set_filterlist(mock.MagicMock())
         selector = htmls.S(stringfilter.render())
-        self.assertTrue(selector.exists('.django-cradmin-listfilter-filter'))
+        self.assertTrue(selector.exists('.cradmin-legacy-listfilter-filter'))

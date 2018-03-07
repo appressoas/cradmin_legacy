@@ -3,7 +3,7 @@ from builtins import str
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from django_cradmin import crinstance, crmenu
+from cradmin_legacy import crinstance, crmenu
 from .crapps import overview
 from .crapps import edit_user
 
@@ -16,10 +16,10 @@ class Menu(crmenu.Menu):
                 url=self.roleselectview_url(),
                 icon='chevron-up')
 
-        self.add(
+        self.add_menuitem(
             label=_('Account overview'), url=self.appindex_url('overview'),
             active=self.request.cradmin_app.appname == 'overview')
-        self.add(
+        self.add_menuitem(
             label=_('Edit profile'), url=self.appindex_url('edit_user'),
             active=self.request.cradmin_app.appname == 'edit_user')
 

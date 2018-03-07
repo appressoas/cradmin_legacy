@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
-from django_cradmin import crinstance, crmenu
-from django_cradmin.demo.listfilterdemo.models import Site
-from django_cradmin.demo.listfilterdemo.views import personlist
+from cradmin_legacy import crinstance, crmenu
+from cradmin_legacy.demo.listfilterdemo.models import Site
+from cradmin_legacy.demo.listfilterdemo.views import personlist
 
 
 class Menu(crmenu.Menu):

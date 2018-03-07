@@ -3,8 +3,8 @@ from __future__ import unicode_literals
 from django.contrib.contenttypes.fields import GenericForeignKey
 from future import standard_library
 
-from django_cradmin import automodelform
-from django_cradmin.crispylayouts import PrimarySubmit, DefaultSubmit
+from cradmin_legacy import automodelform
+from cradmin_legacy.crispylayouts import PrimarySubmit, DefaultSubmit
 
 standard_library.install_aliases()
 import urllib.request
@@ -330,13 +330,13 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         need to override this.
 
         Unlike the default implementation of this method from
-        :class:`django_cradmin.viewhelpers.formbase.PreviewMixin`,
+        :class:`cradmin_legacy.viewhelpers.formbase.PreviewMixin`,
         we use the model class module and name as the session key.
         This is simply because we do not want it to matter if
         you fetch preview data from create or update views
         for the same model (to simplify implementing preview views).
         """
-        sessionkey = 'django_cradmin__{module}.{classname}'.format(
+        sessionkey = 'cradmin_legacy__{module}.{classname}'.format(
             module=cls.model.__module__,
             classname=cls.model.__name__)
         return sessionkey

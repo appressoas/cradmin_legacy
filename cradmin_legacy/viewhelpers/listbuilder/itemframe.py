@@ -1,4 +1,4 @@
-from django_cradmin.viewhelpers.listbuilder import base
+from cradmin_legacy.viewhelpers.listbuilder import base
 
 
 class DefaultSpacingItemFrame(base.ItemFrameRenderer):
@@ -7,7 +7,7 @@ class DefaultSpacingItemFrame(base.ItemFrameRenderer):
     """
     def get_base_css_classes_list(self):
         css_classes = super(DefaultSpacingItemFrame, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listbuilder-itemframe-defaultspacing')
+        css_classes.append('cradmin-legacy-listbuilder-itemframe-defaultspacing')
         return css_classes
 
 
@@ -15,11 +15,11 @@ class Link(DefaultSpacingItemFrame):
     """
     Renders a frame as a link.
     """
-    template_name = 'django_cradmin/viewhelpers/listbuilder/itemframe/link.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemframe/link.django.html'
 
     def get_base_css_classes_list(self):
         css_classes = super(Link, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listbuilder-itemframe-link')
+        css_classes.append('cradmin-legacy-listbuilder-itemframe-link')
         return css_classes
 
     def get_url(self):

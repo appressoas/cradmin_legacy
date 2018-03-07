@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 
-from django_cradmin.viewhelpers.listbuilder import base
+from cradmin_legacy.viewhelpers.listbuilder import base
 from builtins import str
 
 
@@ -13,13 +13,13 @@ class FocusBox(base.ItemValueRenderer):
 
     This is a good default when setting up the structure of views,
     but you will most likely want to create your own
-    :class:`django_cradmin.viewhelpers.listbuilder.base.ItemValueRenderer`
+    :class:`cradmin_legacy.viewhelpers.listbuilder.base.ItemValueRenderer`
     subclass for more than the most simple use cases.
     """
 
     def get_base_css_classes_list(self):
         css_classes = super(FocusBox, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listbuilder-itemvalue-focusbox')
+        css_classes.append('cradmin-legacy-listbuilder-itemvalue-focusbox')
         return css_classes
 
 
@@ -32,15 +32,15 @@ class TitleDescription(FocusBox):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'django_cradmin/viewhelpers/listbuilder/itemvalue/titledescription.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/titledescription.django.html'
 
     def get_base_css_classes_list(self):
         """
-        Adds the ``django-cradmin-listbuilder-itemvalue-titledescription`` css class
+        Adds the ``cradmin-legacy-listbuilder-itemvalue-titledescription`` css class
         in addition to the classes added by the superclasses.
         """
         css_classes = super(TitleDescription, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listbuilder-itemvalue-titledescription')
+        css_classes.append('cradmin-legacy-listbuilder-itemvalue-titledescription')
         return css_classes
 
     def get_title(self):
@@ -64,20 +64,20 @@ class TitleDescription(FocusBox):
 class UseThis(TitleDescription):
     """
     Renders a value item with a *Use this* button that uses
-    the ``django-cradmin-use-this`` directive.
+    the ``cradmin-legacy-use-this`` directive.
     """
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'django_cradmin/viewhelpers/listbuilder/itemvalue/use-this.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/use-this.django.html'
 
     def get_base_css_classes_list(self):
         """
-        Adds the ``django-cradmin-listbuilder-itemvalue-usethis`` css class
+        Adds the ``cradmin-legacy-listbuilder-itemvalue-usethis`` css class
         in addition to the classes added by the superclasses.
         """
         css_classes = super(UseThis, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listbuilder-itemvalue-usethis')
+        css_classes.append('cradmin-legacy-listbuilder-itemvalue-usethis')
         return css_classes
 
     def get_use_this_directive_options_dict(self, request):
@@ -108,20 +108,20 @@ class EditDelete(TitleDescription):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete.django.html'
 
     def get_base_css_classes_list(self):
         """
-        Adds the ``django-cradmin-listbuilder-itemvalue-titleeditdelete`` css class
+        Adds the ``cradmin-legacy-listbuilder-itemvalue-titleeditdelete`` css class
         in addition to the classes added by the superclasses.
         """
         css_classes = super(EditDelete, self).get_base_css_classes_list()
-        css_classes.append('django-cradmin-listbuilder-itemvalue-editdelete')
+        css_classes.append('cradmin-legacy-listbuilder-itemvalue-editdelete')
         return css_classes
 
     def get_edit_viewname(self):
         """
-        Get the viewname within the current :class:`django_cradmin.crapp.App`
+        Get the viewname within the current :class:`cradmin_legacy.crapp.App`
         to go to when editing. The view is called with ``self.value.id`` as
         argument. If you want to change this behavior, override the
         ``editbutton-url`` template block.
@@ -134,7 +134,7 @@ class EditDelete(TitleDescription):
 
     def get_delete_viewname(self):
         """
-        Get the viewname within the current :class:`django_cradmin.crapp.App`
+        Get the viewname within the current :class:`cradmin_legacy.crapp.App`
         to go to when deleting. The view is called with ``self.value.id`` as
         argument. If you want to change this behavior, override the
         ``deletebutton-url`` template block.
@@ -147,7 +147,7 @@ class EditDelete(TitleDescription):
 
     def get_preview_viewname(self):
         """
-        Get the viewname within the current :class:`django_cradmin.crapp.App`
+        Get the viewname within the current :class:`cradmin_legacy.crapp.App`
         to go to when viewing. The view is called with ``self.value.id`` as
         argument. If you want to change this behavior, override the
         ``viewbutton-url`` template block.
@@ -202,11 +202,11 @@ class EditDeleteWithArchiveImage(EditDelete):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete-with-archive-image.django.html'
+    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete-with-archive-image.django.html'
 
     def get_archiveimage(self):
         """
-        Get a :class:`django_cradmin.apps.cradmin_imagearchive.models.ArchiveImage`
+        Get a :class:`cradmin_legacy.apps.cradmin_imagearchive.models.ArchiveImage`
         object to use as the image.
         """
         raise NotImplementedError()
@@ -215,7 +215,7 @@ class EditDeleteWithArchiveImage(EditDelete):
         """
         Get the ``imagetype`` to use to scale/format the image.
 
-        See :func:`django_cradmin.templatetags.cradmin_image_tags.cradmin_create_archiveimage_tag`
+        See :func:`cradmin_legacy.templatetags.cradmin_legacy_image_tags.cradmin_create_archiveimage_tag`
         for more information on ``imagetype``.
 
         Defaults to ``"listbuilder-itemvalue-editdelete"``.
@@ -229,7 +229,7 @@ class EditDeleteWithArchiveImage(EditDelete):
         :meth:`.get_imagetype` is not defined in the
         :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting.
 
-        See :func:`django_cradmin.templatetags.cradmin_image_tags.cradmin_create_archiveimage_tag`
+        See :func:`cradmin_legacy.templatetags.cradmin_legacy_image_tags.cradmin_create_archiveimage_tag`
         for more information on ``fallbackoptions``.
 
         Defaults to::

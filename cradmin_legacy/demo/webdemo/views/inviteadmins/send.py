@@ -5,10 +5,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
-from django_cradmin.apps.cradmin_invite.invite_url import InviteUrl
-from django_cradmin.crispylayouts import PrimarySubmit
-from django_cradmin.formfields.email_list import EmailListField
-from django_cradmin.viewhelpers.formbase import FormView
+from cradmin_legacy.apps.cradmin_invite.invite_url import InviteUrl
+from cradmin_legacy.crispylayouts import PrimarySubmit
+from cradmin_legacy.formfields.email_list import EmailListField
+from cradmin_legacy.viewhelpers.formbase import FormView
 
 
 class InviteEmailsForm(forms.Form):

@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.test import TestCase
-from django_cradmin.apps.cradmin_register_account.forms.email import EmailUserCreateAccountForm
-from django_cradmin.apps.cradmin_register_account.tests.cradmin_register_account_testapp.models import EmailUser
+from cradmin_legacy.apps.cradmin_register_account.forms.email import EmailUserCreateAccountForm
+from cradmin_legacy.apps.cradmin_register_account.tests.cradmin_register_account_testapp.models import EmailUser
 
 
 class EmailUserCreateAccountFormStaticUserModel(EmailUserCreateAccountForm):
