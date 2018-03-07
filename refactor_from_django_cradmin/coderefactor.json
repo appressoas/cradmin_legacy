@@ -3,12 +3,13 @@
   // some more directories
   "extra_exclude_directories": [
     "node_modules$",
+    "bower_components",
     "cradmin_legacy/static/django_cradmin/dist$"
   ],
   "refactor_files": [
-    // Refactor template paths in .py, .html and .rst files
+    // Refactor common stuff in most code files (python, javascript, less, ...)
     {
-      "filepatterns": ["^.*\\.py$", "^.*\\.html$"],
+      "filepatterns": ["^.*\\.py$", "^.*\\.html$", "MANIFEST.in$", "^.*\\.less", "^.*\\.less"],
 
       // List of replacements to make in each matched file
       "replacers": [
@@ -24,6 +25,13 @@
           "replacer": "RegexReplacer",
           "pattern": "django_cradmin",
           "replacement": "cradmin_legacy"
+        },
+
+        // Refactor django-cradmin -> cradmin-legacy
+        {
+          "replacer": "RegexReplacer",
+          "pattern": "django-cradmin",
+          "replacement": "cradmin-legacy"
         },
 
         // Refactor cradmin_<something>_tags -> cradmin_legacy_<something>_tags

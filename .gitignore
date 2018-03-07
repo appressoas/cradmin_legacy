@@ -26,3 +26,5 @@
 /htmlcov/
 
 *.sqlite3
+
+/ievv-coderefactor-logs/
