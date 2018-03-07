@@ -1,0 +1,51 @@
+{
+  // ievv-coderefactor already excludes .git, but we also want to exclude
+  // some more directories
+  "extra_exclude_directories": [
+    "node_modules$",
+    "cradmin_legacy/static/django_cradmin/dist$"
+  ],
+  "refactor_files": [
+    // Refactor template paths in .py and .html files
+    {
+      "filepatterns": ["^.*\\.py$", "^.*\\.html$"],
+
+      // List of replacements to make in each matched file
+      "replacers": [
+        // Refactor <"|'>django_cradmin/ to <"|'>cradmin_legacy/
+        {
+          "replacer": "RegexReplacer",
+          "pattern": "(['\"])django_cradmin/",
+          "replacement": "\\1cradmin_legacy/"
+        }
+      ]
+    },
+
+    // Refactor .py files
+    {
+      "filepatterns": ["^.*\\.py$"],
+
+      // List of replacements to make in each matched file
+      "replacers": [
+        // Refactor <whitepace>django_cradmin. to <whitepace>cradmin_legacy.
+        {
+          "replacer": "RegexReplacer",
+          "pattern": "\\s+django_cradmin\\.",
+          "replacement": "\\1cradmin_legacy."
+        }
+      ]
+    }
+  ],
+
+  "rename": [
+    [
+      // Rename any directory containing "django_cradmin" to contain
+      // "cradmin_legacy" instead
+      {
+        "replacer": "RegexReplacer",
+        "pattern": "django_cradmin",
+        "replacement": "cradmin_legacy"
+      }
+    ]
+  ]
+}
