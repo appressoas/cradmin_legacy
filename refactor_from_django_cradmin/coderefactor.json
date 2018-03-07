@@ -45,8 +45,8 @@
         // Refactor cradmin_<something>_tags -> cradmin_legacy_<something>_tags
         {
           "replacer": "RegexReplacer",
-          "pattern": "cradmin_([a-z]+)_tags",
-          "replacement": "cradmin_legacy_\\1_tags"
+          "pattern": "cradmin(_[a-z]+_|_)tags",
+          "replacement": "cradmin_legacy\\1tags"
         }
       ]
     }
@@ -74,8 +74,8 @@
       // Refactor cradmin_<something>_tags -> cradmin_legacy_<something>_tags
       {
         "replacer": "RegexReplacer",
-        "pattern": "cradmin_([a-z]+)_tags",
-        "replacement": "cradmin_legacy_\\1_tags"
+        "pattern": "cradmin(_[a-z]+_|_)tags",
+        "replacement": "cradmin_legacy\\1tags"
       }
     ]
   ]
