@@ -9,22 +9,22 @@ module.exports = (grunt) ->
 
   vendorfiles = {
     js: [
-      'bower_components/jquery/dist/jquery.js'
-      'bower_components/angular/angular.js'
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-      'bower_components/angular-cookies/angular-cookies.js'
-      'bower_components/ng-file-upload/angular-file-upload.js'
-      'bower_components/modernizr/modernizr.js'
-      'bower_components/detectizr/dist/detectizr.js'
-      'bower_components/moment/moment.js'
-      'bower_components/mousetrap/mousetrap.js'
-      'bower_components/angular-hotkeys/src/hotkeys.js'
-      'bower_components/uri.js/src/URI.js'
+      'node_modules/jquery/dist/jquery.js'
+      'node_modules/angular/angular.js'
+#      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+      'node_modules/angular-cookies/angular-cookies.js'
+#      'bower_components/ng-file-upload/angular-file-upload.js'
+#      'bower_components/modernizr/modernizr.js'
+      'node_modules/detectizr/dist/detectizr.js'
+      'node_modules/moment/moment.js'
+      'node_modules/mousetrap/mousetrap.js'
+      'node_modules/angular-hotkeys/src/hotkeys.js'
+      'node_modules/urijs/src/URI.js'
     ]
     ace_editor: [
-      'bower_components/ace-builds/src-min-noconflict/ace.js'
-      'bower_components/ace-builds/src-min-noconflict/mode-markdown.js'
-      'bower_components/ace-builds/src-min-noconflict/theme-tomorrow.js'
+      'node_modules/ace-builds/src-min-noconflict/ace.js'
+      'node_modules/ace-builds/src-min-noconflict/mode-markdown.js'
+      'node_modules/ace-builds/src-min-noconflict/theme-tomorrow.js'
     ]
   }
 
@@ -72,7 +72,7 @@ module.exports = (grunt) ->
     less:
       development:
         options:
-          paths: ["less", "bower_components"]
+          paths: ["less", "node_modules"]
         files:
           "dist/css/cradmin_theme_default/theme.css": "src/less/cradmin_theme_default/theme.less"
           "dist/css/cradmin_theme_topmenu/theme.css": "src/less/cradmin_theme_topmenu/theme.less"
@@ -122,17 +122,17 @@ module.exports = (grunt) ->
       vendor:
         files: [{
           expand: true
-          cwd: 'bower_components/fontawesome/'
+          cwd: 'node_modules/fontawesome/'
           src: ['css/*', 'fonts/*']
           dest: 'dist/vendor/fonts/fontawesome/'
         }, {
           expand: true
-          cwd: 'bower_components/bootstrap/fonts/'
+          cwd: 'node_modules/bootstrap/fonts/'
           src: ['glyphicons-*']
           dest: 'dist/vendor/fonts/glyphicons/'
         }, {
           expand: true
-          cwd: 'bower_components/moment/locale/'
+          cwd: 'node_modules/moment/locale/'
           src: ['*.js']
           dest: 'dist/vendor/momentjs-locale/'
         }, {
@@ -156,13 +156,13 @@ module.exports = (grunt) ->
 
         # list of files / patterns to load in the browser
         files: [
-          'bower_components/jquery/dist/jquery.js'
-          'bower_components/angular/angular.js'
-          'bower_components/angular-mocks/angular-mocks.js'
-          'bower_components/angular-cookies/angular-cookies.js'
-          'bower_components/ng-file-upload/angular-file-upload.js'
-          'bower_components/modernizr/modernizr.js'
-          'bower_components/detectizr/dist/detectizr.js'
+          'node_modules/jquery/dist/jquery.js'
+          'node_modules/angular/angular.js'
+          'node_modules/angular-mocks/angular-mocks.js'
+          'node_modules/angular-cookies/angular-cookies.js'
+#          'bower_components/ng-file-upload/angular-file-upload.js'
+#          'node_modules/modernizr/modernizr.js'
+          'node_modules/detectizr/dist/detectizr.js'
           #'bower_components/angular-ui-ace/ui-ace.min.js'
           #'bower_components/ace-builds/src-min-noconflict/ace.js'
           'src/lib/**/*.js'
