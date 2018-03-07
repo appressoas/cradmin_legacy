@@ -23,8 +23,7 @@ setup(
         'Jinja2',
         'pytz',
         'future',
-        'html2text',
-        'htmls'
+        'html2text'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
