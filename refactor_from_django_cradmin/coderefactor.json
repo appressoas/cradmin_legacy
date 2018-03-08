@@ -14,12 +14,6 @@
 
       // List of replacements to make in each matched file
       "replacers": [
-//        // Refactor <"|'>django_cradmin/ to <"|'>cradmin_legacy/
-//        {
-//          "replacer": "RegexReplacer",
-//          "pattern": "(['\"])django_cradmin/",
-//          "replacement": "\\1cradmin_legacy/"
-//        },
 
         // Refactor django_cradmin -> cradmin_legacy
         {
@@ -63,15 +57,6 @@
         }
       ]
     }
-
-//    // Refactor .py and .rst files
-//    {
-//      "filepatterns": ["^.*\\.py$", "^.*\\.rst$"],
-//
-//      // List of replacements to make in each matched file
-//      "replacers": [
-//      ]
-//    }
   ],
 
   "rename": [
