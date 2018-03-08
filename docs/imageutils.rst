@@ -106,7 +106,7 @@ in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting:
 
 .. code-block:: htmldjango
 
-    {% load cradmin_image_tags %}
+    {% load cradmin_legacy_image_tags %}
 
     <img src="{% cradmin_transform_image_using_imagetype myimage.url 'imagelisting-same-width' %}">
 
@@ -115,7 +115,7 @@ in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting:
 
 .. code-block:: htmldjango
 
-    {% load cradmin_image_tags %}
+    {% load cradmin_legacy_image_tags %}
 
     {% cradmin_create_archiveimage_tag myimage.url 'imagelisting-same-width' %}
 
@@ -127,7 +127,7 @@ Create an image URL in a Django template using raw cloudinary options:
 
 .. code-block:: htmldjango
 
-    {% load cradmin_image_tags %}
+    {% load cradmin_legacy_image_tags %}
 
     <img src="{% cradmin_transform_image myimage.url width=200 height=300 crop="fill" %}">
 

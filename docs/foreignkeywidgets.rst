@@ -9,12 +9,12 @@ Selecting a foreignkey can be handled in multiple ways:
 - *A simple HTML select element* - Works if we have very few items,
   but not a general or scalable solution.
 - *Javascript popupwindow (like django admin)* - Not built into
-  django-cradmin at this time since it does not provide a good
+  cradmin-legacy at this time since it does not provide a good
   user experience (can be blocked, confuse users, etc.)
 - *A more fancy javascript based select element with search* - This
-  can scale very well, but it is not built into django-cradmin at this
+  can scale very well, but it is not built into cradmin-legacy at this
   time.
-- **Iframe in popover div** - This is built into django-cradmin, and
+- **Iframe in popover div** - This is built into cradmin-legacy, and
   this is what we will discuss in this guide.
 
 
@@ -40,13 +40,13 @@ The components that make up forkeignkey selection
     with the following JSON encoded data::
 
         {
-          'postmessageid': 'django-cradmin-use-this',
+          'postmessageid': 'cradmin-legacy-use-this',
           'value': '<the selected value>',
           'fieldid': '<the fieldid>',
           'preview': '<preview HTML>',
         }
 
-    See the docs for the ``django-cradmin-use-this`` angularjs directive for more
+    See the docs for the ``cradmin-legacy-use-this`` angularjs directive for more
     info about how this works.
 
 

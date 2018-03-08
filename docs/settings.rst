@@ -19,7 +19,7 @@ It is used by the ``cradmin_icon`` template tag. If you do
 not set this, you will get font-awesome icons as defined
 in :obj:`.cradmin_legacy.css_icon_map.FONT_AWESOME`.
 
-.. seealso:: :ref:`cradmin_icon_tags` and :issue:`43`.
+.. seealso:: :ref:`cradmin_legacy_icon_tags` and :issue:`43`.
 
 
 .. setting::  CRADMIN_LEGACY_CSS_ICON_LIBRARY_PATH

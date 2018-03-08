@@ -2,7 +2,7 @@
 Develop cradmin_legacy, or run the demo
 #######################################
 
-To develop django-cradmin, or to run the demo, you will have to do the following.
+To develop cradmin-legacy, or to run the demo, you will have to do the following.
 
 
 ******************

@@ -3,28 +3,28 @@ Template tags
 #############
 
 
-************
-cradmin_tags
-************
+*******************
+cradmin_legacy_tags
+*******************
 
-.. currentmodule:: cradmin_legacy.templatetags.cradmin_tags
-.. automodule:: cradmin_legacy.templatetags.cradmin_tags
+.. currentmodule:: cradmin_legacy.templatetags.cradmin_legacy_tags
+.. automodule:: cradmin_legacy.templatetags.cradmin_legacy_tags
 
 
-.. _cradmin_icon_tags:
+.. _cradmin_legacy_icon_tags:
 
-*****************
-cradmin_icon_tags
-*****************
+************************
+cradmin_legacy_icon_tags
+************************
 
-The ``cradmin_icon_tags`` Django template tag library defines tags that makes
+The ``cradmin_legacy_icon_tags`` Django template tag library defines tags that makes
 it easy to swap out the icons used by the provided Django cradmin components.
 
 It is used like this:
 
 .. code-block:: htmldjango
 
-    {% load cradmin_icon_tags %}
+    {% load cradmin_legacy_icon_tags %}
 
     <span class="{% cradmin_icon 'search' %}"></span>
 
@@ -48,16 +48,16 @@ views/components.
 .. automodule:: cradmin_legacy.css_icon_map
 
 
-******************
-cradmin_image_tags
-******************
+*************************
+cradmin_legacy_image_tags
+*************************
 See :doc:`imageutils` for examples.and details.
 
-.. currentmodule:: cradmin_legacy.templatetags.cradmin_image_tags
-.. automodule:: cradmin_legacy.templatetags.cradmin_image_tags
+.. currentmodule:: cradmin_legacy.templatetags.cradmin_legacy_image_tags
+.. automodule:: cradmin_legacy.templatetags.cradmin_legacy_image_tags
 
 
-******************
-cradmin_email_tags
-******************
+*************************
+cradmin_legacy_email_tags
+*************************
 See :doc:`apps.cradmin_email`.

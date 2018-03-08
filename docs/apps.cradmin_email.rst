@@ -110,12 +110,12 @@ You can set the following values:
 
     primary_button_link_style
         Styles for the
-        :func:`~cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags.cradmin_email_primary_buttonlink`
+        :func:`~cradmin_legacy.apps.cradmin_email.templatetags.cradmin_legacy_email_tags.cradmin_email_primary_buttonlink`
         template tag.
 
     secondary_button_link_style
         Styles for the
-        :func:`~cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags.cradmin_email_secondary_buttonlink`
+        :func:`~cradmin_legacy.apps.cradmin_email.templatetags.cradmin_legacy_email_tags.cradmin_email_secondary_buttonlink`
         template tag.
 
     logo_style
@@ -177,8 +177,8 @@ Resources
 Template tags
 *************
 
-.. currentmodule:: cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags
-.. automodule:: cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags
+.. currentmodule:: cradmin_legacy.apps.cradmin_email.templatetags.cradmin_legacy_email_tags
+.. automodule:: cradmin_legacy.apps.cradmin_email.templatetags.cradmin_legacy_email_tags
     :members:
 
 ***

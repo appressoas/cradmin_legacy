@@ -15,7 +15,7 @@ Django cradmin is in BETA. The system is fairly stable, but:
 
 Docs
 ====
-http://django-cradmin.readthedocs.org
+http://cradmin-legacy.readthedocs.org
 
 
 License
