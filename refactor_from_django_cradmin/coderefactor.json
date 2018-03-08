@@ -10,7 +10,7 @@
   "refactor_files": [
     // Refactor common stuff in most code files (python, javascript, less, ...)
     {
-      "filepatterns": ["^.*\\.py$", "^.*\\.html$", "MANIFEST.in$", "^.*\\.less", "^.*\\.coffee"],
+      "filepatterns": ["^.*\\.py$", "^.*\\.html$", "MANIFEST.in$", "^.*\\.less", "^.*\\.coffee", "^.*\\.rst"],
 
       // List of replacements to make in each matched file
       "replacers": [
@@ -34,6 +34,13 @@
           "replacer": "RegexReplacer",
           "pattern": "djangoCradmin",
           "replacement": "cradminLegacy"
+        },
+
+        // Refactor DJANGO_CRADMIN -> CRADMIN_LEGACY
+        {
+          "replacer": "RegexReplacer",
+          "pattern": "DJANGO_CRADMIN",
+          "replacement": "CRADMIN_LEGACY"
         },
 
         // Refactor cradmin_<something>_tags -> cradmin_legacy_<something>_tags
