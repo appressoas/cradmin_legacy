@@ -45,8 +45,21 @@
         // Refactor cradmin_<something>_tags -> cradmin_legacy_<something>_tags
         {
           "replacer": "RegexReplacer",
-          "pattern": "cradmin(_[a-z]+_|_)tags",
+          "pattern": "cradmin(_icon_|_image_|_email_|_)tags",
           "replacement": "cradmin_legacy\\1tags"
+        }
+      ]
+    },
+    {
+      "filepatterns": ["^.*\\.py$"],
+
+      // List of replacements to make in each matched file
+      "replacers": [
+        // Refactor cradmin_legacy.apps.cradmin_generic_token_with_metadata -> django_cradmin.apps.cradmin_generic_token_with_metadata
+        {
+          "replacer": "RegexReplacer",
+          "pattern": "cradmin_legacy\\.apps\\.cradmin_generic_token_with_metadata",
+          "replacement": "django_cradmin.apps.cradmin_generic_token_with_metadata"
         }
       ]
     }
@@ -74,7 +87,7 @@
       // Refactor cradmin_<something>_tags -> cradmin_legacy_<something>_tags
       {
         "replacer": "RegexReplacer",
-        "pattern": "cradmin(_[a-z]+_|_)tags",
+        "pattern": "cradmin(_icon_|_image_|_email_|_)tags",
         "replacement": "cradmin_legacy\\1tags"
       }
     ]
