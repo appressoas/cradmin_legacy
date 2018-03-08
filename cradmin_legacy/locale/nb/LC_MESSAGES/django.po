@@ -126,7 +126,7 @@ msgid "Edit description"
 msgstr "Rediger beskrivelse"
 
 #: apps/cradmin_imagearchive/cradminviews.py:44
-#: templates/django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete.django.html:39
+#: templates/cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete.django.html:39
 #: viewhelpers/delete.py:29
 msgid "Delete"
 msgstr "Slett"
@@ -173,7 +173,7 @@ msgid "... or select an image"
 msgstr ".. Eller velg et bilde"
 
 #: apps/cradmin_imagearchive/cradminviews.py:144
-#: templates/django_cradmin/filewidgets/imagewidget.django.html:41
+#: templates/cradmin_legacy/filewidgets/imagewidget.django.html:41
 msgid "Select an image ..."
 msgstr "Velg et bilde ..."
 
@@ -407,7 +407,7 @@ msgstr "Vi finner ingen konto med denne epostadressen"
 
 #: apps/cradmin_resetpassword/views/begin.py:54
 #: superuserui/views/listview.py:34
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:48
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:48
 msgid "Search"
 msgstr "Søk"
 
@@ -433,46 +433,46 @@ msgstr "Beklager, men bildet ditt er over maksstørrelsen på %(max_filesize)s"
 msgid "Unsupported filetype."
 msgstr "Ugyldig filtype."
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:24
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:27
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:24
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:27
 msgid "close file upload window"
 msgstr "Lukk opplastingsvinduet"
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:36
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:36
 msgid "We are uploading your file. Please do not close the browser window."
 msgstr ""
 "Bildet lastes opp. Vennligst ikke lukk vinduet før opplastingen er ferdig."
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:38
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:38
 msgid "We are uploading your files. Please do not close the browser window."
 msgstr ""
 "Bildene lastes opp. Vennligst ikke lukk vinduet før opplastingen er ferdig."
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:77
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:77
 msgid "Upload a file by dragging and dropping it here"
 msgstr "Last opp en file ved å dra og slipp den her"
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:79
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:79
 msgid "Upload files by dragging and dropping them here"
 msgstr "Last opp filer ved å dra og slipp de her"
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:99
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:99
 msgid "... or select a file"
 msgstr "... eller velg en fil"
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:101
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:101
 msgid "... or select files"
 msgstr "... eller velg filer"
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:115
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:115
 msgid "Invalid filetype"
 msgstr "Ugyldig filtype"
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:137
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:137
 msgid "Select a file ..."
 msgstr "Velg en fil..."
 
-#: apps/cradmin_temporaryfileuploadstore/templates/django_cradmin/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:139
+#: apps/cradmin_temporaryfileuploadstore/templates/cradmin_legacy/apps/cradmin_temporaryfileuploadstore/include/bulkfileupload.django.html:139
 msgid "Select files ..."
 msgstr "Velg filer ..."
 
@@ -491,7 +491,7 @@ msgstr ""
 "stemme kan du prøve igjen."
 
 #: apps/cradmin_temporaryfileuploadstore/widgets.py:125
-#: templates/django_cradmin/include/messages.django.html:26
+#: templates/cradmin_legacy/include/messages.django.html:26
 msgid "Close"
 msgstr "Lukk"
 
@@ -529,31 +529,31 @@ msgstr "Ugyldig epostadresse: %(email)s"
 msgid "Superuser UI"
 msgstr "Superbruker UI"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:12
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:12
 msgid "Heading 1"
 msgstr "Overskrift 1"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:17
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:17
 msgid "Heading 2"
 msgstr "Overskrift 2"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:22
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:22
 msgid "Heading 3"
 msgstr "Overskrift 3"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:29
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:29
 msgid "Text here"
 msgstr "Tekst her"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:31
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:31
 msgid "Bold"
 msgstr "Fet"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:36
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:36
 msgid "Italic"
 msgstr "Kursiv"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:40
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:40
 msgid ""
 "Write the URL in the field below. Make sure you include the http:// or "
 "https:// part of the URL."
@@ -561,208 +561,208 @@ msgstr ""
 "Skriv en nettaddresse i feltet nedenfor. Du må passe på å få med http:// "
 "eller https:// delen av nettaddressen."
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:41
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:41
 msgid "Link title here"
 msgstr "Linktittel her"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:43
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:43
 msgid "Link"
 msgstr "Link"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:52
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:52
 msgid "Bulletlist"
 msgstr "Punktliste"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:57
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:57
 msgid "Numbered list"
 msgstr "Nummerert liste"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:65
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:65
 msgid "programminglanguage"
 msgstr "programmeringsspråk"
 
-#: templates/django_cradmin/acemarkdown/widget.django.html:68
+#: templates/cradmin_legacy/acemarkdown/widget.django.html:68
 msgid "Code block"
 msgstr "Kodeblokk"
 
-#: templates/django_cradmin/error.django.html:10
-#: templates/django_cradmin/include/messages.django.html:31
+#: templates/cradmin_legacy/error.django.html:10
+#: templates/cradmin_legacy/include/messages.django.html:31
 msgid "Error"
 msgstr "Feil"
 
-#: templates/django_cradmin/filewidgets/filewidget.django.html:21
+#: templates/cradmin_legacy/filewidgets/filewidget.django.html:21
 msgid "Remove file"
 msgstr "Fjern fil"
 
-#: templates/django_cradmin/filewidgets/imagewidget.django.html:27
+#: templates/cradmin_legacy/filewidgets/imagewidget.django.html:27
 msgid "Remove image"
 msgstr "Fjern bilde"
 
-#: templates/django_cradmin/filewidgets/imagewidget.django.html:39
+#: templates/cradmin_legacy/filewidgets/imagewidget.django.html:39
 msgid "Replace image ..."
 msgstr "Erstatt bilde ..."
 
-#: templates/django_cradmin/include/messages.django.html:33
+#: templates/cradmin_legacy/include/messages.django.html:33
 msgid "Warning"
 msgstr "Advarsel"
 
-#: templates/django_cradmin/include/messages.django.html:35
+#: templates/cradmin_legacy/include/messages.django.html:35
 msgid "Info"
 msgstr "Info"
 
-#: templates/django_cradmin/include/messages.django.html:37
+#: templates/cradmin_legacy/include/messages.django.html:37
 msgid "Success"
 msgstr "Suksess"
 
-#: templates/django_cradmin/invalid_roleid.django.html:6
+#: templates/cradmin_legacy/invalid_roleid.django.html:6
 msgid "Invalid role"
 msgstr "Ugyldig rolle"
 
-#: templates/django_cradmin/invalid_roleid.django.html:7
+#: templates/cradmin_legacy/invalid_roleid.django.html:7
 msgid "The requested role does not exist."
 msgstr "Den ønskede rollen finnes ikke."
 
-#: templates/django_cradmin/menu.django.html:31
+#: templates/cradmin_legacy/menu.django.html:31
 msgid "Menu"
 msgstr "Meny"
 
-#: templates/django_cradmin/missing_role.django.html:6
+#: templates/cradmin_legacy/missing_role.django.html:6
 msgid "Permission denied"
 msgstr "Ingen tilgang"
 
-#: templates/django_cradmin/missing_role.django.html:8
+#: templates/cradmin_legacy/missing_role.django.html:8
 #, python-format
 msgid "You do not have permission to administer \"%(what)s\"."
 msgstr ""
 "Du har ikke de nødvendige rettighetene for å administrere \"%(what)s\"."
 
-#: templates/django_cradmin/pagepreview/includes/pagepreview-fullsize-iframe-wrapper.django.html:25
+#: templates/cradmin_legacy/pagepreview/includes/pagepreview-fullsize-iframe-wrapper.django.html:25
 msgid "Close preview"
 msgstr "Lukk forhåndsvisning"
 
-#: templates/django_cradmin/pagepreview/includes/pagepreview-fullsize-iframe-wrapper.django.html:34
+#: templates/cradmin_legacy/pagepreview/includes/pagepreview-fullsize-iframe-wrapper.django.html:34
 msgid "Preview options"
 msgstr "Konfigurer forhåndsvisningen"
 
-#: templates/django_cradmin/superuserui/dashboard.django.html:15
+#: templates/cradmin_legacy/superuserui/dashboard.django.html:15
 msgid "Please select what you would like to edit"
 msgstr "Velg hva du vil redigere"
 
-#: templates/django_cradmin/viewhelpers/delete.django.html:27
+#: templates/cradmin_legacy/viewhelpers/delete.django.html:27
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: templates/django_cradmin/viewhelpers/formview_base.django.html:49
+#: templates/cradmin_legacy/viewhelpers/formview_base.django.html:49
 msgid "Close window"
 msgstr "Lukk vindu"
 
-#: templates/django_cradmin/viewhelpers/includes/loadmorepager-base.django.html:40
-#: templates/django_cradmin/viewhelpers/multiselect2view/base.django.html:37
+#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:40
+#: templates/cradmin_legacy/viewhelpers/multiselect2view/base.django.html:37
 msgid "Loading ..."
 msgstr "Henter ..."
 
-#: templates/django_cradmin/viewhelpers/includes/loadmorepager-base.django.html:45
+#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:45
 msgid "Load more"
 msgstr "Hent flere"
 
-#: templates/django_cradmin/viewhelpers/includes/pager.django.html:28
+#: templates/cradmin_legacy/viewhelpers/includes/pager.django.html:28
 msgid "Previous"
 msgstr "Forrige"
 
-#: templates/django_cradmin/viewhelpers/includes/pager.django.html:32
+#: templates/cradmin_legacy/viewhelpers/includes/pager.django.html:32
 #, python-format
 msgid "Page %(number)s of %(total)s"
 msgstr "Side %(number)s av %(total)s"
 
-#: templates/django_cradmin/viewhelpers/includes/pager.django.html:37
+#: templates/cradmin_legacy/viewhelpers/includes/pager.django.html:37
 msgid "Next"
 msgstr "Neste"
 
-#: templates/django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete.django.html:13
+#: templates/cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete.django.html:13
 msgid "Edit"
 msgstr "Rediger"
 
-#: templates/django_cradmin/viewhelpers/listbuilder/itemvalue/edit-delete.django.html:29
+#: templates/cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete.django.html:29
 msgid "View"
 msgstr "Vis"
 
-#: templates/django_cradmin/viewhelpers/listbuilder/itemvalue/use-this.django.html:12
+#: templates/cradmin_legacy/viewhelpers/listbuilder/itemvalue/use-this.django.html:12
 #, python-format
 msgid "Select \"%(title)s\""
 msgstr "Velg \"%(title)s\""
 
-#: templates/django_cradmin/viewhelpers/listbuilder/itemvalue/use-this.django.html:14
+#: templates/cradmin_legacy/viewhelpers/listbuilder/itemvalue/use-this.django.html:14
 msgctxt "listbuilder-usethis"
 msgid "Select"
 msgstr "Velg"
 
-#: templates/django_cradmin/viewhelpers/listbuilderview/includes/create-button.django.html:5
+#: templates/cradmin_legacy/viewhelpers/listbuilderview/includes/create-button.django.html:5
 #: viewhelpers/create.py:36
 msgid "Create"
 msgstr "Opprett"
 
-#: templates/django_cradmin/viewhelpers/listfilter/django/single/textinput/base.django.html:20
+#: templates/cradmin_legacy/viewhelpers/listfilter/django/single/textinput/base.django.html:20
 #, python-format
 msgid "Clear %(label)s"
 msgstr "Nullstill %(label)s"
 
-#: templates/django_cradmin/viewhelpers/listfilter/django/single/textinput/base.django.html:24
+#: templates/cradmin_legacy/viewhelpers/listfilter/django/single/textinput/base.django.html:24
 msgid "Clear"
 msgstr "Nullstill"
 
-#: templates/django_cradmin/viewhelpers/multiselect/formview.django.html:6
+#: templates/cradmin_legacy/viewhelpers/multiselect/formview.django.html:6
 msgid "EDIT"
 msgstr "REDIGER"
 
-#: templates/django_cradmin/viewhelpers/multiselect2/listbuilder_itemvalues/itemvalue.django.html:39
+#: templates/cradmin_legacy/viewhelpers/multiselect2/listbuilder_itemvalues/itemvalue.django.html:39
 msgid "Selected"
 msgstr "Valgte"
 
-#: templates/django_cradmin/viewhelpers/multiselect2view/base.django.html:42
+#: templates/cradmin_legacy/viewhelpers/multiselect2view/base.django.html:42
 msgid "Select all"
 msgstr "Velg alle"
 
-#: templates/django_cradmin/viewhelpers/objecttable/imagepreviewcolumn-cell.django.html:4
-#: templates/django_cradmin/viewhelpers/objecttable/plaintextcolumn-cell.django.html:3
+#: templates/cradmin_legacy/viewhelpers/objecttable/imagepreviewcolumn-cell.django.html:4
+#: templates/cradmin_legacy/viewhelpers/objecttable/plaintextcolumn-cell.django.html:3
 msgid "(None)"
 msgstr "(Ingen)"
 
-#: templates/django_cradmin/viewhelpers/objecttable/no-items-message.django.html:2
+#: templates/cradmin_legacy/viewhelpers/objecttable/no-items-message.django.html:2
 #: viewhelpers/listbuilderview.py:285
 #, python-format
 msgid "No %(modelname_plural)s"
 msgstr "Ingen %(modelname_plural)s"
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:42
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:42
 #: viewhelpers/objecttable.py:929
 msgid "Search..."
 msgstr "Søk..."
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:125
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:125
 msgid "Ordered ascending - Click to order descending"
 msgstr "Sortert stigende - klikk for å sortere synkende"
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:127
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:127
 msgid "Ordered descending - Click to order ascending"
 msgstr "Sortert synkende - klikk for å sortere stigende"
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:134
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:134
 msgid "Do not order by this column"
 msgstr "Ikke sorter etter denne kolonnen"
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:139
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:139
 msgid "Ordering priority"
 msgstr "Sorteringsprioritet"
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:195
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:195
 msgid "Select an action"
 msgstr "Velg en handling"
 
-#: templates/django_cradmin/viewhelpers/objecttable/objecttable.django.html:198
+#: templates/cradmin_legacy/viewhelpers/objecttable/objecttable.django.html:198
 msgid "Go"
 msgstr "Gå"
 
-#: templates/django_cradmin/widgets/modelchoice.django.html:25
+#: templates/cradmin_legacy/widgets/modelchoice.django.html:25
 #: widgets/modelchoice.py:34
 msgid "Select ..."
 msgstr "Velg ..."
