@@ -1,7 +1,7 @@
 {
   "name": "webdemo",
   "version": "0.0.0",
-  "homepage": "https://github.com/appressoas/django_cradmin",
+  "homepage": "https://github.com/appressoas/cradmin_legacy",
   "authors": [
     "Espen Angell Kristiansen <post@espenak.net>"
   ],
