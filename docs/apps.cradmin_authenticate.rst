@@ -16,8 +16,8 @@ Add the following to ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
         # ...
-        'django_cradmin',
-        'django_cradmin.apps.cradmin_authenticate',
+        'cradmin_legacy',
+        'cradmin_legacy.apps.cradmin_authenticate',
     )
 
 
@@ -25,7 +25,7 @@ And add something like this to your root url config::
 
     urlpatterns = patterns(
         # ...
-        url(r'^authenticate/', include('django_cradmin.apps.cradmin_authenticate.urls')),
+        url(r'^authenticate/', include('cradmin_legacy.apps.cradmin_authenticate.urls')),
         # ...
     )
 
@@ -58,7 +58,7 @@ attribute of the user model. As long as the username field is
 ``email`` or ``username``, and you use password to login,
 the view should just work out of the box.
 
-You can extend ``django_cradmin.apps.cradmin_authenticate.views.LoginView`` and
+You can extend ``cradmin_legacy.apps.cradmin_authenticate.views.LoginView`` and
 add a custom login form class by overriding the ``get_form_class``-method.
 
 
@@ -146,18 +146,18 @@ cradmin-authenticate-logout
 *************
 Customization
 *************
-The authentication-view is handled by the :class:`django_cradmin.apps.cradmin_authenticate.views.login.LoginView` in
-combination with the various subclasses of :class:`django_cradmin.apps.cradmin_authenticate.views.login.AbstractLoginForm`.
+The authentication-view is handled by the :class:`cradmin_legacy.apps.cradmin_authenticate.views.login.LoginView` in
+combination with the various subclasses of :class:`cradmin_legacy.apps.cradmin_authenticate.views.login.AbstractLoginForm`.
 
 If you want to customize the default behaviour, extend/override the suitable class from these:
 
 
-django_cradmin.apps.cradmin_authenticate.views.login
+cradmin_legacy.apps.cradmin_authenticate.views.login
 ----------------------------------------------------
-.. automodule:: django_cradmin.apps.cradmin_authenticate.views.login
+.. automodule:: cradmin_legacy.apps.cradmin_authenticate.views.login
     :members:
 
-django_cradmin.apps.cradmin_authenticate.backends
+cradmin_legacy.apps.cradmin_authenticate.backends
 -------------------------------------------------
-.. automodule:: django_cradmin.apps.cradmin_authenticate.backends
+.. automodule:: cradmin_legacy.apps.cradmin_authenticate.backends
     :members:

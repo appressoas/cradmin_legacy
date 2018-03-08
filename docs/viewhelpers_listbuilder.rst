@@ -16,7 +16,7 @@ API
 
 Base API
 ========
-.. currentmodule:: django_cradmin.viewhelpers.listbuilder.base
+.. currentmodule:: cradmin_legacy.viewhelpers.listbuilder.base
 
 .. autosummary::
 
@@ -25,12 +25,12 @@ Base API
     ItemFrameRenderer
     List
 
-.. automodule:: django_cradmin.viewhelpers.listbuilder.base
+.. automodule:: cradmin_legacy.viewhelpers.listbuilder.base
 
 
 Views
 =====
-.. currentmodule:: django_cradmin.viewhelpers.listbuilderview
+.. currentmodule:: cradmin_legacy.viewhelpers.listbuilderview
 
 .. autosummary::
 
@@ -38,4 +38,4 @@ Views
     View
     FilterListMixin
 
-.. automodule:: django_cradmin.viewhelpers.listbuilderview
+.. automodule:: cradmin_legacy.viewhelpers.listbuilderview

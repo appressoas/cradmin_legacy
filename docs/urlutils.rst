@@ -3,7 +3,7 @@
 ##############################################
 
 
-.. currentmodule:: django_cradmin.urlutils
+.. currentmodule:: cradmin_legacy.urlutils
 
-.. automodule:: django_cradmin.urlutils
+.. automodule:: cradmin_legacy.urlutils
     :members:

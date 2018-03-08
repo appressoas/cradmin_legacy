@@ -34,5 +34,5 @@ in commit d7b0c061e805431d01d4a48dd7def8c6ad2414ba.
 Can no longer set button classes using field_classes
 ====================================================
 This is due to changes in ``django-crispy-forms`` 1.6.0. Buttons inheriting from
-``django_cradmin.crispylayouts.CradminSubmitButton`` (or PrimarySubmit, DangerSubmit, DefaultSubmit, ...),
+``cradmin_legacy.crispylayouts.CradminSubmitButton`` (or PrimarySubmit, DangerSubmit, DefaultSubmit, ...),
 must set their CSS classes using the ``button_css_classes`` attribute instead.

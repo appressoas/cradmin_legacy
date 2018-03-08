@@ -12,7 +12,7 @@ Use this when you need a view to delete a single item. Your users will get a pre
 *****
 Usage
 *****
-The :class:`django_cradmin.viewhelpers.delete.DeleteView` is just a subclass of :class:`django.views.generic.DeleteView`, so you use it just like the Django DeleteView.
+The :class:`cradmin_legacy.viewhelpers.delete.DeleteView` is just a subclass of :class:`django.views.generic.DeleteView`, so you use it just like the Django DeleteView.
 
 
 Very basic example (no security)
@@ -32,8 +32,8 @@ Lets say you have the following ``Page``-model in ``models.py``::
 
 Then you would create a PageDeleteView and register it in an app with the following code::
 
-    from django_cradmin.viewhelpers import delete
-    from django_cradmin import crapp
+    from cradmin_legacy.viewhelpers import delete
+    from cradmin_legacy import crapp
 
     class PageDeleteView(delete.DeleteView):
         """
@@ -72,7 +72,7 @@ The basic example lets anyone with access to the cradmin delete any page. You no
 
 We make the Site the roleclass on our ``WebdemoCrAdminInstance``::
 
-    from django_cradmin import crinstance
+    from cradmin_legacy import crinstance
     class WebdemoCrAdminInstance(crinstance.BaseCrAdminInstance):
         roleclass = Site
         # Other stuff documented elsewhere

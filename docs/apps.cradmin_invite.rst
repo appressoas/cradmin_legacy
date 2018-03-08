@@ -2,7 +2,7 @@
 `cradmin_invite` --- A generalized invite workflow
 ##################################################
 
-The purpose of the :mod:`django_cradmin.apps.cradmin_invite` app is to provide a
+The purpose of the :mod:`cradmin_legacy.apps.cradmin_invite` app is to provide a
 general purpose invite workflow.
 
 *******
@@ -12,9 +12,9 @@ Add the following to ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
         # ...
-        'django_cradmin',
-        'django_cradmin.apps.cradmin_generic_token_with_metadata',
-        'django_cradmin.apps.cradmin_invite',
+        'cradmin_legacy',
+        'cradmin_legacy.apps.cradmin_generic_token_with_metadata',
+        'cradmin_legacy.apps.cradmin_invite',
     )
 
 Set the ``DJANGO_CRADMIN_SITENAME`` setting::
@@ -44,9 +44,9 @@ Lets say we have the following model::
 
 Create the invite email
 =======================
-Create a subclass of :class:`django_cradmin.apps.cradmin_invite.invite_url.InviteUrl`::
+Create a subclass of :class:`cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl`::
 
-    from django_cradmin.apps.cradmin_invite.invite_url import InviteUrl
+    from cradmin_legacy.apps.cradmin_invite.invite_url import InviteUrl
 
     class SiteAdminInviteUrl(InviteUrl):
         def get_appname(self):
@@ -78,13 +78,13 @@ to add the user accepting the invite to.
 
 Create the view responsible for adding the user as admin
 ========================================================
-Create a subclass of :class:`django_cradmin.apps.cradmin_invite.baseviews.AbstractAcceptInviteView`::
+Create a subclass of :class:`cradmin_legacy.apps.cradmin_invite.baseviews.AbstractAcceptInviteView`::
 
     from django.http import HttpResponseRedirect
     from django.shortcuts import get_object_or_404
     from django.conf import settings
 
-    from django_cradmin.apps.cradmin_invite.baseviews.accept import AbstractAcceptInviteView
+    from cradmin_legacy.apps.cradmin_invite.baseviews.accept import AbstractAcceptInviteView
     from myapp.models import Site
 
     class AcceptSiteAdminInviteView(AbstractAcceptInviteView):
@@ -120,15 +120,15 @@ Add the views to your url patterns::
 ***************************
 Private vs public InviteUrl
 ***************************
-See :meth:`~django_cradmin.apps.cradmin_invite.invite_url.InviteUrl.get_share_url`
-and :meth:`~django_cradmin.apps.cradmin_invite.invite_url.InviteUrl.send_email`.
+See :meth:`~cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl.get_share_url`
+and :meth:`~cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl.send_email`.
 
 
 *******************
 The InviteUrl class
 *******************
 
-.. autoclass:: django_cradmin.apps.cradmin_invite.invite_url.InviteUrl
+.. autoclass:: cradmin_legacy.apps.cradmin_invite.invite_url.InviteUrl
     :members:
 
 
@@ -156,7 +156,7 @@ All of the email templates get the following context variables:
 UI messages/labels and how to override them
 *******************************************
 
-.. currentmodule:: django_cradmin.apps.cradmin_invite.baseviews.accept
+.. currentmodule:: cradmin_legacy.apps.cradmin_invite.baseviews.accept
 
 You do not have to override the entire template to adjust
 the text in the :class:`~.AbstractAcceptInviteView` UI.
@@ -164,12 +164,12 @@ We provide the following class methods for you to override:
 
 .. autosummary::
 
-    ~django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_pagetitle
-    ~django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_description_template_name
-    ~django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_accept_as_button_label
-    ~django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_register_account_button_label
-    ~django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_login_as_different_user_button_label
-    ~django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_login_button_label
+    ~cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_pagetitle
+    ~cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_description_template_name
+    ~cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_accept_as_button_label
+    ~cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_register_account_button_label
+    ~cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_login_as_different_user_button_label
+    ~cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView.get_login_button_label
 
 
 ************************
@@ -204,7 +204,7 @@ override the ``invalid_token_message`` and ``expired_token_message`` blocks:
 The AbstractAcceptInviteView class
 **********************************
 
-.. autoclass:: django_cradmin.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView
+.. autoclass:: cradmin_legacy.apps.cradmin_invite.baseviews.accept.AbstractAcceptInviteView
     :members:
 
 

@@ -2,5 +2,5 @@
 CRMenu
 ######
 
-.. automodule:: django_cradmin.crmenu
+.. automodule:: cradmin_legacy.crmenu
    :members:

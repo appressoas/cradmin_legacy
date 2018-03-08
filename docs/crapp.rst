@@ -2,5 +2,5 @@
 CRApp
 #####
 
-.. automodule:: django_cradmin.crapp
+.. automodule:: cradmin_legacy.crapp
    :members:

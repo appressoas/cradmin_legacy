@@ -7,7 +7,7 @@ Settings
 DJANGO_CRADMIN_THEME_PATH
 =========================
 The staticfiles path to the theme CSS. If this is not
-set, we use ``django_cradmin/dist/css/cradmin_theme_default/theme.css``.
+set, we use ``cradmin_legacy/dist/css/cradmin_theme_default/theme.css``.
 
 
 .. setting::  DJANGO_CRADMIN_CSS_ICON_MAP
@@ -17,7 +17,7 @@ DJANGO_CRADMIN_CSS_ICON_MAP
 A dictionary mapping generalized icon names to css classes.
 It is used by the ``cradmin_icon`` template tag. If you do
 not set this, you will get font-awesome icons as defined
-in :obj:`.django_cradmin.css_icon_map.FONT_AWESOME`.
+in :obj:`.cradmin_legacy.css_icon_map.FONT_AWESOME`.
 
 .. seealso:: :ref:`cradmin_icon_tags` and :issue:`43`.
 
@@ -27,7 +27,7 @@ in :obj:`.django_cradmin.css_icon_map.FONT_AWESOME`.
 DJANGO_CRADMIN_CSS_ICON_LIBRARY_PATH
 ====================================
 The staticfiles path to the css icon library.
-Defaults to ``"django_cradmin/dist/vendor/fonts/fontawesome/css/font-awesome.min.css"``.
+Defaults to ``"cradmin_legacy/dist/vendor/fonts/fontawesome/css/font-awesome.min.css"``.
 
 
 .. setting:: DJANGO_CRADMIN_HIDE_PAGEHEADER_IN_FORMVIEWS
@@ -57,8 +57,8 @@ automatically scrolls the menu when the window is scrolled.
 DJANGO_CRADMIN_HIDE_PAGE_HEADER
 ===============================
 If this is ``True``, we do not render the page header. This only affects views
-that use templates inheriting from the ``django_cradmin/standalone-base.django.html``
-template. This means all the views in ``django_cradmin.viewhelpers``, but not the login
+that use templates inheriting from the ``cradmin_legacy/standalone-base.django.html``
+template. This means all the views in ``cradmin_legacy.viewhelpers``, but not the login
 views, or other standalone (non-crapp.App views).
 
 
@@ -70,10 +70,10 @@ imageutils
 
 DJANGO_CRADMIN_IMAGEUTILS_BACKEND
 =================================
-The string path of a :doc:`django_cradmin.imageutils <imageutils>` backend.
+The string path of a :doc:`cradmin_legacy.imageutils <imageutils>` backend.
 Defaults to::
 
-    DJANGO_CRADMIN_IMAGEUTILS_BACKEND = "django_cradmin.imageutils.backends.sorl_thumbnail.SorlThumbnail"
+    DJANGO_CRADMIN_IMAGEUTILS_BACKEND = "cradmin_legacy.imageutils.backends.sorl_thumbnail.SorlThumbnail"
 
 
 .. setting:: DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP
@@ -81,7 +81,7 @@ Defaults to::
 DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP
 =======================================
 A map between an *imagetype* (a name you define) and
-options for :meth:`django_cradmin.imageutils.backends.backendinterface.Interface.transform_image`.
+options for :meth:`cradmin_legacy.imageutils.backends.backendinterface.Interface.transform_image`.
 
 See :doc:`imageutils` for more information.
 
@@ -137,7 +137,7 @@ Any pattern must contain all the variables in the pattern above.
 DJANGO_CRADMIN_IMAGEARCHIVE_MAX_FILESIZE
 ========================================
 Max file size for images uploaded to the image archive as a string
-compatible with :func:`django_cradmin.utils.crhumanize.py.dehumanize_readable_filesize`.
+compatible with :func:`cradmin_legacy.utils.crhumanize.py.dehumanize_readable_filesize`.
 
 Defaults to ``None``, which means that there is no limit by default. Examples::
 
@@ -150,5 +150,5 @@ Defaults to ``None``, which means that there is no limit by default. Examples::
 
 DJANGO_CRADMIN_SUPERUSERUI_THEME_PATH
 =====================================
-The theme path to use by default for ``django_cradmin.superuserui``.
+The theme path to use by default for ``cradmin_legacy.superuserui``.
 Defaults to ``None``, which means that we use :setting:`DJANGO_CRADMIN_THEME_PATH`.

@@ -9,8 +9,8 @@ with HTML email.
 *****
 Usage
 *****
-Add ``django_cradmin.apps.cradmin_email`` to you ``INSTALLED_APPS``-setting.
-See :class:`django_cradmin.apps.cradmin_email.emailutils.AbstractEmail` for example usage.
+Add ``cradmin_legacy.apps.cradmin_email`` to you ``INSTALLED_APPS``-setting.
+See :class:`cradmin_legacy.apps.cradmin_email.emailutils.AbstractEmail` for example usage.
 
 
 ********
@@ -18,7 +18,7 @@ Settings
 ********
 DJANGO_CRADMIN_EMAIL_SUBJECT_PREFIX
     Use this to specify a default prefix for email subjects send with
-    :class:`django_cradmin.apps.cradmin_email.emailutils.AbstractEmail`.
+    :class:`cradmin_legacy.apps.cradmin_email.emailutils.AbstractEmail`.
 
 DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA
     Documented below.
@@ -110,12 +110,12 @@ You can set the following values:
 
     primary_button_link_style
         Styles for the
-        :func:`~django_cradmin.apps.cradmin_email.templatetags.cradmin_email_tags.cradmin_email_primary_buttonlink`
+        :func:`~cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags.cradmin_email_primary_buttonlink`
         template tag.
 
     secondary_button_link_style
         Styles for the
-        :func:`~django_cradmin.apps.cradmin_email.templatetags.cradmin_email_tags.cradmin_email_secondary_buttonlink`
+        :func:`~cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags.cradmin_email_secondary_buttonlink`
         template tag.
 
     logo_style
@@ -137,7 +137,7 @@ cradmin_email/html_message_base.django.html
 cradmin_email/include/html_message_header.django.html
     Included ``cradmin_email/html_message_base.django.html`` to render the header.
     You can override this in one of your own apps - just ensure the app is listed
-    before ``django_cradmin.apps.cradmin_email`` in ``INSTALLED_APPS``.
+    before ``cradmin_legacy.apps.cradmin_email`` in ``INSTALLED_APPS``.
 
     The template should not need to be overridden if you can render
     your logo/header using HTML and CSS. You should instead adjust
@@ -152,7 +152,7 @@ Design/develop/debug email rendering
 To make it easy to visually develop the email template, we provide
 a view that you can add to your url config::
 
-    url(r'^cradmin_email/', include('django_cradmin.apps.cradmin_email.urls')),
+    url(r'^cradmin_email/', include('cradmin_legacy.apps.cradmin_email.urls')),
 
 And go to one of these URLs to debug email rendering:
 
@@ -177,14 +177,14 @@ Resources
 Template tags
 *************
 
-.. currentmodule:: django_cradmin.apps.cradmin_email.templatetags.cradmin_email_tags
-.. automodule:: django_cradmin.apps.cradmin_email.templatetags.cradmin_email_tags
+.. currentmodule:: cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags
+.. automodule:: cradmin_legacy.apps.cradmin_email.templatetags.cradmin_email_tags
     :members:
 
 ***
 API
 ***
 
-.. currentmodule:: django_cradmin.apps.cradmin_email.emailutils
-.. automodule:: django_cradmin.apps.cradmin_email.emailutils
+.. currentmodule:: cradmin_legacy.apps.cradmin_email.emailutils
+.. automodule:: cradmin_legacy.apps.cradmin_email.emailutils
     :members:

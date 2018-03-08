@@ -2,7 +2,7 @@
 `cradmin_register_account` --- A register account workflow
 ##########################################################
 
-The purpose of the :mod:`django_cradmin.apps.cradmin_register_account` app is to provide a
+The purpose of the :mod:`cradmin_legacy.apps.cradmin_register_account` app is to provide a
 general purpose register account workflow where all you need to do is provide a
 form class.
 
@@ -24,7 +24,7 @@ to ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
         # ...
-        'django_cradmin.apps.cradmin_register_account',
+        'cradmin_legacy.apps.cradmin_register_account',
     )
 
 
@@ -32,7 +32,7 @@ And add something like this to your root url config::
 
     urlpatterns = patterns(
         # ...
-        url(r'^register/', include('django_cradmin.apps.cradmin_register_account.urls')),
+        url(r'^register/', include('cradmin_legacy.apps.cradmin_register_account.urls')),
         # ...
     )
 
@@ -57,13 +57,13 @@ form class compatible with your user model:
     If you are using the default ``django.contrib.auth.models.User`` model::
 
         DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-            'django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
+            'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
 
     If you have a custom user model with an ``email``-field and a ``set_password()``-method,
     you can use::
 
         DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
-            'django_cradmin.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm'
+            'cradmin_legacy.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm'
 
     If your user model does not fit with any of these descriptions, or for more details,
     continue reading this document.
@@ -137,71 +137,71 @@ If you use ``django.contrib.auth.models.User``, the following form classes can b
 without any modification, or as base class for your own register account form class:
 
 
-    In the ``django_cradmin.apps.cradmin_register_account.forms.auth_user_form`` module:
+    In the ``cradmin_legacy.apps.cradmin_register_account.forms.auth_user_form`` module:
 
     .. autosummary::
         :nosignatures:
 
-        ~django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm
-        ~django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm
+        ~cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm
+        ~cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm
 
 If you have a custom user model, you may be able to use the following form classes
 without any modification, or as base class for your own register account form class:
 
-    In the ``django_cradmin.apps.cradmin_register_account.forms.auth_user_form`` module:
+    In the ``cradmin_legacy.apps.cradmin_register_account.forms.auth_user_form`` module:
 
     .. autosummary::
         :nosignatures:
 
-        ~django_cradmin.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm
+        ~cradmin_legacy.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm
 
 If you want to create a completely custom register account form, you will most likely want
 to extend one of these abstract form classes:
 
-    In the ``django_cradmin.apps.cradmin_register_account.forms.base`` module:
+    In the ``cradmin_legacy.apps.cradmin_register_account.forms.base`` module:
 
     .. autosummary::
         :nosignatures:
 
-        ~django_cradmin.apps.cradmin_register_account.forms.base.AbstractCreateAccountForm
-        ~django_cradmin.apps.cradmin_register_account.forms.base.AbstractCreateAccountWithPasswordForm
+        ~cradmin_legacy.apps.cradmin_register_account.forms.base.AbstractCreateAccountForm
+        ~cradmin_legacy.apps.cradmin_register_account.forms.base.AbstractCreateAccountWithPasswordForm
 
 
 Form classes for ``django.contrib.auth.models.User``
 ====================================================
-The following forms are available in ``django_cradmin.apps.cradmin_register_account.forms.auth_user``.
+The following forms are available in ``cradmin_legacy.apps.cradmin_register_account.forms.auth_user``.
 They provide ready-to-use register account forms suitable if your user model is ``django.contrib.auth.models.User``.
 They can also be used as base classes for your own register account forms.
 
 
-.. autoclass:: django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm
+.. autoclass:: cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm
     :members:
 
-.. autoclass:: django_cradmin.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm
+.. autoclass:: cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm
     :members:
 
 
 Form classes for custom user models
 ===================================
-The following forms are available in ``django_cradmin.apps.cradmin_register_account.forms.email``.
+The following forms are available in ``cradmin_legacy.apps.cradmin_register_account.forms.email``.
 They provide ready-to-use register account forms suitable if your user model has an ``email``-field
 and a ``set_password()``-method. They can also be used as base classes for your own register account forms.
 
 
-.. autoclass:: django_cradmin.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm
+.. autoclass:: cradmin_legacy.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm
     :members:
 
 
 Abstract register account form classes
 ======================================
-The following base forms are available in ``django_cradmin.apps.cradmin_register_account.forms.base``.
+The following base forms are available in ``cradmin_legacy.apps.cradmin_register_account.forms.base``.
 They provide a common structure for all the register account forms.
 
 
-.. autoclass:: django_cradmin.apps.cradmin_register_account.forms.base.AbstractCreateAccountForm
+.. autoclass:: cradmin_legacy.apps.cradmin_register_account.forms.base.AbstractCreateAccountForm
     :members:
 
-.. autoclass:: django_cradmin.apps.cradmin_register_account.forms.base.AbstractCreateAccountWithPasswordForm
+.. autoclass:: cradmin_legacy.apps.cradmin_register_account.forms.base.AbstractCreateAccountWithPasswordForm
     :members:
 
 

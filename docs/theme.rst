@@ -40,7 +40,7 @@ Create the theme
 ****************
 For this example we will assume you want to extend the default theme::
 
-    $ cd django_cradmin_reporoot/django_cradmin/static/django_cradmin/src/less/
+    $ cd cradmin_legacy_reporoot/cradmin_legacy/static/cradmin_legacy/src/less/
     $ cp -r cradmin_base cradmin_theme_default /path/where/you/store/your/less/files/
 
 Next, create a directory for your theme, and add a ``theme.less`` file containing

@@ -2,7 +2,7 @@
 `cradmin_resetpassword` --- A password reset workflow
 #####################################################
 
-The purpose of the :mod:`django_cradmin.apps.cradmin_resetpassword` app is to provide a
+The purpose of the :mod:`cradmin_legacy.apps.cradmin_resetpassword` app is to provide a
 general purpose password reset workflow.
 
 It is designed to work with any user model as long as it
@@ -17,9 +17,9 @@ Add the following to ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
         # ...
-        'django_cradmin',
-        'django_cradmin.apps.cradmin_generic_token_with_metadata',
-        'django_cradmin.apps.cradmin_resetpassword',
+        'cradmin_legacy',
+        'cradmin_legacy.apps.cradmin_generic_token_with_metadata',
+        'cradmin_legacy.apps.cradmin_resetpassword',
     )
 
 
@@ -27,7 +27,7 @@ And add something like this to your root url config::
 
     urlpatterns = patterns(
         # ...
-        url(r'^resetpassword/', include('django_cradmin.apps.cradmin_resetpassword.urls')),
+        url(r'^resetpassword/', include('cradmin_legacy.apps.cradmin_resetpassword.urls')),
         # ...
     )
 

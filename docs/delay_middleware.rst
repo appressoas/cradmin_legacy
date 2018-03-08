@@ -2,7 +2,7 @@
 `delay_middleware` --- Middleware for testing how your app behaves with latency
 ###############################################################################
 
-.. currentmodule:: django_cradmin.delay_middleware
+.. currentmodule:: cradmin_legacy.delay_middleware
 
-.. automodule:: django_cradmin.delay_middleware
+.. automodule:: cradmin_legacy.delay_middleware
     :members:

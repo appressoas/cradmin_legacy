@@ -13,5 +13,5 @@ TODO
 API
 ***
 
-.. currentmodule:: django_cradmin.viewhelpers.objecttable
-.. automodule:: django_cradmin.viewhelpers.objecttable
+.. currentmodule:: cradmin_legacy.viewhelpers.objecttable
+.. automodule:: cradmin_legacy.viewhelpers.objecttable

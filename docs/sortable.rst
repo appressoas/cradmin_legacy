@@ -10,8 +10,8 @@ To make a model sortable, you need the following two additions to your model:
 
 Example::
 
-    from django_cradmin.sortable.models import SortableBase
-    from django_cradmin.sortable.models import SortableManagerBase
+    from cradmin_legacy.sortable.models import SortableBase
+    from cradmin_legacy.sortable.models import SortableManagerBase
 
     class MySortableItemManager(SortableManagerBase):
         parent_attribute = 'container'
@@ -35,11 +35,11 @@ Custom QuerySet with sortable
 *****************************
 
 If you want to use a custom queryset with SortableBase, you need to extend
-:class:`django_cradmin.sortable.models.SortableQuerySetBase`. Example::
+:class:`cradmin_legacy.sortable.models.SortableQuerySetBase`. Example::
 
-    from django_cradmin.sortable.models import SortableBase
-    from django_cradmin.sortable.models import SortableManagerBase
-    from django_cradmin.sortable.models import SortableQuerySetBase
+    from cradmin_legacy.sortable.models import SortableBase
+    from cradmin_legacy.sortable.models import SortableManagerBase
+    from cradmin_legacy.sortable.models import SortableQuerySetBase
 
     class MySortableItemQuerySet(SortableQuerySetBase):
         def my_queryset_method(self):
@@ -65,9 +65,9 @@ How to sort
 
 Sorting is done by using these methods:
 
-- :meth:`django_cradmin.sortable.models.SortableManagerBase.sort_before`
-- :meth:`django_cradmin.sortable.models.SortableManagerBase.sort_last`
-- :meth:`django_cradmin.sortable.models.SortableManagerBase.set_newitem_sort_index_to_last`
+- :meth:`cradmin_legacy.sortable.models.SortableManagerBase.sort_before`
+- :meth:`cradmin_legacy.sortable.models.SortableManagerBase.sort_last`
+- :meth:`cradmin_legacy.sortable.models.SortableManagerBase.set_newitem_sort_index_to_last`
 
 Example::
 
@@ -91,10 +91,10 @@ Example::
 Makin an Admin UI that automatically adds items last in parent
 **************************************************************
 Making an Admin UI that automatically adds items last in parent is easy. Just extend
-:class:`django_cradmin.sortable.admin.SortableModelAdmin` instead of
+:class:`cradmin_legacy.sortable.admin.SortableModelAdmin` instead of
 ``django.contrib.admin.ModelAdmin``::
 
-    from django_cradmin.sortable.admin import SortableModelAdmin
+    from cradmin_legacy.sortable.admin import SortableModelAdmin
 
     class MySortableItemAdmin(SortableModelAdmin):
         pass
@@ -112,14 +112,14 @@ with something like this::
 API
 ***
 
-.. autoclass:: django_cradmin.sortable.models.SortableQuerySetBase
+.. autoclass:: cradmin_legacy.sortable.models.SortableQuerySetBase
     :members:
 
-.. autoclass:: django_cradmin.sortable.models.SortableManagerBase
+.. autoclass:: cradmin_legacy.sortable.models.SortableManagerBase
     :members:
 
-.. autoclass:: django_cradmin.sortable.models.SortableBase
+.. autoclass:: cradmin_legacy.sortable.models.SortableBase
     :members:
 
-.. autoclass:: django_cradmin.sortable.admin.SortableModelAdmin
+.. autoclass:: cradmin_legacy.sortable.admin.SortableModelAdmin
     :members:

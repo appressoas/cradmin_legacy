@@ -5,7 +5,7 @@ Localization/internationalization/translation
 ********************************
 How we organize the translations
 ********************************
-All translations are added to ``django_cradmin/locale/``.
+All translations are added to ``cradmin_legacy/locale/``.
 We do not add translation per app for the following reasons:
 
 - There are lots of overlapping translation strings.
@@ -48,7 +48,7 @@ Below we go in detail for each of these steps. All commands assume the
 following::
 
     $ cd /path/to/reporoot
-    $ workon django_cradmin
+    $ workon cradmin_legacy
 
 
 Mark new translations or change existing translations
@@ -66,7 +66,7 @@ We have a fabric task for that::
 
     $ inv makemessages
 
-Commit the changes to the ``.po``-files in ``django_cradmin/locale/``.
+Commit the changes to the ``.po``-files in ``cradmin_legacy/locale/``.
 
 
 Push translation files to Transifex
@@ -83,8 +83,8 @@ Compile translations and commit the .mo files
 We have a fabric task for compiling the translations::
 
     $ cd /path/to/reporoot
-    $ workon django_cradmin
+    $ workon cradmin_legacy
     $ inv compilemessages
 
-This should change some ``.mo``-files in ``django_cradmin/locale/``.
+This should change some ``.mo``-files in ``cradmin_legacy/locale/``.
 Commit those files.

@@ -2,7 +2,7 @@
 `utils.crhumanize` --- Utilities for humanizing data
 ####################################################
 
-.. currentmodule:: django_cradmin.utils.crhumanize
+.. currentmodule:: cradmin_legacy.utils.crhumanize
 
-.. automodule:: django_cradmin.utils.crhumanize
+.. automodule:: cradmin_legacy.utils.crhumanize
     :members:

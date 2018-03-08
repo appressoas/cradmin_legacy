@@ -6,16 +6,16 @@ Django cradmin 1.1.1 releasenotes
 ************
 What is new?
 ************
-``django_cradmin.viewhelpers`` can now be imported with ``from django_cradmin import viewhelpers``.
+``cradmin_legacy.viewhelpers`` can now be imported with ``from cradmin_legacy import viewhelpers``.
 Example::
 
-    from django_cradmin import viewhelpers
+    from cradmin_legacy import viewhelpers
 
     class MyCreateView(viewhelpers.create.CreateView):
         pass  # more code here ...
 
 The imported ``viewhelpers`` object does not include ``listbuilder``, ``listfilter`` or ``multiselect2``,
-they should still be imported using ``from django_cradmin.viewhelpers import <module>``.
+they should still be imported using ``from cradmin_legacy.viewhelpers import <module>``.
 
 
 ****************

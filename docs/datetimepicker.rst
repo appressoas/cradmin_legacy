@@ -3,7 +3,7 @@ Date/time picker widgets
 ########################
 
 
-.. currentmodule:: django_cradmin.widgets.datetimepicker
+.. currentmodule:: cradmin_legacy.widgets.datetimepicker
 
-.. automodule:: django_cradmin.widgets.datetimepicker
+.. automodule:: cradmin_legacy.widgets.datetimepicker
     :members:

@@ -2,9 +2,9 @@
 `cradmin_generic_token_with_metadata` --- Secure generic tokens with metadata
 #############################################################################
 
-.. currentmodule:: django_cradmin.apps.cradmin_generic_token_with_metadata.models
+.. currentmodule:: cradmin_legacy.apps.cradmin_generic_token_with_metadata.models
 
-The purpose of the :mod:`django_cradmin.apps.cradmin_generic_token_with_metadata` app is to provide
+The purpose of the :mod:`cradmin_legacy.apps.cradmin_generic_token_with_metadata` app is to provide
 secure and unique tokens with attached metadata. The tokens are suitable for email confirmation
 workflows and public share urls.
 
@@ -19,7 +19,7 @@ How it works
 ************
 Lets say you have an object and want to generate a unique token for that object::
 
-    from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+    from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
     from django.contrib.auth import get_user_model
 
     myuser = get_user_model().get(...)  # The user is the object the token is for.
@@ -138,5 +138,5 @@ or the ``cradmin_generic_token_with_metadata_delete_expired`` management command
 API
 ***
 
-.. automodule:: django_cradmin.apps.cradmin_generic_token_with_metadata.models
+.. automodule:: cradmin_legacy.apps.cradmin_generic_token_with_metadata.models
     :members:

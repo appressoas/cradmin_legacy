@@ -2,5 +2,5 @@
 CRInstance
 ##########
 
-.. automodule:: django_cradmin.crinstance
+.. automodule:: cradmin_legacy.crinstance
    :members:

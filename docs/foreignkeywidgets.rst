@@ -27,7 +27,7 @@ The components that make up forkeignkey selection
 - A view that makes it possible to browse and select the foreignkey.
   Preferrable this view should also support adding the item in addition
   to selecting an existing one.
-  :class:`django_cradmin.viewhelpers.objecttable.ObjectTableView`
+  :class:`cradmin_legacy.viewhelpers.objecttable.ObjectTableView`
   supports this.
 - A comination of javascript and querystring arguments to transport the
   information between the views:
@@ -52,7 +52,7 @@ The components that make up forkeignkey selection
 
 Model choice widgets
 ====================
-We currently only have one model choice widget: :class:`django_cradmin.widgets.ModelChoiceWidget`.
+We currently only have one model choice widget: :class:`cradmin_legacy.widgets.ModelChoiceWidget`.
 It shows a preview and a button that allows the user to trigger the foreignkey select
 overlay/popover.
 

@@ -7,8 +7,8 @@ Template tags
 cradmin_tags
 ************
 
-.. currentmodule:: django_cradmin.templatetags.cradmin_tags
-.. automodule:: django_cradmin.templatetags.cradmin_tags
+.. currentmodule:: cradmin_legacy.templatetags.cradmin_tags
+.. automodule:: cradmin_legacy.templatetags.cradmin_tags
 
 
 .. _cradmin_icon_tags:
@@ -31,10 +31,10 @@ It is used like this:
 where ``{% cradmin_icon 'search' %}`` will look up css classes for the
 icon in the ``DJANGO_CRADMIN_CSS_ICON_MAP`` Django setting.
 If ``DJANGO_CRADMIN_CSS_ICON_MAP`` is not set, we default to
-:obj:`.django_cradmin.css_icon_map.FONT_AWESOME`, but you can
+:obj:`.cradmin_legacy.css_icon_map.FONT_AWESOME`, but you can
 easily provide your own with something like this in your settings.py::
 
-    from django_cradmin import css_icon_map
+    from cradmin_legacy import css_icon_map
     DJANGO_CRADMIN_CSS_ICON_MAP = css_icon_map.FONT_AWESOME.copy()
     DJANGO_CRADMIN_CSS_ICON_MAP.update({
         'search': 'my my-search-icon'
@@ -44,8 +44,8 @@ You can even add your own icons and use ``cradmin_icon`` for your own
 views/components.
 
 
-.. currentmodule:: django_cradmin.css_icon_map
-.. automodule:: django_cradmin.css_icon_map
+.. currentmodule:: cradmin_legacy.css_icon_map
+.. automodule:: cradmin_legacy.css_icon_map
 
 
 ******************
@@ -53,8 +53,8 @@ cradmin_image_tags
 ******************
 See :doc:`imageutils` for examples.and details.
 
-.. currentmodule:: django_cradmin.templatetags.cradmin_image_tags
-.. automodule:: django_cradmin.templatetags.cradmin_image_tags
+.. currentmodule:: cradmin_legacy.templatetags.cradmin_image_tags
+.. automodule:: cradmin_legacy.templatetags.cradmin_image_tags
 
 
 ******************
