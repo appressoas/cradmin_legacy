@@ -43,7 +43,7 @@ class ActivationEmail(emailutils.AbstractEmail):
         self.user = user
         self.request = request
         self.next_url = next_url or getattr(
-            settings, 'DJANGO_CRADMIN_ACTIVATE_ACCOUNT_DEFAULT_NEXT_URL', settings.LOGIN_URL)
+            settings, 'CRADMIN_LEGACY_ACTIVATE_ACCOUNT_DEFAULT_NEXT_URL', settings.LOGIN_URL)
         self.token = self.generate_token()
         super(ActivationEmail, self).__init__(recipient=self.user.email)
 
@@ -70,10 +70,10 @@ class ActivationEmail(emailutils.AbstractEmail):
         """
         Get the email sender address.
 
-        Defaults to the ``DJANGO_CRADMIN_ACTIVATE_ACCOUNT_FROM_EMAIL`` setting
+        Defaults to the ``CRADMIN_LEGACY_ACTIVATE_ACCOUNT_FROM_EMAIL`` setting
         falling back on the ``DEFAULT_FROM_EMAIL`` setting.
         """
-        return getattr(settings, 'DJANGO_CRADMIN_ACTIVATE_ACCOUNT_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
+        return getattr(settings, 'CRADMIN_LEGACY_ACTIVATE_ACCOUNT_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
 
     def get_expiration_datetime(self):
         """

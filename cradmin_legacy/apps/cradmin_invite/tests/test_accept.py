@@ -80,7 +80,7 @@ class TestAbstractAcceptInviteView(TestCase):
         request = self.factory.get('/test')
         request.user = create_user('testuser')
         token = self.__create_token()
-        with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+        with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
             response = AcceptInviteView.as_view()(request, token=token.token)
         self.assertEqual(response.status_code, 200)
         response.render()
@@ -108,7 +108,7 @@ class TestAbstractAcceptInviteView(TestCase):
         request = self.factory.get('/test')
         request.user = AnonymousUser()
         token = self.__create_token()
-        with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+        with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
             response = AcceptInviteView.as_view()(request, token=token.token)
         self.assertEqual(response.status_code, 200)
         response.render()

@@ -57,5 +57,5 @@ You will also typically want to use variables as much as possible. Lots of thing
 can be adjusted by just changing a couple of bootstrap and cradmin LESS variables.
 
 How you build the theme is up to you, but you need to build ``yourtheme/theme.less``
-and update the ``DJANGO_CRADMIN_THEME_PATH``-setting to point to your theme
-(see :setting:`DJANGO_CRADMIN_THEME_PATH`).
+and update the ``CRADMIN_LEGACY_THEME_PATH``-setting to point to your theme
+(see :setting:`CRADMIN_LEGACY_THEME_PATH`).

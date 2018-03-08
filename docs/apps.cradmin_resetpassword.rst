@@ -38,20 +38,20 @@ Configure
 *********
 
 Required settings:
-    DJANGO_CRADMIN_SITENAME
+    CRADMIN_LEGACY_SITENAME
         The name of the site.
         You **must set this setting** unless you override the email subject
         and message templates as explained in :ref:`password_reset_emailtemplates`.
 
 Optional settings:
-    DJANGO_CRADMIN_RESETPASSWORD_NO_SUCCESS_MESSAGE
+    CRADMIN_LEGACY_RESETPASSWORD_NO_SUCCESS_MESSAGE
         Set this to `False` to prevent adding a message to ``django.contrib.messages``
         on success. More details in :ref:`password_reset_step_three`.
 
-    DJANGO_CRADMIN_RESETPASSWORD_FROM_EMAIL
+    CRADMIN_LEGACY_RESETPASSWORD_FROM_EMAIL
         Defaults to the ``DEFAULT_FROM_EMAIL`` setting.
 
-    DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL
+    CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL
         The URL to redirect to when the password has been reset.
         Defaults to the ``LOGIN_URL`` setting. More details in :ref:`password_reset_step_three`.
 
@@ -91,10 +91,10 @@ After updating the password, we add:
     Your password has been updated.
 
 to ``django.contrib.messages.success`` and redirect to the url
-configured in the ``DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL``
+configured in the ``CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL``
 setting.
 
-You can set `DJANGO_CRADMIN_RESETPASSWORD_NO_SUCCESS_MESSAGE = False` to prevent
+You can set `CRADMIN_LEGACY_RESETPASSWORD_NO_SUCCESS_MESSAGE = False` to prevent
 adding a message to ``django.contrib.messages``.
 
 Override the ``cradmin_passwordreset/successmessage.django.html``
@@ -132,14 +132,14 @@ cradmin_passwordreset/email/subject.django.txt
 
     Template context variables:
 
-    - ``DJANGO_CRADMIN_SITENAME``: The value of the setting with the same name.
+    - ``CRADMIN_LEGACY_SITENAME``: The value of the setting with the same name.
 
 cradmin_passwordreset/email/html_message.django.txt
     Override this to change the email message.
 
     Template context variables:
 
-    - ``DJANGO_CRADMIN_SITENAME``: The value of the setting with the same name.
+    - ``CRADMIN_LEGACY_SITENAME``: The value of the setting with the same name.
     - ``reset_url``: The URL that users should click to reset their password.
     - ``user``: The user that is resetting their email.
 

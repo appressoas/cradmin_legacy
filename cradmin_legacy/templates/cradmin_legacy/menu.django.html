@@ -12,8 +12,8 @@
             cradmin-legacy-menu
             cradmin-legacy-menu-autodetect-overflow-y="cradmin-legacy-menu-overflow-y"
             {% block scrollfixed %}
-                {% if DJANGO_CRADMIN_MENU_SCROLL_TOP_FIXED %}
-                    cradmin-legacy-scroll-top-fixed='{{ DJANGO_CRADMIN_MENU_SCROLL_TOP_FIXED|cradmin_jsonencode }}'
+                {% if CRADMIN_LEGACY_MENU_SCROLL_TOP_FIXED %}
+                    cradmin-legacy-scroll-top-fixed='{{ CRADMIN_LEGACY_MENU_SCROLL_TOP_FIXED|cradmin_jsonencode }}'
                 {% endif %}
             {% endblock scrollfixed %}
             class="{% block css-class %}cradmin-legacy-menu{% endblock %}">

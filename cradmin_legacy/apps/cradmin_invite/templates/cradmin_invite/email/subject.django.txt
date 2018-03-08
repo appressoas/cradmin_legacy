@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans with sitename=DJANGO_CRADMIN_SITENAME %}Invitation to {{ sitename }}{% endblocktrans %}
+{% blocktrans with sitename=CRADMIN_LEGACY_SITENAME %}Invitation to {{ sitename }}{% endblocktrans %}

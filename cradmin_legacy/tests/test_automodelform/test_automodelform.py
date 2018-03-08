@@ -168,7 +168,7 @@ class TestModelForm(test.TestCase):
         mockview = mock.MagicMock()
         mockview.request.build_absolute_uri.return_value = 'testimage.png'
 
-        with self.settings(DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP={}):
+        with self.settings(CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP={}):
             selector = htmls.S(MyModelForm(view=mockview,
                                            instance=autoformtestmodelobject).as_ul())
         self.assertTrue(selector.exists('input[type="file"][name="imagefield"]'))

@@ -6,7 +6,7 @@ def get_setting(settingvariable, fallback=None):
 
 
 def get_cradmin_legacy_menu_scroll_top_fixed_setting():
-    scroll_top_fixed_settings = get_setting('DJANGO_CRADMIN_MENU_SCROLL_TOP_FIXED', False)
+    scroll_top_fixed_settings = get_setting('CRADMIN_LEGACY_MENU_SCROLL_TOP_FIXED', False)
     if scroll_top_fixed_settings is True:
         return {
             'cssClasses': {
@@ -19,15 +19,15 @@ def get_cradmin_legacy_menu_scroll_top_fixed_setting():
 
 def cradmin(request):
     return {
-        'DJANGO_CRADMIN_THEME_PATH': get_setting(
-            'DJANGO_CRADMIN_THEME_PATH',
+        'CRADMIN_LEGACY_THEME_PATH': get_setting(
+            'CRADMIN_LEGACY_THEME_PATH',
             'cradmin_legacy/dist/css/cradmin_theme_default/theme.css'),
-        'DJANGO_CRADMIN_MENU_SCROLL_TOP_FIXED': get_cradmin_legacy_menu_scroll_top_fixed_setting(),
-        'DJANGO_CRADMIN_MOMENTJS_LOCALE': get_setting(
-            'DJANGO_CRADMIN_MOMENTJS_LOCALE', None),
-        'DJANGO_CRADMIN_CSS_ICON_LIBRARY_PATH': get_setting(
-            'DJANGO_CRADMIN_CSS_ICON_LIBRARY_PATH',
+        'CRADMIN_LEGACY_MENU_SCROLL_TOP_FIXED': get_cradmin_legacy_menu_scroll_top_fixed_setting(),
+        'CRADMIN_LEGACY_MOMENTJS_LOCALE': get_setting(
+            'CRADMIN_LEGACY_MOMENTJS_LOCALE', None),
+        'CRADMIN_LEGACY_CSS_ICON_LIBRARY_PATH': get_setting(
+            'CRADMIN_LEGACY_CSS_ICON_LIBRARY_PATH',
             'cradmin_legacy/dist/vendor/fonts/fontawesome/css/font-awesome.min.css'),
-        'DJANGO_CRADMIN_HIDE_PAGE_HEADER': get_setting(
-            'DJANGO_CRADMIN_HIDE_PAGE_HEADER', False),
+        'CRADMIN_LEGACY_HIDE_PAGE_HEADER': get_setting(
+            'CRADMIN_LEGACY_HIDE_PAGE_HEADER', False),
     }

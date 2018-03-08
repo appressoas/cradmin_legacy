@@ -83,7 +83,7 @@ class TestSendActivationEmail(TestCase):
         testrequest = mock.MagicMock()
         testrequest.build_absolute_uri = lambda path: 'http://testserver{}'.format(path)
 
-        with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+        with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
             InviteUrlWithStaticTokenMock(request=testrequest, content_object=self.invite_target, private=True)\
                 .send_email('test@example.com')
         self.assertEqual(len(mail.outbox), 1)
@@ -97,7 +97,7 @@ class TestSendActivationEmail(TestCase):
         testrequest = mock.MagicMock()
         testrequest.build_absolute_uri = lambda path: 'http://testserver{}'.format(path)
 
-        with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+        with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
             inviteurl = InviteUrlWithTokenIteratorMock(
                 request=testrequest, content_object=self.invite_target, private=True)
             inviteurl.send_email('test1@example.com', 'test2@example.com', 'test3@example.com')
@@ -109,7 +109,7 @@ class TestSendActivationEmail(TestCase):
         testrequest = mock.MagicMock()
         testrequest.build_absolute_uri = lambda path: 'http://testserver{}'.format(path)
 
-        with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+        with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
             inviteurl = InviteUrlWithTokenIteratorMock(
                 request=testrequest, content_object=self.invite_target, private=False)
             inviteurl.send_email('test1@example.com', 'test2@example.com', 'test3@example.com')

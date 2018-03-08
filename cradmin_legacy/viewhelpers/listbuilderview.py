@@ -63,9 +63,9 @@ class ViewMixin(object):
         Return ``True`` if we should hide the page header.
 
         You can override this, or set :obj:`.hide_page_header`, or hide the page header
-        in all form views with the ``DJANGO_CRADMIN_HIDE_PAGEHEADER_IN_LISTVIEWS`` setting.
+        in all form views with the ``CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTVIEWS`` setting.
         """
-        return self.hide_page_header or getattr(settings, 'DJANGO_CRADMIN_HIDE_PAGEHEADER_IN_LISTVIEWS', False)
+        return self.hide_page_header or getattr(settings, 'CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTVIEWS', False)
 
     def get_enable_previews(self):
         """

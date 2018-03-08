@@ -9,7 +9,7 @@ class TestEmailSentView(TestCase):
         self.url = reverse('cradmin-resetpassword-email-sent')
 
     def test_get(self):
-        with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+        with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
             response = self.client.get(self.url)
         selector = htmls.S(response.content)
         self.assertEqual(selector.one('h1').alltext_normalized, 'Check your email')

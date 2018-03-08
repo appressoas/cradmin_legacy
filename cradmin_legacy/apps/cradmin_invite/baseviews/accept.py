@@ -47,7 +47,7 @@ class AbstractAcceptInviteView(TemplateView):
         """
         Get the label of the *Sign up* button.
         """
-        return _('Sign up for %(sitename)s') % {'sitename': settings.DJANGO_CRADMIN_SITENAME}
+        return _('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
 
     def get_login_as_different_user_button_label(self):
         """

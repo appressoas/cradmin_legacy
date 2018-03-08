@@ -75,11 +75,11 @@ class ImageColumn(objecttable.ImagePreviewColumn):
         if self.column_width:
             return self.column_width
         else:
-            width = crsettings.get_setting('DJANGO_CRADMIN_IMAGEARCHIVE_LISTING_IMAGEWIDTH', 100)
+            width = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGEWIDTH', 100)
             return '{}px'.format(width)
 
     def get_preview_imagetype(self):
-        imagetype_from_settings = crsettings.get_setting('DJANGO_CRADMIN_IMAGEARCHIVE_LISTING_IMAGETYPE')
+        imagetype_from_settings = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGETYPE')
         if self.preview_imagetype:
             return self.preview_imagetype
         elif imagetype_from_settings:
@@ -106,7 +106,7 @@ def get_bulkupload_apiparameters():
     apiparameters = {
         'accept': 'image/png,image/jpeg,image/gif',
     }
-    max_filesize_bytes = crsettings.get_setting('DJANGO_CRADMIN_IMAGEARCHIVE_MAX_FILESIZE', None)
+    max_filesize_bytes = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_MAX_FILESIZE', None)
     if max_filesize_bytes is not None:
         apiparameters['max_filesize_bytes'] = crhumanize.dehumanize_readable_filesize(max_filesize_bytes)
     return apiparameters

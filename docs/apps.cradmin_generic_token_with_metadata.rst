@@ -101,16 +101,16 @@ reset request, we do something like the following::
 Configure
 *********
 You can configure the time to live of the generated tokens using the
-``DJANGO_CRADMIN_SECURE_USER_TOKEN_TIME_TO_LIVE_MINUTES`` setting::
+``CRADMIN_LEGACY_SECURE_USER_TOKEN_TIME_TO_LIVE_MINUTES`` setting::
 
-    DJANGO_CRADMIN_SECURE_USER_TOKEN_TIME_TO_LIVE_MINUTES = {
+    CRADMIN_LEGACY_SECURE_USER_TOKEN_TIME_TO_LIVE_MINUTES = {
         'default': 1440,
         'myapp': 2500
     }
 
 It defaults to::
 
-    DJANGO_CRADMIN_SECURE_USER_TOKEN_TIME_TO_LIVE_MINUTES = {
+    CRADMIN_LEGACY_SECURE_USER_TOKEN_TIME_TO_LIVE_MINUTES = {
         'default': 60*24*4
     }
 

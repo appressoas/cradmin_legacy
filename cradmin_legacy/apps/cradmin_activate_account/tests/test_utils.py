@@ -29,7 +29,7 @@ class TestSendActivationEmail(TestCase):
         testrequest.build_absolute_uri = lambda path: 'http://testserver{}'.format(path)
 
         with mock.patch.object(ActivationEmail, 'generate_token', lambda s: testtoken):
-            with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+            with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
                 ActivationEmail(user=self.testuser, request=testrequest).send()
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, 'Activate your Testsite account')

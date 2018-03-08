@@ -95,7 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'cradmin_legacy.delay_middleware.DelayMiddleware',
 )
-# DJANGO_CRADMIN_DELAY_MIDDLEWARE_MILLISECONDS = 2000
+# CRADMIN_LEGACY_DELAY_MIDDLEWARE_MILLISECONDS = 2000
 
 TEMPLATES = [
     {
@@ -202,17 +202,17 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/authenticate/login'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-DJANGO_CRADMIN_SITENAME = 'Cradmin demo'
-DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL = LOGIN_REDIRECT_URL
-DJANGO_CRADMIN_FORGOTPASSWORD_URL = '/resetpassword/begin'
+CRADMIN_LEGACY_SITENAME = 'Cradmin demo'
+CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL = LOGIN_REDIRECT_URL
+CRADMIN_LEGACY_FORGOTPASSWORD_URL = '/resetpassword/begin'
 
-DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
+CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS = \
     'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountAutoUsernameForm'
-# DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
+# CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS = \
 #     'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
 
 
-DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND = True
+CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND = True
 
 AUTHENTICATION_BACKENDS = (
     'cradmin_legacy.apps.cradmin_authenticate.backends.EmailAuthBackend',
@@ -222,9 +222,9 @@ TIME_INPUT_FORMATS = [
     '%H:%M:%S',     # '14:30:59'
 ]
 
-# DJANGO_CRADMIN_THEME_PATH = 'cradmin_legacy/dist/css/cradmin_theme_topmenu/theme.css'
-DJANGO_CRADMIN_MENU_SCROLL_TOP_FIXED = True
-# DJANGO_CRADMIN_MOMENTJS_LOCALE = 'nb'
+# CRADMIN_LEGACY_THEME_PATH = 'cradmin_legacy/dist/css/cradmin_theme_topmenu/theme.css'
+CRADMIN_LEGACY_MENU_SCROLL_TOP_FIXED = True
+# CRADMIN_LEGACY_MOMENTJS_LOCALE = 'nb'
 
 
 # Internationalization
@@ -242,7 +242,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP = {
+CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP = {
     'cradmin-webdemo-pages-listing': {
         'width': 300,
         'height': 200,
@@ -263,10 +263,10 @@ DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP = {
     },
 }
 
-DJANGO_CRADMIN_IMAGEARCHIVE_LISTING_IMAGETYPE = 'cradmin-archiveimage-listing'
-DJANGO_CRADMIN_IMAGEARCHIVE_LISTING_IMAGEWIDTH = 170
-DJANGO_CRADMIN_IMAGEARCHIVE_PREVIEW_IMAGETYPE = 'cradmin-archiveimage-preview'
-# DJANGO_CRADMIN_IMAGEARCHIVE_MAX_FILESIZE = '100KB'
+CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGETYPE = 'cradmin-archiveimage-listing'
+CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGEWIDTH = 170
+CRADMIN_LEGACY_IMAGEARCHIVE_PREVIEW_IMAGETYPE = 'cradmin-archiveimage-preview'
+# CRADMIN_LEGACY_IMAGEARCHIVE_MAX_FILESIZE = '100KB'
 
 
 IEVVTASKS_DOCS_DIRECTORY = 'docs'

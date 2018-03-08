@@ -81,5 +81,5 @@ class TestEmailLogin(TestCase):
 
 TestEmailLogin = override_settings(
     AUTH_USER_MODEL='cradmin_authenticate_testapp.EmailUser',
-    DJANGO_CRADMIN_USE_EMAIL_AUTH=True
+    CRADMIN_LEGACY_USE_EMAIL_AUTH=True
 )(TestEmailLogin)

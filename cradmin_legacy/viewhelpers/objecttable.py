@@ -952,9 +952,9 @@ class ObjectTableView(ListView):
         Return ``True`` if we should hide the page header.
 
         You can override this, or set :obj:`.hide_page_header`, or hide the page header
-        in all listing views with the ``DJANGO_CRADMIN_HIDE_PAGEHEADER_IN_LISTINGVIEWS`` setting.
+        in all listing views with the ``CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTINGVIEWS`` setting.
         """
-        return self.hide_page_header or getattr(settings, 'DJANGO_CRADMIN_HIDE_PAGEHEADER_IN_LISTINGVIEWS', False)
+        return self.hide_page_header or getattr(settings, 'CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTINGVIEWS', False)
 
     def get_no_items_message_template_name(self):
         """

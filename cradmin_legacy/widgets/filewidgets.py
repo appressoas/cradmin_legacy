@@ -38,7 +38,7 @@ class ImageWidget(forms.ClearableFileInput):
 
     def get_preview_css_styles(self):
         if self.preview_imagetype:
-            options = settings.DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP[self.preview_imagetype]
+            options = settings.CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP[self.preview_imagetype]
         else:
             options = self.preview_fallback_options
         styles = []

@@ -252,7 +252,7 @@ def cradmin_theme_staticpath(context):
                 theme_path = str(theme_path)
         if not theme_path:
             theme_path = getattr(settings,
-                                 'DJANGO_CRADMIN_THEME_PATH',
+                                 'CRADMIN_LEGACY_THEME_PATH',
                                  'cradmin_legacy/dist/css/cradmin_theme_default/theme.css')
         return static(theme_path)
     else:

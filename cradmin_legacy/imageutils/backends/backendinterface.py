@@ -4,14 +4,14 @@ from django.conf import settings
 class ImageTypeMapSettingNotDefined(Exception):
     """
     Raised when :meth:`.Interface.transform_image_using_imagetype` is called
-    when the ``DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP`` setting is not defined.
+    when the ``CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP`` setting is not defined.
     """
 
 
 class InvalidImageType(Exception):
     """
     Raised when :meth:`.Interface.transform_image_using_imagetype` is called
-    with an ``imagetype`` not in the ``DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP``
+    with an ``imagetype`` not in the ``CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP``
     setting.
     """
 
@@ -21,7 +21,7 @@ class Interface(object):
     Imageutils backend interface.
 
     An object of subclass of this interface is loaded via the
-    ``DJANGO_CRADMIN_IMAGEUTILS_BACKEND`` setting, and the object
+    ``CRADMIN_LEGACY_IMAGEUTILS_BACKEND`` setting, and the object
     is a singleton that only has one instance for the entire
     Django server process.
     """
@@ -52,19 +52,19 @@ class Interface(object):
     def transform_image_using_imagetype(self, imageurl, imagetype):
         """
         Works just like :meth:`.transform_image`, except that the
-        options is retrieved from the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting.
+        options is retrieved from the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
 
-        Raises :exc:`.ImageTypeMapSettingNotDefined` if the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP`
+        Raises :exc:`.ImageTypeMapSettingNotDefined` if the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP`
         setting is not defined.
 
         Raises :exc:`.InvalidImageType` if the ``imagetype`` key is not defined in
-        the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting.
+        the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
         """
-        if not hasattr(settings, 'DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP'):
-            raise ImageTypeMapSettingNotDefined('The DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP setting is not defined.')
+        if not hasattr(settings, 'CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP'):
+            raise ImageTypeMapSettingNotDefined('The CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP setting is not defined.')
         try:
-            options = settings.DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP[imagetype]
+            options = settings.CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP[imagetype]
         except KeyError:
             raise InvalidImageType('The requested imagetype, {}, is not specified in the '
-                                   'DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP setting.'.format(imagetype))
+                                   'CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP setting.'.format(imagetype))
         return self.transform_image(imageurl, **options)

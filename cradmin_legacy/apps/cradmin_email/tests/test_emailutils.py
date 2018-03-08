@@ -48,7 +48,7 @@ class TestAbstractEmail(TestCase):
         class MyEmail(emailutils.AbstractEmail):
             subject_template = 'cradmin_email_testapp/abstractemail/subject.django.txt'
             html_message_template = 'cradmin_email_testapp/abstractemail/html_message.django.html'
-        with self.settings(DJANGO_CRADMIN_EMAIL_SUBJECT_PREFIX='[Testbrand] '):
+        with self.settings(CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX='[Testbrand] '):
             MyEmail(recipient='test@example.com', extra_context_data={'name': 'Test'}).send()
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, '[Testbrand] Hello, Test')

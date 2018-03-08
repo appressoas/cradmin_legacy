@@ -227,7 +227,7 @@ class EditDeleteWithArchiveImage(EditDelete):
         Get the ``fallbackoptions`` to use to scale/format the image.
         These options are used when the imagetype returned by
         :meth:`.get_imagetype` is not defined in the
-        :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting.
+        :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
 
         See :func:`cradmin_legacy.templatetags.cradmin_legacy_image_tags.cradmin_create_archiveimage_tag`
         for more information on ``fallbackoptions``.

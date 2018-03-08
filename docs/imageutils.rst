@@ -22,7 +22,7 @@ The interface defines two central methods:
   directly)
 - :meth:`~cradmin_legacy.imageutils.backends.backendinterface.Interface.transform_image_using_imagetype`
   --- Works just like ``transform_image``, except that it takes the transformation options
-  as a key in the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting (a dict) instead of
+  as a key in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting (a dict) instead of
   specifying options directly. This is much more maintainable in a project since it gives
   a clear overview of all image transformations used in a single place.
 
@@ -34,20 +34,20 @@ To swap out the backend, you need to:
 
 1. Create a custom imageutils class as a subclass of
    :class:`cradmin_legacy.imageutils.backends.backendinterface.Interface`.
-2. Update the :setting:`DJANGO_CRADMIN_IMAGEUTILS_BACKEND` setting with the
+2. Update the :setting:`CRADMIN_LEGACY_IMAGEUTILS_BACKEND` setting with the
    string path to your custom imageutils backend class.
 
 
 ************************************************************
 Avoid specifying image transformations all over the codebase
 ************************************************************
-We provide the ``DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP``
+We provide the ``CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP``
 setting where you can map imagetype (a name you define) mapped
 to options for :meth:`cradmin_legacy.imageutils.backends.backendinterface.Interface.transform_image`.
 
 Example::
 
-    DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP = {
+    CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP = {
         'logo': {
             'width': 200,
             'height': 60,
@@ -74,7 +74,7 @@ See the examples below for information about how to use this in code and templat
     Your custom backend can support many more options than
     the default backend, and you can add any options supported by your
     ``cradmin_legacy.imageutils`` backend to the
-    :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting.
+    :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
 
 
 ********
@@ -84,7 +84,7 @@ Examples
 In Python code
 ==============
 Create an image URL in Python code from an imagetype specified
-in the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting::
+in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting::
 
     from cradmin_legacy import imageutils
     url = imageutils.get_backend().transform_image_using_imagetype(
@@ -102,7 +102,7 @@ In Django templates
 ===================
 
 Create an image URL in a Django template from an imagetype specified
-in the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting:
+in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting:
 
 .. code-block:: htmldjango
 
@@ -111,7 +111,7 @@ in the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting:
     <img src="{% cradmin_transform_image_using_imagetype myimage.url 'imagelisting-same-width' %}">
 
 Create an ``<img>`` tag in a Django template from an imagetype specified
-in the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting:
+in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting:
 
 .. code-block:: htmldjango
 

@@ -37,7 +37,7 @@ class TestBeginPasswordResetView(TestCase):
     def test_post_user_found(self):
         create_user('testuser', email='testuser@example.com')
         with mock.patch.object(BeginPasswordResetView, '_generate_token', lambda s, user: 'testtoken'):
-            with self.settings(DJANGO_CRADMIN_SITENAME='Testsite'):
+            with self.settings(CRADMIN_LEGACY_SITENAME='Testsite'):
                 response = self.client.post(self.url, {'email': 'testuser@example.com'})
         self.assertRedirects(response, reverse('cradmin-resetpassword-email-sent'))
 

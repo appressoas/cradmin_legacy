@@ -108,7 +108,7 @@ class EmailLoginForm(AbstractLoginForm):
     This form is used for email-based login along with the
     :class:`cradmin_legacy.apps.cradmin_authenticate.backends.EmailAuthBackend`.
 
-    This requires adding ``DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND = True`` to your ``settings.py``.
+    This requires adding ``CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND = True`` to your ``settings.py``.
 
     This will work with the default django ``User``-model, and your own custom ``User`` model,
     as long as your ``User`` model has the field ``email`` for login. If your ``email`` field
@@ -125,14 +125,14 @@ class EmailLoginForm(AbstractLoginForm):
     error_message_invalid_login = _("Your email and password didn't match. Please try again.")
 
     def model_sanity_check(self):
-        if not getattr(settings, 'DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND', False):
-            raise ValueError('The DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND must be set to use the EmailLoginForm.')
+        if not getattr(settings, 'CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND', False):
+            raise ValueError('The CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND must be set to use the EmailLoginForm.')
 
 
 class EmailLoginFormNoSanityCheck(EmailLoginForm):
     """
     This works exactly like :class:`.EmailLoginForm`, but does not require
-    ``DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND`` to be set.
+    ``CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND`` to be set.
     """
     def model_sanity_check(self):
         pass
@@ -141,7 +141,7 @@ class EmailLoginFormNoSanityCheck(EmailLoginForm):
 class LoginView(FormView):
     """
     View for handling login.
-    By default, a "forgot password" link is read from ``DJANGO_CRADMIN_FORGOTPASSWORD_URL`` to your ``settings.py``.
+    By default, a "forgot password" link is read from ``CRADMIN_LEGACY_FORGOTPASSWORD_URL`` to your ``settings.py``.
     """
     template_name = 'cradmin_authenticate/login.django.html'
 
@@ -149,14 +149,14 @@ class LoginView(FormView):
         """
         Determine which subclass of :class:`.AbstractLoginForm` should be used for login.
 
-        if ``settings.DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND`` is set, the :class:`.EmailLoginForm` will be used.
+        if ``settings.CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND`` is set, the :class:`.EmailLoginForm` will be used.
         If not, the ``user_model.USERNAME_FIELD`` will be checked, and :class:`.EmailLoginFormNoSanityCheck`
         will be used if this is ``email``, and :class:`.UsernameLoginForm` if it is set to `username`.
 
         Override this function to add your own login-form.
         """
         user_model = get_user_model()
-        if getattr(settings, 'DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND', False):
+        if getattr(settings, 'CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND', False):
             return EmailLoginForm
         elif user_model.USERNAME_FIELD == 'email':
             return EmailLoginFormNoSanityCheck
@@ -264,11 +264,11 @@ class LoginView(FormView):
 
     def get_context_data(self, **kwargs):
         """
-        adds form from :func:`get_form_helper`, and (if set) ``settings.DJANGO_CRADMIN_FORGOTPASSWORD_URL`` to
+        adds form from :func:`get_form_helper`, and (if set) ``settings.CRADMIN_LEGACY_FORGOTPASSWORD_URL`` to
         template-context.
         """
         context = super(LoginView, self).get_context_data(**kwargs)
         context['formhelper'] = self.get_form_helper()
-        context['DJANGO_CRADMIN_FORGOTPASSWORD_URL'] = getattr(
-            settings, 'DJANGO_CRADMIN_FORGOTPASSWORD_URL', None)
+        context['CRADMIN_LEGACY_FORGOTPASSWORD_URL'] = getattr(
+            settings, 'CRADMIN_LEGACY_FORGOTPASSWORD_URL', None)
         return context

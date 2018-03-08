@@ -7,12 +7,12 @@ class EmailUserCreateAccountForm(AbstractCreateAccountWithPasswordForm):
     A create account form for a custom user model with an
     email field and a ``set_password()``-method.
 
-    Can be used directly as the ``DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS``
+    Can be used directly as the ``CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS``
     setting, or extended to create a custom register account form.
 
     To use it directly, set the following setting::
 
-        DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
+        CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS = \
             'cradmin_legacy.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm'
 
     The form only includes username, email and password. To add more fields, simply

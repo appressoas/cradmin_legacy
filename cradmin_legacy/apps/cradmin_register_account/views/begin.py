@@ -15,11 +15,11 @@ class BeginRegisterAccountView(FormView):
         if self.form_class:
             return self.form_class
         else:
-            return import_string(settings.DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS)
+            return import_string(settings.CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS)
 
     def get_context_data(self, **kwargs):
         context = super(BeginRegisterAccountView, self).get_context_data(**kwargs)
-        context['DJANGO_CRADMIN_SITENAME'] = settings.DJANGO_CRADMIN_SITENAME
+        context['CRADMIN_LEGACY_SITENAME'] = settings.CRADMIN_LEGACY_SITENAME
         return context
 
     def get_success_url(self):
@@ -29,13 +29,13 @@ class BeginRegisterAccountView(FormView):
         """
         Get the next url to go to after the account has been activated.
 
-        Defaults to the ``DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL``, falling back to
+        Defaults to the ``CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL``, falling back to
         the ``LOGIN_URL`` setting.
         """
         if 'next' in self.request.GET:
             return self.request.GET['next']
         else:
-            return getattr(settings, 'DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL', settings.LOGIN_URL)
+            return getattr(settings, 'CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL', settings.LOGIN_URL)
 
     def send_activation_email(self, user):
         activation_email = ActivationEmail(

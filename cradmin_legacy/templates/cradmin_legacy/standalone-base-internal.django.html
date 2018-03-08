@@ -25,11 +25,11 @@
         <title>{% block title-pre %}{% endblock %}{% block title %}{% endblock %}{% block title-post %}{% endblock %}</title>
 
         {% block styles %}
-{#            <link href='{% if crinstance_theme_path %}{% static crinstance_theme_path %}{% else %}{% static DJANGO_CRADMIN_THEME_PATH %}{% endif %}' rel="stylesheet">#}
+{#            <link href='{% if crinstance_theme_path %}{% static crinstance_theme_path %}{% else %}{% static CRADMIN_LEGACY_THEME_PATH %}{% endif %}' rel="stylesheet">#}
             <link href='{% cradmin_theme_staticpath %}' rel="stylesheet">
         {% endblock styles %}
         {% block iconlibrary %}
-            <link href='{% static DJANGO_CRADMIN_CSS_ICON_LIBRARY_PATH %}' rel="stylesheet">
+            <link href='{% static CRADMIN_LEGACY_CSS_ICON_LIBRARY_PATH %}' rel="stylesheet">
         {% endblock iconlibrary %}
 
         {% block vendorjs %}
@@ -37,10 +37,10 @@
         {% endblock vendorjs %}
 
         {% block momentjslocale %}
-            {% if DJANGO_CRADMIN_MOMENTJS_LOCALE %}
-                <script src="{{ STATIC_URL }}cradmin_legacy/dist/vendor/momentjs-locale/{{ DJANGO_CRADMIN_MOMENTJS_LOCALE }}.js" type="text/javascript"></script>
+            {% if CRADMIN_LEGACY_MOMENTJS_LOCALE %}
+                <script src="{{ STATIC_URL }}cradmin_legacy/dist/vendor/momentjs-locale/{{ CRADMIN_LEGACY_MOMENTJS_LOCALE }}.js" type="text/javascript"></script>
                 <script>
-                  moment.locale('{{ DJANGO_CRADMIN_MOMENTJS_LOCALE }}')
+                  moment.locale('{{ CRADMIN_LEGACY_MOMENTJS_LOCALE }}')
                 </script>
             {% endif %}
         {% endblock momentjslocale %}

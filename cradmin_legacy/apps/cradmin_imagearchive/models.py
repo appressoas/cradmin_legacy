@@ -20,7 +20,7 @@ def archiveimage_upload_to(archiveimage, filename):
     if archiveimage.id is None:
         raise ValueError('Can not set image until after the ArchiveImage object has been created.')
     name, extension = os.path.splitext(filename)
-    filenamepattern = getattr(settings, 'DJANGO_CRADMIN_IMAGEARCHIVE_FILENAMEPATTERN',
+    filenamepattern = getattr(settings, 'CRADMIN_LEGACY_IMAGEARCHIVE_FILENAMEPATTERN',
                               'cradmin_imagearchive_images/{id}-{uuid}{extension}')
     return filenamepattern.format(
         id=archiveimage.id,
@@ -128,7 +128,7 @@ class ArchiveImage(models.Model):
                 absolute URI for the image.
         """
         if not imagetype:
-            imagetype = crsettings.get_setting('DJANGO_CRADMIN_IMAGEARCHIVE_PREVIEW_IMAGETYPE')
+            imagetype = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_PREVIEW_IMAGETYPE')
         context = {
             'archiveimage': self,
             'imagetype': imagetype,

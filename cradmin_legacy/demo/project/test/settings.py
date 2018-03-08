@@ -117,6 +117,6 @@ STATIC_ROOT = 'test_django_static_root'
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 ROOT_URLCONF = 'cradmin_legacy.demo.project.test.urls'
-DJANGO_CRADMIN_SITENAME = 'Testsite'
-DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
+CRADMIN_LEGACY_SITENAME = 'Testsite'
+CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS = \
     'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'

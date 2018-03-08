@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans with sitename=DJANGO_CRADMIN_SITENAME %}Reset your {{ sitename }} password{% endblocktrans %}
+{% blocktrans with sitename=CRADMIN_LEGACY_SITENAME %}Reset your {{ sitename }} password{% endblocktrans %}

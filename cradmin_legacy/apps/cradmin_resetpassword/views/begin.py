@@ -24,7 +24,7 @@ class PasswordResetEmail(emailutils.AbstractEmail):
     def get_context_data(self):
         context = super(PasswordResetEmail, self).get_context_data()
         context.update({
-            'DJANGO_CRADMIN_SITENAME': settings.DJANGO_CRADMIN_SITENAME
+            'CRADMIN_LEGACY_SITENAME': settings.CRADMIN_LEGACY_SITENAME
         })
         return context
 
@@ -66,7 +66,7 @@ class BeginPasswordResetView(FormView):
     def __send_email(self, user, reset_url):
         PasswordResetEmail(
             recipient=user.email,
-            from_email=getattr(settings, 'DJANGO_CRADMIN_RESETPASSWORD_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL),
+            from_email=getattr(settings, 'CRADMIN_LEGACY_RESETPASSWORD_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL),
             extra_context_data={
                 'user': user,
                 'reset_url': reset_url

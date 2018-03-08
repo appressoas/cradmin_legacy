@@ -57,7 +57,7 @@ class AbstractCreateAccountForm(forms.ModelForm):
 
         Override this to provide a custom label.
         """
-        return _('Sign up for %(sitename)s') % {'sitename': settings.DJANGO_CRADMIN_SITENAME}
+        return _('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
 
     def get_button_layout(self):
         """

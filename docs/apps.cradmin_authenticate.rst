@@ -42,10 +42,10 @@ Required settings:
         (see :ref:`authenticate_redirect_after_login`).
 
 Optional settings:
-    DJANGO_CRADMIN_FORGOTPASSWORD_URL
+    CRADMIN_LEGACY_FORGOTPASSWORD_URL
         If this is set, we show a forgot password link on the login page.
 
-    DJANGO_CRADMIN_USE_EMAIL_AUTH_BACKEND
+    CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND
         If this is set (``True``), we explicitly use ``email`` to login, not ``USERNAME_FIELD``. This will also work
         with the standard django user model.
 

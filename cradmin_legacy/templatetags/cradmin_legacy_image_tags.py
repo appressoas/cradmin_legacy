@@ -38,7 +38,7 @@ def cradmin_transform_image_using_imagetype(context, imageurl, imagetype, fallba
         imagetype: See
             :meth:`~cradmin_legacy.imageutils.backends.backendinterface.Interface.transform_image_using_imagetype`.
         fallbackoptions: An optional dict of options to use if ``imagetype``
-            is not in the :setting:`DJANGO_CRADMIN_IMAGEUTILS_IMAGETYPE_MAP` setting.
+            is not in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
     """
     request = context['request']
     imageurl = request.build_absolute_uri(imageurl)

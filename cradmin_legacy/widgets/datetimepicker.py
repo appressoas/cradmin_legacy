@@ -32,7 +32,7 @@ class DatePickerWidget(widgets.TextInput):
     The AngularJS directive uses momentjs.
     MomentJS has their own i18n support which we use to format date and time.
     You can override the locale/language used by momentjs via the
-    ``DJANGO_CRADMIN_MOMENTJS_LOCALE`` Django setting,
+    ``CRADMIN_LEGACY_MOMENTJS_LOCALE`` Django setting,
     and Django-cradmin contains all the locale files bundled with MomentJS.
 
     You can easily provide your own translation files as explained in the momentjs docs.

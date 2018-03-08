@@ -59,7 +59,7 @@ class ResetPasswordView(FormView):
         return context
 
     def get_success_url(self):
-        return getattr(settings, 'DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL', settings.LOGIN_URL)
+        return getattr(settings, 'CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL', settings.LOGIN_URL)
 
     def __get_success_message(self):
         return render_to_string('cradmin_resetpassword/messages/successmessage.django.html').strip()

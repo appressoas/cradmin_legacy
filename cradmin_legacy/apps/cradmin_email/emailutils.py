@@ -75,7 +75,7 @@ class AbstractEmail(object):
     #: is not set in subclasses, we autoconvert the HTML message to plain text.
     plaintext_message_template = None
 
-    #: Fallback value of the DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA setting
+    #: Fallback value of the CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA setting
     #: is not set.
     DEFAULT_CONTEXT_DATA = {
         'body_style': 'background-color: #fff;',
@@ -160,14 +160,14 @@ class AbstractEmail(object):
         """
         Get the prefix to use for the subject.
 
-        Defaults to ``settings.DJANGO_CRADMIN_EMAIL_SUBJECT_PREFIX``, falling
+        Defaults to ``settings.CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX``, falling
         back to empty string.
 
         If your privide a prefix, you should most likely include an empty
         space at the end of it.
         """
-        if hasattr(settings, 'DJANGO_CRADMIN_EMAIL_SUBJECT_PREFIX'):
-            return settings.DJANGO_CRADMIN_EMAIL_SUBJECT_PREFIX
+        if hasattr(settings, 'CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX'):
+            return settings.CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX
         else:
             return ''
 
@@ -221,11 +221,11 @@ class AbstractEmail(object):
         """
         context_data = {
             'from_email': self.from_email,
-            'DJANGO_CRADMIN_SITENAME': getattr(settings, 'DJANGO_CRADMIN_SITENAME', ''),
-            'DJANGO_CRADMIN_EMAIL_LOGO_HTML': getattr(settings, 'DJANGO_CRADMIN_EMAIL_LOGO_HTML', '')
+            'CRADMIN_LEGACY_SITENAME': getattr(settings, 'CRADMIN_LEGACY_SITENAME', ''),
+            'CRADMIN_LEGACY_EMAIL_LOGO_HTML': getattr(settings, 'CRADMIN_LEGACY_EMAIL_LOGO_HTML', '')
         }
-        if hasattr(settings, 'DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA'):
-            context_data.update(settings.DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA)
+        if hasattr(settings, 'CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA'):
+            context_data.update(settings.CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA)
         else:
             context_data.update(self.DEFAULT_CONTEXT_DATA)
         return context_data
@@ -238,9 +238,9 @@ class AbstractEmail(object):
         By default this returns:
 
         - ``from_email``.
-        - ``DJANGO_CRADMIN_SITENAME`` (if set as a Django setting).
+        - ``CRADMIN_LEGACY_SITENAME`` (if set as a Django setting).
         - anything you send as the ``extra_context_data`` argument to the constructor.
-        - Anything in the ``DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA`` setting.
+        - Anything in the ``CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA`` setting.
         """
         context_data = self.get_default_context_data()
         if self.extra_context_data:

@@ -16,18 +16,18 @@ See :class:`cradmin_legacy.apps.cradmin_email.emailutils.AbstractEmail` for exam
 ********
 Settings
 ********
-DJANGO_CRADMIN_EMAIL_SUBJECT_PREFIX
+CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX
     Use this to specify a default prefix for email subjects send with
     :class:`cradmin_legacy.apps.cradmin_email.emailutils.AbstractEmail`.
 
-DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA
+CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA
     Documented below.
 
-DJANGO_CRADMIN_EMAIL_LOGO_HTML
+CRADMIN_LEGACY_EMAIL_LOGO_HTML
     HTML for the logo in HTML emails. Used by the default email header template.
     More documentation below.
 
-DJANGO_CRADMIN_SITENAME
+CRADMIN_LEGACY_SITENAME
     Use this to specify a site name that you can use in your email
     templates. Used by the default email header template.
 
@@ -60,13 +60,13 @@ We make this easy to do by providing the ``cradmin_email/html_message_base.djang
 template that you can extend in your html message templates:
 
 - You just have to override the ``contents`` block.
-- The template is styled via the ``DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA`` setting.
+- The template is styled via the ``CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA`` setting.
 
 
 Styling and tuning the html_message_base template
 =================================================
 The easiest thing to adjust is the styles. You do this via
-the ``DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA`` setting (a dict).
+the ``CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA`` setting (a dict).
 You can set the following values:
 
     body_style
@@ -121,7 +121,7 @@ You can set the following values:
     logo_style
         Style for the logo. This is a ``<span>`` element. This element is
         rendered by the default header include template if you
-        set the ``DJANGO_CRADMIN_EMAIL_LOGO_HTML`` setting.
+        set the ``CRADMIN_LEGACY_EMAIL_LOGO_HTML`` setting.
 
 
 *********
@@ -131,7 +131,7 @@ Templates
 cradmin_email/html_message_base.django.html
     The base template for all HTML emails. You should not need to
     override this, but just extend it in all your email templates.
-    How to style this template via DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA is
+    How to style this template via CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA is
     described above.
 
 cradmin_email/include/html_message_header.django.html
@@ -142,7 +142,7 @@ cradmin_email/include/html_message_header.django.html
     The template should not need to be overridden if you can render
     your logo/header using HTML and CSS. You should instead adjust
     the ``logo_style``, ``header_td_style`` and perhaps
-    the ``header_td_style`` via the ``DJANGO_CRADMIN_EMAIL_DEFAULT_CONTEXT_DATA``
+    the ``header_td_style`` via the ``CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA``
     setting.
 
 

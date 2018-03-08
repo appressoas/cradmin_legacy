@@ -107,7 +107,7 @@ class TestResetPasswordView(TestCase):
             token='valid-token', user=self.testuser)
 
         with self.settings(
-                DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL='http://example.com'):
+                CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL='http://example.com'):
             response = self.client.post(self.__get_url('valid-token'), {
                 'password1': 'newpassword',
                 'password2': 'newpassword',
@@ -128,7 +128,7 @@ class TestResetPasswordView(TestCase):
         request.user = self.testuser
         request._messages = mock.MagicMock()
 
-        with self.settings(DJANGO_CRADMIN_RESETPASSWORD_FINISHED_REDIRECT_URL='http://example.com'):
+        with self.settings(CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL='http://example.com'):
             ResetPasswordView.as_view()(request, token='valid-token')
         request._messages.add.assert_called_once_with(
             messages.SUCCESS, 'Your password has been updated.', '')

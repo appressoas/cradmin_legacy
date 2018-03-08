@@ -21,7 +21,7 @@ class InviteEmail(emailutils.AbstractEmail):
     def get_context_data(self):
         context = super(InviteEmail, self).get_context_data()
         context.update({
-            'DJANGO_CRADMIN_SITENAME': settings.DJANGO_CRADMIN_SITENAME
+            'CRADMIN_LEGACY_SITENAME': settings.CRADMIN_LEGACY_SITENAME
         })
         return context
 
@@ -99,10 +99,10 @@ class InviteUrl(object):
         """
         Get the email sender address.
 
-        Defaults to the ``DJANGO_CRADMIN_INVITE_FROM_EMAIL`` setting
+        Defaults to the ``CRADMIN_LEGACY_INVITE_FROM_EMAIL`` setting
         falling back on the ``DEFAULT_FROM_EMAIL`` setting.
         """
-        return getattr(settings, 'DJANGO_CRADMIN_INVITE_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
+        return getattr(settings, 'CRADMIN_LEGACY_INVITE_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
 
     def get_expiration_datetime(self):
         """

@@ -17,9 +17,9 @@ Add the following to ``INSTALLED_APPS``::
         'cradmin_legacy.apps.cradmin_invite',
     )
 
-Set the ``DJANGO_CRADMIN_SITENAME`` setting::
+Set the ``CRADMIN_LEGACY_SITENAME`` setting::
 
-    DJANGO_CRADMIN_SITENAME = 'Testsite'
+    CRADMIN_LEGACY_SITENAME = 'Testsite'
 
 
 ********
@@ -148,7 +148,7 @@ cradmin_invite/email/message.django.txt
 
 All of the email templates get the following context variables:
 
-- ``DJANGO_CRADMIN_SITENAME``: The value of the setting with the same name.
+- ``CRADMIN_LEGACY_SITENAME``: The value of the setting with the same name.
 - ``activate_url``: The URL that users should click to activate their account.
 
 
@@ -213,13 +213,13 @@ Settings
 ********
 
 Required settings:
-    DJANGO_CRADMIN_SITENAME
+    CRADMIN_LEGACY_SITENAME
         The name of the site.
         You **must set this setting** unless you override the email subject
         and message templates as explained in :ref:`invite_emailtemplates`.
 
 
 Optional settings:
-    DJANGO_CRADMIN_INVITE_FROM_EMAIL
+    CRADMIN_LEGACY_INVITE_FROM_EMAIL
         Defaults to the ``DEFAULT_FROM_EMAIL`` setting.
 

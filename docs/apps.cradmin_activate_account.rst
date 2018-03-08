@@ -37,9 +37,9 @@ And add something like this to your root url config::
 Quick start
 ***********
 If you install and setup the app as explained above, you just need to set
-the ``DJANGO_CRADMIN_SITENAME`` setting::
+the ``CRADMIN_LEGACY_SITENAME`` setting::
 
-    DJANGO_CRADMIN_SITENAME = 'Testsite'
+    CRADMIN_LEGACY_SITENAME = 'Testsite'
 
 Now you should be able to use the
 :class:`~cradmin_legacy.apps.cradmin_activate_account.utils.ActivationEmail`
@@ -59,17 +59,17 @@ Configure
 *********
 
 Required settings:
-    DJANGO_CRADMIN_SITENAME
+    CRADMIN_LEGACY_SITENAME
         The name of the site.
         You **must set this setting** unless you override the email subject
         and message templates as explained in :ref:`activate_account_emailtemplates`.
 
 
 Optional settings:
-    DJANGO_CRADMIN_ACTIVATE_ACCOUNT_FROM_EMAIL
+    CRADMIN_LEGACY_ACTIVATE_ACCOUNT_FROM_EMAIL
         Defaults to the ``DEFAULT_FROM_EMAIL`` setting.
 
-    DJANGO_CRADMIN_ACTIVATE_ACCOUNT_DEFAULT_NEXT_URL
+    CRADMIN_LEGACY_ACTIVATE_ACCOUNT_DEFAULT_NEXT_URL
         The URL to redirect to when the account has been activated.
         Defaults to the ``LOGIN_URL`` setting.
 
@@ -108,7 +108,7 @@ cradmin_activate_account/email/html_message.django.txt
 
 All of the email templates get the following context variables:
 
-- ``DJANGO_CRADMIN_SITENAME``: The value of the setting with the same name.
+- ``CRADMIN_LEGACY_SITENAME``: The value of the setting with the same name.
 - ``activate_url``: The URL that users should click to activate their account.
 - ``user``: The user that is activating their account.
 

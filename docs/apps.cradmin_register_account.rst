@@ -42,27 +42,27 @@ And add something like this to your root url config::
 Quickstart
 **********
 
-Set the ``DJANGO_CRADMIN_SITENAME`` setting to the name of your site::
+Set the ``CRADMIN_LEGACY_SITENAME`` setting to the name of your site::
 
-    DJANGO_CRADMIN_SITENAME = 'Testsite'
+    CRADMIN_LEGACY_SITENAME = 'Testsite'
 
-Set the ``LOGIN_URL`` or ``DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL`` setting
+Set the ``LOGIN_URL`` or ``CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL`` setting
 to the URL you want your users to go to after the user is created and activated::
 
-    DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL = '/authenticate/login'
+    CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL = '/authenticate/login'
 
-Set the ``DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS`` setting to a register account
+Set the ``CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS`` setting to a register account
 form class compatible with your user model:
 
     If you are using the default ``django.contrib.auth.models.User`` model::
 
-        DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
+        CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS = \
             'cradmin_legacy.apps.cradmin_register_account.forms.auth_user.AuthUserCreateAccountForm'
 
     If you have a custom user model with an ``email``-field and a ``set_password()``-method,
     you can use::
 
-        DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS = \
+        CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS = \
             'cradmin_legacy.apps.cradmin_register_account.forms.email.EmailUserCreateAccountForm'
 
     If your user model does not fit with any of these descriptions, or for more details,
@@ -78,21 +78,21 @@ Configure
 *********
 
 Required settings:
-    DJANGO_CRADMIN_SITENAME
+    CRADMIN_LEGACY_SITENAME
         The name of the site.
 
-    DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL or LOGIN_URL
+    CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL or LOGIN_URL
         The URL to redirect to after login is found in the following order:
 
         1. Via the ``next``-attribute as input to the view
            (see :ref:`register_account_redirect_after_login`).
-        2. Use the ``DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL`` setting if defined.
+        2. Use the ``CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL`` setting if defined.
         3. Use the ``LOGIN_URL`` setting.
 
         This means that you have to set one of the settings in order for
         the workflow to work out of the box.
 
-    DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS
+    CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS
         Must be set to the full Python path to a Django ModelForm
         that handles input and saving of new users. We provide default
         implementations for the default Django user model, and an
@@ -110,7 +110,7 @@ Step One --- Create an inactive user
 The first step is to create a user object. This is taken care of by
 the view named ``cradmin-register-account-begin``. This view displays
 and validate/process the form configured via the
-``DJANGO_CRADMIN_REGISTER_ACCOUNT_FORM_CLASS`` setting.
+``CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS`` setting.
 
 Step two --- Activate the account
 =================================
@@ -210,7 +210,7 @@ They provide a common structure for all the register account forms.
 ****************************************************
 Where to redirect after the account has been created
 ****************************************************
-You can change the ``DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL`` or ``LOGIN_URL``
+You can change the ``CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL`` or ``LOGIN_URL``
 settings as :ref:`documented above <register_account_settings>` if you want to change
 he default URL to redirect to after the account has been created.
 

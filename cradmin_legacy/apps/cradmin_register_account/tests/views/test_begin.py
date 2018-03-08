@@ -91,7 +91,7 @@ class TestBeginRegisterAccountView(TestCase):
 
     def test_post_next_url_as_cradmin_legacy_register_account_redirect_url_setting(self):
         self.assertEqual(get_user_model().objects.count(), 0)
-        with self.settings(DJANGO_CRADMIN_REGISTER_ACCOUNT_REDIRECT_URL='/redirect'):
+        with self.settings(CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL='/redirect'):
             self.client.post(self.url, {
                 'username': 'test',
                 'password1': 'test',
