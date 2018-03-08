@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'cradmin_legacy',
     'cradmin_legacy.apps.cradmin_imagearchive.apps.ImageArchiveConfig',
     'cradmin_legacy.apps.cradmin_temporaryfileuploadstore',
-    'cradmin_legacy.apps.cradmin_generic_token_with_metadata',
+    'django_cradmin.apps.cradmin_generic_token_with_metadata',
     'cradmin_legacy.apps.cradmin_authenticate',
     'cradmin_legacy.apps.cradmin_resetpassword',
     'cradmin_legacy.apps.cradmin_activate_account',

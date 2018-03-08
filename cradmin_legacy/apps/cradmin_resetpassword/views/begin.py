@@ -12,7 +12,7 @@ from django.views.generic import FormView
 from crispy_forms.helper import FormHelper
 
 from cradmin_legacy.apps.cradmin_email import emailutils
-from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     get_expiration_datetime_for_app
 from cradmin_legacy.crispylayouts import PrimarySubmitLg
 

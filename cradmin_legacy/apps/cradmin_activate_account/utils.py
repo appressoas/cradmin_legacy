@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 
 from cradmin_legacy.apps.cradmin_email import emailutils
-from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     get_expiration_datetime_for_app
 
 
@@ -27,7 +27,7 @@ class ActivationEmail(emailutils.AbstractEmail):
     html_message_template = 'cradmin_activate_account/email/html_message.django.html'
 
     #: The name of the app. Used for
-    #: :obj:`cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata.app`.
+    #: :obj:`django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata.app`.
     #: If you override this, you also have to override :meth:`~.ActivationEmail.get_activate_url`
     #: and return the URL to a view that pops a GenericTokenWithMetadata with the
     #: changed appname.
@@ -78,7 +78,7 @@ class ActivationEmail(emailutils.AbstractEmail):
     def get_expiration_datetime(self):
         """
         Get the value to use for the ``expiration_datetime`` attribute of
-        :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
+        :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
         """
         return get_expiration_datetime_for_app(self.appname)
 

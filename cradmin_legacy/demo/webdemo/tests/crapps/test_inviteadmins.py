@@ -6,7 +6,7 @@ from cradmin_legacy.python2_compatibility import mock
 from cradmin_legacy.demo.webdemo.views.inviteadmins.send import SendInvitesView
 
 from cradmin_legacy.demo.webdemo.models import Site
-from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata
 
 
 class TestInviteAdmins(TestCase):

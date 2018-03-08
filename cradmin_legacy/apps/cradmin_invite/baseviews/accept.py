@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.utils.http import urlencode
 from django.views.generic import TemplateView
 
-from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     GenericTokenExpiredError
 
 
@@ -87,7 +87,7 @@ class AbstractAcceptInviteView(TemplateView):
         requests.
 
         If the token is valid, we set ``self.generic_token`` to the
-        :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
+        :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
 
         If the token is invalid, we respond with :meth:`.token_error_response`.
         """

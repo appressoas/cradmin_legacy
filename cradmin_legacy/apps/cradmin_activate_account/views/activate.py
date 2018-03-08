@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView
 
-from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     GenericTokenExpiredError
 
 

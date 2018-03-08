@@ -4,7 +4,7 @@ from builtins import object
 from django.conf import settings
 
 from cradmin_legacy.apps.cradmin_email import emailutils
-from cradmin_legacy.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
     get_expiration_datetime_for_app
 
 
@@ -73,7 +73,7 @@ class InviteUrl(object):
     def get_appname(self):
         """
         Get the appname for
-        :obj:`cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata.app`.
+        :obj:`django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata.app`.
 
         You must override this in subclasses.
         """
@@ -87,7 +87,7 @@ class InviteUrl(object):
 
         Parameters:
             generictoken: A
-                :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`
+                :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`
                 object.
         """
         raise NotImplementedError()
@@ -107,7 +107,7 @@ class InviteUrl(object):
     def get_expiration_datetime(self):
         """
         Get the value to use for the ``expiration_datetime`` attribute of
-        :class:`~cradmin_legacy.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
+        :class:`~django_cradmin.apps.cradmin_generic_token_with_metadata.models.GenericTokenWithMetadata`.
 
         Defaults to the expiration_datetime provided via the constructor,
         and falls back to getting the configured expiration datetime for
