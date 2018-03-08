@@ -1,5 +1,5 @@
 [run]
-source = django_cradmin
+source = cradmin_legacy
 
 [report]
 omit =
@@ -13,4 +13,4 @@ omit =
     */project/default/default_urls.py
     */project/settingsproxy.py
     */project/production/wsgi.py
-    django_cradmin/demo/*
+    cradmin_legacy/demo/*
