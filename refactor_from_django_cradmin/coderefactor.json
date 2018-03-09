@@ -5,12 +5,13 @@
     "^.*/node_modules$",
     "^.*/bower_components$",
     "^.*/django_cradmin/dist$",
-    "^/refactor_from_django_cradmin$"
+    "^/refactor_from_django_cradmin$",
+    "^.*/ievv-coderefactor-logs$"
   ],
   "refactor_files": [
     // Refactor common stuff in most code files (python, javascript, less, ...)
     {
-      "filepatterns": ["^.*\\.py$", "^.*\\.html$", "MANIFEST.in$", "^.*\\.less", "^.*\\.coffee", "^.*\\.rst"],
+      "filepatterns": ["^.*\\.py$", "^.*\\.html$", "^.*\\.txt$", "MANIFEST.in$", "^.*\\.less", "^.*\\.coffee", "^.*\\.rst"],
 
       // List of replacements to make in each matched file
       "replacers": [
