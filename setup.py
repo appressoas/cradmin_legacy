@@ -1,9 +1,14 @@
+import json
+import os
 from setuptools import setup, find_packages
+
+with open(os.path.join(os.path.dirname(__file__), 'cradmin_legacy', 'version.json')) as f:
+    version = json.loads(f.read())
 
 setup(
     name='cradmin-legacy',
     description='Legacy 1.x fork of django cradmin.',
-    version='1.3.0',
+    version=version,
     url='https://github.com/appressoas/cradmin_legacy',
     author='Espen Angell Kristiansen, Tor Johansen, Vegard Angell, Magne Westlie',
     author_email='post@appresso.no',
