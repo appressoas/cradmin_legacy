@@ -29,7 +29,7 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         view_title = mockresponse.selector.one('.cradmin-legacy-page-header-inner').alltext_normalized
         # mockresponse.selector.prettyprint()
 
-        self.assertEquals('Edit Page', view_title)
+        self.assertEqual('Edit Page', view_title)
 
     def test_post_without_required_field_title(self):
         """
@@ -53,7 +53,7 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
             })
         self.assertTrue(mockresponse.selector.exists('#div_id_title'))
         self.assertTrue(mockresponse.selector.exists('.has-error'))
-        self.assertEquals('This field is required.', mockresponse.selector.one('#error_1_id_title').alltext_normalized)
+        self.assertEqual('This field is required.', mockresponse.selector.one('#error_1_id_title').alltext_normalized)
 
     def test_post_without_required_field_intro(self):
         """
@@ -74,7 +74,7 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
             })
         self.assertTrue(mockresponse.selector.exists('#div_id_intro'))
         self.assertTrue(mockresponse.selector.exists('.has-error'))
-        self.assertEquals('This field is required.', mockresponse.selector.one('#error_1_id_intro').alltext_normalized)
+        self.assertEqual('This field is required.', mockresponse.selector.one('#error_1_id_intro').alltext_normalized)
 
     def test_post_without_required_field_body(self):
         """
@@ -95,7 +95,7 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
             })
         self.assertTrue(mockresponse.selector.exists('#div_id_body'))
         self.assertTrue(mockresponse.selector.exists('.has-error'))
-        self.assertEquals('This field is required.', mockresponse.selector.one('#error_1_id_body').alltext_normalized)
+        self.assertEqual('This field is required.', mockresponse.selector.one('#error_1_id_body').alltext_normalized)
 
     def test_post_without_required_field_publishing_time(self):
         """
@@ -116,7 +116,7 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
             })
         self.assertTrue(mockresponse.selector.exists('#div_id_publishing_time'))
         self.assertTrue(mockresponse.selector.exists('.has-error'))
-        self.assertEquals('This field is required.',
+        self.assertEqual('This field is required.',
                           mockresponse.selector.one('#error_1_id_publishing_time').alltext_normalized)
 
     def test_post_all_required_fields_filled(self):
@@ -136,4 +136,4 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
                     'publishing_time': '2000-09-09 13:37',
                 }
             })
-        self.assertEquals(302, mockresponse.response.status_code)
+        self.assertEqual(302, mockresponse.response.status_code)

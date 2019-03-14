@@ -115,7 +115,7 @@ The ``%<number><letter>`` stuff is URL escape codes. You will most likely want
 to handle this using python code. Lets generate the same URL using Python::
 
     from django.utils.http import urlencode
-    from django.core.urlresolvers import reverse
+    from django.urls import reverse
 
     login_url = '{login_url}?{arguments}'.format(
         login_url=reverse('cradmin-authenticate-login'),

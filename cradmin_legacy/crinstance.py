@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from builtins import object
 
 from django.conf.urls import url, include
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import render
 from django.utils.html import format_html
 
@@ -19,7 +19,7 @@ def reverse_cradmin_url(instanceid, appname, roleid=None,
     """
     Reverse an URL within a cradmin instance.
 
-    Usage is very similar to :func:`django.core.urlresolvers.reverse`,
+    Usage is very similar to :func:`django.urls.reverse`,
     but you specify the cradmin instance, appname, roleid and viewname
     instead of the url-name
 
@@ -241,7 +241,7 @@ class BaseCrAdminInstance(object):
         """
         Reverse an URL within this cradmin instance.
 
-        The advantage over using :func:`django.core.urlresolvers.reverse`
+        The advantage over using :func:`django.urls.reverse`
         is that you do not need to hardcode the id of the cradmin instance,
         and that the ``roleid`` is automatically added to args or kwargs
         (depending on which one you use to pass arguments to the url).
@@ -325,10 +325,10 @@ class BaseCrAdminInstance(object):
         """
         Check if the given user has access to this cradmin instance.
 
-        Defaults to ``self.request.user.is_authenticated()``, but you
+        Defaults to ``self.request.user.is_authenticated``, but you
         can override this.
         """
-        return self.request.user.is_authenticated()
+        return self.request.user.is_authenticated
 
     def get_foreignkeyselectview_url(self, model_class):
         """

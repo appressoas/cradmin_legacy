@@ -31,7 +31,7 @@ class TestInviteAdmins(TestCase):
         })
         request.cradmin_role = self.testsite
         response = SendInvitesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response.render()
         selector = htmls.S(response.content)
         self.assertIn(
@@ -54,7 +54,7 @@ class TestInviteAdmins(TestCase):
         })
         request.cradmin_role = self.testsite
         response = SendInvitesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response.render()
         selector = htmls.S(response.content)
         self.assertIn(
@@ -69,7 +69,7 @@ class TestInviteAdmins(TestCase):
         request.cradmin_app = mock.MagicMock()
         self.assertEqual(GenericTokenWithMetadata.objects.count(), 0)
         response = SendInvitesView.as_view()(request)
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
         self.assertEqual(GenericTokenWithMetadata.objects.count(), 2)
         self.assertEqual(len(mail.outbox), 2)
         self.assertEqual(mail.outbox[0].to, [u'test1@example.com'])

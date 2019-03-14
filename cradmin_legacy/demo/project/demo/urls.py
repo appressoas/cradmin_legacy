@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^activate_account/', include('cradmin_legacy.apps.cradmin_activate_account.urls')),
     url(r'^register/', include('cradmin_legacy.apps.cradmin_register_account.urls')),
 
-    url(r'^djangoadmin/', include(admin.site.urls)),
+    url(r'^djangoadmin/', admin.site.urls),
     url(r'^webdemo/', include(WebdemoCrAdminInstance.urls())),
     url(r'^listfilterdemo/', include(ListfilterDemoCrAdminInstance.urls())),
     url(r'^multiselect2demo/', include(MultiselectDemoCrAdminInstance.urls())),

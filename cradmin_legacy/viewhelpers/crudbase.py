@@ -183,9 +183,9 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     def get_success_url(self):
         if self.get_submit_save_and_continue_edititing_button_name() in self.request.POST:
-            return self._get_full_editurl(self.object)
+            return str(self._get_full_editurl(self.object))
         else:
-            return self.get_default_save_success_url()
+            return str(self.get_default_save_success_url())
 
     def set_automatic_attributes(self, obj):
         """

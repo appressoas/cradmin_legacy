@@ -66,7 +66,7 @@ class TestPlainTextColumn(TestCase):
 
     def test_render_cell(self):
         self.model_testobject.testfield = 'test_value'
-        self.assertEquals(
+        self.assertEqual(
             '<span class="objecttable-cellvalue">test_value</span>',
             self.column_subclass.render_cell_content(self.model_testobject).strip())
 
@@ -104,7 +104,7 @@ class TestSingleActionColumn(TestCase):
 
     def test_render_cell(self):
         expected = '<a href="www.example.com/test_value" class="objecttable-cellvalue-link">test_value</a>'
-        self.assertEquals(self.column_subclass.render_cell_content(self.model_testobject), expected)
+        self.assertEqual(self.column_subclass.render_cell_content(self.model_testobject), expected)
 
 
 class TestMultiActionColumn(TestCase):
@@ -171,16 +171,16 @@ class TestButton(TestCase):
 class TestOrderingStringParser(TestCase):
     def test_parse_empty(self):
         orderingqueryarg = objecttable.OrderingStringParser('')
-        self.assertEquals(len(orderingqueryarg.orderingdict), 0)
+        self.assertEqual(len(orderingqueryarg.orderingdict), 0)
 
     def test_parse_single(self):
         orderingqueryarg = objecttable.OrderingStringParser('a3')
-        self.assertEquals(len(orderingqueryarg.orderingdict), 1)
+        self.assertEqual(len(orderingqueryarg.orderingdict), 1)
         self.assertTrue(orderingqueryarg.orderingdict[3])
 
     def test_parse_multi(self):
         orderingqueryarg = objecttable.OrderingStringParser('a3.d1')
-        self.assertEquals(len(orderingqueryarg.orderingdict), 2)
+        self.assertEqual(len(orderingqueryarg.orderingdict), 2)
         self.assertTrue(orderingqueryarg.orderingdict[3].order_ascending)
         self.assertFalse(orderingqueryarg.orderingdict[1].order_ascending)
 
@@ -245,7 +245,7 @@ class TestObjectTableView(TestCase):
         selector = htmls.S(response.content)
         # selector.one('#cradmin_legacy_contentwrapper').prettyprint()
         self.assertFalse(selector.exists('#objecttableview-table'))
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-no-items-message').alltext_normalized,
             'No some items')
 
@@ -372,14 +372,14 @@ class TestObjectTableView(TestCase):
         response.render()
         selector = htmls.S(response.content)
 
-        self.assertEquals(selector.count('#objecttableview-table>thead>tr>th'), 1)
-        self.assertEquals(
+        self.assertEqual(selector.count('#objecttableview-table>thead>tr>th'), 1)
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th').alltext_normalized,
             'The name - Ordered descending - Click to order ascending')
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 1)
-        self.assertEquals(selector.count('#objecttableview-table>tbody>tr>td'), 1)
-        self.assertEquals(
+        self.assertEqual(selector.count('#objecttableview-table>tbody>tr>td'), 1)
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr>td').alltext_normalized,
             'Item One')
 
@@ -399,20 +399,20 @@ class TestObjectTableView(TestCase):
         response.render()
         selector = htmls.S(response.content)
 
-        self.assertEquals(selector.count('#objecttableview-table>thead>tr>th'), 2)
-        self.assertEquals(
+        self.assertEqual(selector.count('#objecttableview-table>thead>tr>th'), 2)
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th:first-child').alltext_normalized,
             'The name - Ordered descending - Click to order ascending')
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th:last-child').alltext_normalized,
             'Somenumber - Ordered descending - Click to order ascending')
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 1)
-        self.assertEquals(selector.count('#objecttableview-table>tbody>tr>td'), 2)
-        self.assertEquals(
+        self.assertEqual(selector.count('#objecttableview-table>tbody>tr>td'), 2)
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr>td:first-child').alltext_normalized,
             'Item One')
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr>td:last-child').alltext_normalized,
             '10')
 
@@ -437,14 +437,14 @@ class TestObjectTableView(TestCase):
         selector = htmls.S(response.content)
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 3)
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr:first-child>td').alltext_normalized,
             'Item A')
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr:last-child>td').alltext_normalized,
             'Item C')
 
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th').alltext_normalized,
             'The name - Ordered ascending - Click to order descending')
 
@@ -470,14 +470,14 @@ class TestObjectTableView(TestCase):
         # selector.one('#cradmin_legacy_contentwrapper thead').prettyprint()
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 3)
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr:first-child>td').alltext_normalized,
             'Item C')
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr:last-child>td').alltext_normalized,
             'Item A')
 
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th').alltext_normalized,
             'The name - Ordered descending - Click to order ascending')
 
@@ -502,19 +502,19 @@ class TestObjectTableView(TestCase):
         selector = htmls.S(response.content)
         # selector.one('#cradmin_legacy_contentwrapper thead').prettyprint()
 
-        self.assertEquals(selector.count('#objecttableview-table>thead>tr>th'), 2),
-        self.assertEquals(
+        self.assertEqual(selector.count('#objecttableview-table>thead>tr>th'), 2),
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th:first-child').alltext_normalized,
             'The name - Ordered descending - Click to order ascending - Ordering priority 2')
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>thead>tr>th:last-child').alltext_normalized,
             'Somenumber - Ordered ascending - Click to order descending - Ordering priority 1')
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 3)
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr:first-child>td:first-child').alltext_normalized,
             'Item A')
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr:last-child>td:first-child').alltext_normalized,
             'Item B')
 
@@ -560,7 +560,7 @@ class TestObjectTableView(TestCase):
         selector = htmls.S(response.content)
 
         self.assertEqual(selector.count('#objecttableview-table>tbody>tr'), 1)
-        self.assertEquals(
+        self.assertEqual(
             selector.one('#objecttableview-table>tbody>tr>td').alltext_normalized,
             'Item Two')
 

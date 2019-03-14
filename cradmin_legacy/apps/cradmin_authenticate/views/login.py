@@ -170,7 +170,7 @@ class LoginView(FormView):
         """
         if user is authenticated, redirect to ``settings.LOGIN_REDIRECT_URL``, else render the login form.
         """
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
         else:
             return super(LoginView, self).get(*args, **kwargs)

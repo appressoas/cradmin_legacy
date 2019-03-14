@@ -40,8 +40,8 @@ class TestMultiSelectView(TestCase):
         })
         request.cradmin_role = mock.MagicMock()
         response = SimpleMultiSelectView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.content, b"OK")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, b"OK")
 
     def test_object_selection_invalid(self):
         class SimpleMultiSelectView(multiselect.MultiSelectView):
@@ -55,7 +55,7 @@ class TestMultiSelectView(TestCase):
         request.cradmin_role = mock.MagicMock()
         response = SimpleMultiSelectView.as_view()(request)
         selector = htmls.S(response.content)
-        self.assertEquals(
+        self.assertEqual(
             selector.one('.alert.alert-danger').text_normalized,
             'Invalid selection. This is usually caused by someone else changing permissions '
             'while you where selecting items to edit.')
@@ -109,10 +109,10 @@ class TestMultiSelectFormView(TestCase):
         response = SimpleMultiSelectFormView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        self.assertEquals(selector.count('#cradmin_legacy_contentwrapper form'), 1)
-        self.assertEquals(selector.one('input[name=selected_objects]')['type'], 'hidden')
-        self.assertEquals(selector.one('input[name=selected_objects]')['value'], '1')
-        self.assertEquals(selector.count('input[name=data]'), 1)
+        self.assertEqual(selector.count('#cradmin_legacy_contentwrapper form'), 1)
+        self.assertEqual(selector.one('input[name=selected_objects]')['type'], 'hidden')
+        self.assertEqual(selector.one('input[name=selected_objects]')['value'], '1')
+        self.assertEqual(selector.count('input[name=data]'), 1)
         self.assertFalse(selector.exists('form .has-error'))
 
     def test_form_invalid(self):
@@ -142,11 +142,11 @@ class TestMultiSelectFormView(TestCase):
         response = SimpleMultiSelectFormView.as_view()(request)
         response.render()
         selector = htmls.S(response.content)
-        self.assertEquals(selector.count('#cradmin_legacy_contentwrapper form'), 1)
-        self.assertEquals(selector.one('input[name=selected_objects]')['type'], 'hidden')
-        self.assertEquals(selector.one('input[name=selected_objects]')['value'], '1')
-        self.assertEquals(selector.count('input[name=data]'), 1)
-        self.assertEquals(
+        self.assertEqual(selector.count('#cradmin_legacy_contentwrapper form'), 1)
+        self.assertEqual(selector.one('input[name=selected_objects]')['type'], 'hidden')
+        self.assertEqual(selector.one('input[name=selected_objects]')['value'], '1')
+        self.assertEqual(selector.count('input[name=data]'), 1)
+        self.assertEqual(
             selector.one('#div_id_data .help-block').alltext_normalized,
             'This field is required.')
 
@@ -176,7 +176,7 @@ class TestMultiSelectFormView(TestCase):
         })
         request.cradmin_role = mock.MagicMock()
         response = SimpleMultiSelectFormView.as_view()(request)
-        self.assertEquals(response.content, b'Submitted: Hello world')
+        self.assertEqual(response.content, b'Submitted: Hello world')
 
     def test_form_valid_success_redirect(self):
         class DemoForm(forms.Form):
@@ -207,5 +207,5 @@ class TestMultiSelectFormView(TestCase):
         })
         request.cradmin_role = mock.MagicMock()
         response = SimpleMultiSelectFormView.as_view()(request)
-        self.assertEquals(response.status_code, 302)
-        self.assertEquals(response['Location'], '/success')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '/success')

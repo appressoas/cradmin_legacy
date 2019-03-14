@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='person',
             name='site',
-            field=models.ForeignKey(to='listfilterdemo.Site'),
+            field=models.ForeignKey(to='listfilterdemo.Site', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

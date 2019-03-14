@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('publishing_time', models.DateTimeField(default=datetime.datetime(2015, 12, 7, 2, 45, 9, 26449, tzinfo=utc), verbose_name='Publishing time', help_text='The time when this will be visible on the website.')),
                 ('unpublish_time', models.DateTimeField(default=None, null=True, help_text='Hide the item on the website after this time.', verbose_name='Unpublish time', blank=True)),
                 ('internal_notes', models.TextField(default='', help_text='Put internal notes here. Will not be visible on the website.', verbose_name='Internal notes', blank=True)),
-                ('image', models.ForeignKey(null=True, verbose_name='Image', blank=True, to='cradmin_imagearchive.ArchiveImage')),
+                ('image', models.ForeignKey(null=True, verbose_name='Image', blank=True, to='cradmin_imagearchive.ArchiveImage', on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name_plural': 'Pages',
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, verbose_name='ID', serialize=False)),
                 ('tag', models.SlugField()),
-                ('page', models.ForeignKey(to='webdemo.Page', related_name='tags')),
+                ('page', models.ForeignKey(to='webdemo.Page', related_name='tags', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='page',
             name='site',
-            field=models.ForeignKey(to='webdemo.Site'),
+            field=models.ForeignKey(to='webdemo.Site', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

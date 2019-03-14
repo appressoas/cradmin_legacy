@@ -45,7 +45,7 @@ class TestUpdateView(TestCase):
         request.cradmin_role = self.role
 
         response = cradminviews.ArchiveImageUpdateView.as_view()(request, pk=self.archiveimage.pk)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         response.render()
         selector = htmls.S(response.content)
         self.assertTrue(selector.exists('textarea#id_description'))
@@ -63,8 +63,8 @@ class TestUpdateView(TestCase):
 
         self.assertEqual(ArchiveImage.objects.count(), 1)
         response = cradminviews.ArchiveImageUpdateView.as_view()(request, pk=self.archiveimage.pk)
-        self.assertEquals(response.status_code, 302)
-        self.assertEquals(response['Location'], '/success')
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], '/success')
         self.assertEqual(ArchiveImage.objects.count(), 1)
         updated_image = ArchiveImage.objects.first()
         self.assertEqual(updated_image.image.read(), self.testimage)
@@ -144,7 +144,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
         mockresponse = self.mock_http200_getrequest_htmls(
             requestuser=create_user('testuser'),
             cradmin_role=testrole)
-        self.assertEquals(mockresponse.response.status_code, 200)
+        self.assertEqual(mockresponse.response.status_code, 200)
         self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_imagearchive_bulkadd_form'))
         self.assertTrue(mockresponse.selector.exists('input[type=hidden][name=filecollectionid]'))
         self.assertTrue(mockresponse.selector.exists('#div_id_filecollectionid'))
@@ -183,7 +183,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
                 }
             })
 
-        self.assertEquals(mockresponse.response['Location'], '/success')
+        self.assertEqual(mockresponse.response['Location'], '/success')
         self.assertEqual(ArchiveImage.objects.count(), 1)
         created_image = ArchiveImage.objects.first()
         self.assertEqual(created_image.image.read(), testimage)
@@ -238,7 +238,7 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
                     'filecollectionid': collection.id
                 }
             })
-        self.assertEquals(mockresponse.response['Location'], '/success')
+        self.assertEqual(mockresponse.response['Location'], '/success')
         self.assertEqual(ArchiveImage.objects.count(), 2)
         created_images = ArchiveImage.objects.order_by('name')
 

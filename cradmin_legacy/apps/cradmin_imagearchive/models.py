@@ -42,7 +42,9 @@ class ArchiveImage(models.Model):
     role_content_type = models.ForeignKey(
         ContentType,
         verbose_name=_('role'),
-        help_text=_('The role owning this image.'))
+        help_text=_('The role owning this image.'),
+        on_delete=models.CASCADE
+    )
     role_object_id = models.PositiveIntegerField()
     role = GenericForeignKey('role_content_type', 'role_object_id')
 

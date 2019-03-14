@@ -12,7 +12,7 @@ class TesPagesListBuilderView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         site = mommy.make('webdemo.Site')
         mommy.make('webdemo.Page', site=site, title='Test title')
         mockresponse = self.mock_http200_getrequest_htmls(cradmin_role=site)
-        self.assertEquals('Test title',
+        self.assertEqual('Test title',
                           mockresponse.selector.one('.cradmin-legacy-listbuilder-itemvalue h2').alltext_normalized)
 
     def test_get_multiple(self):
@@ -25,4 +25,4 @@ class TesPagesListBuilderView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         mommy.make('webdemo.Page', site=site, title='Test title 3')
         mockresponse = self.mock_http200_getrequest_htmls(cradmin_role=site)
         page_list = mockresponse.selector.list('.cradmin-legacy-listbuilder-itemvalue')
-        self.assertEquals(3, len(page_list))
+        self.assertEqual(3, len(page_list))
