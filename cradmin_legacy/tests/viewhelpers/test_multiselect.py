@@ -1,4 +1,7 @@
 from __future__ import unicode_literals
+
+from model_mommy import mommy
+
 from cradmin_legacy.python2_compatibility import mock
 import htmls
 from django.test import TestCase
@@ -6,37 +9,49 @@ from django.test.client import RequestFactory
 from django import http
 from django import forms
 
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import TestModel
 from cradmin_legacy.viewhelpers import multiselect
+
+TEST_PK = 42
+
+
+class DemoForm(forms.Form):
+    data = forms.CharField()
+
+
+class SimpleMultiSelectFormView(multiselect.MultiSelectFormView):
+    form_class = DemoForm
+    model = TestModel
+
+    def get_queryset_for_role(self, role):
+        return TestModel.objects.all()
+
+    def form_valid(self, form):
+        return http.HttpResponse('Submitted: {data}'.format(**form.cleaned_data))
+
+    def get_field_layout(self):
+        return ['data']
+
+
+class SimpleMultiSelectView(multiselect.MultiSelectView):
+    def get_queryset_for_role(self, role):
+        return TestModel.objects.all()
+
+    def object_selection_valid(self):
+        return http.HttpResponse('OK')
 
 
 class TestMultiSelectView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
+        self.testmodelinstance = mommy.make('cradmin_viewhelpers_testapp.TestModel', pk=TEST_PK)
 
     def test_object_selection_valid(self):
-        class SimpleMultiSelectView(multiselect.MultiSelectView):
-            def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                item1 = mock.MagicMock()
-                item1.pk = 1
-                item2 = mock.MagicMock()
-                item2.pk = 10
-                item3 = mock.MagicMock()
-                item3.pk = 12
-                all_queryset = mock.MagicMock()
-                all_queryset.filter.return_value = [item1, item2, item3]
-                queryset.all.return_value = all_queryset
-
-                return queryset
-
-            def object_selection_valid(self):
-                return http.HttpResponse('OK')
-
-            def object_selection_invalid(self, form):
-                return http.HttpResponse(form.errors.as_text())
+        testmodelinstance2 = mommy.make('cradmin_viewhelpers_testapp.TestModel')
+        testmodelinstance3 = mommy.make('cradmin_viewhelpers_testapp.TestModel')
 
         request = self.factory.post('/test', {
-            'selected_objects': [1, 10]
+            'selected_objects': [testmodelinstance2.id, testmodelinstance3.id]
         })
         request.cradmin_role = mock.MagicMock()
         response = SimpleMultiSelectView.as_view()(request)
@@ -44,11 +59,6 @@ class TestMultiSelectView(TestCase):
         self.assertEqual(response.content, b"OK")
 
     def test_object_selection_invalid(self):
-        class SimpleMultiSelectView(multiselect.MultiSelectView):
-            def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                return queryset
-
         request = self.factory.post('/test', {
             'selected_objects': [1, 10]
         })
@@ -61,11 +71,7 @@ class TestMultiSelectView(TestCase):
             'while you where selecting items to edit.')
 
     def test_object_selection_invalid_override(self):
-        class SimpleMultiSelectView(multiselect.MultiSelectView):
-            def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                return queryset
-
+        class SimpleMultiSelectViewOverride(SimpleMultiSelectView):
             def object_selection_invalid(self, form):
                 return http.HttpResponse('Invalid selection')
 
@@ -73,36 +79,19 @@ class TestMultiSelectView(TestCase):
             'selected_objects': [1, 10]
         })
         request.cradmin_role = mock.MagicMock()
-        response = SimpleMultiSelectView.as_view()(request)
+        response = SimpleMultiSelectViewOverride.as_view()(request)
         self.assertIn(b'Invalid selection', response.content)
 
 
 class TestMultiSelectFormView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
+        self.testmodelinstance = mommy.make('cradmin_viewhelpers_testapp.TestModel', pk=TEST_PK)
 
     def test_first_load(self):
-        class DemoForm(forms.Form):
-            data = forms.CharField()
-
-        class SimpleMultiSelectFormView(multiselect.MultiSelectFormView):
-            form_class = DemoForm
-            model = mock.MagicMock()
-
-            def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                item1 = mock.MagicMock()
-                item1.pk = 1
-                all_queryset = mock.MagicMock()
-                all_queryset.filter.return_value = [item1]
-                queryset.all.return_value = all_queryset
-                return queryset
-
-            def get_field_layout(self):
-                return ['data']
 
         request = self.factory.post('/test', {
-            'selected_objects': [1],
+            'selected_objects': [self.testmodelinstance.id],
             'is_the_multiselect_form': 'yes'
         })
         request.cradmin_role = mock.MagicMock()
@@ -111,32 +100,14 @@ class TestMultiSelectFormView(TestCase):
         selector = htmls.S(response.content)
         self.assertEqual(selector.count('#cradmin_legacy_contentwrapper form'), 1)
         self.assertEqual(selector.one('input[name=selected_objects]')['type'], 'hidden')
-        self.assertEqual(selector.one('input[name=selected_objects]')['value'], '1')
+        self.assertEqual(selector.one('input[name=selected_objects]')['value'], f'{self.testmodelinstance.id}')
         self.assertEqual(selector.count('input[name=data]'), 1)
         self.assertFalse(selector.exists('form .has-error'))
 
     def test_form_invalid(self):
-        class DemoForm(forms.Form):
-            data = forms.CharField()
-
-        class SimpleMultiSelectFormView(multiselect.MultiSelectFormView):
-            form_class = DemoForm
-            model = mock.MagicMock()
-
-            def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                item1 = mock.MagicMock()
-                item1.pk = 1
-                all_queryset = mock.MagicMock()
-                all_queryset.filter.return_value = [item1]
-                queryset.all.return_value = all_queryset
-                return queryset
-
-            def get_field_layout(self):
-                return ['data']
 
         request = self.factory.post('/test', {
-            'selected_objects': [1],
+            'selected_objects': [self.testmodelinstance.id],
         })
         request.cradmin_role = mock.MagicMock()
         response = SimpleMultiSelectFormView.as_view()(request)
@@ -144,34 +115,16 @@ class TestMultiSelectFormView(TestCase):
         selector = htmls.S(response.content)
         self.assertEqual(selector.count('#cradmin_legacy_contentwrapper form'), 1)
         self.assertEqual(selector.one('input[name=selected_objects]')['type'], 'hidden')
-        self.assertEqual(selector.one('input[name=selected_objects]')['value'], '1')
+        self.assertEqual(selector.one('input[name=selected_objects]')['value'], f'{self.testmodelinstance.id}')
         self.assertEqual(selector.count('input[name=data]'), 1)
         self.assertEqual(
             selector.one('#div_id_data .help-block').alltext_normalized,
             'This field is required.')
 
     def test_form_valid(self):
-        class DemoForm(forms.Form):
-            data = forms.CharField()
-
-        class SimpleMultiSelectFormView(multiselect.MultiSelectFormView):
-            form_class = DemoForm
-            model = mock.MagicMock()
-
-            def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                item1 = mock.MagicMock()
-                item1.pk = 1
-                all_queryset = mock.MagicMock()
-                all_queryset.filter.return_value = [item1]
-                queryset.all.return_value = all_queryset
-                return queryset
-
-            def form_valid(self, form):
-                return http.HttpResponse('Submitted: {data}'.format(**form.cleaned_data))
 
         request = self.factory.post('/test', {
-            'selected_objects': [1],
+            'selected_objects': [self.testmodelinstance.id],
             'data': 'Hello world'
         })
         request.cradmin_role = mock.MagicMock()
@@ -184,16 +137,10 @@ class TestMultiSelectFormView(TestCase):
 
         class SimpleMultiSelectFormView(multiselect.MultiSelectFormView):
             form_class = DemoForm
-            model = mock.MagicMock()
+            model = TestModel
 
             def get_queryset_for_role(self, role):
-                queryset = mock.MagicMock()
-                item1 = mock.MagicMock()
-                item1.pk = 1
-                all_queryset = mock.MagicMock()
-                all_queryset.filter.return_value = [item1]
-                queryset.all.return_value = all_queryset
-                return queryset
+                return TestModel.objects.filter(id=TEST_PK)
 
             def get_success_url(self):
                 return '/success'
@@ -202,7 +149,7 @@ class TestMultiSelectFormView(TestCase):
                 return self.success_redirect_response()
 
         request = self.factory.post('/test', {
-            'selected_objects': [1],
+            'selected_objects': [self.testmodelinstance.id],
             'data': 'Hello world'
         })
         request.cradmin_role = mock.MagicMock()
