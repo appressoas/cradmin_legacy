@@ -1,7 +1,8 @@
 from django.contrib import messages
+from django.utils.deprecation import MiddlewareMixin
 
 
-class MessagesDebugMiddleware(object):
+class MessagesDebugMiddleware(MiddlewareMixin):
     """
     Add ``cradmin_legacy.messages_debug_middleware.MessagesDebugMiddleware``
     to your MIDDLEWARE setting to debug Django messages

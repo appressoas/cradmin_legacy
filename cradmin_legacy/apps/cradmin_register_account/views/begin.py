@@ -23,7 +23,7 @@ class BeginRegisterAccountView(FormView):
         return context
 
     def get_success_url(self):
-        return reverse('cradmin-register-account-email-sent')
+        return str(reverse('cradmin-register-account-email-sent'))
 
     def get_next_url(self):
         """

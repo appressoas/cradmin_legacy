@@ -47,8 +47,8 @@ def reverse_cradmin_url(instanceid, appname, roleid=None,
             if not kwargs:
                 kwargs = {}
             kwargs['roleid'] = roleid
-    urlname = u'{}-{}-{}'.format(instanceid, appname, viewname)
-    return reverse(urlname, args=args, kwargs=kwargs)
+    urlname = '{}-{}-{}'.format(instanceid, appname, viewname)
+    return str(reverse(urlname, args=args, kwargs=kwargs))
 
 
 class BaseCrAdminInstance(object):
@@ -280,8 +280,9 @@ class BaseCrAdminInstance(object):
             kwargs (dict): Keyword args for the view.
             roleid: The roleid.
         """
-        return self.reverse_url(appname, viewname=crapp.INDEXVIEW_NAME, roleid=roleid,
-                                args=args, kwargs=kwargs)
+        print("test")
+        return str(self.reverse_url(appname, viewname=crapp.INDEXVIEW_NAME, roleid=roleid,
+                                args=args, kwargs=kwargs))
 
     def rolefrontpage_url(self, roleid=None):
         """

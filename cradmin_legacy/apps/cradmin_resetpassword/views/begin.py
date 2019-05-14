@@ -61,7 +61,7 @@ class BeginPasswordResetView(FormView):
         return context
 
     def get_success_url(self):
-        return reverse('cradmin-resetpassword-email-sent')
+        return str(reverse('cradmin-resetpassword-email-sent'))
 
     def __send_email(self, user, reset_url):
         PasswordResetEmail(

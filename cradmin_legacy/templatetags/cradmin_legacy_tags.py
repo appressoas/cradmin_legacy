@@ -258,7 +258,6 @@ def cradmin_theme_staticpath(context):
     else:
         return ''
 
-
 @register.simple_tag(takes_context=True)
 def cradmin_render_renderable(context, renderable):
     """

@@ -1,9 +1,10 @@
 import time
 
 from django.conf import settings
+from django.utils.deprecation import MiddlewareMixin
 
 
-class DelayMiddleware(object):
+class DelayMiddleware(MiddlewareMixin):
     """
     To use this, you must add the following to your settings:
 

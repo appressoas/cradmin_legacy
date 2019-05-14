@@ -267,6 +267,7 @@ class Menu(object):
 
         See :meth:`cradmin_legacy.BaseInstance.appindex_url`.
         """
+        print("yest")
         return self.cradmin_instance.appindex_url(appname)
 
     def roleselectview_url(self):
