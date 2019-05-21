@@ -54,8 +54,6 @@ class AbstractRenderable(object):
                 (which is used to render the template).
         """
         context = self.get_context_data(request=request);
-        print("\n rewuest: " + str(request) + "\n template: " + str(self.get_template_name()) + " \n context: " + str(context))
-
         return render_to_string(
             self.get_template_name(),
             context,
