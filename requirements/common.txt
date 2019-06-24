@@ -47,11 +47,11 @@ coverage==4.0
 # For building styles
 vitalstyles==1.1.4
 
-# ievv_opensource==0.2.17
+ievv_opensource==6.0.0
 
 django_dbdev==1.2.1
 
-# django_cradmin==6.0.2
+django_cradmin==7.0.0
 
 # Pull inn development packages from GIT
 -r develop.gitpackages.txt
