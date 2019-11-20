@@ -118,9 +118,9 @@ angular-mocks@~1.4.1:
   version "1.4.14"
   resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.4.14.tgz#ea12ec70a5227697e79575523abbec0e0f9168a7"
 
-angular@~1.4.1:
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.4.14.tgz#9d0feaf60ce6e52ce50f49ee328656d1e1875c37"
+angular@~1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.9.tgz#e52616e8701c17724c3c238cfe4f9446fd570bc4"
 
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
