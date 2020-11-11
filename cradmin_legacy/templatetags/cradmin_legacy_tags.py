@@ -4,7 +4,7 @@ import json
 
 from django import template
 from django.conf import settings
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.templatetags.static import static
 import warnings
 
 from cradmin_legacy import crapp
@@ -257,7 +257,6 @@ def cradmin_theme_staticpath(context):
         return static(theme_path)
     else:
         return ''
-
 
 @register.simple_tag(takes_context=True)
 def cradmin_render_renderable(context, renderable):

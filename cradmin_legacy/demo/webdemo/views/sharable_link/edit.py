@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django import forms
 from crispy_forms import layout
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from cradmin_legacy.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin

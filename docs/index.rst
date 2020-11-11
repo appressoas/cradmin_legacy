@@ -112,6 +112,7 @@ Development
    develop
    databasedumps
    i18n
+   javascript
 
 *************
 Documentation

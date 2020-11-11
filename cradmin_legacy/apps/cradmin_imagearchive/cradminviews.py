@@ -341,7 +341,7 @@ class ArchiveImagesSingleSelectView(BaseImagesListView):
         url = self.request.build_absolute_uri()
         uploaded_archiveimage = self.uploaded_archiveimages[0]
         url = create.CreateView.add_foreignkey_selected_value_to_url_querystring(url, uploaded_archiveimage.pk)
-        return url
+        return str(url)
 
 
 class ArchiveImageUpdateView(crudbase.OnlySaveButtonMixin,

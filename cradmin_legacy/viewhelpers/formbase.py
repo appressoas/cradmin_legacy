@@ -441,7 +441,7 @@ class FormViewMixin(PreviewMixin):
             return self.get_listing_url()
 
     def get_success_url(self):
-        return self.get_default_save_success_url()
+        return str(self.get_default_save_success_url())
 
 
 class FormView(FormViewMixin, DjangoFormView):

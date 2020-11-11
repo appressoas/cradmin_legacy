@@ -131,7 +131,9 @@ class TemporaryFileCollection(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         help_text='The user that owns this temporary file. Users should not'
-                  'be allowed access to other users temporary files.')
+                  'be allowed access to other users temporary files.',
+        on_delete=models.CASCADE
+    )
     created_datetime = models.DateTimeField(auto_now_add=True)
     minutes_to_live = models.PositiveIntegerField(
         default=60,

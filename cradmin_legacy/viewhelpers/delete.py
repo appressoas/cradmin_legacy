@@ -58,7 +58,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
 
         Defaults to the INDEX view of the current app.
         """
-        return self.request.cradmin_app.reverse_appindexurl()
+        return str(self.request.cradmin_app.reverse_appindexurl())
 
     def get_context_data(self, **kwargs):
         context = super(DeleteView, self).get_context_data(**kwargs)

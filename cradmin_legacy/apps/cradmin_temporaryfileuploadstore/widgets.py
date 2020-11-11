@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 from django import forms
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import gettext
 from cradmin_legacy.utils import crhumanize
@@ -149,7 +149,7 @@ class BulkFileUploadWidget(forms.Widget):
         context['overlaymode_autosubmit_uploading_message'] = self.overlaymode_autosubmit_uploading_message
         return context
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             value = ''
         return render_to_string(self.template_name, self.get_template_context_data(

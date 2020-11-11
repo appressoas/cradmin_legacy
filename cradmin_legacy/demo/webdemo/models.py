@@ -23,7 +23,7 @@ class Site(models.Model):
 
 @python_2_unicode_compatible
 class Page(models.Model):
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
     title = models.CharField(
         max_length=100,
         verbose_name=_('Title'))
@@ -33,7 +33,9 @@ class Page(models.Model):
     image = models.ForeignKey(
         imagearchivemodels.ArchiveImage,
         verbose_name=_('Image'),
-        null=True, blank=True)
+        null=True, blank=True,
+        on_delete=models.CASCADE
+    )
     attachment = models.FileField(
         verbose_name=_('Attachment'),
         null=True, blank=True)
@@ -77,7 +79,7 @@ class Page(models.Model):
 
 @python_2_unicode_compatible
 class PageTag(models.Model):
-    page = models.ForeignKey(Page, related_name='tags')
+    page = models.ForeignKey(Page, related_name='tags', on_delete=models.CASCADE)
     tag = models.SlugField()
 
     def __str__(self):

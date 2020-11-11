@@ -15,7 +15,7 @@ class Site(models.Model):
 
 @python_2_unicode_compatible
 class Person(models.Model):
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     banned_datetime = models.DateTimeField(null=True, blank=True)
 

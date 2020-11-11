@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from crispy_forms import layout
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django import forms
@@ -61,7 +61,7 @@ class BeginPasswordResetView(FormView):
         return context
 
     def get_success_url(self):
-        return reverse('cradmin-resetpassword-email-sent')
+        return str(reverse('cradmin-resetpassword-email-sent'))
 
     def __send_email(self, user, reset_url):
         PasswordResetEmail(

@@ -23,7 +23,7 @@ class TestRoleSelectView(TestCase):
                 cradmin_instance_registry):
             request = self.factory.get('/roleselecttest')
             response = RoleSelectView.as_view()(request)
-            self.assertEquals(response.status_code, 302)
+            self.assertEqual(response.status_code, 302)
 
     def test_200_on_multiple(self):
         cradmin_instance = mock.MagicMock()
@@ -35,7 +35,7 @@ class TestRoleSelectView(TestCase):
                 cradmin_instance_registry):
             request = self.factory.get('/roleselecttest')
             response = RoleSelectView.as_view()(request)
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
 
     def __mock_cradmin_instance(self, roles):
         cradmin_instance = mock.MagicMock()
@@ -69,7 +69,7 @@ class TestRoleSelectView(TestCase):
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = CustomRoleSelectView.as_view()(request)
-                self.assertEquals(response.status_code, 200)
+                self.assertEqual(response.status_code, 200)
                 response.render()
                 selector = htmls.S(response.content)
                 self.assertEqual(
@@ -95,14 +95,14 @@ class TestRoleSelectView(TestCase):
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = RoleSelectView.as_view()(request)
-                self.assertEquals(response.status_code, 200)
+                self.assertEqual(response.status_code, 200)
                 response.render()
                 selector = htmls.S(response.content)
 
                 self.assertEqual(selector.count('.cradmin-legacy-roleselect-role-title'), 2)
                 titletextlist = [element.alltext_normalized
                                  for element in selector.list('.cradmin-legacy-roleselect-role-title')]
-                self.assertEquals(titletextlist, ['Role One', 'Role Two'])
+                self.assertEqual(titletextlist, ['Role One', 'Role Two'])
 
     def test_render_list_descriptions(self):
         role1 = mock.MagicMock()
@@ -125,14 +125,14 @@ class TestRoleSelectView(TestCase):
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = RoleSelectView.as_view()(request)
-                self.assertEquals(response.status_code, 200)
+                self.assertEqual(response.status_code, 200)
                 response.render()
                 selector = htmls.S(response.content)
 
                 self.assertEqual(selector.count('.cradmin-legacy-roleselect-role-description'), 2)
                 titletextlist = [element.alltext_normalized
                                  for element in selector.list('.cradmin-legacy-roleselect-role-description')]
-                self.assertEquals(titletextlist, ['Role One desc', 'Role Two desc'])
+                self.assertEqual(titletextlist, ['Role One desc', 'Role Two desc'])
 
     def test_render_list_urls(self):
         role1 = mock.MagicMock()
@@ -153,13 +153,13 @@ class TestRoleSelectView(TestCase):
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = RoleSelectView.as_view()(request)
-                self.assertEquals(response.status_code, 200)
+                self.assertEqual(response.status_code, 200)
                 response.render()
                 selector = htmls.S(response.content)
 
                 urllist = [element['href']
                            for element in selector.list('.cradmin-legacy-roleselect-list li a')]
-                self.assertEquals(urllist, ['/role/1', '/role/2'])
+                self.assertEqual(urllist, ['/role/1', '/role/2'])
 
     def test_render_pagination(self):
         class CustomRoleSelectView(RoleSelectView):
@@ -183,7 +183,7 @@ class TestRoleSelectView(TestCase):
                     cradmin_instance_registry):
                 request_page1 = self.factory.get('/roleselecttest')
                 response_page1 = CustomRoleSelectView.as_view()(request_page1)
-                self.assertEquals(response_page1.status_code, 200)
+                self.assertEqual(response_page1.status_code, 200)
                 response_page1.render()
                 selector_page1 = htmls.S(response_page1.content)
 
@@ -191,7 +191,7 @@ class TestRoleSelectView(TestCase):
                     'page': 2
                 })
                 response_page2 = CustomRoleSelectView.as_view()(request_page2)
-                self.assertEquals(response_page2.status_code, 200)
+                self.assertEqual(response_page2.status_code, 200)
                 response_page2.render()
                 selector_page2 = htmls.S(response_page2.content)
 
@@ -227,7 +227,7 @@ class TestRoleSelectView(TestCase):
                     cradmin_instance_registry):
                 request = self.factory.get('/roleselecttest')
                 response = CustomRoleSelectView.as_view()(request)
-                self.assertEquals(response.status_code, 200)
+                self.assertEqual(response.status_code, 200)
                 response.render()
                 selector = htmls.S(response.content)
 

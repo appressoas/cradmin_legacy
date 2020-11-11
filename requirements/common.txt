@@ -1,7 +1,4 @@
-#Django==1.8.4
-#Django==1.9.7
-#Django==1.10b1
-Django==1.11.5
+Django==2.2.1
 
 django-crispy-forms==1.7.0
 Pillow==2.8.1
@@ -43,18 +40,18 @@ transifex-client==0.11b3
 invoke==0.10.1
 
 # For model creation in tests
-model_mommy==1.2.6
+model_mommy==1.6.0
 
 coverage==4.0
 
 # For building styles
 vitalstyles==1.1.4
 
-ievv_opensource==0.2.17
+# ievv_opensource==0.2.17
 
 django_dbdev==1.2.1
 
-django_cradmin==4.0.0a0
+# django_cradmin==6.0.2
 
 # Pull inn development packages from GIT
 -r develop.gitpackages.txt

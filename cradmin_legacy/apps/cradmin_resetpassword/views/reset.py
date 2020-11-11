@@ -59,7 +59,7 @@ class ResetPasswordView(FormView):
         return context
 
     def get_success_url(self):
-        return getattr(settings, 'CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL', settings.LOGIN_URL)
+        return str(getattr(settings, 'CRADMIN_LEGACY_RESETPASSWORD_FINISHED_REDIRECT_URL', settings.LOGIN_URL))
 
     def __get_success_message(self):
         return render_to_string('cradmin_resetpassword/messages/successmessage.django.html').strip()
@@ -69,7 +69,7 @@ class ResetPasswordView(FormView):
             token = GenericTokenWithMetadata.objects.pop(
                 token=self.kwargs['token'], app='cradmin_resetpassword')
         except GenericTokenWithMetadata.DoesNotExist:
-            return self.render_to_response(self.get_context_data())
+            return self.render(self.get_context_data())
         else:
             raw_password = form.cleaned_data['password1']
             user = token.content_object
