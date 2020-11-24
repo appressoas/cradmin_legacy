@@ -69,7 +69,7 @@ class ResetPasswordView(FormView):
             token = GenericTokenWithMetadata.objects.pop(
                 token=self.kwargs['token'], app='cradmin_resetpassword')
         except GenericTokenWithMetadata.DoesNotExist:
-            return self.render(self.get_context_data())
+            return self.render_to_response(self.get_context_data())
         else:
             raw_password = form.cleaned_data['password1']
             user = token.content_object
