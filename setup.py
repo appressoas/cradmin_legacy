@@ -22,8 +22,9 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'django-crispy-forms>=1.6.0',
-        'Django>=2.2.0,<3.0.0',
+        'Django>=3.1.0,<4.0.0',
+        'django-cradmin>=8.0.2,<9.0.0',
+        'ievv-opensource>=7.0.3,<8.0.0',
         'django-multiupload',
         'Jinja2',
         'pytz',
