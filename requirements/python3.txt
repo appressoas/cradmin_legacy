@@ -1,2 +1,0 @@
--r common.txt
-doc2dash==2.0.2
