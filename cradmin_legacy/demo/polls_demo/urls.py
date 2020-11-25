@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from django.conf import urls, include
+from django.urls import path, include
 
 from cradmin_legacy.demo.polls_demo import cradmin
 from .views import poll_views
