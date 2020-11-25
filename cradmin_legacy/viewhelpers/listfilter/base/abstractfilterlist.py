@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 
 from cradmin_legacy.renderable import AbstractRenderableWithCss
 from cradmin_legacy.templatetags.cradmin_legacy_icon_tags import cradmin_icon
@@ -86,7 +86,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
 
         Must return a string (can not use ugettext_lazy, use ugettext instead).
         """
-        return ugettext('An error occurred. Please try to reload the page.')
+        return gettext('An error occurred. Please try to reload the page.')
 
     def get_loadingmessage_delay_milliseconds(self):
         """

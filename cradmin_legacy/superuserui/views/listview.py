@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 from cradmin_legacy.superuserui.views import mixins
 from cradmin_legacy.viewhelpers import listbuilder
@@ -31,7 +31,7 @@ class BaseView(mixins.ListFilterQuerySetForRoleMixin,
         if search_fields:
             filterlist.append(listfilter.django.single.textinput.Search(
                 slug='search',
-                label=ugettext_lazy('Search'),
+                label=gettext_lazy('Search'),
                 label_is_screenreader_only=True,
                 modelfields=search_fields))
 

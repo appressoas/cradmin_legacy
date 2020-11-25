@@ -2,7 +2,7 @@ import calendar
 
 import datetime
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy, pgettext_lazy
+from django.utils.translation import gettext_lazy, pgettext_lazy
 
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
 
@@ -134,13 +134,13 @@ class AbstractBoolean(AbstractSelectFilter):
         """
         Get the label for the ``True`` option. Defaults to ``Yes`` (translatable).
         """
-        return ugettext_lazy('Yes')
+        return gettext_lazy('Yes')
 
     def get_false_label(self):
         """
         Get the label for the ``False`` option. Defaults to ``No`` (translatable).
         """
-        return ugettext_lazy('No')
+        return gettext_lazy('No')
 
     def get_choices(self):
         return [
@@ -173,7 +173,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Today`` (translatable).
         """
-        return ugettext_lazy('Today')
+        return gettext_lazy('Today')
 
     def get_yesterday_label(self):
         """
@@ -181,7 +181,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Today`` (translatable).
         """
-        return ugettext_lazy('Yesterday')
+        return gettext_lazy('Yesterday')
 
     def get_last_seven_days_label(self):
         """
@@ -189,7 +189,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Today`` (translatable).
         """
-        return ugettext_lazy('Last seven days')
+        return gettext_lazy('Last seven days')
 
     def get_this_week_label(self):
         """
@@ -197,7 +197,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``This week`` (translatable).
         """
-        return ugettext_lazy('This week')
+        return gettext_lazy('This week')
 
     def get_this_month_label(self):
         """
@@ -205,7 +205,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``This month`` (translatable).
         """
-        return ugettext_lazy('This month')
+        return gettext_lazy('This month')
 
     def get_this_year_label(self):
         """
@@ -213,7 +213,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``This year`` (translatable).
         """
-        return ugettext_lazy('This year')
+        return gettext_lazy('This year')
 
     def null_enabled(self):
         """
