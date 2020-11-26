@@ -280,7 +280,6 @@ class BaseCrAdminInstance(object):
             kwargs (dict): Keyword args for the view.
             roleid: The roleid.
         """
-        print("test")
         return str(self.reverse_url(appname, viewname=crapp.INDEXVIEW_NAME, roleid=roleid,
                                 args=args, kwargs=kwargs))
 
