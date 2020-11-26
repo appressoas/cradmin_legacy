@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django.views.generic import ListView
 from django.http import HttpResponseRedirect
 
@@ -10,7 +10,7 @@ class RoleSelectView(ListView):
     paginate_by = 30
     template_name = 'cradmin_legacy/roleselect.django.html'
     context_object_name = 'roles'
-    pagetitle = _('What would you like to edit?')
+    pagetitle = gettext_lazy('What would you like to edit?')
     autoredirect_if_single_role = True
     list_cssclass = 'cradmin-legacy-roleselect-list cradmin-legacy-roleselect-list-flat'
 

@@ -10,7 +10,7 @@ import uuid
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 import math
 from cradmin_legacy.utils import crhumanize
 
@@ -213,7 +213,7 @@ def temporary_file_upload_to(instance, filename):
 
 def validate_max_file_size(max_filesize_bytes, fieldfile):
     if fieldfile.size > max_filesize_bytes:
-        raise ValidationError(_('Can not upload files larger than %(max_filesize)s.') % {
+        raise ValidationError(gettext_lazy('Can not upload files larger than %(max_filesize)s.') % {
             'max_filesize': crhumanize.human_readable_filesize(max_filesize_bytes),
         }, code='max_filesize_bytes_exceeded')
 
@@ -245,7 +245,7 @@ class TemporaryFile(models.Model):
                 self.filename = truncate_filename(filename=self.filename,
                                                   maxlength=self.collection.max_filename_length)
             if not self.collection.is_supported_filetype(self.mimetype, self.filename):
-                raise ValidationError(_('Unsupported filetype.'), code='unsupported_mimetype')
+                raise ValidationError(gettext_lazy('Unsupported filetype.'), code='unsupported_mimetype')
             if self.collection.singlemode:
                 other_temporaryfiles_queryset = self.collection.files.all()
                 if self.id is not None:

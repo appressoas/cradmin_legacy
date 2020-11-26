@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.template.defaultfilters import truncatechars
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 from cradmin_legacy import crinstance, crmenu
 from cradmin_legacy.demo.login_not_required_demo.views import dashboard
@@ -11,7 +11,7 @@ from cradmin_legacy.demo.webdemo.models import Site
 class Menu(crmenu.Menu):
     def build_menu(self):
         self.add_menuitem(
-            label=_('Dashboard'), url=self.appindex_url('dashboard'),
+            label=gettext_lazy('Dashboard'), url=self.appindex_url('dashboard'),
             active=self.request.cradmin_app.appname == 'dashboard')
 
 

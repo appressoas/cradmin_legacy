@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.views.generic import FormView
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 from django import forms
 from multiupload.fields import MultiFileField
@@ -125,7 +125,7 @@ class UploadTemporaryFilesView(FormView):
                     mimetype=mimetypes.guess_type(formfile.name)[0],
                     filename=formfile.name):
                 raise ValidationError(
-                    _('%(filename)s: Unsupported filetype.') % {'filename': formfile.name},
+                    gettext_lazy('%(filename)s: Unsupported filetype.') % {'filename': formfile.name},
                     code='unsupported_mimetype')
 
     def __validate_max_filesize_bytes(self, form, max_filesize_bytes):

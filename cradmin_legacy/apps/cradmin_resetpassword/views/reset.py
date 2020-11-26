@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from django.conf import settings
 from django.contrib import messages
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from django.views.generic import FormView
 
@@ -15,10 +15,10 @@ from cradmin_legacy.crispylayouts import PrimarySubmitLg
 
 class RepeatPasswordForm(forms.Form):
     password1 = forms.CharField(
-        label=_('Type your new password'),
+        label=gettext_lazy('Type your new password'),
         widget=forms.PasswordInput)
     password2 = forms.CharField(
-        label=_('Type your new password one more time'),
+        label=gettext_lazy('Type your new password one more time'),
         widget=forms.PasswordInput)
 
     def clean(self):
@@ -28,7 +28,7 @@ class RepeatPasswordForm(forms.Form):
 
         if password1 and password2:
             if password1 != password2:
-                raise forms.ValidationError(_('The passwords do not match'))
+                raise forms.ValidationError(gettext_lazy('The passwords do not match'))
 
 
 class ResetPasswordView(FormView):
@@ -42,7 +42,7 @@ class ResetPasswordView(FormView):
         helper.layout = layout.Layout(
             layout.Field('password1', focusonme='focusonme', css_class='input-lg'),
             layout.Field('password2', css_class='input-lg'),
-            PrimarySubmitLg('submit', _('Reset password'))
+            PrimarySubmitLg('submit', gettext_lazy('Reset password'))
         )
         return helper
 

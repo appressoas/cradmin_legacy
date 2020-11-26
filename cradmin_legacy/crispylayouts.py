@@ -2,7 +2,7 @@
 Custom django-crispy-forms layouts.
 """
 from __future__ import unicode_literals
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from crispy_forms import layout
 from crispy_forms.helper import FormHelper
 from crispy_forms.utils import flatatt
@@ -57,8 +57,8 @@ class CollapsedSectionLayout(layout.Div):
     wrapper_template_name = 'cradmin_legacy/crispylayouts/collapsed-section-layout.django.html'
 
     def __init__(self, *args, **kwargs):
-        self.show_label = kwargs.pop('show_label', _('Show'))
-        self.hide_label = kwargs.pop('hide_label', _('Hide'))
+        self.show_label = kwargs.pop('show_label', gettext_lazy('Show'))
+        self.hide_label = kwargs.pop('hide_label', gettext_lazy('Hide'))
         self.show_icon = kwargs.pop('show_icon', cradmin_icon('caret-down'))
         self.hide_icon = kwargs.pop('hide_icon', cradmin_icon('caret-up'))
         super(CollapsedSectionLayout, self).__init__(*args, **kwargs)

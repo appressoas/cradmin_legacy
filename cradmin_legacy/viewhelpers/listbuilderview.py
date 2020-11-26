@@ -3,7 +3,7 @@ from django.conf import settings
 from django.template import defaultfilters
 from django.views.generic import ListView
 from cradmin_legacy.viewhelpers import listbuilder
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from cradmin_legacy.viewhelpers.listfilter import listfilter_viewmixin
 from cradmin_legacy.viewhelpers import listfilter
 
@@ -282,7 +282,7 @@ class View(ViewMixin, ListView):
         """
         Get the message to show when there are no items.
         """
-        return _('No %(modelname_plural)s') % {
+        return gettext_lazy('No %(modelname_plural)s') % {
             'modelname_plural': self.get_model_class()._meta.verbose_name_plural.lower(),
         }
 

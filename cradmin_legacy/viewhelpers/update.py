@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.http import HttpResponseRedirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django.views.generic import UpdateView as DjangoUpdateView
 
 from cradmin_legacy.crispylayouts import PrimarySubmit
@@ -19,7 +19,7 @@ class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
 
         Defaults to ``Edit <verbose_name model>``.
         """
-        return _('Edit %(what)s') % {'what': self.get_model_class()._meta.verbose_name}
+        return gettext_lazy('Edit %(what)s') % {'what': self.get_model_class()._meta.verbose_name}
 
     def get_buttons(self):
         buttons = [
@@ -36,7 +36,7 @@ class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
         return helper
 
     def get_success_message(self, object):
-        return _('Saved "%(object)s".') % {'object': object}
+        return gettext_lazy('Saved "%(object)s".') % {'object': object}
 
 
 class UpdateRoleView(UpdateView):

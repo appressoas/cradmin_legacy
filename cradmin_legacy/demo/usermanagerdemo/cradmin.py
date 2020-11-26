@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from builtins import str
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 from cradmin_legacy import crinstance, crmenu
 from .crapps import overview
@@ -12,15 +12,15 @@ class Menu(crmenu.Menu):
     def build_menu(self):
         if self.request.cradmin_instance.get_rolequeryset().count() > 1:
             self.add_headeritem(
-                label=_('Select user'),
+                label=gettext_lazy('Select user'),
                 url=self.roleselectview_url(),
                 icon='chevron-up')
 
         self.add_menuitem(
-            label=_('Account overview'), url=self.appindex_url('overview'),
+            label=gettext_lazy('Account overview'), url=self.appindex_url('overview'),
             active=self.request.cradmin_app.appname == 'overview')
         self.add_menuitem(
-            label=_('Edit profile'), url=self.appindex_url('edit_user'),
+            label=gettext_lazy('Edit profile'), url=self.appindex_url('edit_user'),
             active=self.request.cradmin_app.appname == 'edit_user')
 
 

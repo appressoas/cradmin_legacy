@@ -4,7 +4,7 @@ from crispy_forms import layout
 from crispy_forms.helper import FormHelper
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from cradmin_legacy.crispylayouts import PrimarySubmitLg
 
@@ -57,7 +57,7 @@ class AbstractCreateAccountForm(forms.ModelForm):
 
         Override this to provide a custom label.
         """
-        return _('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
+        return gettext_lazy('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
 
     def get_button_layout(self):
         """
@@ -187,12 +187,12 @@ class AbstractCreateAccountWithPasswordForm(AbstractCreateAccountForm):
 
     #: The first password.
     password1 = forms.CharField(
-        label=_('Type your password'),
+        label=gettext_lazy('Type your password'),
         widget=forms.PasswordInput)
 
     #: The repeat password fields.
     password2 = forms.CharField(
-        label=_('Type your password one more time'),
+        label=gettext_lazy('Type your password one more time'),
         widget=forms.PasswordInput)
 
     def set_password(self, user):
@@ -227,6 +227,6 @@ class AbstractCreateAccountWithPasswordForm(AbstractCreateAccountForm):
         if password1 and password2:
             if password1 != password2:
                 raise forms.ValidationError(
-                    message=_('The passwords do not match.'),
+                    message=gettext_lazy('The passwords do not match.'),
                     code='passwords_do_not_match')
         return cleaned_data

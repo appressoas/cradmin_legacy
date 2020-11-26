@@ -4,7 +4,7 @@ from builtins import object
 
 from crispy_forms import layout
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django.views.generic import FormView as DjangoFormView
 
 from cradmin_legacy import crapp
@@ -43,10 +43,10 @@ class PreviewMixin(object):
 
             def get_buttons(self):
                 return [
-                    PrimarySubmit('save', _('Save')),
+                    PrimarySubmit('save', gettext_lazy('Save')),
 
                     # When this button is clicked, self.preview_requested() returns True (see form_valid above).
-                    DefaultSubmit(self.submit_preview_name, _('Preview'))
+                    DefaultSubmit(self.submit_preview_name, gettext_lazy('Preview'))
                 ]
 
             def serialize_preview(self, form):
@@ -180,10 +180,10 @@ class FormViewMixin(PreviewMixin):
     hide_page_header = False
 
     #: The save submit label. See :meth:`~.FormViewMixin.get_submit_save_label`.
-    submit_save_label = _('Save')
+    submit_save_label = gettext_lazy('Save')
 
     #: The save submit label. See :meth:`~.FormViewMixin.get_submit_save_and_continue_edititing_label`.
-    submit_save_and_continue_edititing_label = _('Save and continue editing')
+    submit_save_and_continue_edititing_label = gettext_lazy('Save and continue editing')
 
     #: See :meth:`~.FormViewMixin.get_submit_save_button_name`.
     submit_save_button_name = 'submit-save'
@@ -472,7 +472,7 @@ class FormView(FormViewMixin, DjangoFormView):
 
                 def get_buttons(self):
                     return [
-                        PrimarySubmit('save', _('Save')),
+                        PrimarySubmit('save', gettext_lazy('Save')),
                     ]
 
                 def form_valid(self, form):
