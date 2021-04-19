@@ -1,5 +1,5 @@
 from django import test
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.demo.webdemo.views import pages
 from cradmin_legacy import cradmin_testhelpers
@@ -20,8 +20,8 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Test the view title ('Edit Page').
         """
-        site = mommy.make('webdemo.Site')
-        page = mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        page = baker.make('webdemo.Page', site=site)
 
         # When updating the view, the url needs a parameter, here the pk of the page to update.
         # According to the views/pages.py class Apps ('^edit/(?P<pk>\d+)$').
@@ -35,8 +35,8 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Test a post request with all fields filled except title (required).
         """
-        site = mommy.make('webdemo.Site')
-        page = mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        page = baker.make('webdemo.Page', site=site)
 
         # When updating the view, the url needs a parameter, here the pk of the page to update.
         # According to the views/pages.py class Apps ('^edit/(?P<pk>\d+)$').
@@ -59,8 +59,8 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Test a post request with all fields filled except intro (required).
         """
-        site = mommy.make('webdemo.Site')
-        page = mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        page = baker.make('webdemo.Page', site=site)
         mockresponse = self.mock_http200_postrequest_htmls(
             cradmin_role=site,
             viewkwargs={'pk': page.id},
@@ -80,8 +80,8 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Test a post request with all fields filled except body (required).
         """
-        site = mommy.make('webdemo.Site')
-        page = mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        page = baker.make('webdemo.Page', site=site)
         mockresponse = self.mock_http200_postrequest_htmls(
             cradmin_role=site,
             viewkwargs={'pk': page.id},
@@ -101,8 +101,8 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Test a post request with all fields filled except time (required).
         """
-        site = mommy.make('webdemo.Site')
-        page = mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        page = baker.make('webdemo.Page', site=site)
         mockresponse = self.mock_http200_postrequest_htmls(
             cradmin_role=site,
             viewkwargs={'pk': page.id},
@@ -123,8 +123,8 @@ class TestPageUpdateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Gets 302 Found redirect.
         """
-        site = mommy.make('webdemo.Site')
-        page = mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        page = baker.make('webdemo.Page', site=site)
         mockresponse = self.mock_http302_postrequest(
             cradmin_role=site,
             viewkwargs={'pk': page.id},

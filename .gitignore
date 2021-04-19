@@ -30,3 +30,4 @@
 /ievv-coderefactor-logs/
 
 .vscode/
+.vscode-atest-temp/

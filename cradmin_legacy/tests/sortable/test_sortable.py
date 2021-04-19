@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from builtins import range
 from django import test
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.tests.sortable.cradmin_sortable_testapp.models import SortableItem
 from cradmin_legacy.tests.sortable.cradmin_sortable_testapp.models import ItemContainer
@@ -177,10 +177,10 @@ class TestSortableItem(test.TestCase):
             self.assertTrue(object.sort_index >= 0)
 
     def test_sortindex_is_none_sanity(self):
-        container = mommy.make(ItemContainer)
-        item1 = mommy.make(SortableItem, sort_index=None, container=container)
-        item2 = mommy.make(SortableItem, sort_index=None, container=container)
-        item3 = mommy.make(SortableItem, sort_index=None, container=container)
+        container = baker.make(ItemContainer)
+        item1 = baker.make(SortableItem, sort_index=None, container=container)
+        item2 = baker.make(SortableItem, sort_index=None, container=container)
+        item3 = baker.make(SortableItem, sort_index=None, container=container)
         SortableItem.objects.sort_last(item1)
         SortableItem.objects.sort_last(item2)
         SortableItem.objects.sort_last(item3)

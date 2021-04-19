@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.python2_compatibility import mock
 import htmls
@@ -44,11 +44,11 @@ class SimpleMultiSelectView(multiselect.MultiSelectView):
 class TestMultiSelectView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.testmodelinstance = mommy.make('cradmin_viewhelpers_testapp.TestModel', pk=TEST_PK)
+        self.testmodelinstance = baker.make('cradmin_viewhelpers_testapp.TestModel', pk=TEST_PK)
 
     def test_object_selection_valid(self):
-        testmodelinstance2 = mommy.make('cradmin_viewhelpers_testapp.TestModel')
-        testmodelinstance3 = mommy.make('cradmin_viewhelpers_testapp.TestModel')
+        testmodelinstance2 = baker.make('cradmin_viewhelpers_testapp.TestModel')
+        testmodelinstance3 = baker.make('cradmin_viewhelpers_testapp.TestModel')
 
         request = self.factory.post('/test', {
             'selected_objects': [testmodelinstance2.id, testmodelinstance3.id]
@@ -86,7 +86,7 @@ class TestMultiSelectView(TestCase):
 class TestMultiSelectFormView(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
-        self.testmodelinstance = mommy.make('cradmin_viewhelpers_testapp.TestModel', pk=TEST_PK)
+        self.testmodelinstance = baker.make('cradmin_viewhelpers_testapp.TestModel', pk=TEST_PK)
 
     def test_first_load(self):
 
