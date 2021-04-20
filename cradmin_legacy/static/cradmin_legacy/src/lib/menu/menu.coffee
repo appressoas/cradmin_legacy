@@ -47,9 +47,9 @@ angular.module('cradminLegacy.menu', [])
 
         $scope.getAriaPressed = ->
           if $scope.cradminMenuDisplay
-            return 'pressed'
+            return 'true'
           else
-            return ''
+            return 'false'
 
         @close = ->
           $scope.cradminMenuDisplay = false
