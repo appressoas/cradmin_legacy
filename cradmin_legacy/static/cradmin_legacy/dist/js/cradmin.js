@@ -4250,9 +4250,9 @@
           };
           $scope.getAriaPressed = function() {
             if ($scope.cradminMenuDisplay) {
-              return 'pressed';
+              return 'true';
             } else {
-              return '';
+              return 'false';
             }
           };
           this.close = function() {
