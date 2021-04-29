@@ -286,9 +286,47 @@ class View(ViewMixin, ListView):
             'modelname_plural': self.get_model_class()._meta.verbose_name_plural.lower(),
         }
 
+    def disable_paging_requested(self):
+        """
+        If this returns ``True``, we disable paging.
+
+        The default implementation disables paging if ``disablePaging=true`` is
+        in the querystring (in ``request.GET``).
+
+        When pagination is enabled for the listbuilder-view, disabling pagination 
+        will also be supported to be able to load all instead of just the next page.
+        """
+        return self.request.GET.get('disablePaging', 'false') == 'true'
+
+    def get_paginate_by(self, queryset):
+        """
+        Built-in support for pagination.
+
+        Will return the set pagination (paginate_by), or disable pagination 
+        if `self.disable_paging_requested` returns `True`.
+        """
+        if self.disable_paging_requested():
+            return None
+        return self.paginate_by
+
+    def use_pagination_load_all(self):
+        """
+        If pagination is enabled, requesting the next page 
+        will load all, not only the next page.
+
+        This is used to tell the UI that the pagination should load 
+        all elements, not just the next page setting the javasscript 
+        pagination-handling mode to "loadAllOnClick".
+        
+        If `True`, the page-load will load all elements, and the 
+        button will also show "Load all" intead of "Load more".
+        """
+        return False
+
     def get_context_data(self, **kwargs):
         context = super(View, self).get_context_data(**kwargs)
         context['cradmin_hide_menu'] = self.hide_menu
+        context['pagination_mode_load_all'] = self.use_pagination_load_all()
         return context
 
 
