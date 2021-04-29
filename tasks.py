@@ -20,7 +20,7 @@ def _manage(args, echo=True, cwd=None, **kwargs):
 
 
 @task
-def makemessages():
+def makemessages(context):
     for languagecode in LANGUAGE_CODES:
         _manage('makemessages -l {} '
                 '-i "node_modules/*" '
@@ -30,5 +30,5 @@ def makemessages():
 
 
 @task
-def compilemessages():
+def compilemessages(context):
     _manage('compilemessages', cwd='cradmin_legacy')
