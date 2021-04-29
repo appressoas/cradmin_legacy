@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cradmin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-14 19:19+0100\n"
-"PO-Revision-Date: 2016-02-14 18:19+0000\n"
+"POT-Creation-Date: 2021-04-29 15:24+0200\n"
+"PO-Revision-Date: 2021-04-29 15:25+0200\n"
 "Last-Translator: Espen Angell Kristiansen <espen@appresso.no>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/appresso/cradmin/"
 "language/nb/)\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2\n"
 
 #: apps/cradmin_activate_account/templates/cradmin_activate_account/activate.django.html:7
 #: apps/cradmin_activate_account/templates/cradmin_activate_account/activate.django.html:12
@@ -105,15 +106,7 @@ msgstr "Epost"
 msgid "Your email and password didn't match. Please try again."
 msgstr "Ugyldig epost/passord. Venligst prøv igjen."
 
-#: apps/cradmin_generic_token_with_metadata/models.py:224
-msgid "Created"
-msgstr "Lagt til"
-
-#: apps/cradmin_generic_token_with_metadata/models.py:230
-msgid "Expires"
-msgstr "Utgår"
-
-#: apps/cradmin_imagearchive/apps.py:9
+#: apps/cradmin_imagearchive/apps.py:7
 msgid "Image archive"
 msgstr "Bildearkiv"
 
@@ -199,31 +192,31 @@ msgstr "Legg til bilde"
 msgid "Uploaded %(what)s."
 msgstr "Lastet opp %(what)s."
 
-#: apps/cradmin_imagearchive/models.py:42
+#: apps/cradmin_imagearchive/models.py:44
 msgid "role"
 msgstr "rolle"
 
-#: apps/cradmin_imagearchive/models.py:43
+#: apps/cradmin_imagearchive/models.py:45
 msgid "The role owning this image."
 msgstr "Rollen som eier dette bildet."
 
-#: apps/cradmin_imagearchive/models.py:52
+#: apps/cradmin_imagearchive/models.py:56
 msgid "image"
 msgstr "bilde"
 
-#: apps/cradmin_imagearchive/models.py:53
+#: apps/cradmin_imagearchive/models.py:57
 msgid "Select an image to add to the archive."
 msgstr "Velg et bilde du ønsker å legge til i arkivet."
 
-#: apps/cradmin_imagearchive/models.py:78
+#: apps/cradmin_imagearchive/models.py:82
 msgid "name"
 msgstr "navn"
 
-#: apps/cradmin_imagearchive/models.py:86
+#: apps/cradmin_imagearchive/models.py:90
 msgid "description"
 msgstr "beskrivelse"
 
-#: apps/cradmin_imagearchive/models.py:88
+#: apps/cradmin_imagearchive/models.py:92
 msgid ""
 "An optional description of the image. Think if this as a description of the "
 "image for visually impaired users. This means that you should describe the "
@@ -233,11 +226,11 @@ msgstr ""
 "En alternativ beskrivelse av dette bildet. Tenk på dette som en beskrivelse "
 "av innholdet og hva du kan se i bildet. "
 
-#: apps/cradmin_imagearchive/models.py:101
+#: apps/cradmin_imagearchive/models.py:105
 msgid "archive image"
 msgstr "arkivbilde"
 
-#: apps/cradmin_imagearchive/models.py:102
+#: apps/cradmin_imagearchive/models.py:106
 msgid "archive images"
 msgstr "arkivbilder"
 
@@ -423,13 +416,13 @@ msgstr "Skriv ditt nye passord en gang til"
 msgid "The passwords do not match"
 msgstr "Passordene er ikke like"
 
-#: apps/cradmin_temporaryfileuploadstore/models.py:214
+#: apps/cradmin_temporaryfileuploadstore/models.py:216
 #: apps/cradmin_temporaryfileuploadstore/widgets.py:78
 #, python-format
 msgid "Can not upload files larger than %(max_filesize)s."
 msgstr "Beklager, men bildet ditt er over maksstørrelsen på %(max_filesize)s"
 
-#: apps/cradmin_temporaryfileuploadstore/models.py:246
+#: apps/cradmin_temporaryfileuploadstore/models.py:248
 msgid "Unsupported filetype."
 msgstr "Ugyldig filtype."
 
@@ -508,11 +501,11 @@ msgctxt "automodelform modelchoice_field no value"
 msgid "(Not selected)"
 msgstr "(Ikke valgt)"
 
-#: crispylayouts.py:58
+#: crispylayouts.py:60
 msgid "Show"
 msgstr "Vis"
 
-#: crispylayouts.py:59
+#: crispylayouts.py:61
 msgid "Hide"
 msgstr "Skjul"
 
@@ -661,7 +654,11 @@ msgstr "Lukk vindu"
 msgid "Loading ..."
 msgstr "Henter ..."
 
-#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:45
+#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:46
+msgid "Load all"
+msgstr "Hent alle"
+
+#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:48
 msgid "Load more"
 msgstr "Hent flere"
 
@@ -789,11 +786,11 @@ msgstr "Legg til %(what)s"
 msgid "Created \"%(object)s\"."
 msgstr "Opprettet \"%(object)s\"."
 
-#: viewhelpers/create.py:142 viewhelpers/formbase.py:42
+#: viewhelpers/create.py:142 viewhelpers/formbase.py:183
 msgid "Save"
 msgstr "Lagre"
 
-#: viewhelpers/create.py:143 viewhelpers/formbase.py:45
+#: viewhelpers/create.py:143 viewhelpers/formbase.py:186
 msgid "Save and continue editing"
 msgstr "Lagre og fortsett redigering"
 
@@ -802,7 +799,7 @@ msgstr "Lagre og fortsett redigering"
 msgid "Saved \"%(object)s\"."
 msgstr "Lagret \"%(object)s\"."
 
-#: viewhelpers/crudbase.py:301
+#: viewhelpers/crudbase.py:285
 msgid "Please fix the errors in the form below."
 msgstr "Vennligst fiks feilene i skjemaet nedenfor."
 
@@ -1039,16 +1036,22 @@ msgctxt "Time label datetime widget"
 msgid "Time"
 msgstr "Kl."
 
-#: widgets/datetimepicker.py:694
+#: widgets/datetimepicker.py:703
 msgctxt "Has value trigger button text for date widget"
 msgid "Change date/time"
 msgstr "Endre tidspunkt"
 
-#: widgets/datetimepicker.py:695
+#: widgets/datetimepicker.py:704
 msgctxt "No value trigger button text for date widget"
 msgid "Select a date/time"
 msgstr "Velg et tidspunk"
 
-#: widgets/datetimepicker.py:716
+#: widgets/datetimepicker.py:725
 msgid "hh:mm"
 msgstr "tt:mm"
+
+#~ msgid "Created"
+#~ msgstr "Lagt til"
+
+#~ msgid "Expires"
+#~ msgstr "Utgår"
