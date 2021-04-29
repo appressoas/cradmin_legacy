@@ -21,3 +21,11 @@ What is new?
 - Fix Aria-pressed values
 - Upgrade grunt
 - Update yarn.lock
+
+
+#####
+3.2.0
+#####
+- listbuilder-view: Default listbuilder-view now supports either the load more 
+ option (as before) or load all. Enabled by overriding method `use_pagination_load_all` and return ``True``.
+- translations
