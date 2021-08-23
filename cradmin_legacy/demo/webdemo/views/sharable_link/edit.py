@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 from django import forms
 from crispy_forms import layout
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from cradmin_legacy.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
 
 from cradmin_legacy.apps.cradmin_invite.invite_url import InviteUrl
@@ -15,13 +15,13 @@ class SharableLinkForm(forms.Form):
     message = forms.CharField(
         required=False,
         widget=forms.Textarea,
-        label=_('Message'),
-        help_text=_('An optional message that people will see when they visit the sharable link.')
+        label=gettext_lazy('Message'),
+        help_text=gettext_lazy('An optional message that people will see when they visit the sharable link.')
     )
     expiration_datetime = forms.DateTimeField(
         required=False,
-        label=_('Expiration time'),
-        help_text=_('An optional expiration time for the sharable link.')
+        label=gettext_lazy('Expiration time'),
+        help_text=gettext_lazy('An optional expiration time for the sharable link.')
     )
 
 
@@ -63,7 +63,7 @@ class CreateOrEditSharableLinkView(FormView, QuerysetForRoleMixin):
 
     def get_buttons(self):
         return [
-            PrimarySubmit('submit', _('Get sharable link')),
+            PrimarySubmit('submit', gettext_lazy('Get sharable link')),
         ]
 
     def form_valid(self, form):

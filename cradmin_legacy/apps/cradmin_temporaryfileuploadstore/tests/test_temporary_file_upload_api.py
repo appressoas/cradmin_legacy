@@ -23,13 +23,13 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         self.assertIsNotNone(responsedata['collectionid'])
 
         collectionid = responsedata['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.files.count(), 1)
+        self.assertEqual(collection.files.count(), 1)
         uploadedfile = collection.files.first()
         self.assertEqual(uploadedfile.filename, 'testfile1.txt')
         self.assertNotIn('testfile1.txt', uploadedfile.file.name)
@@ -37,8 +37,8 @@ class TestUploadTemporaryFilesView(TestCase):
             'cradmin_temporaryfileuploadstore/{}/'.format(collection.id)))
         self.assertEqual(uploadedfile.file.read(), b'Test1')
 
-        self.assertEquals(len(responsedata['temporaryfiles']), 1)
-        self.assertEquals(responsedata['temporaryfiles'][0]['filename'], 'testfile1.txt')
+        self.assertEqual(len(responsedata['temporaryfiles']), 1)
+        self.assertEqual(responsedata['temporaryfiles'][0]['filename'], 'testfile1.txt')
 
     def test_post_multiple_files(self):
         request = self.factory.post('/test', {
@@ -49,16 +49,16 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         self.assertIsNotNone(responsedata['collectionid'])
 
         collectionid = responsedata['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.files.count(), 2)
-        self.assertEquals(len(responsedata['temporaryfiles']), 2)
-        self.assertEquals(responsedata['temporaryfiles'][0]['filename'], 'testfile1.txt')
-        self.assertEquals(responsedata['temporaryfiles'][1]['filename'], 'testfile2.txt')
+        self.assertEqual(collection.files.count(), 2)
+        self.assertEqual(len(responsedata['temporaryfiles']), 2)
+        self.assertEqual(responsedata['temporaryfiles'][0]['filename'], 'testfile1.txt')
+        self.assertEqual(responsedata['temporaryfiles'][1]['filename'], 'testfile2.txt')
 
     def test_post_multiple_requests_for_same_collection(self):
         request1 = self.factory.post('/test', {
@@ -66,12 +66,12 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request1.user = self.testuser
         response1 = UploadTemporaryFilesView.as_view()(request1)
-        self.assertEquals(response1.status_code, 200)
+        self.assertEqual(response1.status_code, 200)
         response1data = json.loads(response1.content.decode('utf-8'))
         self.assertIsNotNone(response1data['collectionid'])
         collectionid = response1data['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.files.count(), 1)
+        self.assertEqual(collection.files.count(), 1)
 
         request2 = self.factory.post('/test', {
             'file': SimpleUploadedFile('testfile2.txt', b'Test2'),
@@ -79,10 +79,10 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request2.user = self.testuser
         response2 = UploadTemporaryFilesView.as_view()(request2)
-        self.assertEquals(response2.status_code, 200)
+        self.assertEqual(response2.status_code, 200)
         response2data = json.loads(response2.content.decode('utf-8'))
-        self.assertEquals(collectionid, response2data['collectionid'])
-        self.assertEquals(collection.files.count(), 2)
+        self.assertEqual(collectionid, response2data['collectionid'])
+        self.assertEqual(collection.files.count(), 2)
 
     def test_post_multiple_files_singlefile_mode(self):
         request1 = self.factory.post('/test', {
@@ -91,12 +91,12 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request1.user = self.testuser
         response1 = UploadTemporaryFilesView.as_view()(request1)
-        self.assertEquals(response1.status_code, 200)
+        self.assertEqual(response1.status_code, 200)
         response1data = json.loads(response1.content.decode('utf-8'))
         self.assertIsNotNone(response1data['collectionid'])
         collectionid = response1data['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.files.count(), 1)
+        self.assertEqual(collection.files.count(), 1)
         uploadedfile1 = collection.files.first()
         uploadedfile1_physical_file_path = uploadedfile1.file.path
         self.assertTrue(os.path.exists(uploadedfile1_physical_file_path))
@@ -108,10 +108,10 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request2.user = self.testuser
         response2 = UploadTemporaryFilesView.as_view()(request2)
-        self.assertEquals(response2.status_code, 200)
+        self.assertEqual(response2.status_code, 200)
         response2data = json.loads(response2.content.decode('utf-8'))
-        self.assertEquals(collectionid, response2data['collectionid'])
-        self.assertEquals(collection.files.count(), 1)
+        self.assertEqual(collectionid, response2data['collectionid'])
+        self.assertEqual(collection.files.count(), 1)
         uploadedfile2 = collection.files.first()
         self.assertEqual(uploadedfile2.filename, 'testfile2.txt')
         self.assertEqual(uploadedfile2.file.read(), b'Test2')
@@ -124,17 +124,17 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         collectionid = responsedata['collectionid']
 
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.accept, 'text/plain,application/pdf')
-        self.assertEquals(collection.files.count(), 1)
+        self.assertEqual(collection.accept, 'text/plain,application/pdf')
+        self.assertEqual(collection.files.count(), 1)
         uploadedfile = collection.files.first()
         self.assertEqual(uploadedfile.mimetype, 'text/plain')
 
-        self.assertEquals(responsedata['temporaryfiles'][0]['mimetype'], 'text/plain')
+        self.assertEqual(responsedata['temporaryfiles'][0]['mimetype'], 'text/plain')
 
     def test_post_accept_invalid_single_file(self):
         request = self.factory.post('/test', {
@@ -142,13 +142,13 @@ class TestUploadTemporaryFilesView(TestCase):
             'accept': 'application/pdf'
         })
         request.user = self.testuser
-        self.assertEquals(TemporaryFileCollection.objects.count(), 0)
+        self.assertEqual(TemporaryFileCollection.objects.count(), 0)
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(TemporaryFileCollection.objects.count(), 0)
-        self.assertEquals(responsedata['file'][0]['code'], 'unsupported_mimetype')
-        self.assertEquals(responsedata['file'][0]['message'], u'testfile1.txt: Unsupported filetype.')
+        self.assertEqual(TemporaryFileCollection.objects.count(), 0)
+        self.assertEqual(responsedata['file'][0]['code'], 'unsupported_mimetype')
+        self.assertEqual(responsedata['file'][0]['message'], u'testfile1.txt: Unsupported filetype.')
 
     def test_post_accept_invalid_existing_collection(self):
         collection = TemporaryFileCollection.objects.create(user=self.testuser)
@@ -163,15 +163,15 @@ class TestUploadTemporaryFilesView(TestCase):
             'accept': 'application/pdf'
         })
         request.user = self.testuser
-        self.assertEquals(TemporaryFileCollection.objects.count(), 1)
-        self.assertEquals(collection.files.count(), 1)
+        self.assertEqual(TemporaryFileCollection.objects.count(), 1)
+        self.assertEqual(collection.files.count(), 1)
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(TemporaryFileCollection.objects.count(), 1)
-        self.assertEquals(collection.files.count(), 1)
-        self.assertEquals(responsedata['file'][0]['code'], 'unsupported_mimetype')
-        self.assertEquals(responsedata['file'][0]['message'], u'testfile1.txt: Unsupported filetype.')
+        self.assertEqual(TemporaryFileCollection.objects.count(), 1)
+        self.assertEqual(collection.files.count(), 1)
+        self.assertEqual(responsedata['file'][0]['code'], 'unsupported_mimetype')
+        self.assertEqual(responsedata['file'][0]['message'], u'testfile1.txt: Unsupported filetype.')
 
     def test_post_accept_invalid_multiple_files(self):
         request = self.factory.post('/test', {
@@ -182,13 +182,13 @@ class TestUploadTemporaryFilesView(TestCase):
             'accept': 'application/pdf'
         })
         request.user = self.testuser
-        self.assertEquals(TemporaryFileCollection.objects.count(), 0)
+        self.assertEqual(TemporaryFileCollection.objects.count(), 0)
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(TemporaryFileCollection.objects.count(), 0)
-        self.assertEquals(responsedata['file'][0]['code'], 'unsupported_mimetype')
-        self.assertEquals(responsedata['file'][0]['message'], u'testfile2.txt: Unsupported filetype.')
+        self.assertEqual(TemporaryFileCollection.objects.count(), 0)
+        self.assertEqual(responsedata['file'][0]['code'], 'unsupported_mimetype')
+        self.assertEqual(responsedata['file'][0]['message'], u'testfile2.txt: Unsupported filetype.')
 
     def test_post_max_filename_length_not_truncated(self):
         request = self.factory.post('/test', {
@@ -197,13 +197,13 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         collectionid = responsedata['collectionid']
 
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.files.first().filename, 'abc.txt')
-        self.assertEquals(responsedata['temporaryfiles'][0]['filename'], 'abc.txt')
+        self.assertEqual(collection.files.first().filename, 'abc.txt')
+        self.assertEqual(responsedata['temporaryfiles'][0]['filename'], 'abc.txt')
 
     def test_post_max_filename_length_truncated(self):
         request = self.factory.post('/test', {
@@ -212,13 +212,13 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         collectionid = responsedata['collectionid']
 
         collection = TemporaryFileCollection.objects.get(id=collectionid)
-        self.assertEquals(collection.files.first().filename, 'bc.txt')
-        self.assertEquals(responsedata['temporaryfiles'][0]['filename'], 'bc.txt')
+        self.assertEqual(collection.files.first().filename, 'bc.txt')
+        self.assertEqual(responsedata['temporaryfiles'][0]['filename'], 'bc.txt')
 
     def test_post_unique_filenames(self):
         request = self.factory.post('/test', {
@@ -230,7 +230,7 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         collectionid = responsedata['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
@@ -238,12 +238,12 @@ class TestUploadTemporaryFilesView(TestCase):
         files_by_content = {}
         for temporaryfile in collection.files.all():
             files_by_content[temporaryfile.file.read()] = temporaryfile
-        self.assertEquals(files_by_content[b'Testcontent1'].filename, 'abc.txt')
-        self.assertNotEquals(files_by_content[b'Testcontent2'].filename, 'abc.txt')
+        self.assertEqual(files_by_content[b'Testcontent1'].filename, 'abc.txt')
+        self.assertNotEqual(files_by_content[b'Testcontent2'].filename, 'abc.txt')
         self.assertTrue(files_by_content[b'Testcontent2'].filename.endswith('abc.txt'))
 
-        self.assertEquals(responsedata['temporaryfiles'][0]['filename'], 'abc.txt')
-        self.assertNotEquals(responsedata['temporaryfiles'][1]['filename'], 'abc.txt')
+        self.assertEqual(responsedata['temporaryfiles'][0]['filename'], 'abc.txt')
+        self.assertNotEqual(responsedata['temporaryfiles'][1]['filename'], 'abc.txt')
         self.assertTrue(responsedata['temporaryfiles'][1]['filename'].endswith('abc.txt'))
 
     def test_post_unique_filenames_and_max_filename_length(self):
@@ -257,7 +257,7 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         collectionid = responsedata['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
@@ -265,9 +265,9 @@ class TestUploadTemporaryFilesView(TestCase):
         files_by_content = {}
         for temporaryfile in collection.files.all():
             files_by_content[temporaryfile.file.read()] = temporaryfile
-        self.assertEquals(files_by_content[b'Testcontent1'].filename,
+        self.assertEqual(files_by_content[b'Testcontent1'].filename,
                           'ttttttttttttttttttttt...ttttttttttttttttttttt')
-        self.assertNotEquals(files_by_content[b'Testcontent2'].filename,
+        self.assertNotEqual(files_by_content[b'Testcontent2'].filename,
                              'ttttttttttttttttttttt...ttttttttttttttttttttt')
         self.assertTrue(files_by_content[b'Testcontent2'].filename.endswith('-tttttttt'))
 
@@ -278,7 +278,7 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
         collectionid = responsedata['collectionid']
         collection = TemporaryFileCollection.objects.get(id=collectionid)
@@ -291,18 +291,18 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals('max_filesize_bytes_exceeded', responsedata['file'][0]['code'])
+        self.assertEqual('max_filesize_bytes_exceeded', responsedata['file'][0]['code'])
         self.assertFalse(TemporaryFileCollection.objects.exists())
 
     def test_post_form_invalid_no_file(self):
         request = self.factory.post('/test')
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['file'][0]['code'], 'required')
+        self.assertEqual(responsedata['file'][0]['code'], 'required')
         self.assertFalse(TemporaryFileCollection.objects.exists())
 
     def test_post_form_invalid_collectionid_not_number(self):
@@ -312,9 +312,9 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['collectionid'][0]['code'], 'invalid')
+        self.assertEqual(responsedata['collectionid'][0]['code'], 'invalid')
 
     def test_post_form_collectionid_does_not_exist(self):
         request = self.factory.post('/test', {
@@ -323,9 +323,9 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['collectionid'][0]['code'], 'doesnotexist')
+        self.assertEqual(responsedata['collectionid'][0]['code'], 'doesnotexist')
 
     def test_post_form_collection_not_owned_by_user(self):
         collection = TemporaryFileCollection.objects.create(user=self.testuser)
@@ -335,9 +335,9 @@ class TestUploadTemporaryFilesView(TestCase):
         })
         request.user = create_user('otheruser')
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['collectionid'][0]['code'], 'doesnotexist')
+        self.assertEqual(responsedata['collectionid'][0]['code'], 'doesnotexist')
 
     def test_delete_single_file(self):
         collection = TemporaryFileCollection.objects.create(user=self.testuser)
@@ -352,11 +352,11 @@ class TestUploadTemporaryFilesView(TestCase):
         }))
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         responsedata = json.loads(response.content.decode('utf-8'))
 
-        self.assertEquals(responsedata['collectionid'], collection.id)
-        self.assertEquals(responsedata['temporaryfileid'], temporaryfile.id)
+        self.assertEqual(responsedata['collectionid'], collection.id)
+        self.assertEqual(responsedata['temporaryfileid'], temporaryfile.id)
 
         self.assertTrue(TemporaryFileCollection.objects.filter(id=collection.id).exists())
         self.assertFalse(TemporaryFile.objects.filter(id=temporaryfile.id).exists())
@@ -365,9 +365,9 @@ class TestUploadTemporaryFilesView(TestCase):
         request = self.factory.delete('/test', data='invalid')
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 400)
+        self.assertEqual(response.status_code, 400)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['errormessage'], 'Invalid JSON data in the request body.')
+        self.assertEqual(responsedata['errormessage'], 'Invalid JSON data in the request body.')
 
     def test_delete_form_collectionid_does_not_exist(self):
         request = self.factory.delete('/test', data=json.dumps({
@@ -376,9 +376,9 @@ class TestUploadTemporaryFilesView(TestCase):
         }))
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['collectionid'][0]['code'], 'doesnotexist')
+        self.assertEqual(responsedata['collectionid'][0]['code'], 'doesnotexist')
 
     def test_delete_form_collection_not_owned_by_user(self):
         collection = TemporaryFileCollection.objects.create(user=self.testuser)
@@ -388,9 +388,9 @@ class TestUploadTemporaryFilesView(TestCase):
         }))
         request.user = create_user('otheruser')
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['collectionid'][0]['code'], 'doesnotexist')
+        self.assertEqual(responsedata['collectionid'][0]['code'], 'doesnotexist')
 
     def test_delete_form_temporaryfileid_does_not_exist(self):
         collection = TemporaryFileCollection.objects.create(user=self.testuser)
@@ -400,6 +400,6 @@ class TestUploadTemporaryFilesView(TestCase):
         }))
         request.user = self.testuser
         response = UploadTemporaryFilesView.as_view()(request)
-        self.assertEquals(response.status_code, 404)
+        self.assertEqual(response.status_code, 404)
         responsedata = json.loads(response.content.decode('utf-8'))
-        self.assertEquals(responsedata['temporaryfileid'][0]['code'], 'doesnotexist')
+        self.assertEqual(responsedata['temporaryfileid'][0]['code'], 'doesnotexist')

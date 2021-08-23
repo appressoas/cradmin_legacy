@@ -10,7 +10,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.loader import render_to_string
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from future.utils import python_2_unicode_compatible
 
 from cradmin_legacy import crsettings
@@ -41,8 +41,10 @@ class ArchiveImage(models.Model):
 
     role_content_type = models.ForeignKey(
         ContentType,
-        verbose_name=_('role'),
-        help_text=_('The role owning this image.'))
+        verbose_name=gettext_lazy('role'),
+        help_text=gettext_lazy('The role owning this image.'),
+        on_delete=models.CASCADE
+    )
     role_object_id = models.PositiveIntegerField()
     role = GenericForeignKey('role_content_type', 'role_object_id')
 
@@ -51,8 +53,8 @@ class ArchiveImage(models.Model):
         max_length=255, null=True, blank=False,
         height_field='image_height',
         width_field='image_width',
-        verbose_name=_('image'),
-        help_text=_('Select an image to add to the archive.'),
+        verbose_name=gettext_lazy('image'),
+        help_text=gettext_lazy('Select an image to add to the archive.'),
         upload_to=archiveimage_upload_to)
 
     #: The height of the :obj:`.image`. Autopopulated by the :obj:`.image` field.
@@ -77,16 +79,16 @@ class ArchiveImage(models.Model):
     #: provided by the app sets this.
     name = models.CharField(
         max_length=255, blank=True, null=False,
-        verbose_name=_('name')
-        # help_text=_('A good name helps search engines find the image, '
+        verbose_name=gettext_lazy('name')
+        # help_text=gettext_lazy('A good name helps search engines find the image, '
         #             'and it helps visually impaired users.')
     )
 
     #: An optional description of the image.
     description = models.TextField(
         blank=True, null=False, default='',
-        verbose_name=_('description'),
-        help_text=_(
+        verbose_name=gettext_lazy('description'),
+        help_text=gettext_lazy(
             'An optional description of the image. Think if this as a description '
             'of the image for visually impaired users. This means that you should describe '
             'the information carried in the image (if any). A good description also helps '
@@ -100,8 +102,8 @@ class ArchiveImage(models.Model):
     )
 
     class Meta(object):
-        verbose_name = _('archive image')
-        verbose_name_plural = _('archive images')
+        verbose_name = gettext_lazy('archive image')
+        verbose_name_plural = gettext_lazy('archive images')
 
     def clean(self):
         if not self.name:

@@ -7,7 +7,7 @@ from builtins import str
 import urllib.request
 import urllib.parse
 import urllib.error
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 from django.views.generic import CreateView as DjangoCreateView
 
@@ -30,11 +30,11 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
     allow_foreignkey_select = True
 
     #: The label of the back button in foreign key select mode.
-    foreignkey_select_mode_backbutton_label = _('Back')
+    foreignkey_select_mode_backbutton_label = gettext_lazy('Back')
 
-    submit_use_label = _('Create and select')
-    submit_save_label = _('Create')
-    submit_save_and_continue_edititing_label = _('Create and continue editing')
+    submit_use_label = gettext_lazy('Create and select')
+    submit_save_label = gettext_lazy('Create')
+    submit_save_and_continue_edititing_label = gettext_lazy('Create and continue editing')
 
     def get_pagetitle(self):
         """
@@ -42,7 +42,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
 
         Defaults to ``Create <verbose_name model>``.
         """
-        return _('Create %(what)s') % {'what': self.get_model_class()._meta.verbose_name}
+        return gettext_lazy('Create %(what)s') % {'what': self.get_model_class()._meta.verbose_name}
 
     def get_submit_use_label(self):
         """
@@ -113,7 +113,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
         return context
 
     def get_success_message(self, object):
-        return _('Created "%(object)s".') % {'object': object}
+        return gettext_lazy('Created "%(object)s".') % {'object': object}
 
 
 class CreateLikeUpdateView(CreateView):
@@ -139,8 +139,8 @@ class CreateLikeUpdateView(CreateView):
     will behave the same (output the same submit labels, and the same
     success message)
     """
-    submit_save_label = _('Save')
-    submit_save_and_continue_edititing_label = _('Save and continue editing')
+    submit_save_label = gettext_lazy('Save')
+    submit_save_and_continue_edititing_label = gettext_lazy('Save and continue editing')
 
     def get_success_message(self, object):
-        return _('Saved "%(object)s".') % {'object': object}
+        return gettext_lazy('Saved "%(object)s".') % {'object': object}

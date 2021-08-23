@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy, pgettext, pgettext_lazy
+from django.utils.translation import gettext_lazy, pgettext, pgettext_lazy
 
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
 
@@ -122,7 +122,7 @@ class AbstractSearch(AbstractInputFilter):
         return css_classes
 
     def get_placeholder(self):
-        return ugettext_lazy('Search ...')
+        return gettext_lazy('Search ...')
 
     def get_loadingmessage(self):
         return pgettext('listfilter loading message', 'Searching')

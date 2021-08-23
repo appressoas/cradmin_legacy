@@ -4,7 +4,7 @@ from future.utils import python_2_unicode_compatible
 
 from cradmin_legacy.apps.cradmin_imagearchive.tests.helpers import create_image
 import htmls
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.viewhelpers import listbuilder
 from cradmin_legacy.python2_compatibility import mock
@@ -207,7 +207,7 @@ class TestEditDeleteWithArchiveImage(test.TestCase):
     def test_with_archiveimage(self):
         class MyEditDeleteWithArchiveImage(listbuilder.itemvalue.EditDeleteWithArchiveImage):
             def get_archiveimage(self):
-                archiveimage = mommy.make('cradmin_imagearchive.ArchiveImage')
+                archiveimage = baker.make('cradmin_imagearchive.ArchiveImage')
                 archiveimage.image.save('testimage.png', ContentFile(create_image(200, 100)))
                 return archiveimage
 
@@ -260,7 +260,7 @@ class TestEditDeleteWithArchiveImageAndView(test.TestCase):
     def test_with_archiveimage(self):
         class MyEditDeleteWithArchiveImageAndView(listbuilder.itemvalue.EditDeleteWithArchiveImageAndPreview):
             def get_archiveimage(self):
-                archiveimage = mommy.make('cradmin_imagearchive.ArchiveImage')
+                archiveimage = baker.make('cradmin_imagearchive.ArchiveImage')
                 archiveimage.image.save('testimage.png', ContentFile(create_image(200, 100)))
                 return archiveimage
 

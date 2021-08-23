@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.test import TestCase
 import htmls
 from cradmin_legacy.python2_compatibility import mock
-from model_mommy import mommy
+from model_bakery import baker
 from future import standard_library
 
 from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
@@ -78,11 +78,11 @@ class TestAbstractFilterList(TestCase):
             def filter(self, queryobject):
                 return queryobject.filter(mybooleanfield=True)
 
-        match = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        match = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                            mycharfield='test', mybooleanfield=True)
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield='no match', mybooleanfield=True)
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield='test', mybooleanfield=False)
 
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
@@ -101,11 +101,11 @@ class TestAbstractFilterList(TestCase):
             def filter(self, queryobject):
                 return queryobject.filter(mybooleanfield=True)
 
-        match1 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        match1 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                             mycharfield='test', mybooleanfield=True)
-        match2 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        match2 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                             mycharfield='no match', mybooleanfield=True)
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield='test', mybooleanfield=False)
 
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')

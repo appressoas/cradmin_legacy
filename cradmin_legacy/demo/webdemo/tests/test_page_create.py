@@ -1,5 +1,5 @@
 from django import test
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.demo.webdemo.views import pages
 from cradmin_legacy import cradmin_testhelpers
@@ -20,29 +20,29 @@ class TestPageCreateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
         """
         Test the view title ('Create Page').
         """
-        site = mommy.make('webdemo.Site')
-        mommy.make('webdemo.Page', site=site)
+        site = baker.make('webdemo.Site')
+        baker.make('webdemo.Page', site=site)
         mockresponse = self.mock_http200_getrequest_htmls(cradmin_role=site)
         view_title = mockresponse.selector.one('.cradmin-legacy-page-header-inner').alltext_normalized
 
-        self.assertEquals('Create Page', view_title)
+        self.assertEqual('Create Page', view_title)
 
     def test_get_create_button_text(self):
         """
         Test the button text for creating a page in view ('Create').
         """
-        site = mommy.make('webdemo.Site', name='Demosite')
-        mommy.make('webdemo.Page', title='Webpage2', site=site)
+        site = baker.make('webdemo.Site', name='Demosite')
+        baker.make('webdemo.Page', title='Webpage2', site=site)
         mockresponse = self.mock_http200_getrequest_htmls(cradmin_role=site)
         button_text = mockresponse.selector.one('.btn-primary').alltext_normalized
 
-        self.assertEquals('Create', button_text)
+        self.assertEqual('Create', button_text)
 
     def test_post_create_all_required_fields_filled(self):
         """
         Gets 302 Found redirect.
         """
-        site = mommy.make('webdemo.Site')
+        site = baker.make('webdemo.Site')
         mockresponse = self.mock_http302_postrequest(
             cradmin_role=site,
             requestkwargs={
@@ -53,4 +53,4 @@ class TestPageCreateView(test.TestCase, cradmin_testhelpers.TestCaseMixin):
                     'publishing_time': '2000-09-09 13:37',
                 }
             })
-        self.assertEquals(302, mockresponse.response.status_code)
+        self.assertEqual(302, mockresponse.response.status_code)

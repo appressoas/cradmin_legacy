@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
+from django.utils.translation import gettext_lazy
 
 from django.shortcuts import render
 from django.utils.http import urlencode
@@ -35,31 +35,31 @@ class AbstractAcceptInviteView(TemplateView):
         """
         Get the title of the page.
         """
-        return _('Accept invite')
+        return gettext_lazy('Accept invite')
 
     def get_accept_as_button_label(self):
         """
         Get the label of the *Accept as authenticated user* button.
         """
-        return _('Accept as %(user)s') % {'user': self.request.user}
+        return gettext_lazy('Accept as %(user)s') % {'user': self.request.user}
 
     def get_register_account_button_label(self):
         """
         Get the label of the *Sign up* button.
         """
-        return _('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
+        return gettext_lazy('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
 
     def get_login_as_different_user_button_label(self):
         """
         Get the label of the *Sign in as different user* button.
         """
-        return _('Sign in as another user')
+        return gettext_lazy('Sign in as another user')
 
     def get_login_button_label(self):
         """
         Get the label of the *Sign in* button.
         """
-        return _('Sign in')
+        return gettext_lazy('Sign in')
 
     def get_description_template_name(self):
         """
@@ -190,7 +190,7 @@ class AbstractAcceptInviteView(TemplateView):
         If the user is authenticated, we return :meth:`~.AbstractAcceptInviteView.invite_accepted`.
         If the user is not authenticated, we raise :exc:`django.core.exceptions.PermissionDenied`.
         """
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return self.invite_accepted(self.generictoken)
         else:
             raise PermissionDenied()

@@ -8,7 +8,7 @@ angular.module('cradminLegacy', [
   'cradminLegacy.menu'
   'cradminLegacy.objecttable'
   'cradminLegacy.acemarkdown'
-  # 'cradminLegacy.bulkfileupload'  # TODO: We have to fix this! Commented out because it crashes everything!
+  'cradminLegacy.bulkfileupload'  # TODO: We have to fix this! Commented out because it crashes everything!
   'cradminLegacy.iosaddtohomescreen'
 #  'cradminLegacy.wysihtml'
   'cradminLegacy.imagepreview'

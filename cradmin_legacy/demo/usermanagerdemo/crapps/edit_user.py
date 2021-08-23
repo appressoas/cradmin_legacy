@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from crispy_forms import layout
 
 from cradmin_legacy.crispylayouts import PrimarySubmit
@@ -20,7 +20,7 @@ class EditUserView(update.UpdateRoleView):
     ]
 
     def get_success_message(self, object):
-        return _('Updated your account information.')
+        return gettext_lazy('Updated your account information.')
 
     def get_field_layout(self):
         return [
@@ -34,7 +34,7 @@ class EditUserView(update.UpdateRoleView):
 
     def get_buttons(self):
         return [
-            PrimarySubmit('submit-save', _('Save')),
+            PrimarySubmit('submit-save', gettext_lazy('Save')),
         ]
 
 

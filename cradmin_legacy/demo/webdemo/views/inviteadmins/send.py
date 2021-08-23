@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 from django import forms
 from crispy_forms import layout
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 from cradmin_legacy.apps.cradmin_invite.invite_url import InviteUrl
 from cradmin_legacy.crispylayouts import PrimarySubmit
@@ -13,8 +13,8 @@ from cradmin_legacy.viewhelpers.formbase import FormView
 
 class InviteEmailsForm(forms.Form):
     emails = EmailListField(
-        label=_('Email addresses to send invites to'),
-        extra_help_text=_('We will send a separate invite to each of the email addresses you provide.')
+        label=gettext_lazy('Email addresses to send invites to'),
+        extra_help_text=gettext_lazy('We will send a separate invite to each of the email addresses you provide.')
     )
 
 
@@ -42,7 +42,7 @@ class SendInvitesView(FormView):
 
     def get_buttons(self):
         return [
-            PrimarySubmit('submit', _('Send invites')),
+            PrimarySubmit('submit', gettext_lazy('Send invites')),
         ]
 
     def form_valid(self, form):

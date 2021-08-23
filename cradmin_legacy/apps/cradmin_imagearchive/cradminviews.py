@@ -5,7 +5,7 @@ import logging
 from django import http
 from django.contrib import messages
 from django.core.files.base import ContentFile
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from crispy_forms import layout
 from django import forms
 from django.views.generic.edit import FormMixin
@@ -33,15 +33,15 @@ class DescriptionColumn(objecttable.MultiActionColumn):
         return obj.screenreader_text
 
     def get_buttons(self, obj):
-        edit_description_label = _('Set a description')
+        edit_description_label = gettext_lazy('Set a description')
         if obj.description:
-            edit_description_label = _('Edit description')
+            edit_description_label = gettext_lazy('Edit description')
         return [
             objecttable.Button(
                 label=edit_description_label,
                 url=self.reverse_appurl('edit', args=[obj.id])),
             objecttable.Button(
-                label=_('Delete'),
+                label=gettext_lazy('Delete'),
                 url=self.reverse_appurl('delete', args=[obj.id]),
                 buttonclass="btn btn-danger btn-sm"),
         ]
@@ -57,7 +57,7 @@ class DescriptionSelectColumn(objecttable.UseThisActionColumn):
         return [
             objecttable.UseThisButton(
                 view=self.view,
-                label=_('Use this'),
+                label=gettext_lazy('Use this'),
                 obj=obj)
         ]
 
@@ -88,7 +88,7 @@ class ImageColumn(objecttable.ImagePreviewColumn):
             return None
 
     def get_header(self):
-        return _('Preview')
+        return gettext_lazy('Preview')
 
 
 class ArchiveImagesQuerySetForRoleMixin(object):
@@ -120,14 +120,14 @@ class BulkAddForm(forms.Form):
             accept='image/*',
             # accept='image/png,image/jpeg,image/gif',  # NOTE: Does not work with the fileselector in firefox
             apiparameters=get_bulkupload_apiparameters(),
-            dropbox_text=_('Upload images by dragging and dropping them here'),
-            invalid_filetype_message=_('Invalid filetype. You can only upload images.'),
-            advanced_fileselectbutton_text=_('... or select images'),
-            simple_fileselectbutton_text=_('Select images ...')
+            dropbox_text=gettext_lazy('Upload images by dragging and dropping them here'),
+            invalid_filetype_message=gettext_lazy('Invalid filetype. You can only upload images.'),
+            advanced_fileselectbutton_text=gettext_lazy('... or select images'),
+            simple_fileselectbutton_text=gettext_lazy('Select images ...')
         ),
-        label=_('Upload at least one image'),
+        label=gettext_lazy('Upload at least one image'),
         error_messages={
-            'required': _('You must upload at least one image.')
+            'required': gettext_lazy('You must upload at least one image.')
         })
 
 
@@ -138,14 +138,14 @@ class SingleAddForm(forms.Form):
             autosubmit=True,
             accept='image/*',
             apiparameters=get_bulkupload_apiparameters(),
-            dropbox_text=_('Upload an image by dragging and dropping it here'),
-            advanced_fileselectbutton_text=_('... or select an image'),
-            invalid_filetype_message=_('Invalid filetype. You can only upload images.'),
-            simple_fileselectbutton_text=_('Select an image ...')
+            dropbox_text=gettext_lazy('Upload an image by dragging and dropping it here'),
+            advanced_fileselectbutton_text=gettext_lazy('... or select an image'),
+            invalid_filetype_message=gettext_lazy('Invalid filetype. You can only upload images.'),
+            simple_fileselectbutton_text=gettext_lazy('Select an image ...')
         ),
-        label=_('Upload an image'),
+        label=gettext_lazy('Upload an image'),
         error_messages={
-            'required': _('You must upload an image.')
+            'required': gettext_lazy('You must upload an image.')
         })
 
     def clean(self):
@@ -156,11 +156,11 @@ class SingleAddForm(forms.Form):
             filecount = collection.files.count()
             if filecount < 1:
                 raise forms.ValidationError({
-                    'filecollectionid': _('You must upload an image.')
+                    'filecollectionid': gettext_lazy('You must upload an image.')
                 })
             elif filecount > 1:
                 raise forms.ValidationError({
-                    'filecollectionid': _('You must upload exactly one image.')
+                    'filecollectionid': gettext_lazy('You must upload exactly one image.')
                 })
 
 
@@ -199,7 +199,7 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
 
     def get_buttons(self):
         return [
-            AddImageOverlayButton(label=_('Add image'), buttonclass='btn btn-primary')
+            AddImageOverlayButton(label=gettext_lazy('Add image'), buttonclass='btn btn-primary')
         ]
 
     def get_button_layout(self):
@@ -243,9 +243,9 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
 
         Used by :meth:`.add_success_messages`.
         """
-        filenames = [u'"{}"'.format(temporaryfile.filename) for temporaryfile in temporaryfilecollection.files.all()]
-        return _(u'Uploaded %(what)s.') % {
-            'what': u','.join(filenames)
+        filenames = ['"{}"'.format(temporaryfile.filename) for temporaryfile in temporaryfilecollection.files.all()]
+        return gettext_lazy('Uploaded %(what)s.') % {
+            'what': ','.join(filenames)
         }
 
     def add_success_messages(self, temporaryfilecollection):
@@ -310,7 +310,7 @@ class ArchiveImagesListView(BaseImagesListView):
 
     # def get_button_layout(self):
     #     return [
-    #         layout.Div(PrimarySubmit('save', _('Upload images')),
+    #         layout.Div(PrimarySubmit('save', gettext_lazy('Upload images')),
     #                    css_class="cradmin_legacy_submitrow")
     #     ]
 
@@ -333,7 +333,7 @@ class ArchiveImagesSingleSelectView(BaseImagesListView):
 
     # def get_button_layout(self):
     #     return [
-    #         layout.Div(PrimarySubmit('save', _('Upload image')),
+    #         layout.Div(PrimarySubmit('save', gettext_lazy('Upload image')),
     #                    css_class="cradmin_legacy_submitrow")
     #     ]
 
@@ -341,7 +341,7 @@ class ArchiveImagesSingleSelectView(BaseImagesListView):
         url = self.request.build_absolute_uri()
         uploaded_archiveimage = self.uploaded_archiveimages[0]
         url = create.CreateView.add_foreignkey_selected_value_to_url_querystring(url, uploaded_archiveimage.pk)
-        return url
+        return str(url)
 
 
 class ArchiveImageUpdateView(crudbase.OnlySaveButtonMixin,

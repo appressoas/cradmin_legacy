@@ -1,5 +1,5 @@
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.cradmin_testhelpers import TestCaseMixin
 from cradmin_legacy.viewhelpers import listbuilderview
@@ -23,19 +23,19 @@ class TestListBuilderView(TestCase, TestCaseMixin):
     def test_empty(self):
         mockresponse = self.mock_http200_getrequest_htmls()
         self.assertFalse(mockresponse.selector.exists('.cradmin-legacy-listbuilder-list'))
-        self.assertEquals(
+        self.assertEqual(
             mockresponse.selector.one('.cradmin-legacy-listbuilderview-no-items-message').alltext_normalized,
             'No some items')
 
     def test_not_empty(self):
-        mommy.make('cradmin_legacy_testapp.SomeItem',
+        baker.make('cradmin_legacy_testapp.SomeItem',
                    name='Test name')
         mockresponse = self.mock_http200_getrequest_htmls()
         self.assertFalse(mockresponse.selector.exists('.cradmin-legacy-listbuilderview-no-items-message'))
         self.assertTrue(mockresponse.selector.exists('.cradmin-legacy-listbuilder-list'))
 
     def test_item_rendering(self):
-        mommy.make('cradmin_legacy_testapp.SomeItem',
+        baker.make('cradmin_legacy_testapp.SomeItem',
                    name='Test name')
         mockresponse = self.mock_http200_getrequest_htmls()
         # mockresponse.selector.prettyprint()
@@ -48,26 +48,26 @@ class TestListBuilderPaginationView(TestCase, TestCaseMixin):
     viewclass = ListBuilderViewWithPaging
 
     def test_paginate_by_singlepage(self):
-        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=3)
+        baker.make('cradmin_legacy_testapp.SomeItem', _quantity=3)
         mockresponse = self.mock_http200_getrequest_htmls()
         self.assertEqual(3, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
         self.assertFalse(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))
 
     def test_paginate_by_firstpage(self):
-        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
+        baker.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
         mockresponse = self.mock_http200_getrequest_htmls()
         # mockresponse.selector.one('#cradmin_legacy_contentwrapper').prettyprint()
         self.assertEqual(3, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
         self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))
 
     def test_paginate_by_middlepage(self):
-        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
+        baker.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
         mockresponse = self.mock_http200_getrequest_htmls(requestkwargs={'data': {'page': 2}})
         self.assertEqual(3, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
         self.assertTrue(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))
 
     def test_paginate_by_lastpage(self):
-        mommy.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
+        baker.make('cradmin_legacy_testapp.SomeItem', _quantity=8)
         mockresponse = self.mock_http200_getrequest_htmls(requestkwargs={'data': {'page': 3}})
         self.assertEqual(2, mockresponse.selector.count('.cradmin-legacy-listbuilder-list li'))
         self.assertFalse(mockresponse.selector.exists('#cradmin_legacy_contentwrapper .cradmin-legacy-loadmorepager'))

@@ -14,7 +14,7 @@ from django import forms
 from django import http
 from django.contrib import messages
 from django.core import serializers
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 from crispy_forms import layout
 
@@ -86,7 +86,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
     def add_preview_button_if_configured(self, buttons):
         preview_url = self.get_preview_url()
         if preview_url:
-            buttons.append(DefaultSubmit(self.submit_preview_name, _('Preview')))
+            buttons.append(DefaultSubmit(self.submit_preview_name, gettext_lazy('Preview')))
 
     def get_model_fields(self):
         """
@@ -183,9 +183,9 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     def get_success_url(self):
         if self.get_submit_save_and_continue_edititing_button_name() in self.request.POST:
-            return self._get_full_editurl(self.object)
+            return str(self._get_full_editurl(self.object))
         else:
-            return self.get_default_save_success_url()
+            return str(self.get_default_save_success_url())
 
     def set_automatic_attributes(self, obj):
         """
@@ -282,7 +282,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
         Used by :meth:`.add_form_invalid_messages`.
         """
-        return _('Please fix the errors in the form below.')
+        return gettext_lazy('Please fix the errors in the form below.')
 
     def add_form_invalid_messages(self, form):
         """

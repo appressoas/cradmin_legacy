@@ -6,7 +6,7 @@ standard_library.install_aliases()
 import urllib.request
 import urllib.parse
 import urllib.error
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django.forms import widgets
 from django.template.loader import render_to_string
 
@@ -31,7 +31,7 @@ class ModelChoiceWidget(widgets.TextInput):
     #: The default select-button text. You can override this in a subclass,
     #: or use the ``selectbutton_text``-argument for the constructor to
     #: change the button text.
-    default_selectbutton_text = _('Select ...')
+    default_selectbutton_text = gettext_lazy('Select ...')
 
     def __init__(self, queryset, selectview_url, preview='',
                  selectbutton_text=None):

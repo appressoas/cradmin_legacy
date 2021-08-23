@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.test import RequestFactory
 import htmls
-from model_mommy import mommy
+from model_bakery import baker
 
-from cradmin_legacy.python2_compatibility import mock
+from unittest import mock
 
 
 class MockRequestResponse(object):
@@ -97,7 +97,7 @@ class TestCaseMixin(object):
                 viewclass = MyView
 
                 def test_post(self):
-                    requestuser = mommy.make(settings.AUTH_USER_MODEL)
+                    requestuser = baker.make(settings.AUTH_USER_MODEL)
                     mockresponse = self.mock_http200_getrequest_htmls(requestuser=requestuser)
 
         Mocking Django messages framework messages::
@@ -123,7 +123,7 @@ class TestCaseMixin(object):
     viewclass = None
 
     def create_default_user_for_mock_request(self):
-        return mommy.make(settings.AUTH_USER_MODEL)
+        return baker.make(settings.AUTH_USER_MODEL)
 
     def mock_request(self, method,
                      cradmin_role=None,

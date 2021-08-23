@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from builtins import str
 from django.contrib import messages
 from django.views.generic import DeleteView as DjangoDeleteView
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from cradmin_legacy.viewhelpers.mixins import QuerysetForRoleMixin
 
 
@@ -17,7 +17,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
 
         Defaults to ``Delete <verbose_name model>``.
         """
-        return _('Delete %(what)s') % {'what': self.get_object_preview()}
+        return gettext_lazy('Delete %(what)s') % {'what': self.get_object_preview()}
 
     def get_action_label(self):
         """
@@ -26,7 +26,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
         Used as the prefix of the page title (see :meth:`.get_pagetitle`),
         and as the default for :meth:`.get_delete_button_label`.
         """
-        return _('Delete')
+        return gettext_lazy('Delete')
 
     def get_delete_button_label(self):
         """
@@ -48,7 +48,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
         """
         Get the confirm message shown in the focus area of the view.
         """
-        return _('Are you sure you want to delete "%(object_preview)s"?') % {
+        return gettext_lazy('Are you sure you want to delete "%(object_preview)s"?') % {
             'object_preview': self.get_object_preview()
         }
 
@@ -58,7 +58,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
 
         Defaults to the INDEX view of the current app.
         """
-        return self.request.cradmin_app.reverse_appindexurl()
+        return str(self.request.cradmin_app.reverse_appindexurl())
 
     def get_context_data(self, **kwargs):
         context = super(DeleteView, self).get_context_data(**kwargs)
@@ -77,7 +77,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
 
         Used by :meth:`.add_success_messages`.
         """
-        return _('Deleted "%(what)s"') % {
+        return gettext_lazy('Deleted "%(what)s"') % {
             'what': object_preview
         }
 

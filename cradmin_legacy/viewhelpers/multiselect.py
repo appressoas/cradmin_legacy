@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormMixin
@@ -88,7 +88,7 @@ class MultiSelectView(TemplateView):
         Must be overridden.
         """
         return render(self.request, 'cradmin_legacy/error.django.html', {
-            'error': _(
+            'error': gettext_lazy(
                 'Invalid selection. This is usually caused by someone else changing '
                 'permissions while you where selecting items to edit.')
         })

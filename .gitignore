@@ -28,3 +28,6 @@
 *.sqlite3
 
 /ievv-coderefactor-logs/
+
+.vscode/
+.vscode-atest-temp/

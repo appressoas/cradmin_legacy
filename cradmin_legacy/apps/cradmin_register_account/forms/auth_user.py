@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from django.contrib.auth import get_user_model
 from cradmin_legacy.apps.cradmin_register_account.forms.base import AbstractCreateAccountWithPasswordForm
@@ -51,7 +51,7 @@ class AuthUserCreateAccountForm(AbstractCreateAccountWithPasswordForm):
         user_model = get_user_model()
         if user_model.objects.filter(email=email).exists():
             raise forms.ValidationError(
-                message=_('Account with this email address already exists.'),
+                message=gettext_lazy('Account with this email address already exists.'),
                 code='not_unique_email')
         return email
 

@@ -3,7 +3,7 @@ import os
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile, \
     html_input_accept_match, truncate_filename, make_unique_filename
 from cradmin_legacy.tests.helpers import create_user
@@ -31,7 +31,7 @@ class TestModels(TestCase):
         self.assertTrue(os.path.exists(physical_file_path))
         collection.clear_files()
         self.assertFalse(os.path.exists(physical_file_path))
-        self.assertEquals(collection.files.count(), 0)
+        self.assertEqual(collection.files.count(), 0)
 
     def test_singlemode_keeps_only_last_file(self):
         collection = TemporaryFileCollection.objects.create(
@@ -47,8 +47,8 @@ class TestModels(TestCase):
         last_added_temporary_file.file.save('test1.txt', ContentFile('Testdata'), save=False)
         last_added_temporary_file.clean()
         last_added_temporary_file.save()
-        self.assertEquals(collection.files.count(), 1)
-        self.assertEquals(collection.files.first(), last_added_temporary_file)
+        self.assertEqual(collection.files.count(), 1)
+        self.assertEqual(collection.files.first(), last_added_temporary_file)
 
     def test_singlemode_keeps_only_last_file_delete_physical_file(self):
         collection = TemporaryFileCollection.objects.create(
@@ -77,8 +77,8 @@ class TestModels(TestCase):
         last_added_temporary_file.clean()
         last_added_temporary_file.save()
         last_added_temporary_file.clean()
-        self.assertEquals(collection.files.count(), 1)
-        self.assertEquals(collection.files.first(), last_added_temporary_file)
+        self.assertEqual(collection.files.count(), 1)
+        self.assertEqual(collection.files.first(), last_added_temporary_file)
 
     def test_get_filename_set(self):
         collection = TemporaryFileCollection.objects.create(
@@ -89,39 +89,39 @@ class TestModels(TestCase):
         temporaryfile2.file.save('y', ContentFile('Testdata'))
         temporaryfile3 = TemporaryFile(filename='test.txt', collection=collection)
         temporaryfile3.file.save('z', ContentFile('Testdata'))
-        self.assertEquals(collection.get_filename_set(), {'test.txt', 'test2.txt'})
+        self.assertEqual(collection.get_filename_set(), {'test.txt', 'test2.txt'})
 
     def test_set_mimetype_from_filename(self):
         temporaryfile = TemporaryFile(filename='test.png')
         temporaryfile.set_mimetype_from_filename()
-        self.assertEquals(temporaryfile.mimetype, 'image/png')
+        self.assertEqual(temporaryfile.mimetype, 'image/png')
 
     def test_set_mimetype_from_filename_no_extension(self):
         temporaryfile = TemporaryFile(filename='test')
         temporaryfile.set_mimetype_from_filename()
-        self.assertEquals(temporaryfile.mimetype, '')
+        self.assertEqual(temporaryfile.mimetype, '')
 
     def test_set_mimetype_from_filename_unknown_extension(self):
         temporaryfile = TemporaryFile(filename='test.thisdoesnotexist')
         temporaryfile.set_mimetype_from_filename()
-        self.assertEquals(temporaryfile.mimetype, '')
+        self.assertEqual(temporaryfile.mimetype, '')
 
     def clean_sets_mimetype(self):
         temporaryfile = TemporaryFile(filename='test.png')
         temporaryfile.clean()
-        self.assertEquals(temporaryfile.mimetype, 'image/png')
+        self.assertEqual(temporaryfile.mimetype, 'image/png')
 
     def clean_truncates_filename(self):
         collection = TemporaryFileCollection(max_filename_length=6)
         temporaryfile = TemporaryFile(filename='test.png', collection=collection)
         temporaryfile.clean()
-        self.assertEquals(temporaryfile.filename, 'st.png')
+        self.assertEqual(temporaryfile.filename, 'st.png')
 
     def clean_does_not_truncate_filename_if_max_filename_length_is_none(self):
         collection = TemporaryFileCollection(max_filename_length=None)
         temporaryfile = TemporaryFile(filename='test.png', collection=collection)
         temporaryfile.clean()
-        self.assertEquals(temporaryfile.filename, 'test.png')
+        self.assertEqual(temporaryfile.filename, 'test.png')
 
     def clean_validates_accept(self):
         collection = TemporaryFileCollection.objects.create(
@@ -160,24 +160,24 @@ class TestModels(TestCase):
         self.assertFalse(html_input_accept_match(accept='image/jpeg', mimetype=None, filename='test.jpeg'))
 
     def test_truncate_filename_not_above_max_length(self):
-        self.assertEquals(truncate_filename('test.txt', maxlength=8), 'test.txt')
+        self.assertEqual(truncate_filename('test.txt', maxlength=8), 'test.txt')
 
     def test_truncate_filename_veryshort_maxlength(self):
-        self.assertEquals(truncate_filename('test.txt', maxlength=5), 't.txt')
+        self.assertEqual(truncate_filename('test.txt', maxlength=5), 't.txt')
 
     def test_truncate_filename_ellipsis_even_filelength_more_in_tail(self):
-        self.assertEquals(truncate_filename('abcdefghABCDEFGH', maxlength=14), 'abcde...CDEFGH')
+        self.assertEqual(truncate_filename('abcdefghABCDEFGH', maxlength=14), 'abcde...CDEFGH')
 
     def test_truncate_filename_ellipsis_odd_filelength(self):
-        self.assertEquals(truncate_filename('abcdeX___Xhijkl', maxlength=13), 'abcde...hijkl')
+        self.assertEqual(truncate_filename('abcdeX___Xhijkl', maxlength=13), 'abcde...hijkl')
 
     def test_make_unique_filename_already_unique(self):
-        self.assertEquals(
+        self.assertEqual(
             make_unique_filename(filename_set={'test.txt'}, wanted_filename='test2.txt'),
             'test2.txt')
 
     def test_make_unique_filename(self):
-        self.assertNotEquals(
+        self.assertNotEqual(
             make_unique_filename(filename_set={'test.txt'}, wanted_filename='test.txt'),
             'test.txt')
         self.assertTrue(
@@ -189,25 +189,25 @@ class TestModels(TestCase):
             filename_set={'t' * 45},
             wanted_filename='t' * 45,
             max_filename_length=45)
-        self.assertNotEquals(unique_filename, 't' * 45)
+        self.assertNotEqual(unique_filename, 't' * 45)
         self.assertTrue(unique_filename.endswith('-tttttttt'))
-        self.assertEquals(len(unique_filename), 45)
+        self.assertEqual(len(unique_filename), 45)
 
     def test_no_max_filesize_bytes(self):
-        collection = mommy.make('cradmin_temporaryfileuploadstore.TemporaryFileCollection')
+        collection = baker.make('cradmin_temporaryfileuploadstore.TemporaryFileCollection')
         temporaryfile = TemporaryFile(filename='test.txt', collection=collection)
         temporaryfile.file.save('test.txt', ContentFile('Testdata'))
         temporaryfile.clean()  # No ValidationError
 
     def test_max_filesize_bytes_size_below_ok(self):
-        collection = mommy.make('cradmin_temporaryfileuploadstore.TemporaryFileCollection',
+        collection = baker.make('cradmin_temporaryfileuploadstore.TemporaryFileCollection',
                                 max_filesize_bytes=100)
         temporaryfile = TemporaryFile(filename='test.txt', collection=collection)
         temporaryfile.file.save('test.txt', ContentFile('Testdata'))
         temporaryfile.clean()  # No ValidationError
 
     def test_max_filesize_bytes_size_above_fails(self):
-        collection = mommy.make('cradmin_temporaryfileuploadstore.TemporaryFileCollection',
+        collection = baker.make('cradmin_temporaryfileuploadstore.TemporaryFileCollection',
                                 max_filesize_bytes=1)
         temporaryfile = TemporaryFile(filename='test.txt', collection=collection)
         temporaryfile.file.save('test.txt', ContentFile('Testdata'))

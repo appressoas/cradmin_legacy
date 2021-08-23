@@ -26,7 +26,7 @@
             ng-class="{'cradmin-legacy-loadmorepager-loading': loadmorePagerIsLoading}"
             cradmin-legacy-load-more-pager='{% block load-more-pager-options %}{
                 "targetElementCssSelector": "{% block load-more-pager-targetElementCssSelector %}{% endblock %}",
-                "nextPageNumber": {{ page_obj.next_page_number }}
+                "nextPageNumber": {{ page_obj.next_page_number }}{% if pagination_mode_load_all %},"mode": "loadAllOnClick"{% endif %}
             }{% endblock %}'>
         <button type="button"
                 class="cradmin-legacy-loadmorepager-button {% block load-more-button-extra-css-classes %}btn btn-default{% endblock %}"
@@ -42,7 +42,11 @@
             </span>
             <span class="cradmin-legacy-loadmorepager-not-loadingtext" ng-if="!loadmorePagerIsLoading">
                 {% block load-more-text %}
-                    {% trans "Load more" %}
+                    {% if pagination_mode_load_all %}
+                        {% trans "Load all" %}
+                    {% else %}
+                        {% trans "Load more" %}
+                    {% endif %}
                 {% endblock load-more-text %}
             </span>
         </button>

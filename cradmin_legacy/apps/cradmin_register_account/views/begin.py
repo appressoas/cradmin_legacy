@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.module_loading import import_string
 
 from django.views.generic import FormView
@@ -23,7 +23,7 @@ class BeginRegisterAccountView(FormView):
         return context
 
     def get_success_url(self):
-        return reverse('cradmin-register-account-email-sent')
+        return str(reverse('cradmin-register-account-email-sent'))
 
     def get_next_url(self):
         """

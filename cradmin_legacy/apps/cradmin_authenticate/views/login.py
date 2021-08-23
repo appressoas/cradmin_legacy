@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate, get_user_model
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from crispy_forms.helper import FormHelper
 from django.views.generic import FormView
@@ -33,17 +33,17 @@ class AbstractLoginForm(forms.Form):
 
     #: The placeholder text for the password field.
     #: Must be set in subclasses
-    password_field_placeholder = _('Password')
+    password_field_placeholder = gettext_lazy('Password')
 
     #: Error message to show if username and password do not match
     error_message_invalid_login = None
 
     #: Error message to show if the account is inactive.
-    error_message_inactive = _("This account is inactive.")
+    error_message_inactive = gettext_lazy('This account is inactive.')
 
     #: The password field
     password = forms.CharField(
-        label=_('Password'),
+        label=gettext_lazy('Password'),
         widget=forms.PasswordInput)
 
     def model_sanity_check(self):
@@ -91,10 +91,10 @@ class UsernameLoginForm(AbstractLoginForm):
     This is set in the field ``username_field`` in this class.
     """
     username_field = 'username'
-    username_field_placeholder = _('Username')
+    username_field_placeholder = gettext_lazy('Username')
     username = forms.CharField(
-        label=_('Username'))
-    error_message_invalid_login = _("Your username and password didn't match. Please try again.")
+        label=gettext_lazy('Username'))
+    error_message_invalid_login = gettext_lazy('Your username and password didn\'t match. Please try again.')
 
     def model_sanity_check(self):
         user_model = get_user_model()
@@ -119,10 +119,10 @@ class EmailLoginForm(AbstractLoginForm):
     :class:`.EmailLoginFormNoSanityCheck`.
     """
     username_field = 'email'
-    username_field_placeholder = _('Email')
+    username_field_placeholder = gettext_lazy('Email')
     email = forms.CharField(
-        label=_('Email'))
-    error_message_invalid_login = _("Your email and password didn't match. Please try again.")
+        label=gettext_lazy('Email'))
+    error_message_invalid_login = gettext_lazy('Your email and password didn\'t match. Please try again.')
 
     def model_sanity_check(self):
         if not getattr(settings, 'CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND', False):
@@ -170,7 +170,7 @@ class LoginView(FormView):
         """
         if user is authenticated, redirect to ``settings.LOGIN_REDIRECT_URL``, else render the login form.
         """
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
         else:
             return super(LoginView, self).get(*args, **kwargs)
@@ -240,7 +240,7 @@ class LoginView(FormView):
         formhelper.form_id = 'cradmin_authenticate_login_form'
         formhelper.label_class = 'sr-only'
 
-        layoutargs = self.get_field_layout() + [PrimarySubmitLg('login', _('Sign in'))]
+        layoutargs = self.get_field_layout() + [PrimarySubmitLg('login', gettext_lazy('Sign in'))]
         formhelper.layout = layout.Layout(*layoutargs)
         return formhelper
 
@@ -250,9 +250,9 @@ class LoginView(FormView):
         if present, or ``settings.LOGIN_REDIRECT_URL`` if not.
         """
         if 'next' in self.request.GET:
-            return self.request.GET['next']
+            return str(self.request.GET['next'])
         else:
-            return settings.LOGIN_REDIRECT_URL
+            return str(settings.LOGIN_REDIRECT_URL)
 
     def form_valid(self, form):
         """

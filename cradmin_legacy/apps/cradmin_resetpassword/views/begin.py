@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 from crispy_forms import layout
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from django.views.generic import FormView
 
@@ -36,7 +36,7 @@ class EmailForm(forms.Form):
         email = self.cleaned_data['email']
         user_model = get_user_model()
         if not user_model.objects.filter(email=email).exists():
-            raise forms.ValidationError(_("No account with this email address found"))
+            raise forms.ValidationError(gettext_lazy('No account with this email address found'))
         return email
 
 
@@ -50,8 +50,8 @@ class BeginPasswordResetView(FormView):
         helper.form_id = 'cradmin_legacy_resetpassword_begin_form'
         helper.form_show_labels = False
         helper.layout = layout.Layout(
-            layout.Field('email', css_class='input-lg', placeholder=_('Email'), focusonme='focusonme'),
-            PrimarySubmitLg('submit', _('Search'))
+            layout.Field('email', css_class='input-lg', placeholder=gettext_lazy('Email'), focusonme='focusonme'),
+            PrimarySubmitLg('submit', gettext_lazy('Search'))
         )
         return helper
 
@@ -61,7 +61,7 @@ class BeginPasswordResetView(FormView):
         return context
 
     def get_success_url(self):
-        return reverse('cradmin-resetpassword-email-sent')
+        return str(reverse('cradmin-resetpassword-email-sent'))
 
     def __send_email(self, user, reset_url):
         PasswordResetEmail(

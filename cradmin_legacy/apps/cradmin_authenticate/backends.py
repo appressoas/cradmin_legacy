@@ -10,7 +10,7 @@ class EmailAuthBackend(object):
     the default django ``User``-model, as it does not require ``USERNAME_FIELD`` to be ``email``.
     """
 
-    def authenticate(self, email, password):
+    def authenticate(self, request, email, password):
         """
         Find the `User` corresponding to ``email``, verify ``password`` and return user.
 

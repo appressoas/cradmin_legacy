@@ -14,7 +14,7 @@ from django.shortcuts import get_object_or_404
 from django.template import defaultfilters
 from django.template.defaultfilters import truncatechars
 from django.utils.http import urlencode
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django.template.loader import render_to_string
 from django.views.generic import ListView
 from django.db import models
@@ -926,7 +926,7 @@ class ObjectTableView(ListView):
     search_comparator = 'icontains'
 
     #: The search placeholder text. See :meth:`.get_search_placeholder_text`. Defaults to "Search...".
-    search_placeholder_text = _('Search...')
+    search_placeholder_text = gettext_lazy('Search...')
 
     #: Enable previews? See :meth:`.get_enable_previews`. Defaults to ``False``.
     enable_previews = False

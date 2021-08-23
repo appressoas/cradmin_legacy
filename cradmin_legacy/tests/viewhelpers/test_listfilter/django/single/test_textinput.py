@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 from future import standard_library
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
 from cradmin_legacy.viewhelpers import listfilter
@@ -16,13 +16,13 @@ class TestSearch(TestCase):
             slug='mycharfield',
             modelfields=['mycharfield', 'mytextfield'])
         testfilter.set_values(values=[])
-        withvalue1 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        withvalue1 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                 mycharfield='A testvalue')
-        withvalue2 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        withvalue2 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                 mytextfield='Another testvalue')
-        emptyvalue = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        emptyvalue = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                 mycharfield='')
-        nullvalue = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        nullvalue = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                mycharfield=None)
         self.assertEqual(
             {withvalue1, withvalue2, emptyvalue, nullvalue},
@@ -33,13 +33,13 @@ class TestSearch(TestCase):
             slug='mycharfield',
             modelfields=['mycharfield', 'mytextfield'])
         testfilter.set_values(values=['Another'])
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield='A testvalue')
-        withvalue2 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        withvalue2 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                 mytextfield='Another testvalue')
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield='')
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield=None)
         self.assertEqual(
             {withvalue2},
@@ -50,13 +50,13 @@ class TestSearch(TestCase):
             slug='mycharfield',
             modelfields=['mycharfield', 'mytextfield'])
         testfilter.set_values(values=['testvalue'])
-        withvalue1 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        withvalue1 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                 mycharfield='A testvalue')
-        withvalue2 = mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        withvalue2 = baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                                 mytextfield='Another testvalue')
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield='')
-        mommy.make('cradmin_viewhelpers_testapp.FilterTestModel',
+        baker.make('cradmin_viewhelpers_testapp.FilterTestModel',
                    mycharfield=None)
         self.assertEqual(
             {withvalue1, withvalue2},

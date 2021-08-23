@@ -22,7 +22,7 @@ class RelatedModelOrFilter(abstractcheckbox.AbstractCheckboxFilter, DjangoOrmFil
                 pass
 
             class Tag(models.Model):
-                person = models.ForeignKey(Person, related_name='tags')
+                person = models.ForeignKey(Person, related_name='tags', on_delete=models.CASCADE)
                 tag = models.SlugField()
 
             class TagFilter(listfilter.django.multi.checkbox.RelatedModel):

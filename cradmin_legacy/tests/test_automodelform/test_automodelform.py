@@ -3,7 +3,7 @@ import datetime
 import htmls
 from django import test
 from django.core.files.base import ContentFile
-from model_mommy import mommy
+from model_bakery import baker
 
 from cradmin_legacy import automodelform
 from cradmin_legacy.apps.cradmin_imagearchive.tests.helpers import create_image
@@ -31,7 +31,7 @@ class TestModelForm(test.TestCase):
                 model = AutoFormTestModel
                 fields = ['datetimefield_without_default']
 
-        autoformtestmodelobject = mommy.make(
+        autoformtestmodelobject = baker.make(
             'cradmin_automodelform_testapp.AutoFormTestModel',
             datetimefield_without_default=datetimeutils.default_timezone_datetime(2015, 12, 24, 12, 0, 0))
         selector = htmls.S(MyModelForm(instance=autoformtestmodelobject).as_ul())
@@ -58,7 +58,7 @@ class TestModelForm(test.TestCase):
                 model = AutoFormTestModel
                 fields = ['datetimefield_with_default']
 
-        autoformtestmodelobject = mommy.make(
+        autoformtestmodelobject = baker.make(
             'cradmin_automodelform_testapp.AutoFormTestModel',
             datetimefield_with_default=datetimeutils.default_timezone_datetime(2015, 12, 24, 12, 0, 0))
         selector = htmls.S(MyModelForm(instance=autoformtestmodelobject).as_ul())
@@ -85,7 +85,7 @@ class TestModelForm(test.TestCase):
                 model = AutoFormTestModel
                 fields = ['datefield_without_default']
 
-        autoformtestmodelobject = mommy.make(
+        autoformtestmodelobject = baker.make(
             'cradmin_automodelform_testapp.AutoFormTestModel',
             datefield_without_default=datetime.date(2015, 12, 24))
         selector = htmls.S(MyModelForm(instance=autoformtestmodelobject).as_ul())
@@ -112,7 +112,7 @@ class TestModelForm(test.TestCase):
                 model = AutoFormTestModel
                 fields = ['datefield_with_default']
 
-        autoformtestmodelobject = mommy.make(
+        autoformtestmodelobject = baker.make(
             'cradmin_automodelform_testapp.AutoFormTestModel',
             datefield_with_default=datetime.date(2015, 12, 24))
         selector = htmls.S(MyModelForm(instance=autoformtestmodelobject).as_ul())
@@ -137,7 +137,7 @@ class TestModelForm(test.TestCase):
                 model = AutoFormTestModel
                 fields = ['filefield']
 
-        autoformtestmodelobject = mommy.make(
+        autoformtestmodelobject = baker.make(
             'cradmin_automodelform_testapp.AutoFormTestModel',
             filefield='test.txt')
         selector = htmls.S(MyModelForm(instance=autoformtestmodelobject).as_ul())
@@ -160,7 +160,7 @@ class TestModelForm(test.TestCase):
                 model = AutoFormTestModel
                 fields = ['imagefield']
 
-        autoformtestmodelobject = mommy.make(
+        autoformtestmodelobject = baker.make(
             'cradmin_automodelform_testapp.AutoFormTestModel')
         testimage = create_image(200, 100)
         autoformtestmodelobject.imagefield.save('testimage.png', ContentFile(testimage))

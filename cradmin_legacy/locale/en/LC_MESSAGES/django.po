@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-14 19:19+0100\n"
+"POT-Creation-Date: 2021-04-29 15:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,15 +98,7 @@ msgstr ""
 msgid "Your email and password didn't match. Please try again."
 msgstr ""
 
-#: apps/cradmin_generic_token_with_metadata/models.py:224
-msgid "Created"
-msgstr ""
-
-#: apps/cradmin_generic_token_with_metadata/models.py:230
-msgid "Expires"
-msgstr ""
-
-#: apps/cradmin_imagearchive/apps.py:9
+#: apps/cradmin_imagearchive/apps.py:7
 msgid "Image archive"
 msgstr ""
 
@@ -192,31 +184,31 @@ msgstr ""
 msgid "Uploaded %(what)s."
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:42
+#: apps/cradmin_imagearchive/models.py:44
 msgid "role"
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:43
+#: apps/cradmin_imagearchive/models.py:45
 msgid "The role owning this image."
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:52
+#: apps/cradmin_imagearchive/models.py:56
 msgid "image"
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:53
+#: apps/cradmin_imagearchive/models.py:57
 msgid "Select an image to add to the archive."
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:78
+#: apps/cradmin_imagearchive/models.py:82
 msgid "name"
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:86
+#: apps/cradmin_imagearchive/models.py:90
 msgid "description"
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:88
+#: apps/cradmin_imagearchive/models.py:92
 msgid ""
 "An optional description of the image. Think if this as a description of the "
 "image for visually impaired users. This means that you should describe the "
@@ -224,11 +216,11 @@ msgid ""
 "search engines find the image."
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:101
+#: apps/cradmin_imagearchive/models.py:105
 msgid "archive image"
 msgstr ""
 
-#: apps/cradmin_imagearchive/models.py:102
+#: apps/cradmin_imagearchive/models.py:106
 msgid "archive images"
 msgstr ""
 
@@ -401,13 +393,13 @@ msgstr ""
 msgid "The passwords do not match"
 msgstr ""
 
-#: apps/cradmin_temporaryfileuploadstore/models.py:214
+#: apps/cradmin_temporaryfileuploadstore/models.py:216
 #: apps/cradmin_temporaryfileuploadstore/widgets.py:78
 #, python-format
 msgid "Can not upload files larger than %(max_filesize)s."
 msgstr ""
 
-#: apps/cradmin_temporaryfileuploadstore/models.py:246
+#: apps/cradmin_temporaryfileuploadstore/models.py:248
 msgid "Unsupported filetype."
 msgstr ""
 
@@ -481,11 +473,11 @@ msgctxt "automodelform modelchoice_field no value"
 msgid "(Not selected)"
 msgstr ""
 
-#: crispylayouts.py:58
+#: crispylayouts.py:60
 msgid "Show"
 msgstr ""
 
-#: crispylayouts.py:59
+#: crispylayouts.py:61
 msgid "Hide"
 msgstr ""
 
@@ -631,7 +623,11 @@ msgstr ""
 msgid "Loading ..."
 msgstr ""
 
-#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:45
+#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:46
+msgid "Load all"
+msgstr ""
+
+#: templates/cradmin_legacy/viewhelpers/includes/loadmorepager-base.django.html:48
 msgid "Load more"
 msgstr ""
 
@@ -759,11 +755,11 @@ msgstr ""
 msgid "Created \"%(object)s\"."
 msgstr ""
 
-#: viewhelpers/create.py:142 viewhelpers/formbase.py:42
+#: viewhelpers/create.py:142 viewhelpers/formbase.py:183
 msgid "Save"
 msgstr ""
 
-#: viewhelpers/create.py:143 viewhelpers/formbase.py:45
+#: viewhelpers/create.py:143 viewhelpers/formbase.py:186
 msgid "Save and continue editing"
 msgstr ""
 
@@ -772,7 +768,7 @@ msgstr ""
 msgid "Saved \"%(object)s\"."
 msgstr ""
 
-#: viewhelpers/crudbase.py:301
+#: viewhelpers/crudbase.py:285
 msgid "Please fix the errors in the form below."
 msgstr ""
 
@@ -1004,16 +1000,16 @@ msgctxt "Time label datetime widget"
 msgid "Time"
 msgstr ""
 
-#: widgets/datetimepicker.py:694
+#: widgets/datetimepicker.py:703
 msgctxt "Has value trigger button text for date widget"
 msgid "Change date/time"
 msgstr ""
 
-#: widgets/datetimepicker.py:695
+#: widgets/datetimepicker.py:704
 msgctxt "No value trigger button text for date widget"
 msgid "Select a date/time"
 msgstr ""
 
-#: widgets/datetimepicker.py:716
+#: widgets/datetimepicker.py:725
 msgid "hh:mm"
 msgstr ""

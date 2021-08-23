@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 import htmls
 
@@ -16,13 +16,13 @@ class TestBeginRegisterAccountView(TestCase):
         response = self.client.get(self.url)
         selector = htmls.S(response.content)
         self.assertTrue(selector.exists('form#cradmin_legacy_register_account_form'))
-        self.assertEquals(selector.one('h1').alltext_normalized, 'Create your Testsite account')
-        self.assertEquals(selector.one('title').alltext_normalized, 'Create your Testsite account')
+        self.assertEqual(selector.one('h1').alltext_normalized, 'Create your Testsite account')
+        self.assertEqual(selector.one('title').alltext_normalized, 'Create your Testsite account')
         self.assertTrue(selector.exists('input[type="email"][name="email"]'))
         self.assertTrue(selector.exists('input[type="text"][name="username"]'))
         self.assertTrue(selector.exists('input[type="password"][name="password1"]'))
         self.assertTrue(selector.exists('input[type="password"][name="password2"]'))
-        self.assertEquals(selector.one('button[type="submit"]').alltext_normalized, 'Sign up for Testsite')
+        self.assertEqual(selector.one('button[type="submit"]').alltext_normalized, 'Sign up for Testsite')
 
     def test_post_email_not_unique(self):
         create_user('testuser', email='testuser@example.com')

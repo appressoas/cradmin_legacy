@@ -2,7 +2,7 @@ import re
 from collections import OrderedDict
 
 from django.apps import apps
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 from future.utils import python_2_unicode_compatible
 
 from cradmin_legacy import crinstance
@@ -144,7 +144,7 @@ class Registry(object):
         self._modelconfigmap = {}
 
     def get_title(self):
-        return ugettext_lazy('Superuser UI')
+        return gettext_lazy('Superuser UI')
 
     def iter_djangoappconfigs(self):
         return iter(self._djangoappconfigs.values())

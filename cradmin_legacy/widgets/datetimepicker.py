@@ -6,7 +6,7 @@ from datetime import timedelta, datetime
 from django.forms import widgets
 from django.template import loader
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django.utils.translation import pgettext_lazy
 
 from cradmin_legacy.templatetags.cradmin_legacy_icon_tags import cradmin_icon
@@ -195,7 +195,7 @@ class DatePickerWidget(widgets.TextInput):
     #:
     #: Can be overridden via the ``back_to_datepicker_screenreader_text``
     #: keyword argument for ``__init__``.
-    default_back_to_datepicker_screenreader_text = _('Return to date picker')
+    default_back_to_datepicker_screenreader_text = gettext_lazy('Return to date picker')
 
     #: The screenreader only date-picker table caption.
     #:
@@ -447,7 +447,7 @@ class DatePickerWidget(widgets.TextInput):
             Inserting translation strings (remember to use ``u"..."`` if using Python2)::
 
                 return "{label}: {{ momentObject.format('LL') }}".format(
-                    label=_('Selected date'))
+                    label=gettext_lazy('Selected date'))
         """
         return self.preview_angularjs_template
 
@@ -722,7 +722,7 @@ class TimePickerWidget(widgets.TimeInput):
     """
     template_name = 'cradmin_legacy/widgets/timepicker.django.html'
 
-    def __init__(self, attrs=None, format=None, placeholder=_('hh:mm')):
+    def __init__(self, attrs=None, format=None, placeholder=gettext_lazy('hh:mm')):
         if attrs is None:
             attrs = {}
         if placeholder:
@@ -745,8 +745,8 @@ class TimePickerWidget(widgets.TimeInput):
 #     """
 #
 #     def __init__(self, attrs=None,
-#                  datewidget_placeholder=_('yyyy-mm-dd'),
-#                  timewidget_placeholder=_('hh:mm')):
+#                  datewidget_placeholder=gettext_lazy('yyyy-mm-dd'),
+#                  timewidget_placeholder=gettext_lazy('hh:mm')):
 #         """
 #         Parameters:
 #             datewidget_placeholder: The placeholder for the datewidget.

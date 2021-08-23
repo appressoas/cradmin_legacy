@@ -3,7 +3,7 @@ from builtins import object
 
 from datetime import datetime
 from django.shortcuts import get_object_or_404
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from django import forms
 from crispy_forms import layout
 from django.views.generic import TemplateView
@@ -82,7 +82,7 @@ class PagesListView(objecttable.FilterListMixin, PagesQuerySetForRoleMixin, obje
     def get_buttons(self):
         app = self.request.cradmin_app
         return [
-            objecttable.Button(label=_('Create'),
+            objecttable.Button(label=gettext_lazy('Create'),
                                url=app.reverse_appurl('create'),
                                buttonclass='btn btn-primary'),
         ]
@@ -91,7 +91,7 @@ class PagesListView(objecttable.FilterListMixin, PagesQuerySetForRoleMixin, obje
         app = self.request.cradmin_app
         return [
             objecttable.MultiSelectAction(
-                label=_('Edit'),
+                label=gettext_lazy('Edit'),
                 url=app.reverse_appurl('multiedit')
             ),
         ]
@@ -238,7 +238,7 @@ class PageMultiEditView(PagesQuerySetForRoleMixin, multiselect.MultiSelectFormVi
 
     def get_buttons(self):
         return [
-            PrimarySubmit('submit-save', _('Update text for selected pages'))
+            PrimarySubmit('submit-save', gettext_lazy('Update text for selected pages'))
         ]
 
     def get_field_layout(self):

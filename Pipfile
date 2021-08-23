@@ -1,0 +1,43 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "==5.3.5"
+pytest-django = "==3.8.0"
+pytest-env = "==0.6.2"
+model-bakery = "*"
+ipython = "*"
+django-dbdev = "*"
+coverage = "*"
+Sphinx = "*"
+mock = "*"
+mock-django = "*"
+htmls = "*"
+
+[packages]
+django = ">=3.1.0,<3.2.0"
+django-crispy-forms = "*"
+sorl-thumbnail = "*"
+pytz = "*"
+html2text = "*"
+django-multiupload = "*"
+sphinxcontrib-napoleon = "*"
+sphinx-rtd-theme = "*"
+flake8 = "*"
+tox = "*"
+django-extensions = "*"
+python-dateutil = "*"
+future = "*"
+transifex-client = "*"
+invoke = "*"
+vitalstyles = "*"
+ievv-opensource = ">=7.0.3,<8.0.0"
+django-cradmin = ">=8.0.2,<9.0.0"
+invoke-extras = {editable = true, git = "git://github.com/appressoas/invoke_extras.git"}
+Pillow = "*"
+appresso_sphinx_extensions = "*"
+
+[requires]
+python_version = "3.8"

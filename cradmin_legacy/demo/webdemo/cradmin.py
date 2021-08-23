@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.template.defaultfilters import truncatechars
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from cradmin_legacy import crinstance, crmenu
 from cradmin_legacy.apps.cradmin_imagearchive import cradminviews as imagearchive
 
@@ -16,28 +16,28 @@ from cradmin_legacy.demo.webdemo.views import sharable_link
 class Menu(crmenu.Menu):
     def build_menu(self):
         self.add_headeritem(
-            label=_('Select role'), url=self.cradmin_instance.roleselectview_url())
+            label=gettext_lazy('Select role'), url=self.cradmin_instance.roleselectview_url())
         self.add_menuitem(
-            label=_('Dashboard'), url=self.appindex_url('dashboard'),
+            label=gettext_lazy('Dashboard'), url=self.appindex_url('dashboard'),
             active=self.request.cradmin_app.appname == 'dashboard')
         self.add_menuitem(
-            label=_('Pages'), url=self.appindex_url('pages'),
+            label=gettext_lazy('Pages'), url=self.appindex_url('pages'),
             active=self.request.cradmin_app.appname == 'pages')
         self.add_menuitem(
-            label=_('Pages (listbuilder)'), url=self.appindex_url('pages_listbuilder'),
+            label=gettext_lazy('Pages (listbuilder)'), url=self.appindex_url('pages_listbuilder'),
             active=self.request.cradmin_app.appname == 'pages_listbuilder')
         self.add_menuitem(
-            label=_('FormUtils demo'), url=self.appindex_url('formutils'),
+            label=gettext_lazy('FormUtils demo'), url=self.appindex_url('formutils'),
             active=self.request.cradmin_app.appname == 'formutils')
         self.add_menuitem(
-            label=_('Images'), url=self.appindex_url('imagearchive'),
+            label=gettext_lazy('Images'), url=self.appindex_url('imagearchive'),
             active=self.request.cradmin_app.appname == 'imagearchive')
 
         self.add_footeritem(
-            label=_('Invite admins'), url=self.appindex_url('inviteadmins'),
+            label=gettext_lazy('Invite admins'), url=self.appindex_url('inviteadmins'),
             active=self.request.cradmin_app.appname == 'inviteadmins')
         self.add_footeritem(
-            label=_('Share'), url=self.appindex_url('sharable_link'),
+            label=gettext_lazy('Share'), url=self.appindex_url('sharable_link'),
             active=self.request.cradmin_app.appname == 'sharable_link')
 
 

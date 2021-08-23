@@ -4,7 +4,7 @@ import re
 from django import forms
 from django.core import validators
 from django.core.validators import EmailValidator
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 
 
 class EmailListField(forms.Field):
@@ -15,9 +15,9 @@ class EmailListField(forms.Field):
     we split the email addresses by whitespace or comma.
     """
     default_error_messages = {
-        'invalid': _('Type email-addresses separated by newlines, whitespace or comma.')
+        'invalid': gettext_lazy('Type email-addresses separated by newlines, whitespace or comma.')
     }
-    default_help_text = _('Type email-addresses separated by newlines, whitespace or comma.')
+    default_help_text = gettext_lazy('Type email-addresses separated by newlines, whitespace or comma.')
     widget = forms.Textarea
     stringsplit_regex = re.compile(r'(?:\s*,\s*)|\s+')
     email_validator = EmailValidator()
@@ -61,7 +61,7 @@ class EmailListField(forms.Field):
             try:
                 self.email_validator(email)
             except forms.ValidationError:
-                errormessage = _('Invalid email address: %(email)s') % {'email': email}
+                errormessage = gettext_lazy('Invalid email address: %(email)s') % {'email': email}
                 raise forms.ValidationError(errormessage)
 
     def to_python(self, value):
