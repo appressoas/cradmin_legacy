@@ -125,6 +125,7 @@ ROOT_URLCONF = 'cradmin_legacy.demo.project.demo.urls'
 
 # WSGI_APPLICATION = 'cradmin_legacy.demo.wsgi.application'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

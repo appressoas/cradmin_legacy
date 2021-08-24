@@ -22,9 +22,9 @@ setup(
     include_package_data=True,
     install_requires=[
         'setuptools',
-        'Django>=3.1.0,<3.2.0',
-        'django-cradmin>=8.0.2,<9.0.0',
-        'ievv-opensource>=7.0.3,<8.0.0',
+        'Django>=3.2.0,<4',
+        'django-cradmin>=9.0.0b1,<10.0.0',
+        'ievv-opensource>=8.0.0b1,<9.0.0',
         'django-multiupload',
         'Jinja2',
         'pytz',
