@@ -33,8 +33,8 @@ future = "*"
 transifex-client = "*"
 invoke = "*"
 vitalstyles = "*"
-ievv-opensource = ">=8.0.0b1,<9.0.0"
-django-cradmin = ">=9.0.0b1,<10.0.0"
+ievv-opensource = ">=8.0.0,<9.0.0"
+django-cradmin = ">=9.0.0,<10.0.0"
 invoke-extras = {editable = true, git = "git://github.com/appressoas/invoke_extras.git"}
 Pillow = "*"
 appresso_sphinx_extensions = "*"
@@ -43,4 +43,4 @@ appresso_sphinx_extensions = "*"
 python_version = "3.8"
 
 [pipenv]
-allow_prereleases = true
+allow_prereleases = false
