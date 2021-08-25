@@ -1,9 +1,9 @@
-Cradmin legacy 4 beta releasenotes
-==================================
+Cradmin legacy 4 releasenotes
+=============================
 
 
-4.0.0b1
-=======
+4.0.0
+=====
 
 ## What is new
 
