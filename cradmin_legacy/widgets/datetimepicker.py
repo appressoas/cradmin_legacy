@@ -255,6 +255,7 @@ class DatePickerWidget(widgets.TextInput):
     def __init__(self, *args, **kwargs):
         """
         Parameters:
+            required: See :obj:`.DatePickerWidget.default_required`.
             buttonlabel: See :obj:`.DatePickerWidget.default_buttonlabel`.
             buttonlabel_novalue: See :obj:`.DatePickerWidget.default_buttonlabel_novalue`.
             usebuttonlabel: See :obj:`.DatePickerWidget.default_usebuttonlabel`.
