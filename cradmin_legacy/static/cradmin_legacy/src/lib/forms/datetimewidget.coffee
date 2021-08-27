@@ -541,10 +541,13 @@ app.directive 'cradminLegacyDatetimeSelector', [
           if $scope.config.maximum_datetime?
             maximumDatetime = moment($scope.config.maximum_datetime)
 
+          useLastHourAndMinute = $scope.config.use_last_hour_and_minute
+
           $scope.calendarCoordinator = new cradminLegacyCalendarApi.CalendarCoordinator({
             selectedMomentObject: selectedMomentObject,
             minimumDatetime: minimumDatetime,
             maximumDatetime: maximumDatetime,
+            useLastHourAndMinute: useLastHourAndMinute,
             nowMomentObject: moment($scope.config.now)
           })
           $scope.monthlyCalendarCoordinator = new cradminLegacyCalendarApi.MonthlyCalendarCoordinator({

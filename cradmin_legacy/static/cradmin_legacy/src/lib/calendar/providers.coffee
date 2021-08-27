@@ -139,6 +139,7 @@ app.provider 'cradminLegacyCalendarApi', ->
     constructor: ({@selectedMomentObject,
                    @minimumDatetime,
                    @maximumDatetime,
+                   @useLastHourAndMinute,
                    @nowMomentObject}) ->
       # We operate with two momentObjects:
       # - selectedMomentObject: This is the actual moment object
@@ -151,7 +152,11 @@ app.provider 'cradminLegacyCalendarApi', ->
         @shownMomentObject = @selectedMomentObject.clone()
       else
         # We set this to start the date picker on the current date
-        @setToNow()
+        useLastHourMinute = @useLastHourAndMinute
+        if useLastHourMinute
+          @setLastHourAndMinute()
+        else
+          @setToNow()
 
         # If the current time is not allowed, pick the first allowed value
         if not @momentObjectIsAllowed(@shownMomentObject)
@@ -199,6 +204,9 @@ app.provider 'cradminLegacyCalendarApi', ->
 
     setToNow: ->
       @shownMomentObject = @nowMomentObject.clone()
+
+    setLastHourAndMinute: ->
+      @shownMomentObject = @nowMomentObject.clone().set({hour:23, minute:59})
 
 
   ###*
