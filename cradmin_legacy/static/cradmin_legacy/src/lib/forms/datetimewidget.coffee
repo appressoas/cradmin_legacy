@@ -545,6 +545,7 @@ app.directive 'cradminLegacyDatetimeSelector', [
             selectedMomentObject: selectedMomentObject,
             minimumDatetime: minimumDatetime,
             maximumDatetime: maximumDatetime,
+            defaultNowTime: $scope.config.default_now_time,
             nowMomentObject: moment($scope.config.now)
           })
           $scope.monthlyCalendarCoordinator = new cradminLegacyCalendarApi.MonthlyCalendarCoordinator({

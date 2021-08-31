@@ -131,7 +131,7 @@ app.provider 'cradminLegacyCalendarApi', ->
         console?.log? week.prettyOneLineFormat()
 
 
-  ###*
+  ###
   Coordinates the common calendar data no matter what kind of
   view we present.
   ###
@@ -139,6 +139,7 @@ app.provider 'cradminLegacyCalendarApi', ->
     constructor: ({@selectedMomentObject,
                    @minimumDatetime,
                    @maximumDatetime,
+                   @defaultNowTime,
                    @nowMomentObject}) ->
       # We operate with two momentObjects:
       # - selectedMomentObject: This is the actual moment object
@@ -152,6 +153,7 @@ app.provider 'cradminLegacyCalendarApi', ->
       else
         # We set this to start the date picker on the current date
         @setToNow()
+        @setInitialTimeForDate()
 
         # If the current time is not allowed, pick the first allowed value
         if not @momentObjectIsAllowed(@shownMomentObject)
@@ -199,6 +201,20 @@ app.provider 'cradminLegacyCalendarApi', ->
 
     setToNow: ->
       @shownMomentObject = @nowMomentObject.clone()
+    
+    setInitialTimeForDate: ->
+      if @defaultNowTime
+        hour = @nowMomentObject.hour
+        minute = @nowMomentObject.minute
+        if @defaultNowTime.hour != undefined && @defaultNowTime.hour != null
+          hour = @defaultNowTime.hour
+        if @defaultNowTime.minute != undefined && @defaultNowTime.minute != null
+          minute = @defaultNowTime.minute
+        @shownMomentObject = @nowMomentObject.clone().set({
+          hour: if @defaultNowTime.hour then @defaultNowTime.hour else hour,
+          minute: if @defaultNowTime.minute? then @defaultNowTime.minute else minute,
+          second: 0
+        })
 
 
   ###*

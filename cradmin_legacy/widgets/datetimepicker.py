@@ -280,6 +280,8 @@ class DatePickerWidget(widgets.TextInput):
                 :obj:`.DatePickerWidget.default_dateselector_table_screenreader_caption`.
             minimum_datetime: The minimum datetime allowed to be select in the widget.
             maximum_datetime: The minimum datetime allowed to be select in the widget.
+            default_now_time: Dictionary of default time for now. A dictionary that maps hours and 
+                minutes to for the default now date. Format: {'hour': <int>, 'minute': <int>}
         """
         self.required = kwargs.pop('required', self.default_required)
         self.buttonlabel = kwargs.pop('buttonlabel', self.default_buttonlabel)
@@ -323,6 +325,7 @@ class DatePickerWidget(widgets.TextInput):
         self.clear_button_text = kwargs.pop('clear_button_text', self.default_clear_button_text)
         self.date_label_text = kwargs.pop('date_label_text', self.default_date_label_text)
         self.time_label_text = kwargs.pop('time_label_text', self.default_time_label_text)
+        self.default_now_time = kwargs.pop('default_now_time', None)
 
         super(DatePickerWidget, self).__init__(*args, **kwargs)
 
@@ -390,6 +393,7 @@ class DatePickerWidget(widgets.TextInput):
             'preview_change_animation_duration_milliseconds': self.get_preview_change_animation_duration_milliseconds(),
             'hide_animation_duration_milliseconds': self.get_hide_animation_duration_milliseconds(),
 
+            'default_now_time': self.default_now_time
 
             # 'year_emptyvalue': str(self.year_emptyvalue),
             # 'month_emptyvalue': str(self.month_emptyvalue),
@@ -710,7 +714,7 @@ class DateTimePickerWidget(DatePickerWidget):
     def get_datepicker_config(self, *args, **kwargs):
         config = super(DateTimePickerWidget, self).get_datepicker_config(*args, **kwargs)
         config.update({
-            'include_time': True
+            'include_time': True,
         })
         return config
 
