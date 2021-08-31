@@ -24,3 +24,9 @@ launch (6. April 2024).
   that needs to be addressed (you can migrate directly to Django 3 without going through Django 2 first).
 - Check out the documentation for cradmin_legacy 3.x (this is the initial Django 3 release) if you're updating from Django 1 or 2.
 - Update to cradmin_legacy 4.x.
+
+## 4.0 patch releases
+
+### 4.0.1
+- Datetimepicker: Support setting hours and minutes for default "now"-date. The default datetime is the current datetime, but this 
+  allows for static hours and minutes if needed.
