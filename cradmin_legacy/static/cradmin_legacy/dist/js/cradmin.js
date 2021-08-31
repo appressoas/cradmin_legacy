@@ -1379,18 +1379,19 @@
       return CalendarMonth;
 
     })();
-    /**
+    /*
     Coordinates the common calendar data no matter what kind of
     view we present.
     */
 
     CalendarCoordinator = (function() {
       function CalendarCoordinator(_arg) {
-        this.selectedMomentObject = _arg.selectedMomentObject, this.minimumDatetime = _arg.minimumDatetime, this.maximumDatetime = _arg.maximumDatetime, this.nowMomentObject = _arg.nowMomentObject;
+        this.selectedMomentObject = _arg.selectedMomentObject, this.minimumDatetime = _arg.minimumDatetime, this.maximumDatetime = _arg.maximumDatetime, this.defaultNowTime = _arg.defaultNowTime, this.nowMomentObject = _arg.nowMomentObject;
         if (this.selectedMomentObject != null) {
           this.shownMomentObject = this.selectedMomentObject.clone();
         } else {
           this.setToNow();
+          this.setInitialTimeForDate();
           if (!this.momentObjectIsAllowed(this.shownMomentObject)) {
             this.shownMomentObject = this.minimumDatetime.clone();
           }
@@ -1454,6 +1455,25 @@
 
       CalendarCoordinator.prototype.setToNow = function() {
         return this.shownMomentObject = this.nowMomentObject.clone();
+      };
+
+      CalendarCoordinator.prototype.setInitialTimeForDate = function() {
+        var hour, minute;
+        if (this.defaultNowTime) {
+          hour = this.nowMomentObject.hour;
+          minute = this.nowMomentObject.minute;
+          if (this.defaultNowTime.hour !== void 0 && this.defaultNowTime.hour !== null) {
+            hour = this.defaultNowTime.hour;
+          }
+          if (this.defaultNowTime.minute !== void 0 && this.defaultNowTime.minute !== null) {
+            minute = this.defaultNowTime.minute;
+          }
+          return this.shownMomentObject = this.nowMomentObject.clone().set({
+            hour: this.defaultNowTime.hour ? this.defaultNowTime.hour : hour,
+            minute: this.defaultNowTime.minute != null ? this.defaultNowTime.minute : minute,
+            second: 0
+          });
+        }
       };
 
       return CalendarCoordinator;
@@ -2839,6 +2859,7 @@
               selectedMomentObject: selectedMomentObject,
               minimumDatetime: minimumDatetime,
               maximumDatetime: maximumDatetime,
+              defaultNowTime: $scope.config.default_now_time,
               nowMomentObject: moment($scope.config.now)
             });
             $scope.monthlyCalendarCoordinator = new cradminLegacyCalendarApi.MonthlyCalendarCoordinator({
