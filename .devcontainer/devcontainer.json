@@ -1,0 +1,65 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/python-3
+{
+	"name": "cradminlegacy dockerdev",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		// General extensions
+		"eamodio.gitlens",
+		"reduckted.vscode-gitweblinks",
+		"VisualStudioExptTeam.vscodeintellicode",
+		"mksafi.simple-autocomplete",
+
+		// Python extensions
+		"ms-python.python",
+		"ms-python.vscode-pylance",
+		"batisteo.vscode-django",
+		"appresso.atest"
+	],
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+			  "path": "/bin/bash"
+			}
+		},
+		"terminal.integrated.defaultProfile.linux": "bash",
+		"python.pythonPath": "/home/codemonkey/pipenv-virtualenv/bin/python",
+		"python.languageServer": "Pylance",
+		"python.linting.enabled": true,
+		"python.linting.flake8Path": "/home/codemonkey/pipenv-virtualenv/bin/flake8",
+		"python.linting.flake8Enabled": true,
+		"python.analysis.indexing": true,
+		"atest.runners": {
+			"pytest": true
+		},
+		"importMagic.maxColumns": 120
+	},
+
+	// Uncomment these two lines (but do not commit) if you use mutagen.io as described in ./mutagenio.md:
+	// "workspaceMount": "source=cradminlegacy_dockerdev_repo,destination=/workspace,type=volume",
+	// "workspaceFolder": "/workspace",
+
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE},target=/host_userhome/,type=bind,consistency=cached",
+		
+		// Mount a persistent directory for yarn, pip and pipenv caches + dbdev_tempdata.
+		// Speeds up builds, and speeds up the postgres database.
+		"source=cradminlegacy_dockerdev_persistent,destination=/home/codemonkey/persistent/"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [9125],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pipenv install --dev && ln -s $(pipenv --venv) ~/pipenv-virtualenv",
+
+	// Comment out to connect as root instead.
+	"remoteUser": "codemonkey"
+}

@@ -10,9 +10,9 @@ First go to the javascript source directory and install the dependencies::
 
 Then run grunt to build. During development you can use::
 
-    $ grunt watch
+    $ node_modules/.bin/grunt watch
 
 
 For release, use::
 
-    $ grunt dist
+    $ node_modules/.bin/grunt dist
