@@ -109,6 +109,11 @@ angular.module('cradminLegacy.acemarkdown', [])
       scope.aceEditor = ace.edit(element[0])
       scope.aceEditor.setHighlightActiveLine(false)
       scope.aceEditor.setShowPrintMargin(false)
+
+      # Ref tab/keyboard trap (https://github.com/ajaxorg/ace/issues/3149#issuecomment-444570508):
+      scope.aceEditor.commands.removeCommand(scope.aceEditor.commands.byName.indent)
+      scope.aceEditor.commands.removeCommand(scope.aceEditor.commands.byName.outdent)
+      
       scope.aceEditor.renderer.setShowGutter(false)
 
       session = scope.aceEditor.getSession()
