@@ -30,3 +30,10 @@ launch (6. April 2024).
 ### 4.0.1
 - Datetimepicker: Support setting hours and minutes for default "now"-date. The default datetime is the current datetime, but this 
   allows for static hours and minutes if needed.
+
+
+4.1.0
+=====
+
+## What is new?
+- standalone-base-internal.django.html: Add block for overriding HTML-lang.
