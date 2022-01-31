@@ -8,7 +8,7 @@
     {% load static %}
     {% load cradmin_legacy_tags %}
 {% endspaceless %}<!DOCTYPE html>
-<html lang="en" ng-app="cradminLegacyUi" class="{% block html-element-class %}{% endblock %}">
+<html lang="{% block html-element-lang %}en{% endblock %}" ng-app="cradminLegacyUi" class="{% block html-element-class %}{% endblock %}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
