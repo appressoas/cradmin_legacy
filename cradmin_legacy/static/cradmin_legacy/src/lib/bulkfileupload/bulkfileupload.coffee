@@ -478,7 +478,8 @@ angular.module('cradminLegacy.bulkfileupload', [
         $scope.i18nStrings = {
           close_errormessage_label: options.close_errormessage_label
           remove_file_label: options.remove_file_label
-          removing_file_message: options.removing_file_message
+          removing_file_message: options.removing_file_message,
+          upload_status: options.upload_status
         }
         $scope.formController = formController
         $scope.$on '$destroy', ->
