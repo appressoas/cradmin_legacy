@@ -43,3 +43,6 @@ launch (6. April 2024).
 
 ### 4.1.1
 - Ace-editor: Removed keyboard-trap + accessibility improvements.
+
+### 4.1.2
+- Javascript: Add missing build-files.
