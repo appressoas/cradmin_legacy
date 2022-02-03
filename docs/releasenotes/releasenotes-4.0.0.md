@@ -37,3 +37,9 @@ launch (6. April 2024).
 
 ## What is new?
 - standalone-base-internal.django.html: Add block for overriding HTML-lang.
+
+
+## 4.1 patch releases
+
+### 4.1.1
+- Ace-editor: Removed keyboard-trap + accessibility improvements.
