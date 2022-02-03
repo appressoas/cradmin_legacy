@@ -123,6 +123,8 @@
         scope.aceEditor = ace.edit(element[0]);
         scope.aceEditor.setHighlightActiveLine(false);
         scope.aceEditor.setShowPrintMargin(false);
+        scope.aceEditor.commands.removeCommand(scope.aceEditor.commands.byName.indent);
+        scope.aceEditor.commands.removeCommand(scope.aceEditor.commands.byName.outdent);
         scope.aceEditor.renderer.setShowGutter(false);
         session = scope.aceEditor.getSession();
         session.setMode("ace/mode/markdown");
@@ -864,7 +866,8 @@
           $scope.i18nStrings = {
             close_errormessage_label: options.close_errormessage_label,
             remove_file_label: options.remove_file_label,
-            removing_file_message: options.removing_file_message
+            removing_file_message: options.removing_file_message,
+            upload_status: options.upload_status
           };
           $scope.formController = formController;
           $scope.$on('$destroy', function() {
@@ -5411,10 +5414,23 @@ angular.module("bulkfileupload/fileinfo.tpl.html", []).run(["$templateCache", fu
     "            'cradmin-legacy-bulkfileupload-progress-item-finished': fileInfo.finished,\n" +
     "            'cradmin-legacy-bulkfileupload-progress-item-error cradmin-legacy-bulkfileupload-errorparagraph': fileInfo.hasErrors\n" +
     "        }\">\n" +
+    "    <span class=\"cradmin-legacy-bulkfileupload-iteminfo\">\n" +
+    "        <span class=\"cradmin-legacy-progressbar\">\n" +
+    "            <span class=\"cradmin-legacy-progressbar-progress\" ng-style=\"{'width': fileInfo.percent+'%'}\">&nbsp;</span>\n" +
+    "            <span class=\"cradmin-legacy-progresspercent\" role='progressbar' aria-valuenow=\"{{ fileInfo.percent }}\" aria-valuemin=\"0\" aria-valuemax=\"100\"\n" +
+    "                    aria-labelledby=\"id_uploadfilename_{{ fileInfo.temporaryfileid }}\">\n" +
+    "                <span class=\"cradmin-legacy-progresspercent-number\" aria-hidden=\"true\">{{ fileInfo.percent }}</span>%\n" +
+    "            </span>\n" +
+    "        </span>\n" +
+    "        <span id=\"id_uploadfilename_{{ fileInfo.temporaryfileid }}\" style=\"display: none;\">{{fileInfo.name}}: {{fileInfo.i18nStrings.upload_status}} {{ fileInfo.percent }}%</span>\n" +
+    "        <span class=\"cradmin-legacy-filename\" aria-hidden=\"true\">{{fileInfo.name}}</span>\n" +
+    "    </span>\n" +
+    "\n" +
     "    <button cradmin-legacy-bulkfileupload-remove-file-button=\"fileInfo\"\n" +
     "            ng-if=\"fileInfo.finished\"\n" +
     "            type=\"button\"\n" +
-    "            class=\"btn btn-link cradmin-legacy-bulkfileupload-remove-file-button\">\n" +
+    "            class=\"btn btn-link cradmin-legacy-bulkfileupload-remove-file-button\"\n" +
+    "            aria-describedby=\"id_uploadfilename_{{ fileInfo.temporaryfileid }}\">\n" +
     "        <span ng-if=\"!fileInfo.isRemoving &amp;&amp; !fileInfo.autosubmit\"\n" +
     "              class=\"cradmin-legacy-bulkfileupload-remove-file-button-isnotremoving\">\n" +
     "            <span class=\"fa fa-times\"></span>\n" +
@@ -5426,14 +5442,6 @@ angular.module("bulkfileupload/fileinfo.tpl.html", []).run(["$templateCache", fu
     "            <span class=\"sr-only\">{{fileInfo.i18nStrings.removing_file_message}}</span>\n" +
     "        </span>\n" +
     "    </button>\n" +
-    "\n" +
-    "    <span class=\"cradmin-legacy-progressbar\">\n" +
-    "        <span class=\"cradmin-legacy-progressbar-progress\" ng-style=\"{'width': fileInfo.percent+'%'}\">&nbsp;</span>\n" +
-    "        <span class=\"cradmin-legacy-progresspercent\">\n" +
-    "            <span class=\"cradmin-legacy-progresspercent-number\">{{ fileInfo.percent }}</span>%\n" +
-    "        </span>\n" +
-    "    </span>\n" +
-    "    <span class=\"cradmin-legacy-filename\">{{fileInfo.name}}</span>\n" +
     "</p>\n" +
     "");
 }]);
@@ -5441,7 +5449,7 @@ angular.module("bulkfileupload/fileinfo.tpl.html", []).run(["$templateCache", fu
 angular.module("bulkfileupload/progress.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("bulkfileupload/progress.tpl.html",
     "<div class=\"cradmin-legacy-bulkfileupload-progress\">\n" +
-    "    <div ng-repeat=\"fileInfo in fileInfoArray\">\n" +
+    "    <div ng-repeat=\"fileInfo in fileInfoArray\" aria-live='assertive'>\n" +
     "        <div cradmin-legacy-bulk-file-info=\"fileInfo\"\n" +
     "             class=\"cradmin-legacy-bulkfileupload-progress-file\"></div>\n" +
     "    </div>\n" +
@@ -5454,20 +5462,23 @@ angular.module("bulkfileupload/rejectedfiles.tpl.html", []).run(["$templateCache
     "<div class=\"cradmin-legacy-bulkfileupload-rejectedfiles\">\n" +
     "    <p ng-repeat=\"fileInfo in rejectedFiles\"\n" +
     "            class=\"cradmin-legacy-bulkfileupload-rejectedfile cradmin-legacy-bulkfileupload-errorparagraph\">\n" +
+    "\n" +
+    "        <span class=\"cradmin-legacy-bulkfileupload-iteminfo\">\n" +
+    "            <span class=\"cradmin-legacy-bulkfileupload-rejectedfile-filename\">{{ fileInfo.name }}:</span>\n" +
+    "            <span ng-repeat=\"(errorfield,errors) in fileInfo.errors\">\n" +
+    "                <span ng-repeat=\"error in errors\"\n" +
+    "                    class=\"cradmin-legacy-bulkfileupload-error\">\n" +
+    "                    {{ error.message }}\n" +
+    "                </span>\n" +
+    "            </span>\n" +
+    "        </span>\n" +
+    "\n" +
     "        <button ng-click=\"closeMessage(fileInfo)\"\n" +
     "                type=\"button\"\n" +
     "                class=\"btn btn-link cradmin-legacy-bulkfileupload-error-closebutton\">\n" +
     "            <span class=\"fa fa-times\"></span>\n" +
     "            <span class=\"sr-only\">{{fileInfo.i18nStrings.close_errormessage_label}}</span>\n" +
     "        </button>\n" +
-    "\n" +
-    "        <span class=\"cradmin-legacy-bulkfileupload-rejectedfile-filename\">{{ fileInfo.name }}:</span>\n" +
-    "        <span ng-repeat=\"(errorfield,errors) in fileInfo.errors\">\n" +
-    "            <span ng-repeat=\"error in errors\"\n" +
-    "                  class=\"cradmin-legacy-bulkfileupload-error\">\n" +
-    "                {{ error.message }}\n" +
-    "            </span>\n" +
-    "        </span>\n" +
     "    </p>\n" +
     "</div>\n" +
     "");
