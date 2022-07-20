@@ -111,10 +111,10 @@ angular-mocks@~1.4.1:
   resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.4.14.tgz#ea12ec70a5227697e79575523abbec0e0f9168a7"
   integrity sha1-6hLscKUidpfnlXVSOrvsDg+RaKc=
 
-angular@~1.4.1:
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.4.14.tgz#9d0feaf60ce6e52ce50f49ee328656d1e1875c37"
-  integrity sha1-nQ/q9gzm5SzlD0nuMoZW0eGHXDc=
+angular@~1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.8.3.tgz#851ad75d5163c105a7e329555ef70c90aa706894"
+  integrity sha512-5qjkWIQQVsHj4Sb5TcEs4WZWpFeVFHXwxEBHUhrny41D8UrBAd6T/6nPPAsLngJCReIOqi95W3mxdveveutpZw==
 
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
