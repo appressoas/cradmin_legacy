@@ -136,7 +136,7 @@ class TestViewMixin(test.TestCase):
         view.should_include_previously_selected = mock.MagicMock(return_value=True)
         view.get_selected_values_list = mock.MagicMock(return_value='testvalue')
         view.get_queryset_for_role()
-        mockqueryset.exclude.called_once_with(pk__in='testvalue')
+        mockqueryset.exclude.assert_called_once_with(pk__in='testvalue')
 
     def test_get_target_renderer_class(self):
         view = manytomanyview.ViewMixin()
