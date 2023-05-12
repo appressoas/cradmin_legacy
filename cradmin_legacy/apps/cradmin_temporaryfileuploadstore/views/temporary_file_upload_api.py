@@ -39,9 +39,6 @@ class UploadTemporaryFilesView(FormView):
     form_class = FileUploadForm
     http_method_names = ['post', 'delete']
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     return HttpResponse('', status=503)
-
     def create_collection(self, minutes_to_live, accept,
                           max_filename_length, max_filesize_bytes,
                           unique_filenames, singlemode):
