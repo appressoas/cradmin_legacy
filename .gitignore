@@ -31,3 +31,5 @@
 
 .vscode/
 .vscode-atest-temp/
+
+.venv/

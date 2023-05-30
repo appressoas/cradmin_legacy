@@ -15,7 +15,8 @@ from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import Temporar
 
 class FileUploadForm(forms.Form):
     file = MultiFileField(
-        max_file_size=1000000 * getattr(settings, 'CRADMIN_TEMPORARYFILEUPLOADSTORE_MAX_FILE_SIZE_MB', 1000))
+        max_file_size=1000000 * getattr(settings, 'CRADMIN_TEMPORARYFILEUPLOADSTORE_MAX_FILE_SIZE_MB', 1000),
+        min_num=1)
     collectionid = forms.IntegerField(
         required=False)
     minutes_to_live = forms.IntegerField(
@@ -37,9 +38,6 @@ class FileDeleteForm(forms.Form):
 class UploadTemporaryFilesView(FormView):
     form_class = FileUploadForm
     http_method_names = ['post', 'delete']
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     return HttpResponse('', status=503)
 
     def create_collection(self, minutes_to_live, accept,
                           max_filename_length, max_filesize_bytes,

@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 from builtins import object
 
-from django.conf.urls import url, include
-from django.urls import reverse
+from django.conf.urls import include
+from django.urls import reverse, re_path
 from django.shortcuts import render
 from django.utils.html import format_html
 
@@ -419,17 +419,17 @@ class BaseCrAdminInstance(object):
         flatten = cls.rolefrontpage_appname == appname and cls.flatten_rolefrontpage_url
         if cls.roleclass:
             if flatten:
-                return url(r'^(?P<roleid>{})/'.format(cls.roleid_regex),
+                return re_path(r'^(?P<roleid>{})/'.format(cls.roleid_regex),
                            include(appurlpatterns))
             else:
-                return url(r'^(?P<roleid>{})/{}/'.format(cls.roleid_regex, appname),
+                return re_path(r'^(?P<roleid>{})/{}/'.format(cls.roleid_regex, appname),
                            include(appurlpatterns))
 
         else:
             if flatten:
-                return url(r'^', include(appurlpatterns))
+                return re_path(r'^', include(appurlpatterns))
             else:
-                return url(r'^{}/'.format(appname),
+                return re_path(r'^{}/'.format(appname),
                            include(appurlpatterns))
 
     @classmethod
@@ -451,7 +451,7 @@ class BaseCrAdminInstance(object):
         cradmin_instance_registry.add(cls)
         urls = cls._get_app_urls()
         if not cls.__no_role_and_flatten_rolefrontpage_url():
-            urls.append(url('^$', cls.get_instance_frontpage_view(),
+            urls.append(re_path('^$', cls.get_instance_frontpage_view(),
                             name='{}-frontpage'.format(cls.id)))
 
         return urls
