@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy
+from django.core.files.storage import Storage, storages
 import math
 from cradmin_legacy.utils import crhumanize
 
@@ -218,6 +219,11 @@ def validate_max_file_size(max_filesize_bytes, fieldfile):
         }, code='max_filesize_bytes_exceeded')
 
 
+def get_temporary_file_storage() -> Storage:
+    storage_name = getattr(settings, "CRADMIN_LEGACY_TEMPORARY_FILE_STORAGE_BACKEND", "default")
+    return storages[storage_name]
+
+
 class TemporaryFile(models.Model):
     """
     A temporary file uploaded by a user.
@@ -227,7 +233,8 @@ class TemporaryFile(models.Model):
         related_name='files')
     filename = models.TextField(db_index=True)
     file = models.FileField(
-        upload_to=temporary_file_upload_to)
+        upload_to=temporary_file_upload_to,
+        storage=get_temporary_file_storage)
     mimetype = models.TextField(null=False, blank=True, default='')
 
     def delete_object_and_file(self):
