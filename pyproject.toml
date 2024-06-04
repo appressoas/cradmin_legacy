@@ -28,20 +28,16 @@ classifiers = [
 dependencies = [
     "Django>=4.0.0,<5.0.0",
     "django-crispy-forms==1.14.0",
-    "sorl-thumbnail",
-    "pytz",
     "html2text",
     "django-multiupload",
-    "django-extensions",
-    "python-dateutil",
     "future",
     "ievv_opensource>=9.2.2,<10.0.0",
     "django_cradmin>=10.3.3,<11.0.0",
-    "Pillow",
 ]
 
 [project.optional-dependencies]
 dev = [
+    "django-extensions",
     "flake8",
     "tox",
     "model-bakery",
@@ -63,6 +59,10 @@ test = [
     "coverage",
     "mock-django",
     "mock"
+]
+optionalprod = [
+    "sorl-thumbnail",
+    "Pillow",
 ]
 
 [tool.hatch.metadata]
