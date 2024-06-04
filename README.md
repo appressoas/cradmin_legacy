@@ -69,7 +69,7 @@ for package authentication etc.
 
 ```
 $ source .venv/bin/activate   # enable virtualenv
-$ pip install -e ".[dev,test]"
+$ .venv/bin/pip install -e ".[dev,test]"
 ```
 
 ### Upgrade your local packages
@@ -78,7 +78,7 @@ This will upgrade all local packages according to the constraints
 set in pyproject.toml:
 
 ```
-$ pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
+$ .venv/bin/pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
 ```
 
 ### Create demo database
