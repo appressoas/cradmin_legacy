@@ -32,27 +32,27 @@ dependencies = [
     "pytz",
     "html2text",
     "django-multiupload",
-    "sphinxcontrib-napoleon",
-    "sphinx-rtd-theme",
-    "flake8",
-    "tox",
     "django-extensions",
     "python-dateutil",
     "future",
-    "vitalstyles",
     "ievv_opensource>=9.2.2,<10.0.0",
     "django_cradmin>=10.3.3,<11.0.0",
     "Pillow",
-    "appresso_sphinx_extensions"
 ]
 
 [project.optional-dependencies]
 dev = [
+    "flake8",
+    "tox",
     "model-bakery",
     "ipython",
     "django-dbdev",
     "coverage",
-    "Sphinx"
+    "Sphinx",
+    "sphinxcontrib-napoleon",
+    "sphinx-rtd-theme",
+    "appresso_sphinx_extensions",
+    "vitalstyles",
 ]
 test = [
     "htmls",
