@@ -1,3 +1,11 @@
+## 5.0.1 (2024-06-04)
+
+### Fix
+
+- Cleanup dependencies.
+- **temporaryfileupload**: Make the storage backend for temporary files configurable.
+- Cleanup dependencies.
+
 ## 5.0.0 (2023-05-30)
 
 ### Feat
