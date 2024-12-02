@@ -1,17 +1,21 @@
 from __future__ import unicode_literals
 
-from django.core.files.base import ContentFile
-from django.test import TestCase, RequestFactory
 import htmls
-from cradmin_legacy.python2_compatibility import mock
+from django.core.files.base import ContentFile
+from django.test import RequestFactory, TestCase
 from model_bakery import baker
 
 from cradmin_legacy import cradmin_testhelpers
 from cradmin_legacy.apps.cradmin_imagearchive import cradminviews
 from cradmin_legacy.apps.cradmin_imagearchive.models import ArchiveImage
-from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import (
+    TemporaryFile,
+    TemporaryFileCollection,
+)
 from cradmin_legacy.cradmin_legacy_testapp.models import TstRole
+from cradmin_legacy.python2_compatibility import mock
 from cradmin_legacy.tests.helpers import create_user
+
 from .helpers import create_image
 
 
@@ -186,7 +190,9 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
         self.assertEqual(mockresponse.response['Location'], '/success')
         self.assertEqual(ArchiveImage.objects.count(), 1)
         created_image = ArchiveImage.objects.first()
+        created_image.image.open()
         self.assertEqual(created_image.image.read(), testimage)
+        created_image.image.close()
         self.assertEqual(created_image.name, 'testfile.png')
         self.assertEqual(created_image.description, '')
 
@@ -242,6 +248,9 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
         self.assertEqual(ArchiveImage.objects.count(), 2)
         created_images = ArchiveImage.objects.order_by('name')
 
+        for image in created_images:
+            image.image.open()
+
         self.assertEqual(created_images[0].image.read(), testimage1)
         self.assertEqual(created_images[0].name, 'testfile1.png')
         self.assertEqual(created_images[0].description, '')
@@ -249,6 +258,9 @@ class TestArchiveImagesListView(TestCase, cradmin_testhelpers.TestCaseMixin):
         self.assertEqual(created_images[1].image.read(), testimage2)
         self.assertEqual(created_images[1].name, 'testfile2.png')
         self.assertEqual(created_images[1].description, '')
+
+        for image in created_images:
+            image.image.close()
 
     def test_uploadform_post_sets_file_size(self):
         testuser = create_user('testuser')
@@ -397,7 +409,9 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
         created_image = ArchiveImage.objects.first()
         self.assertTrue(mockresponse.response['Location'].endswith(
             '?foreignkey_selected_value={}'.format(created_image.pk)))
+        created_image.image.open()
         self.assertEqual(created_image.image.read(), testimage)
+        created_image.image.close()
         self.assertEqual(created_image.name, 'testfile.png')
         self.assertEqual(created_image.description, '')
 

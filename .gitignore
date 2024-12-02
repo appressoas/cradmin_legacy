@@ -33,3 +33,4 @@
 .vscode-atest-temp/
 
 .venv/
+.python-version

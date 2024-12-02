@@ -24,16 +24,16 @@ conventional commits for your commit messages
 
 First install pipx with:
 
-```
-$ brew install pipx
-$ pipx ensurepath
+```bash
+brew install pipx
+pipx ensurepath
 ```
 
 Then install hatch and commitizen:
 
-```
-$ pipx install hatch
-$ pipx install commitizen
+```bash
+pipx install hatch
+pipx install commitizen
 ```
 
 See https://github.com/pypa/pipx, https://hatch.pypa.io/latest/install/
@@ -44,21 +44,21 @@ needed, but we really recommend using pipx since that is isolated.
 
 #### Install a local python version with pyenv:
 
-```
-$ pyenv install 3.10
-$ pyenv local 3.10
+```bash
+pyenv install $(pyenv latest -k 3.12)
+pyenv local 3.12
 ```
 
 #### Install dependencies in a virtualenv:
 
-```
-$ ./recreate-virtualenv.sh
+```bash
+./recreate-virtualenv.sh
 ```
 
 Alternatively, create virtualenv manually (this does the same as recreate-virtualenv.sh):
 
-```
-$ python -m venv .venv
+```bash
+python -m venv .venv
 ```
 
 the ./recreate-virtualenv.sh script is just here to make creating virtualenvs more uniform
@@ -67,9 +67,9 @@ for package authentication etc.
 
 #### Install dependencies in a virtualenv:
 
-```
-$ source .venv/bin/activate   # enable virtualenv
-$ .venv/bin/pip install -e ".[dev,test]"
+```bash
+source .venv/bin/activate   # enable virtualenv
+.venv/bin/pip install -e ".[dev,test]"
 ```
 
 ### Upgrade your local packages
@@ -77,32 +77,32 @@ $ .venv/bin/pip install -e ".[dev,test]"
 This will upgrade all local packages according to the constraints
 set in pyproject.toml:
 
-```
-$ .venv/bin/pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
+```bash
+.venv/bin/pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
 ```
 
 ### Create demo database
 
-```
-$ python manage.py dbdev_reinit
-$ python manage.py migrate
-$ python manage.py createsuperuser
+```bash
+python manage.py dbdev_reinit
+python manage.py migrate
+python manage.py createsuperuser
 ```
 
 ### Run dev server
 
-```
-$ source .venv/bin/activate   # enable virtualenv
-$ python manage.py runserver
+```bash
+source .venv/bin/activate   # enable virtualenv
+python manage.py runserver
 ```
 
 The devserver is now running at `127.0.0.1:8000`
 
 ### Run tests
 
-```
-$ source .venv/bin/activate   # enable virtualenv
-$ pytest cradmin_legacy
+```bash
+source .venv/bin/activate   # enable virtualenvbash
+pytest cradmin_legacy
 ```
 
 ## Documentation
@@ -115,9 +115,9 @@ First make sure you have NO UNCOMITTED CHANGES!
 
 Release (create changelog, increment version, commit and tag the change) with:
 
-```
-$ cz bump
-$ git push && git push --tags
+```bash
+cz bump
+git push && git push --tags
 ```
 
 ### NOTE (release):
@@ -141,8 +141,8 @@ See _How to revert a bump_ in the [commitizen FAQ](https://commitizen-tools.gith
 
 ### Release to pypi:
 
-```
-$ hatch build -t sdist
-$ hatch publish
-$ rm dist/*              # optional cleanup
+```bash
+hatch build -t sdist
+hatch publish
+rm dist/*              # optional cleanup
 ```
