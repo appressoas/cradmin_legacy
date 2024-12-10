@@ -52,7 +52,7 @@ pyenv local 3.12
 #### Install dependencies in a virtualenv:
 
 ```bash
-./recreate-virtualenv.sh
+./tools/recreate-virtualenv.sh
 ```
 
 Alternatively, create virtualenv manually (this does the same as recreate-virtualenv.sh):
