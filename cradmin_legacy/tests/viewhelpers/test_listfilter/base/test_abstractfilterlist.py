@@ -1,16 +1,24 @@
 from __future__ import unicode_literals
 
-from django.test import TestCase
-import htmls
-from cradmin_legacy.python2_compatibility import mock
-from model_bakery import baker
-from future import standard_library
+import logging
+from unittest import mock
 
-from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
+import htmls
+from django.test import TestCase
+from future import standard_library
+from model_bakery import baker
+
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import (
+    FilterTestModel,
+)
+from cradmin_legacy.viewhelpers.listfilter.base import filtershandler
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
-from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
-from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlistchild import AbstractFilterListChild
-from cradmin_legacy.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import (
+    AbstractFilterList,
+)
+from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlistchild import (
+    AbstractFilterListChild,
+)
 
 standard_library.install_aliases()
 
@@ -55,9 +63,10 @@ class TestAbstractFilterList(TestCase):
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
         stringfilter = MinimalStringFilter()
         filterlist.append(stringfilter)
-        with self.assertRaisesMessage(InvalidFiltersStringError,
-                                      '"x" is not a valid filter slug.'):
+        with self.assertLogs(filtershandler.logger, level=logging.DEBUG) as logcontext:
             filterlist.set_filters_string('x-10')
+            self.assertEqual(len(logcontext.records), 1)
+            self.assertEqual(logcontext.records[0].message, '"x" is not a valid filter slug.')
 
     def test_set_filters_string(self):
         filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
@@ -65,7 +74,8 @@ class TestAbstractFilterList(TestCase):
         stringfilter = MinimalStringFilter()
         filterlist.append(intfilter)
         filterlist.append(stringfilter)
-        filterlist.set_filters_string('i-10/s-test')
+        with self.assertNoLogs(filtershandler.logger, level=logging.DEBUG):
+            filterlist.set_filters_string('i-10/s-test')
         self.assertEqual(['10'], intfilter.values)
         self.assertEqual(['test'], stringfilter.values)
 
