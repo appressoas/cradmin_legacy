@@ -58,7 +58,9 @@ test = [
     "model-bakery",
     "coverage",
     "mock-django",
-    "mock"
+    "mock",
+    "sorl-thumbnail",
+    "Pillow",
 ]
 optionalprod = [
     "sorl-thumbnail",
