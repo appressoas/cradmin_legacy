@@ -1,14 +1,23 @@
 from __future__ import unicode_literals
 
-from django.test import TestCase
-from cradmin_legacy.python2_compatibility import mock
-from model_bakery import baker
-from future import standard_library
+import logging
 
-from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
+from django.test import TestCase
+from future import standard_library
+from model_bakery import baker
+
+from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import (
+    FilterTestModel,
+)
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
-from cradmin_legacy.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
-from cradmin_legacy.viewhelpers.listfilter.base.filtershandler import FiltersHandler
+from cradmin_legacy.viewhelpers.listfilter.base.exceptions import (
+    InvalidFiltersStringError,
+)
+from cradmin_legacy.viewhelpers.listfilter.base.filtershandler import (
+    FiltersHandler,
+    logger,
+)
 
 standard_library.install_aliases()
 
@@ -47,9 +56,10 @@ class TestFiltersHandler(TestCase):
 
     def test_invalid_filter_slug(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
-        with self.assertRaisesMessage(InvalidFiltersStringError,
-                                      '"x" is not a valid filter slug.'):
+        with self.assertLogs(logger, level=logging.DEBUG) as logcontext:
             filtershandler.parse('x-10')
+            self.assertEqual(len(logcontext.records), 1)
+            self.assertEqual(logcontext.records[0].message, '"x" is not a valid filter slug.')
 
     def test_add_filter_duplicate_filter_slug(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
@@ -82,9 +92,10 @@ class TestFiltersHandler(TestCase):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalStringFilter())
         filtershandler.parse('s-test')
-        self.assertEqual(
-            ['test'],
-            filtershandler.filtermap['s'].values)
+        with self.assertNoLogs(logger, level=logging.DEBUG):
+            self.assertEqual(
+                ['test'],
+                filtershandler.filtermap['s'].values)
 
     def test_parse_multivalue_valid_filter_string(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
