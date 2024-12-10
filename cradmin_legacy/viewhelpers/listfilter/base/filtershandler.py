@@ -1,10 +1,18 @@
 from __future__ import unicode_literals
-from collections import OrderedDict
+
+import logging
 import urllib
-from cradmin_legacy.viewhelpers.listfilter.base.exceptions import InvalidFiltersStringError
+from collections import OrderedDict
+
 from future import standard_library
 
+from cradmin_legacy.viewhelpers.listfilter.base.exceptions import (
+    InvalidFiltersStringError,
+)
+
 standard_library.install_aliases()
+
+logger = logging.getLogger(__name__)
 
 
 class FiltersHandler(object):
@@ -95,9 +103,10 @@ class FiltersHandler(object):
         filters_string = filters_string.strip(self.filter_separator)
         for filter_string in filters_string.split(self.filter_separator):
             slug, values = self.parse_filter_string(filter_string)
-            if slug not in self.filtermap:
-                raise InvalidFiltersStringError('"{}" is not a valid filter slug.'.format(slug))
-            self.filtermap[slug].set_values(values)
+            if slug in self.filtermap:
+                self.filtermap[slug].set_values(values)
+            else:
+                logger.debug('"{}" is not a valid filter slug.'.format(slug))
 
     def add_filter(self, filterobject):
         """
