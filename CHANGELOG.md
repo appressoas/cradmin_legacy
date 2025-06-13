@@ -1,3 +1,9 @@
+## 6.1.0 (2025-06-13)
+
+### Feat
+
+- **dependencies**: running on Django 5.2.3 or higher
+
 ## 6.0.1 (2024-12-10)
 
 ### Fix
