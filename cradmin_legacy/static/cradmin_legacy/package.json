@@ -27,7 +27,7 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "^1.1.1",
-    "moment": "~2.21.0",
+    "moment": "~2.29.4",
     "mousetrap": "~1.5.3",
     "urijs": "~1.19.1"
   },
