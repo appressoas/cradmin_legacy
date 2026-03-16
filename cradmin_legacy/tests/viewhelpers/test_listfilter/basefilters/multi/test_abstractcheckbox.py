@@ -1,12 +1,9 @@
-from django.test import TestCase
-from future import standard_library
 import htmls
+from django.test import TestCase
 
 from cradmin_legacy.python2_compatibility import mock
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
 from cradmin_legacy.viewhelpers.listfilter.basefilters.multi.abstractcheckbox import AbstractCheckboxFilter
-
-standard_library.install_aliases()
 
 
 class TestAbstractCheckboxFilter(TestCase):

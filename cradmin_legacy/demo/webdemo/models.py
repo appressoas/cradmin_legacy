@@ -2,12 +2,10 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy
-from future.utils import python_2_unicode_compatible
 
 from cradmin_legacy.apps.cradmin_imagearchive import models as imagearchivemodels
 
 
-@python_2_unicode_compatible
 class Site(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=False, blank=True, default="")
@@ -17,7 +15,6 @@ class Site(models.Model):
         return self.name
 
 
-@python_2_unicode_compatible
 class Page(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, verbose_name=gettext_lazy("Title"))
@@ -73,7 +70,6 @@ class Page(models.Model):
         ordering = ("title", "intro")
 
 
-@python_2_unicode_compatible
 class PageTag(models.Model):
     page = models.ForeignKey(Page, related_name="tags", on_delete=models.CASCADE)
     tag = models.SlugField()

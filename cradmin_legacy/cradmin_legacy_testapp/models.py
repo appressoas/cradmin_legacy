@@ -1,5 +1,4 @@
 from django.db import models
-from future.utils import python_2_unicode_compatible
 
 
 class TstRole(models.Model):
@@ -8,7 +7,6 @@ class TstRole(models.Model):
     """
 
 
-@python_2_unicode_compatible
 class SomeItem(models.Model):
     name = models.CharField(max_length=30, verbose_name="The name")
     somenumber = models.IntegerField(null=True, blank=True)

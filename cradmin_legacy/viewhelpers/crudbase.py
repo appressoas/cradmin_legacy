@@ -1,20 +1,14 @@
-from django.contrib.contenttypes.fields import GenericForeignKey
-from future import standard_library
-
-from cradmin_legacy import automodelform
-from cradmin_legacy.crispylayouts import PrimarySubmit, DefaultSubmit
-
-standard_library.install_aliases()
-import urllib.request
 import urllib.parse
-import urllib.error
-from django import forms
-from django import http
+
+from crispy_forms import layout
+from django import forms, http
 from django.contrib import messages
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core import serializers
 from django.utils.translation import gettext_lazy
 
-from crispy_forms import layout
+from cradmin_legacy import automodelform
+from cradmin_legacy.crispylayouts import DefaultSubmit, PrimarySubmit
 
 from . import formbase
 

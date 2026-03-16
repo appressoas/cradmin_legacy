@@ -3,7 +3,6 @@ from unittest import mock
 
 import htmls
 from django.test import TestCase
-from future import standard_library
 from model_bakery import baker
 
 from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import (
@@ -17,8 +16,6 @@ from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import (
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlistchild import (
     AbstractFilterListChild,
 )
-
-standard_library.install_aliases()
 
 
 class MinimalFilterGroupChild(AbstractFilterListChild):

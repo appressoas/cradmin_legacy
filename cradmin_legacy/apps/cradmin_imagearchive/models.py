@@ -8,7 +8,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy
-from future.utils import python_2_unicode_compatible
 
 from cradmin_legacy import crsettings
 
@@ -30,7 +29,6 @@ class ArchiveImageManager(models.Manager):
         )
 
 
-@python_2_unicode_compatible
 class ArchiveImage(models.Model):
     objects = ArchiveImageManager()
 

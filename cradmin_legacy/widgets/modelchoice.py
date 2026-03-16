@@ -1,12 +1,8 @@
-from future import standard_library
-
-standard_library.install_aliases()
-import urllib.request
 import urllib.parse
-import urllib.error
-from django.utils.translation import gettext_lazy
+
 from django.forms import widgets
 from django.template.loader import render_to_string
+from django.utils.translation import gettext_lazy
 
 
 class ModelChoiceWidget(widgets.TextInput):

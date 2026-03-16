@@ -1,7 +1,6 @@
 import logging
 
 from django.test import TestCase
-from future import standard_library
 from model_bakery import baker
 
 from cradmin_legacy.python2_compatibility import mock
@@ -16,8 +15,6 @@ from cradmin_legacy.viewhelpers.listfilter.base.filtershandler import (
     FiltersHandler,
     logger,
 )
-
-standard_library.install_aliases()
 
 
 class MinimalIntFilter(AbstractFilter):

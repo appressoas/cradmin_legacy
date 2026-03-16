@@ -1,11 +1,8 @@
 from crispy_forms import layout
-from future import standard_library
 
 from cradmin_legacy import crapp
-from cradmin_legacy.demo.webdemo.views.pages import PageCreateView, PageUpdateView, PageDeleteView, PreviewPageView
+from cradmin_legacy.demo.webdemo.views.pages import PageCreateView, PageDeleteView, PageUpdateView, PreviewPageView
 from cradmin_legacy.demo.webdemo.views.pages_listbuilder import PagesListBuilderView
-
-standard_library.install_aliases()
 
 
 class FormUtilsPageUpdateView(PageUpdateView):

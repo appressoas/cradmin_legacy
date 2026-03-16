@@ -1,5 +1,5 @@
-from future.builtins import str
 import re
+
 from django import forms
 from django.core import validators
 from django.core.validators import EmailValidator

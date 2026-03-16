@@ -3,12 +3,10 @@ An example app using Sortable.
 """
 
 from django.db import models
-from future.utils import python_2_unicode_compatible
-from cradmin_legacy.sortable.models import SortableBase
-from cradmin_legacy.sortable.models import SortableManagerBase
+
+from cradmin_legacy.sortable.models import SortableBase, SortableManagerBase
 
 
-@python_2_unicode_compatible
 class ItemContainer(models.Model):
     """
     A test class for being a container for items that should be sorted.

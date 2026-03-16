@@ -1,16 +1,11 @@
 import sys
-from future import standard_library
-
-standard_library.install_aliases()
-import urllib.request
 import urllib.parse
-import urllib.error
-from django.utils.translation import gettext_lazy
 
+from django.utils.translation import gettext_lazy
 from django.views.generic import CreateView as DjangoCreateView
 
-from cradmin_legacy.crispylayouts import PrimarySubmit
-from cradmin_legacy.crispylayouts import DefaultSubmit
+from cradmin_legacy.crispylayouts import DefaultSubmit, PrimarySubmit
+
 from .crudbase import CreateUpdateViewMixin
 
 

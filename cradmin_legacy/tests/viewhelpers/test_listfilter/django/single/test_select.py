@@ -1,14 +1,10 @@
-from cradmin_legacy.python2_compatibility import mock
-
 from django.test import TestCase
-from future import standard_library
 from model_bakery import baker
 
 from cradmin_legacy import datetimeutils
+from cradmin_legacy.python2_compatibility import mock
 from cradmin_legacy.tests.viewhelpers.cradmin_viewhelpers_testapp.models import FilterTestModel
 from cradmin_legacy.viewhelpers import listfilter
-
-standard_library.install_aliases()
 
 
 class TestBoolean(TestCase):

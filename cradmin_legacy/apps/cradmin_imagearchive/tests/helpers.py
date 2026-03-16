@@ -1,8 +1,6 @@
-from future import standard_library
-
-standard_library.install_aliases()
-from PIL import Image, ImageDraw
 from io import BytesIO
+
+from PIL import Image, ImageDraw
 
 
 def create_image(width, height, filetype="PNG"):

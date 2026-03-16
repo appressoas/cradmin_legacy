@@ -1,13 +1,11 @@
+import htmls
 from django import test
 from django.core.files.base import ContentFile
-from future.utils import python_2_unicode_compatible
-
-from cradmin_legacy.apps.cradmin_imagearchive.tests.helpers import create_image
-import htmls
 from model_bakery import baker
 
-from cradmin_legacy.viewhelpers import listbuilder
+from cradmin_legacy.apps.cradmin_imagearchive.tests.helpers import create_image
 from cradmin_legacy.python2_compatibility import mock
+from cradmin_legacy.viewhelpers import listbuilder
 
 
 class TestTitleDescription(test.TestCase):
@@ -36,7 +34,6 @@ class TestTitleDescription(test.TestCase):
         )
 
 
-@python_2_unicode_compatible
 class MockValue:
     def __init__(self, value_str, pk):
         self.value_str = value_str

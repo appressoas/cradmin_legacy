@@ -1,22 +1,16 @@
 from django.contrib.auth import get_user_model
-from future import standard_library
 
-from cradmin_legacy.demo.webdemo.views.pages import (
-    PagesQuerySetForRoleMixin,
-    PageCreateView,
-    PageUpdateView,
-    PageDeleteView,
-    PreviewPageView,
-)
-from cradmin_legacy.viewhelpers import listbuilderview
-from cradmin_legacy.viewhelpers import listfilter
-from cradmin_legacy.viewhelpers import listbuilder
 from cradmin_legacy import crapp
 from cradmin_legacy.demo.webdemo.models import Page, PageTag
+from cradmin_legacy.demo.webdemo.views.pages import (
+    PageCreateView,
+    PageDeleteView,
+    PagesQuerySetForRoleMixin,
+    PageUpdateView,
+    PreviewPageView,
+)
+from cradmin_legacy.viewhelpers import listbuilder, listbuilderview, listfilter
 from cradmin_legacy.viewhelpers.listfilter.basefilters.single import abstractradio
-
-standard_library.install_aliases()
-
 
 
 class PageListItemValue(listbuilder.itemvalue.EditDeleteWithArchiveImageAndPreview):

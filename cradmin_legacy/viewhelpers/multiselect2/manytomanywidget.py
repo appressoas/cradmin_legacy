@@ -1,18 +1,12 @@
 import json
-
-from django.utils.datastructures import MultiValueDict
-from django.utils.translation import pgettext_lazy
-from future import standard_library
-
-from cradmin_legacy.viewhelpers.multiselect2 import widget_preview_renderer
-
-standard_library.install_aliases()
-import urllib.request
 import urllib.parse
-import urllib.error
+
 from django.forms import widgets
 from django.template.loader import render_to_string
-from past.builtins import basestring
+from django.utils.datastructures import MultiValueDict
+from django.utils.translation import pgettext_lazy
+
+from cradmin_legacy.viewhelpers.multiselect2 import widget_preview_renderer
 
 
 class Widget(widgets.TextInput):
@@ -73,7 +67,7 @@ class Widget(widgets.TextInput):
 
     def value_from_datadict(self, data, files, name):
         value = data.get(name, None)
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             # This handles the data we get from this widget,
             # the other stuff below is just if we get data
             # from tests and other sources where it is not JSON encoded.

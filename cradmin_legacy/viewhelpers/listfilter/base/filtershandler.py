@@ -2,13 +2,9 @@ import logging
 import urllib
 from collections import OrderedDict
 
-from future import standard_library
-
 from cradmin_legacy.viewhelpers.listfilter.base.exceptions import (
     InvalidFiltersStringError,
 )
-
-standard_library.install_aliases()
 
 logger = logging.getLogger(__name__)
 
@@ -78,9 +74,7 @@ class FiltersHandler:
         You should not need to override this.
         """
         if self.slug_and_value_separator not in filter_string:
-            raise InvalidFiltersStringError(
-                f'"{filter_string}" does not contain "{self.slug_and_value_separator}".'
-            )
+            raise InvalidFiltersStringError(f'"{filter_string}" does not contain "{self.slug_and_value_separator}".')
         slug, value = filter_string.split(self.slug_and_value_separator, 1)
         return slug, self.split_raw_filter_values(value)
 
@@ -114,9 +108,7 @@ class FiltersHandler:
         if slug in self.filtermap:
             raise ValueError(f'Duplicate slug: "{slug}".')
         if self.slug_and_value_separator in slug:
-            raise ValueError(
-                f'Invalid filter slug: "{slug}". Slugs can not contain "{self.slug_and_value_separator}".'
-            )
+            raise ValueError(f'Invalid filter slug: "{slug}". Slugs can not contain "{self.slug_and_value_separator}".')
         self.filtermap[slug] = filterobject
 
     def normalize_values(self, values):

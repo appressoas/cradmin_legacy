@@ -3,20 +3,15 @@ from collections import OrderedDict
 
 from django.apps import apps
 from django.utils.translation import gettext_lazy
-from future.utils import python_2_unicode_compatible
 
-from cradmin_legacy import crinstance
-from cradmin_legacy import crmenu
-from cradmin_legacy import crapp
+from cradmin_legacy import crapp, crinstance, crmenu
 from cradmin_legacy.crinstance import reverse_cradmin_url
 from cradmin_legacy.crsettings import get_setting
 from cradmin_legacy.decorators import has_access_to_cradmin_instance
-from cradmin_legacy.superuserui.crapps import djangomodel
-from cradmin_legacy.superuserui.crapps import djangoapp
+from cradmin_legacy.superuserui.crapps import djangoapp, djangomodel
 from cradmin_legacy.superuserui.views import dashboardview
 
 
-@python_2_unicode_compatible
 class ModelConfig:
     def __init__(self, model_class=None, menulabel=None, crapp_class=None):
         self.model_class = model_class

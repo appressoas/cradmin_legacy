@@ -1,15 +1,16 @@
-from past.utils import old_div
 import fnmatch
+import math
 import mimetypes
 import os
 import time
 import uuid
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.core.files.storage import Storage, storages
 from django.db import models
 from django.utils.translation import gettext_lazy
-from django.core.files.storage import Storage, storages
-import math
+
 from cradmin_legacy.utils import crhumanize
 
 
@@ -48,8 +49,8 @@ def truncate_filename(filename, maxlength, ellipsis="..."):
         return filename[-maxlength:]
     else:
         max_length_noellipsis = maxlength - len(ellipsis)
-        startlength = int(math.floor(old_div(max_length_noellipsis, 2.0)))
-        endlength = int(math.ceil(old_div(max_length_noellipsis, 2.0)))
+        startlength = int(math.floor(max_length_noellipsis / 2.0))
+        endlength = int(math.ceil(max_length_noellipsis / 2.0))
         start = filename[0:startlength]
         end = filename[-endlength:]
         return f"{start}{ellipsis}{end}"
