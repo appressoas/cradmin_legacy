@@ -34,15 +34,16 @@ class EmailUserCreateAccountForm(AbstractCreateAccountWithPasswordForm):
                 ]
 
     """
+
     class Meta(AbstractCreateAccountWithPasswordForm.Meta):
-        fields = ['email']
+        fields = ["email"]
 
     def deactivate_user(self, user):
         user.is_active = False
 
     def get_field_layout(self):
         return [
-            'email',
-            'password1',
-            'password2',
+            "email",
+            "password1",
+            "password2",
         ]

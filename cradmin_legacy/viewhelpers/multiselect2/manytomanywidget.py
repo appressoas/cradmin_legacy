@@ -22,11 +22,12 @@ class Widget(widgets.TextInput):
     Model multi choice widget that uses an iframe popup to enable users
     to select values for many-to-many and one-to-many fields.
     """
+
     #: The template used to render the widget.
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/widget.django.html'
+    template_name = "cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/widget.django.html"
 
     #: Do not override this (if you set this to hidden, the widget is not rendered correctly).
-    input_type = 'text'
+    input_type = "text"
 
     #: Set this to ``True`` to debug the value of the input field.
     #: Setting this to ``True``, makes the ``type`` of the actually
@@ -37,10 +38,9 @@ class Widget(widgets.TextInput):
     #: The default select-button text. You can override this in a subclass,
     #: or use the ``selectbutton_text``-argument for the constructor to
     #: change the button text.
-    default_selectbutton_text = pgettext_lazy('multiselect2 manytomanywidget', 'Select ...')
+    default_selectbutton_text = pgettext_lazy("multiselect2 manytomanywidget", "Select ...")
 
-    def __init__(self, queryset, selectview_url,
-                 selectbutton_text=None, required=True):
+    def __init__(self, queryset, selectview_url, selectbutton_text=None, required=True):
         """
         Args:
             queryset: A :class:`django.db.models.QuerySet`.
@@ -56,18 +56,22 @@ class Widget(widgets.TextInput):
         super(Widget, self).__init__()
 
     def __make_selectview_url(self, fieldid, fieldvalue):
-        return '{}?{}'.format(
-            self.selectview_url, urllib.parse.urlencode({
-                'manytomany_select_current_value': fieldvalue,
-                'manytomany_select_fieldid': fieldid,
-                'manytomany_select_required': str(self.required)
-            }))
+        return "{}?{}".format(
+            self.selectview_url,
+            urllib.parse.urlencode(
+                {
+                    "manytomany_select_current_value": fieldvalue,
+                    "manytomany_select_fieldid": fieldid,
+                    "manytomany_select_required": str(self.required),
+                }
+            ),
+        )
 
     def get_rendered_input_type(self):
         if self.input_field_visible:
-            return 'text'
+            return "text"
         else:
-            return 'hidden'
+            return "hidden"
 
     def value_from_datadict(self, data, files, name):
         value = data.get(name, None)
@@ -118,9 +122,9 @@ class Widget(widgets.TextInput):
             cradmin_legacy.viewhelpers.multiselect2.widget_preview_renderer.List: An object
             of the :meth:`.get_preview_renderer_list_class` class.
         """
-        return self.get_preview_renderer_list_class()\
-            .from_value_iterable(
-                value_iterable=self.get_selected_values_queryset(values=values))
+        return self.get_preview_renderer_list_class().from_value_iterable(
+            value_iterable=self.get_selected_values_queryset(values=values)
+        )
 
     def render(self, name, value, attrs=None):
         """
@@ -138,19 +142,22 @@ class Widget(widgets.TextInput):
         Returns:
             str: The rendered widget HTML.
         """
-        if value is None or value == '':
+        if value is None or value == "":
             values = []
         else:
             values = value
         fieldvalue = json.dumps(values)
-        fieldid = attrs['id']
-        return render_to_string(self.template_name, {
-            'preview_list': self.get_preview_list(values=values),
-            'fieldname': name,
-            'fieldid': fieldid,
-            'fieldvalue': fieldvalue,
-            'selectview_url': self.__make_selectview_url(fieldid, fieldvalue),
-            'selectbutton_text': self.selectbutton_text,
-            'input_type': self.input_type,
-            'rendered_input_type': self.get_rendered_input_type()
-        })
+        fieldid = attrs["id"]
+        return render_to_string(
+            self.template_name,
+            {
+                "preview_list": self.get_preview_list(values=values),
+                "fieldname": name,
+                "fieldid": fieldid,
+                "fieldvalue": fieldvalue,
+                "selectview_url": self.__make_selectview_url(fieldid, fieldvalue),
+                "selectbutton_text": self.selectbutton_text,
+                "input_type": self.input_type,
+                "rendered_input_type": self.get_rendered_input_type(),
+            },
+        )

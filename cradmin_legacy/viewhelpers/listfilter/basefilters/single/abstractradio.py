@@ -8,7 +8,8 @@ class AbstractRadioFilter(AbstractFilter):
     You only have to override :meth:`~AbstractRadioFilter.get_choices` and
     :meth:`~AbstractRadioFilter.filter`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/single/radio/base.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listfilter/django/single/radio/base.django.html"
 
     def get_choices(self):
         """
@@ -17,7 +18,7 @@ class AbstractRadioFilter(AbstractFilter):
         raise NotImplementedError()
 
     def get_choices_cached(self):
-        if not hasattr(self, '_choices'):
+        if not hasattr(self, "_choices"):
             self._choices = self.get_choices()
         return self._choices
 
@@ -46,17 +47,19 @@ class AbstractRadioFilter(AbstractFilter):
         for value, label in self.get_choices_cached():
             is_selected = value == selected_value
             url = self.build_set_values_url(values=[value])
-            choicesdata.append({
-                'url': url,
-                'label': label,
-                'is_selected': is_selected,
-                'dom_id': '{}_{}'.format(self.get_inputfield_dom_id(), value)
-            })
+            choicesdata.append(
+                {
+                    "url": url,
+                    "label": label,
+                    "is_selected": is_selected,
+                    "dom_id": "{}_{}".format(self.get_inputfield_dom_id(), value),
+                }
+            )
         return choicesdata
 
     def get_context_data(self, request=None):
         context = super(AbstractRadioFilter, self).get_context_data(request=None)
-        context['choicesdata'] = self.get_choicesdata()
+        context["choicesdata"] = self.get_choicesdata()
         return context
 
     def get_cleaned_value(self):
@@ -65,4 +68,4 @@ class AbstractRadioFilter(AbstractFilter):
         if cleaned_value in choices:
             return cleaned_value
         else:
-            return ''
+            return ""

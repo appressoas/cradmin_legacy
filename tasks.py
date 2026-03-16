@@ -3,14 +3,15 @@ import os
 from invoke import task, run
 from invoke_extras.context_managers import cd
 
-LANGUAGE_CODES = ['en', 'nb']
+LANGUAGE_CODES = ["en", "nb"]
+
 
 def _manage(args, echo=True, cwd=None, **kwargs):
-    management_script = 'manage.py'
+    management_script = "manage.py"
     if cwd:
         cwd = os.path.abspath(cwd)
         management_script = os.path.relpath(os.path.abspath(management_script), cwd)
-    command = 'python {} {} --traceback'.format(management_script, args)
+    command = "python {} {} --traceback".format(management_script, args)
     if cwd:
         with cd(cwd):
             result = run(command, echo=echo, **kwargs)
@@ -22,13 +23,12 @@ def _manage(args, echo=True, cwd=None, **kwargs):
 @task
 def makemessages(context):
     for languagecode in LANGUAGE_CODES:
-        _manage('makemessages -l {} '
-                '-i "node_modules/*" '
-                '-i "demo/*" '
-                '-i "static/*"'.format(languagecode),
-                cwd='cradmin_legacy')
+        _manage(
+            'makemessages -l {} -i "node_modules/*" -i "demo/*" -i "static/*"'.format(languagecode),
+            cwd="cradmin_legacy",
+        )
 
 
 @task
 def compilemessages(context):
-    _manage('compilemessages', cwd='cradmin_legacy')
+    _manage("compilemessages", cwd="cradmin_legacy")

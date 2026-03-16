@@ -21,20 +21,20 @@ class FiltersHandler(object):
     """
 
     #: The string separating filters in the filters string. Defaults to ``"/"``.
-    filter_separator = '/'
+    filter_separator = "/"
 
     #: The string used to separate filter slug and value.
     #: It does not matter if this also appears in the value,
     #: we handle that by splitting with a maxsplit of 1.
     #:
     #: Defaults to ``"-"``.
-    slug_and_value_separator = '-'
+    slug_and_value_separator = "-"
 
     #: The string used to separate multivalue strings.
     #: This string can not appear in any value used by the filter.
     #:
     #: Defaults to ``","``.
-    multivalue_separator = ','
+    multivalue_separator = ","
 
     def __init__(self, urlbuilder):
         """
@@ -58,8 +58,7 @@ class FiltersHandler(object):
         If you override this, you will also have ot override :meth:`.join_filter_values`.
         """
         values = urllib.parse.unquote_plus(raw_values)
-        return [urllib.parse.unquote_plus(value)
-                for value in values.split(self.multivalue_separator)]
+        return [urllib.parse.unquote_plus(value) for value in values.split(self.multivalue_separator)]
 
     def join_filter_values(self, values):
         """
@@ -81,8 +80,9 @@ class FiltersHandler(object):
         You should not need to override this.
         """
         if self.slug_and_value_separator not in filter_string:
-            raise InvalidFiltersStringError('"{}" does not contain "{}".'.format(
-                filter_string, self.slug_and_value_separator))
+            raise InvalidFiltersStringError(
+                '"{}" does not contain "{}".'.format(filter_string, self.slug_and_value_separator)
+            )
         slug, value = filter_string.split(self.slug_and_value_separator, 1)
         return slug, self.split_raw_filter_values(value)
 
@@ -94,7 +94,7 @@ class FiltersHandler(object):
         You should not need to override this.
         """
         if self._parse_called:
-            raise RuntimeError('Can not call parse multiple times on a FiltersHandler.')
+            raise RuntimeError("Can not call parse multiple times on a FiltersHandler.")
         self._parse_called = True
 
         if not filters_string:
@@ -116,8 +116,9 @@ class FiltersHandler(object):
         if slug in self.filtermap:
             raise ValueError('Duplicate slug: "{}".'.format(slug))
         if self.slug_and_value_separator in slug:
-            raise ValueError('Invalid filter slug: "{}". Slugs can not contain "{}".'.format(
-                slug, self.slug_and_value_separator))
+            raise ValueError(
+                'Invalid filter slug: "{}". Slugs can not contain "{}".'.format(slug, self.slug_and_value_separator)
+            )
         self.filtermap[slug] = filterobject
 
     def normalize_values(self, values):
@@ -138,10 +139,9 @@ class FiltersHandler(object):
             slug: See :meth:`.AbstractFilter.get_slug`.
             value: A list of values. All items in the list must be strings.
         """
-        return '{slug}{separator}{values}'.format(
-            slug=slug,
-            separator=self.slug_and_value_separator,
-            values=self.join_filter_values(values=values))
+        return "{slug}{separator}{values}".format(
+            slug=slug, separator=self.slug_and_value_separator, values=self.join_filter_values(values=values)
+        )
 
     def build_filters_string(self, changed_filterobject):
         """

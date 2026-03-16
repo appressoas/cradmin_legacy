@@ -2,6 +2,7 @@ from django.template.loader import render_to_string
 
 0
 
+
 class AbstractRenderable(object):
     """
     An abstract class that implements an interface for
@@ -11,6 +12,7 @@ class AbstractRenderable(object):
     which renders a template with an object of this class as
     input.
     """
+
     template_name = None
 
     def get_template_name(self):
@@ -26,8 +28,7 @@ class AbstractRenderable(object):
         if self.template_name:
             return self.template_name
         else:
-            raise NotImplementedError('You must set template_name or override '
-                                      'get_template_name().')
+            raise NotImplementedError("You must set template_name or override get_template_name().")
 
     def get_context_data(self, request=None):
         """
@@ -39,9 +40,7 @@ class AbstractRenderable(object):
                 'me': self
             }
         """
-        return {
-            'me': self
-        }
+        return {"me": self}
 
     def render(self, request=None):
         """
@@ -53,11 +52,8 @@ class AbstractRenderable(object):
                 :meth:`.get_context_data`, and to ``render_to_string()``
                 (which is used to render the template).
         """
-        context = self.get_context_data(request=request);
-        return render_to_string(
-            self.get_template_name(),
-            context,
-            request=request)
+        context = self.get_context_data(request=request)
+        return render_to_string(self.get_template_name(), context, request=request)
 
 
 class AbstractRenderableWithCss(AbstractRenderable):
@@ -105,4 +101,4 @@ class AbstractRenderableWithCss(AbstractRenderable):
         css_classes = []
         css_classes.extend(self.get_base_css_classes_list())
         css_classes.extend(self.get_extra_css_classes_list())
-        return ' '.join(css_classes)
+        return " ".join(css_classes)

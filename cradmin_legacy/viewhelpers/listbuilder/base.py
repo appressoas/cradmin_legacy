@@ -36,13 +36,14 @@ class ItemValueRenderer(AbstractItemRenderer):
     The value renderer renders the value of each item in
     the :class:`.List`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/base/itemvalue.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/base/itemvalue.django.html"
 
     def get_base_css_classes_list(self):
         """
         Override this to set your own css classes.
         """
-        return ['cradmin-legacy-listbuilder-itemvalue']
+        return ["cradmin-legacy-listbuilder-itemvalue"]
 
 
 class ItemFrameRenderer(AbstractItemRenderer):
@@ -65,7 +66,8 @@ class ItemFrameRenderer(AbstractItemRenderer):
         The renderable this frame wraps - an object of
         :class:`.ItemValueRenderer` or a subclass.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/base/itemframe.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/base/itemframe.django.html"
 
     def __init__(self, inneritem, **kwargs):
         super(ItemFrameRenderer, self).__init__(inneritem.value, **kwargs)
@@ -75,7 +77,7 @@ class ItemFrameRenderer(AbstractItemRenderer):
         """
         Override this to set your own css classes.
         """
-        return ['cradmin-legacy-listbuilder-itemframe']
+        return ["cradmin-legacy-listbuilder-itemframe"]
 
 
 class List(AbstractRenderableWithCss):
@@ -94,7 +96,8 @@ class List(AbstractRenderableWithCss):
         - :meth:`.extend_with_values`
         - :meth:`.from_value_iterable`
     """
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/base/list.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/base/list.django.html"
 
     def __init__(self):
         self.renderable_list = []
@@ -116,7 +119,7 @@ class List(AbstractRenderableWithCss):
         """
         Sets ``cradmin-legacy-listbuilder-list`` as css class for the list.
         """
-        return ['cradmin-legacy-listbuilder-list']
+        return ["cradmin-legacy-listbuilder-list"]
 
     def append(self, renderable):
         """
@@ -147,10 +150,9 @@ class List(AbstractRenderableWithCss):
         """
         return None
 
-    def extend_with_values(self, value_iterable,
-                           value_renderer_class=None,
-                           frame_renderer_class=None,
-                           value_and_frame_renderer_kwargs=None):
+    def extend_with_values(
+        self, value_iterable, value_renderer_class=None, frame_renderer_class=None, value_and_frame_renderer_kwargs=None
+    ):
         """
         Extends the list with an iterable of values.
 
@@ -203,11 +205,14 @@ class List(AbstractRenderableWithCss):
             self.append(renderable)
 
     @classmethod
-    def from_value_iterable(cls, value_iterable,
-                            value_renderer_class=None,
-                            frame_renderer_class=None,
-                            value_and_frame_renderer_kwargs=None,
-                            **listkwargs):
+    def from_value_iterable(
+        cls,
+        value_iterable,
+        value_renderer_class=None,
+        frame_renderer_class=None,
+        value_and_frame_renderer_kwargs=None,
+        **listkwargs,
+    ):
         """
         A shortcut for creating an object of this class with the given ``**listkwargs``
         as __init__ arguments, and then calling :meth:`.extend_with_values` with
@@ -220,8 +225,10 @@ class List(AbstractRenderableWithCss):
             An object of this class.
         """
         listobject = cls(**listkwargs)
-        listobject.extend_with_values(value_iterable=value_iterable,
-                                      value_renderer_class=value_renderer_class,
-                                      frame_renderer_class=frame_renderer_class,
-                                      value_and_frame_renderer_kwargs=value_and_frame_renderer_kwargs)
+        listobject.extend_with_values(
+            value_iterable=value_iterable,
+            value_renderer_class=value_renderer_class,
+            frame_renderer_class=frame_renderer_class,
+            value_and_frame_renderer_kwargs=value_and_frame_renderer_kwargs,
+        )
         return listobject

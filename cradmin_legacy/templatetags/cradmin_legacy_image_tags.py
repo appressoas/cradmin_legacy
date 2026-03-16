@@ -19,10 +19,10 @@ def cradmin_transform_image(context, imageurl, **options):
         imageurl: The URL of the image to transform.
         options: Image transformation options.
     """
-    request = context['request']
+    request = context["request"]
     imageurl = request.build_absolute_uri(imageurl)
-    if 'options' in options:
-        options = options['options']
+    if "options" in options:
+        options = options["options"]
     return imageutils.get_backend().transform_image(imageurl, **options)
 
 
@@ -40,7 +40,7 @@ def cradmin_transform_image_using_imagetype(context, imageurl, imagetype, fallba
         fallbackoptions: An optional dict of options to use if ``imagetype``
             is not in the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
     """
-    request = context['request']
+    request = context["request"]
     imageurl = request.build_absolute_uri(imageurl)
     try:
         return imageutils.get_backend().transform_image_using_imagetype(imageurl, imagetype)
@@ -51,9 +51,8 @@ def cradmin_transform_image_using_imagetype(context, imageurl, imagetype, fallba
             raise
 
 
-@register.inclusion_tag('cradmin_legacy/imageutils/templatetags/archiveimage-tag.django.html',
-                        takes_context=True)
-def cradmin_create_archiveimage_tag(context, archiveimage, imagetype, css_class='', fallbackoptions=None):
+@register.inclusion_tag("cradmin_legacy/imageutils/templatetags/archiveimage-tag.django.html", takes_context=True)
+def cradmin_create_archiveimage_tag(context, archiveimage, imagetype, css_class="", fallbackoptions=None):
     """
     Creates an ``<img>`` tag from the given cradmin archiveimage.
 
@@ -63,11 +62,9 @@ def cradmin_create_archiveimage_tag(context, archiveimage, imagetype, css_class=
     The alt-tag is generated from ``archiveimage.screenreader_text``.
     """
     return {
-        'archiveimage': archiveimage,
-        'url': cradmin_transform_image_using_imagetype(
-            context=context,
-            imageurl=archiveimage.image.url,
-            imagetype=imagetype,
-            fallbackoptions=fallbackoptions),
-        'css_class': css_class,
+        "archiveimage": archiveimage,
+        "url": cradmin_transform_image_using_imagetype(
+            context=context, imageurl=archiveimage.image.url, imagetype=imagetype, fallbackoptions=fallbackoptions
+        ),
+        "css_class": css_class,
     }

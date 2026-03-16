@@ -12,36 +12,27 @@ class EditUserView(update.UpdateRoleView):
     """
     View used to edit the user.
     """
+
     model = User
     fields = [
-        'username',
-        'first_name',
-        'last_name',
+        "username",
+        "first_name",
+        "last_name",
     ]
 
     def get_success_message(self, object):
-        return gettext_lazy('Updated your account information.')
+        return gettext_lazy("Updated your account information.")
 
     def get_field_layout(self):
-        return [
-            layout.Div(
-                'username',
-                'first_name',
-                'last_name',
-                css_class='cradmin-globalfields'
-            )
-        ]
+        return [layout.Div("username", "first_name", "last_name", css_class="cradmin-globalfields")]
 
     def get_buttons(self):
         return [
-            PrimarySubmit('submit-save', gettext_lazy('Save')),
+            PrimarySubmit("submit-save", gettext_lazy("Save")),
         ]
 
 
 class App(crapp.App):
     appurls = [
-        crapp.Url(
-            r'^$',
-            EditUserView.as_view(),
-            name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r"^$", EditUserView.as_view(), name=crapp.INDEXVIEW_NAME),
     ]

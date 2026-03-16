@@ -21,11 +21,10 @@ class SelectedProductsForm(forms.Form):
     ``SelectableProductItemValue`` class.
     """
 
-    invalid_selected_items_message = 'Invalid products was selected, please try again.'
+    invalid_selected_items_message = "Invalid products was selected, please try again."
     selected_items = forms.ModelMultipleChoiceField(
         # No products selectable by default - we override this in __init__()
         queryset=Product.objects.none(),
-
         # This is not required for this example, but if your queryset for
         # selected items depends on data that can change (be deleted, made unavailable for
         # selection, ...), and thus make selection invalid, you should include a message
@@ -33,14 +32,14 @@ class SelectedProductsForm(forms.Form):
         # views, and delete the items (using the superuser UI) before submitting your
         # selection.
         error_messages={
-            'invalid_choice': invalid_selected_items_message,
-        }
+            "invalid_choice": invalid_selected_items_message,
+        },
     )
 
     def __init__(self, *args, **kwargs):
-        selectable_items_queryset = kwargs.pop('selectable_items_queryset')
+        selectable_items_queryset = kwargs.pop("selectable_items_queryset")
         super(SelectedProductsForm, self).__init__(*args, **kwargs)
-        self.fields['selected_items'].queryset = selectable_items_queryset
+        self.fields["selected_items"].queryset = selectable_items_queryset
 
 
 class SelectedProductItem(multiselect2.selected_item_renderer.SelectedItem):
@@ -57,7 +56,8 @@ class SelectedProductItem(multiselect2.selected_item_renderer.SelectedItem):
     :class:`cradmin_legacy.viewhelpers.multiselect2.selected_item_renderer.SelectedItem`
     for more details.
     """
-    valuealias = 'product'
+
+    valuealias = "product"
 
     def get_title(self):
         return self.product.name
@@ -76,13 +76,14 @@ class SelectableProductItemValue(multiselect2.listbuilder_itemvalues.ItemValue):
     :class:`cradmin_legacy.viewhelpers.multiselect2.listbuilder_itemvalues.ItemValue`
     for more details.
     """
-    valuealias = 'product'
+
+    valuealias = "product"
 
     # You do not need to override this - the default works in most cases!
     selected_item_renderer_class = SelectedProductItem
 
     def get_inputfield_name(self):
-        return 'selected_items'
+        return "selected_items"
 
     def get_title(self):
         return self.product.name
@@ -104,14 +105,15 @@ class ProductTargetRenderer(multiselect2.target_renderer.Target):
     :class:`cradmin_legacy.viewhelpers.multiselect2.target_renderer.Target`
     for more details.
     """
+
     def get_with_items_title(self):
-        return 'Selected products:'
+        return "Selected products:"
 
     def get_submit_button_text(self):
-        return 'Do some really awesomely cool stuff with products'
+        return "Do some really awesomely cool stuff with products"
 
     def get_without_items_text(self):
-        return 'Nothing selected'
+        return "Nothing selected"
 
 
 ###########################################
@@ -130,12 +132,13 @@ class ProductListView(multiselect2view.ListbuilderView):
     - You do not have to override ``value_renderer_class``.
     - You do not have to override ``get_target_renderer_class``.
     """
+
     model = Product
     value_renderer_class = SelectableProductItemValue
     paginate_by = 20
 
     def get_queryset_for_role(self, role):
-        return Product.objects.all().order_by('name')
+        return Product.objects.all().order_by("name")
 
     def get_target_renderer_class(self):
         return ProductTargetRenderer
@@ -153,14 +156,12 @@ class ProductListView(multiselect2view.ListbuilderView):
 
     def get_form_kwargs(self):
         kwargs = super(ProductListView, self).get_form_kwargs()
-        kwargs['selectable_items_queryset'] = Product.objects.all()
+        kwargs["selectable_items_queryset"] = Product.objects.all()
         return kwargs
 
     def form_valid(self, form):
-        productnames = ['"{}"'.format(product.name) for product in form.cleaned_data['selected_items']]
-        messages.success(
-            self.request,
-            'POST OK. Selected: {}'.format(', '.join(productnames)))
+        productnames = ['"{}"'.format(product.name) for product in form.cleaned_data["selected_items"]]
+        messages.success(self.request, "POST OK. Selected: {}".format(", ".join(productnames)))
         return redirect(self.request.get_full_path())
 
 
@@ -175,23 +176,23 @@ class FilteredProductListView(multiselect2view.ListbuilderFilterView):
     """
     This view is just like ProductListView except that it adds filters!
     """
+
     model = Product
     value_renderer_class = SelectableProductItemValue
     paginate_by = 20
 
     def add_filterlist_items(self, filterlist):
-        filterlist.append(listfilter.django.single.textinput.Search(
-            slug='search',
-            label='Search',
-            label_is_screenreader_only=True,
-            modelfields=['name', 'description']))
+        filterlist.append(
+            listfilter.django.single.textinput.Search(
+                slug="search", label="Search", label_is_screenreader_only=True, modelfields=["name", "description"]
+            )
+        )
 
     def get_filterlist_url(self, filters_string):
-        return self.request.cradmin_app.reverse_appurl(
-            'withfilters', kwargs={'filters_string': filters_string})
+        return self.request.cradmin_app.reverse_appurl("withfilters", kwargs={"filters_string": filters_string})
 
     def get_unfiltered_queryset_for_role(self, role):
-        return Product.objects.all().order_by('name')
+        return Product.objects.all().order_by("name")
 
     def get_target_renderer_class(self):
         return ProductTargetRenderer
@@ -209,14 +210,12 @@ class FilteredProductListView(multiselect2view.ListbuilderFilterView):
 
     def get_form_kwargs(self):
         kwargs = super(FilteredProductListView, self).get_form_kwargs()
-        kwargs['selectable_items_queryset'] = Product.objects.all()
+        kwargs["selectable_items_queryset"] = Product.objects.all()
         return kwargs
 
     def form_valid(self, form):
-        productnames = ['"{}"'.format(product.name) for product in form.cleaned_data['selected_items']]
-        messages.success(
-            self.request,
-            'POST OK. Selected: {}'.format(', '.join(productnames)))
+        productnames = ['"{}"'.format(product.name) for product in form.cleaned_data["selected_items"]]
+        messages.success(self.request, "POST OK. Selected: {}".format(", ".join(productnames)))
         return redirect(self.request.get_full_path())
 
 
@@ -232,11 +231,12 @@ class ProductListViewSelectOnLoad(ProductListView):
     Extends :class:`.ProductListView` to show how to select items when the
     view loads.
     """
+
     def get_inititially_selected_queryset(self):
         """
         Select all products that contains ``"sock"`` in their name on load.
         """
-        return Product.objects.filter(name__icontains='sock')
+        return Product.objects.filter(name__icontains="sock")
 
 
 ###########################################
@@ -251,17 +251,16 @@ class SelectedProductsAndMoreForm(SelectedProductsForm):
     We add an couple of extra required fields (age and tag) to :class:`.SelectedProductsForm`
     for this demo, to show that form validation works.
     """
-    age = forms.CharField(
-        required=True
-    )
+
+    age = forms.CharField(required=True)
     tag = forms.MultipleChoiceField(
         required=True,
         choices=[
-            ('booring', 'Booring'),
-            ('cool', 'Cool'),
-            ('awesome', 'Awesome'),
+            ("booring", "Booring"),
+            ("cool", "Cool"),
+            ("awesome", "Awesome"),
         ],
-        widget=forms.CheckboxSelectMultiple()
+        widget=forms.CheckboxSelectMultiple(),
     )
 
 
@@ -269,10 +268,11 @@ class WithExtraFormDataTargetRenderer(ProductTargetRenderer):
     """
     We have to add the ``age`` and ``tag`` fields to the target renderer.
     """
+
     def get_field_layout(self):
         return [
-            'age',
-            'tag',
+            "age",
+            "tag",
         ]
 
 
@@ -282,6 +282,7 @@ class ProductListViewWithExtraFormData(FilteredProductListView):
     the ``age`` field, and the target renderer that includes
     the ``age`` field in the rendered form.
     """
+
     # paginate_by = 2
 
     # def get_select_all_max_items(self):
@@ -294,16 +295,13 @@ class ProductListViewWithExtraFormData(FilteredProductListView):
         return WithExtraFormDataTargetRenderer
 
     def get_filterlist_url(self, filters_string):
-        return self.request.cradmin_app.reverse_appurl(
-            'extra-form-data', kwargs={'filters_string': filters_string})
+        return self.request.cradmin_app.reverse_appurl("extra-form-data", kwargs={"filters_string": filters_string})
 
     # def get_inititially_selected_queryset(self):
     #     return Product.objects.filter(name__icontains='sock')
 
     def form_valid(self, form):
-        messages.success(
-            self.request,
-            'POST OK. Data: {!r}'.format(form.cleaned_data))
+        messages.success(self.request, "POST OK. Data: {!r}".format(form.cleaned_data))
         return redirect(self.request.get_full_path())
 
 
@@ -316,20 +314,12 @@ class ProductListViewWithExtraFormData(FilteredProductListView):
 
 class App(crapp.App):
     appurls = [
+        crapp.Url(r"^$", ProductListView.as_view(), name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r"^with-filters/(?P<filters_string>.+)?$", FilteredProductListView.as_view(), name="withfilters"),
+        crapp.Url(r"^select-on-load$", ProductListViewSelectOnLoad.as_view(), name="select-on-load"),
         crapp.Url(
-            r'^$',
-            ProductListView.as_view(),
-            name=crapp.INDEXVIEW_NAME),
-        crapp.Url(
-            r'^with-filters/(?P<filters_string>.+)?$',
-            FilteredProductListView.as_view(),
-            name='withfilters'),
-        crapp.Url(
-            r'^select-on-load$',
-            ProductListViewSelectOnLoad.as_view(),
-            name='select-on-load'),
-        crapp.Url(
-            r'^extra-form-data/(?P<filters_string>.+)?$',
+            r"^extra-form-data/(?P<filters_string>.+)?$",
             ProductListViewWithExtraFormData.as_view(),
-            name='extra-form-data'),
+            name="extra-form-data",
+        ),
     ]

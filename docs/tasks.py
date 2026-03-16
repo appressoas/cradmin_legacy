@@ -11,7 +11,7 @@ def docs():
     """
     Build the docs.
     """
-    run('sphinx-build -b html . _build')
+    run("sphinx-build -b html . _build")
 
 
 def _open_file(filename):
@@ -30,7 +30,7 @@ def opendocs():
     """
     Open docs in the default browser.
     """
-    _open_file('_build/index.html')
+    _open_file("_build/index.html")
 
 
 @task
@@ -38,5 +38,5 @@ def clean():
     """
     Remove all files built for the docs.
     """
-    if os.path.exists('_build'):
-        shutil.rmtree('_build')
+    if os.path.exists("_build"):
+        shutil.rmtree("_build")

@@ -21,26 +21,27 @@ class TestDelete(TestCase):
             def get_object(self, queryset=None):
                 obj = mock.MagicMock()
                 if six.PY2:
-                    obj.__unicode__.return_value = 'Simple Test Item'
+                    obj.__unicode__.return_value = "Simple Test Item"
                 else:
-                    obj.__str__.return_value = 'Simple Test Item'
+                    obj.__str__.return_value = "Simple Test Item"
                 obj._meta = mock.MagicMock()
-                obj._meta.verbose_name = 'TestModel'
+                obj._meta.verbose_name = "TestModel"
                 return obj
 
-        request = self.factory.get('/test')
+        request = self.factory.get("/test")
         request.cradmin_app = mock.MagicMock()
         response = SimpleDeleteView.as_view()(request, pk=10)
         response.render()
         selector = htmls.S(response.content)
 
-        self.assertEqual(selector.one('form')['action'], 'http://testserver/test')
+        self.assertEqual(selector.one("form")["action"], "http://testserver/test")
         self.assertEqual(
-            selector.one('.cradmin-legacy-page-header-inner h1').alltext_normalized,
-            'Delete Simple Test Item')
+            selector.one(".cradmin-legacy-page-header-inner h1").alltext_normalized, "Delete Simple Test Item"
+        )
         self.assertEqual(
-            selector.one('#deleteview-preview').alltext_normalized,
-            'Are you sure you want to delete "Simple Test Item"?')
+            selector.one("#deleteview-preview").alltext_normalized,
+            'Are you sure you want to delete "Simple Test Item"?',
+        )
 
     def test_post(self):
         obj = mock.MagicMock()
@@ -53,7 +54,7 @@ class TestDelete(TestCase):
             def get_object(self, queryset=None):
                 return obj
 
-        request = self.factory.post('/test')
+        request = self.factory.post("/test")
         request._messages = mock.MagicMock()
         request.cradmin_app = mock.MagicMock()
         SimpleDeleteView.as_view()(request, pk=10)

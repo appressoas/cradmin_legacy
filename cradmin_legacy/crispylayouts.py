@@ -1,6 +1,7 @@
 """
 Custom django-crispy-forms layouts.
 """
+
 from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy
 from crispy_forms import layout
@@ -11,9 +12,9 @@ from cradmin_legacy.templatetags.cradmin_legacy_icon_tags import cradmin_icon
 
 
 class CradminSubmitButton(layout.Submit):
-    template = 'cradmin_legacy/crispylayouts/submitbutton.django.html'
+    template = "cradmin_legacy/crispylayouts/submitbutton.django.html"
     extra_button_attributes = {}
-    button_css_classes = 'btn btn-default'
+    button_css_classes = "btn btn-default"
 
     def get_extra_button_attributes(self):
         return self.extra_button_attributes
@@ -54,31 +55,29 @@ class DefaultSubmitBlock(CradminSubmitButton):
 
 
 class CollapsedSectionLayout(layout.Div):
-    wrapper_template_name = 'cradmin_legacy/crispylayouts/collapsed-section-layout.django.html'
+    wrapper_template_name = "cradmin_legacy/crispylayouts/collapsed-section-layout.django.html"
 
     def __init__(self, *args, **kwargs):
-        self.show_label = kwargs.pop('show_label', gettext_lazy('Show'))
-        self.hide_label = kwargs.pop('hide_label', gettext_lazy('Hide'))
-        self.show_icon = kwargs.pop('show_icon', cradmin_icon('caret-down'))
-        self.hide_icon = kwargs.pop('hide_icon', cradmin_icon('caret-up'))
+        self.show_label = kwargs.pop("show_label", gettext_lazy("Show"))
+        self.hide_label = kwargs.pop("hide_label", gettext_lazy("Hide"))
+        self.show_icon = kwargs.pop("show_icon", cradmin_icon("caret-down"))
+        self.hide_icon = kwargs.pop("hide_icon", cradmin_icon("caret-up"))
         super(CollapsedSectionLayout, self).__init__(*args, **kwargs)
 
     def get_wrapper_context_data(self):
         return {
-            'show_label': self.show_label,
-            'hide_label': self.hide_label,
-            'show_icon': self.show_icon,
-            'hide_icon': self.hide_icon,
+            "show_label": self.show_label,
+            "hide_label": self.hide_label,
+            "show_icon": self.show_icon,
+            "hide_icon": self.hide_icon,
         }
 
     def render(self, *args, **kwargs):
         content = super(CollapsedSectionLayout, self).render(*args, **kwargs)
-        context = {
-            'content': content
-        }
+        context = {"content": content}
         context.update(self.get_wrapper_context_data())
         return render_to_string(self.wrapper_template_name, context)
 
 
 class CradminFormHelper(FormHelper):
-    template = 'cradmin_legacy/crispylayouts/cradmin_form_helper.django.html'
+    template = "cradmin_legacy/crispylayouts/cradmin_form_helper.django.html"

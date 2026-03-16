@@ -32,7 +32,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
     """
 
     #: The template used to render this renderable.
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2/listbuilder_itemvalues/itemvalue.django.html'
+    template_name = "cradmin_legacy/viewhelpers/multiselect2/listbuilder_itemvalues/itemvalue.django.html"
 
     #: Selected item rendrerer class.
     selected_item_renderer_class = selected_item_renderer.SelectedItem
@@ -43,7 +43,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
             target_dom_id: See :meth:`~.ItemValue.get_target_dom_id`.
             is_selected: Mark the item as selected on load.
         """
-        self.target_dom_id = kwargs.pop('target_dom_id', None)
+        self.target_dom_id = kwargs.pop("target_dom_id", None)
         super(ItemValue, self).__init__(*args, **kwargs)
         self.selected_item_renderer = self.make_selected_item_renderer()
 
@@ -70,7 +70,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
             If you have multiple lists with multiselect2 on the same page, you must
             make sure this is unique.
         """
-        return 'cradmin_legacy_multiselect2_selectbutton_{}'.format(self.value.pk)
+        return "cradmin_legacy_multiselect2_selectbutton_{}".format(self.value.pk)
 
     def get_base_css_classes_list(self):
         """
@@ -78,7 +78,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
         in addition to the classes added by the superclasses.
         """
         css_classes = super(ItemValue, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-multiselect2-itemvalue')
+        css_classes.append("cradmin-legacy-multiselect2-itemvalue")
         return css_classes
 
     def get_selectbutton_text(self):
@@ -88,7 +88,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
 
             Defaults to ``"Select"`` (translatable).
         """
-        return pgettext_lazy('multiselect2 select button', 'Select')
+        return pgettext_lazy("multiselect2 select button", "Select")
 
     def get_selectbutton_aria_label(self):
         """
@@ -97,9 +97,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
 
             Defaults to ``"Select <self.get_title()>"`` (translatable).
         """
-        return pgettext_lazy('multiselect2 select button', 'Select "%(title)s"') % {
-            'title': self.get_title()
-        }
+        return pgettext_lazy("multiselect2 select button", 'Select "%(title)s"') % {"title": self.get_title()}
 
     def get_custom_data(self):
         """
@@ -122,12 +120,12 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
             dict: With options for the directive.
         """
         return {
-            'preview_container_css_selector': '.cradmin-legacy-multiselect2-itemvalue',
-            'preview_css_selector': '.cradmin-legacy-multiselect2-selected-item',
-            'item_wrapper_css_selector': 'li',
-            'target_dom_id': self.get_target_dom_id(),
-            'custom_data': self.get_custom_data(),
-            'is_selected': self.kwargs.get('is_selected', False),
+            "preview_container_css_selector": ".cradmin-legacy-multiselect2-itemvalue",
+            "preview_css_selector": ".cradmin-legacy-multiselect2-selected-item",
+            "item_wrapper_css_selector": "li",
+            "target_dom_id": self.get_target_dom_id(),
+            "custom_data": self.get_custom_data(),
+            "is_selected": self.kwargs.get("is_selected", False),
         }
 
     def get_select_directive_json(self, request):
@@ -167,7 +165,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
 
     def get_context_data(self, request=None):
         context = super(ItemValue, self).get_context_data(request=request)
-        context['select_directive_json'] = self.get_select_directive_json(request=request)
+        context["select_directive_json"] = self.get_select_directive_json(request=request)
         return context
 
 
@@ -178,6 +176,7 @@ class ManyToManySelect(ItemValue):
     Extends :class:`.ItemValue` with the data needed for
     :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
     """
+
     def get_manytomanyfield_preview_renderer_class(self):
         """
         Returns:
@@ -208,6 +207,6 @@ class ManyToManySelect(ItemValue):
             - ``preview``: Preview HTML returned by :meth:`.get_manytomanyfield_preview_html`.
         """
         return {
-            'value': self.selected_item_renderer.get_inputfield_value(),
-            'preview': self.get_manytomanyfield_preview_html()
+            "value": self.selected_item_renderer.get_inputfield_value(),
+            "preview": self.get_manytomanyfield_preview_html(),
         }

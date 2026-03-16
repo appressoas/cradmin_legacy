@@ -18,6 +18,7 @@ class DetailRoleView(DetailView):
     get_queryset_for_role methods implemented to edit the current role
     object.
     """
+
     def get_object(self, queryset=None):
         return self.get_queryset_for_role(self.request.cradmin_role).get()
 

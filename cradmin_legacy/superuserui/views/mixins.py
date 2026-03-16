@@ -1,4 +1,3 @@
-
 class QuerySetForRoleMixin(object):
     def get_model_class(self):
         return self.request.cradmin_app.modelconfig.get_model_class()

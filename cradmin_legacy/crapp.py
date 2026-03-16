@@ -10,7 +10,7 @@ from .decorators import cradminview, has_access_to_cradmin_instance
 #: The name of the app index view (the landing page for the app).
 #: We do not enforce this, but we assume that each app has a
 #: view with this name.
-INDEXVIEW_NAME = 'INDEX'
+INDEXVIEW_NAME = "INDEX"
 
 
 class Url(object):
@@ -18,6 +18,7 @@ class Url(object):
     Url is mostly the same as func:`django.urls.re_path`.
     You use Url to add urls to an app.
     """
+
     def __init__(self, regex, view, kwargs=None, name=None):
         """
         Args:
@@ -41,6 +42,7 @@ class App(object):
     Added to a :class:`cradmin_legacy.crinstance.BaseCrAdminInstance`
     with :obj:`cradmin_legacy.crinstance.BaseCrAdminInstance.apps`.
     """
+
     #: See :meth:`~.App.get_appurls`.
     appurls = []
 
@@ -58,8 +60,8 @@ class App(object):
         This means that you should use this to reverse urls within this app.
         """
         return self.request.cradmin_instance.reverse_url(
-            appname=self.appname, viewname=viewname,
-            args=args, kwargs=kwargs)
+            appname=self.appname, viewname=viewname, args=args, kwargs=kwargs
+        )
 
     def reverse_appindexurl(self, args=None, kwargs=None):
         """
@@ -100,7 +102,10 @@ class App(object):
         for pattern in cls.get_appurls():
             urls.append(
                 re_path(
-                    pattern.regex, cls._wrap_view(appname, pattern.view, pattern.name),
-                    name='{}-{}-{}'.format(cradmin_instance_id, appname, pattern.name),
-                    kwargs=pattern.kwargs))
+                    pattern.regex,
+                    cls._wrap_view(appname, pattern.view, pattern.name),
+                    name="{}-{}-{}".format(cradmin_instance_id, appname, pattern.name),
+                    kwargs=pattern.kwargs,
+                )
+            )
         return urls

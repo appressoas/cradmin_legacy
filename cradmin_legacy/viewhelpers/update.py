@@ -11,7 +11,7 @@ from cradmin_legacy.viewhelpers.mixins import QuerysetForRoleMixin
 
 
 class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
-    template_name = 'cradmin_legacy/viewhelpers/update.django.html'
+    template_name = "cradmin_legacy/viewhelpers/update.django.html"
 
     def get_pagetitle(self):
         """
@@ -19,24 +19,26 @@ class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
 
         Defaults to ``Edit <verbose_name model>``.
         """
-        return gettext_lazy('Edit %(what)s') % {'what': self.get_model_class()._meta.verbose_name}
+        return gettext_lazy("Edit %(what)s") % {"what": self.get_model_class()._meta.verbose_name}
 
     def get_buttons(self):
         buttons = [
             PrimarySubmit(self.get_submit_save_button_name(), self.get_submit_save_label()),
-            DefaultSubmit(self.get_submit_save_and_continue_edititing_button_name(),
-                          self.get_submit_save_and_continue_edititing_label()),
+            DefaultSubmit(
+                self.get_submit_save_and_continue_edititing_button_name(),
+                self.get_submit_save_and_continue_edititing_label(),
+            ),
         ]
         self.add_preview_button_if_configured(buttons)
         return buttons
 
     def get_formhelper(self):
         helper = super(UpdateView, self).get_formhelper()
-        helper.form_id = 'cradmin_legacy_updateform'
+        helper.form_id = "cradmin_legacy_updateform"
         return helper
 
     def get_success_message(self, object):
-        return gettext_lazy('Saved "%(object)s".') % {'object': object}
+        return gettext_lazy('Saved "%(object)s".') % {"object": object}
 
 
 class UpdateRoleView(UpdateView):
@@ -48,6 +50,7 @@ class UpdateRoleView(UpdateView):
     get_queryset_for_role methods implemented to edit the current role
     object.
     """
+
     def get_object(self, queryset=None):
         return self.get_queryset_for_role(self.request.cradmin_role).get()
 
@@ -77,7 +80,7 @@ class RedirectToCreateIfDoesNotExistMixin(object):
 
     #: The viewname within this app for the create view.
     #: See :meth:`.get_createurl`. Defaults to ``create``.
-    createview_appurl_name = 'create'
+    createview_appurl_name = "create"
 
     def get_createurl(self):
         """
@@ -94,4 +97,4 @@ class RedirectToCreateIfDoesNotExistMixin(object):
         try:
             return super().get(request, *args, **kwargs)
         except self.get_model_class().DoesNotExist:
-            return HttpResponseRedirect(self.request.cradmin_app.reverse_appurl('create'))
+            return HttpResponseRedirect(self.request.cradmin_app.reverse_appurl("create"))

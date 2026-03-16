@@ -13,15 +13,20 @@ class MenuItem(object):
     menu, you may want to subclass this and override the template
     and/or :meth:`render` method.
     """
-    template_name = 'cradmin_legacy/menuitem.django.html'
 
-    def __init__(self, label, url,
-                 active=False,
-                 expanded=False,
-                 attributes={},
-                 open_new_window=False,
-                 extra_css_classes='',
-                 extra_context_data=None):
+    template_name = "cradmin_legacy/menuitem.django.html"
+
+    def __init__(
+        self,
+        label,
+        url,
+        active=False,
+        expanded=False,
+        attributes={},
+        open_new_window=False,
+        extra_css_classes="",
+        extra_context_data=None,
+    ):
         """
         Parameters:
             label: A label shown in the menu.
@@ -43,10 +48,10 @@ class MenuItem(object):
         self.childitems = []
 
     def get_item_css_class(self):
-        return 'cradmin-legacy-menu-item'
+        return "cradmin-legacy-menu-item"
 
     def get_link_css_class(self):
-        return ''
+        return ""
 
     def get_context_data(self):
         """
@@ -54,9 +59,7 @@ class MenuItem(object):
 
         If you override this, make sure you call super() to get the defaults.
         """
-        context_data = {
-            'menuitem': self
-        }
+        context_data = {"menuitem": self}
         if self.extra_context_data:
             context_data.update(self.extra_context_data)
         return context_data
@@ -116,7 +119,7 @@ class MenuItem(object):
         return childitem
 
     def get_title(self):
-        return ''
+        return ""
 
 
 class Menu(object):

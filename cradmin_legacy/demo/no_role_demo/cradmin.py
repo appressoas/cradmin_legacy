@@ -9,18 +9,20 @@ from cradmin_legacy.demo.no_role_demo.views import dashboard
 class Menu(crmenu.Menu):
     def build_menu(self):
         self.add_menuitem(
-            label=gettext_lazy('Dashboard'), url=self.appindex_url('dashboard'),
-            active=self.request.cradmin_app.appname == 'dashboard')
+            label=gettext_lazy("Dashboard"),
+            url=self.appindex_url("dashboard"),
+            active=self.request.cradmin_app.appname == "dashboard",
+        )
 
 
 class NoRoleCrAdminInstance(crinstance.BaseCrAdminInstance):
-    id = 'no_role_demo'
+    id = "no_role_demo"
     menuclass = Menu
-    rolefrontpage_appname = 'dashboard'
+    rolefrontpage_appname = "dashboard"
     flatten_rolefrontpage_url = True
 
     apps = [
-        ('dashboard', dashboard.App),
+        ("dashboard", dashboard.App),
     ]
 
     def has_access(self):
@@ -35,4 +37,4 @@ class NoRoleCrAdminInstance(crinstance.BaseCrAdminInstance):
         We only need this because we have multiple cradmin UIs
         in the same project.
         """
-        return urlpath.startswith('/no_role_demo')
+        return urlpath.startswith("/no_role_demo")

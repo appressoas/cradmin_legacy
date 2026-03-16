@@ -70,8 +70,7 @@ class CrAdminInstanceRegistry(object):
             for instanceclass in list(self._registry.values()):
                 if instanceclass.matches_urlpath(request.path):
                     return instanceclass(request)
-            raise NoCrAdminInstanceFound('No CrAdminInstance matching {path} found'.format(
-                path=request.path))
+            raise NoCrAdminInstanceFound("No CrAdminInstance matching {path} found".format(path=request.path))
 
     def add(self, cradmin_instance_class):
         """

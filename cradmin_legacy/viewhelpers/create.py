@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import sys
 from future import standard_library
+
 standard_library.install_aliases()
 from builtins import str
 import urllib.request
@@ -17,7 +18,7 @@ from .crudbase import CreateUpdateViewMixin
 
 
 class CreateView(CreateUpdateViewMixin, DjangoCreateView):
-    template_name = 'cradmin_legacy/viewhelpers/create.django.html'
+    template_name = "cradmin_legacy/viewhelpers/create.django.html"
 
     #: If this is ``True`` (default), we go into foreignkey select mode
     #: if ``foreignkey_select_mode=1`` is in the querystring.
@@ -30,11 +31,11 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
     allow_foreignkey_select = True
 
     #: The label of the back button in foreign key select mode.
-    foreignkey_select_mode_backbutton_label = gettext_lazy('Back')
+    foreignkey_select_mode_backbutton_label = gettext_lazy("Back")
 
-    submit_use_label = gettext_lazy('Create and select')
-    submit_save_label = gettext_lazy('Create')
-    submit_save_and_continue_edititing_label = gettext_lazy('Create and continue editing')
+    submit_use_label = gettext_lazy("Create and select")
+    submit_save_label = gettext_lazy("Create")
+    submit_save_and_continue_edititing_label = gettext_lazy("Create and continue editing")
 
     def get_pagetitle(self):
         """
@@ -42,7 +43,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
 
         Defaults to ``Create <verbose_name model>``.
         """
-        return gettext_lazy('Create %(what)s') % {'what': self.get_model_class()._meta.verbose_name}
+        return gettext_lazy("Create %(what)s") % {"what": self.get_model_class()._meta.verbose_name}
 
     def get_submit_use_label(self):
         """
@@ -56,7 +57,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
         """
         Get the URL of the back button in foreign key select mode.
         """
-        return self.request.GET.get('success_url', '')
+        return self.request.GET.get("success_url", "")
 
     def get_foreignkey_select_mode_backbutton_label(self):
         return self.foreignkey_select_mode_backbutton_label
@@ -64,13 +65,15 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
     def get_buttons(self):
         if self.is_in_foreignkey_select_mode():
             buttons = [
-                PrimarySubmit('submit-use', self.get_submit_use_label()),
+                PrimarySubmit("submit-use", self.get_submit_use_label()),
             ]
         else:
             buttons = [
                 PrimarySubmit(self.get_submit_save_button_name(), self.get_submit_save_label()),
-                DefaultSubmit(self.get_submit_save_and_continue_edititing_button_name(),
-                              self.get_submit_save_and_continue_edititing_label()),
+                DefaultSubmit(
+                    self.get_submit_save_and_continue_edititing_button_name(),
+                    self.get_submit_save_and_continue_edititing_label(),
+                ),
             ]
         self.add_preview_button_if_configured(buttons)
         return buttons
@@ -81,7 +84,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
         urllist = list(urllib.parse.urlsplit(url))
         querystring = urllist[3]
         querydict = urllib.parse.parse_qs(querystring)
-        querydict['foreignkey_selected_value'] = [str(object_pk)]
+        querydict["foreignkey_selected_value"] = [str(object_pk)]
         urllist[3] = urllib.parse.urlencode(querydict, doseq=True)
         url = urllib.parse.urlunsplit(urllist)
         if sys.version_info[0] == 2:
@@ -98,22 +101,22 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
 
     def get_formhelper(self):
         helper = super(CreateView, self).get_formhelper()
-        helper.form_id = 'cradmin_legacy_createform'
+        helper.form_id = "cradmin_legacy_createform"
         return helper
 
     def is_in_foreignkey_select_mode(self):
-        return self.allow_foreignkey_select and self.request.GET.get('foreignkey_select_mode') == '1'
+        return self.allow_foreignkey_select and self.request.GET.get("foreignkey_select_mode") == "1"
 
     def get_context_data(self, **kwargs):
         context = super(CreateView, self).get_context_data(**kwargs)
-        context['cradmin_hide_menu'] = self.is_in_foreignkey_select_mode()
-        context['is_foreignkey_select_mode'] = self.is_in_foreignkey_select_mode()
-        context['foreignkey_select_mode_backbutton_url'] = self.__get_foreignkey_select_mode_backbutton_url()
-        context['foreignkey_select_mode_backbutton_label'] = self.get_foreignkey_select_mode_backbutton_label()
+        context["cradmin_hide_menu"] = self.is_in_foreignkey_select_mode()
+        context["is_foreignkey_select_mode"] = self.is_in_foreignkey_select_mode()
+        context["foreignkey_select_mode_backbutton_url"] = self.__get_foreignkey_select_mode_backbutton_url()
+        context["foreignkey_select_mode_backbutton_label"] = self.get_foreignkey_select_mode_backbutton_label()
         return context
 
     def get_success_message(self, object):
-        return gettext_lazy('Created "%(object)s".') % {'object': object}
+        return gettext_lazy('Created "%(object)s".') % {"object": object}
 
 
 class CreateLikeUpdateView(CreateView):
@@ -139,8 +142,9 @@ class CreateLikeUpdateView(CreateView):
     will behave the same (output the same submit labels, and the same
     success message)
     """
-    submit_save_label = gettext_lazy('Save')
-    submit_save_and_continue_edititing_label = gettext_lazy('Save and continue editing')
+
+    submit_save_label = gettext_lazy("Save")
+    submit_save_and_continue_edititing_label = gettext_lazy("Save and continue editing")
 
     def get_success_message(self, object):
-        return gettext_lazy('Saved "%(object)s".') % {'object': object}
+        return gettext_lazy('Saved "%(object)s".') % {"object": object}

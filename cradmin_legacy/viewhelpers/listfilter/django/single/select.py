@@ -22,17 +22,17 @@ class Boolean(abstractselect.AbstractBoolean, DjangoOrmFilterMixin):
             listfilter.django.single.select.Boolean(
                 slug='is_active', label='Is active?')
     """
+
     def get_query(self, modelfield):
-        return (models.Q(**{modelfield: False}) |
-                models.Q(**{'{}__isnull'.format(modelfield): True}))
+        return models.Q(**{modelfield: False}) | models.Q(**{"{}__isnull".format(modelfield): True})
 
     def filter(self, queryobject):
         modelfield = self.get_modelfield()
         cleaned_value = self.get_cleaned_value()
         query = self.get_query(modelfield)
-        if cleaned_value == 'true':
+        if cleaned_value == "true":
             queryobject = queryobject.exclude(query)
-        elif cleaned_value == 'false':
+        elif cleaned_value == "false":
             queryobject = queryobject.filter(query)
         return queryobject
 
@@ -55,8 +55,9 @@ class IsNotNull(Boolean, DjangoOrmFilterMixin):
             listfilter.django.single.select.IsNotNull(
                 slug='owner', label='Has owner?')
     """
+
     def get_query(self, modelfield):
-        return models.Q(**{'{}__isnull'.format(modelfield): True})
+        return models.Q(**{"{}__isnull".format(modelfield): True})
 
 
 class DateTime(abstractselect.AbstractDateTime, DjangoOrmFilterMixin):
@@ -75,14 +76,17 @@ class DateTime(abstractselect.AbstractDateTime, DjangoOrmFilterMixin):
             listfilter.django.single.select.DateTime(
                 slug='created_datetime', label='Created time')
     """
+
     def filter_datetime_range(self, queryobject, start_datetime, end_datetime):
         modelfield = self.get_modelfield()
         start_datetime = datetimeutils.make_aware_in_default_timezone(start_datetime)
         end_datetime = datetimeutils.make_aware_in_default_timezone(end_datetime)
-        return queryobject.filter(**{
-            '{}__gte'.format(modelfield): start_datetime,
-            '{}__lt'.format(modelfield): end_datetime,
-        })
+        return queryobject.filter(
+            **{
+                "{}__gte".format(modelfield): start_datetime,
+                "{}__lt".format(modelfield): end_datetime,
+            }
+        )
 
 
 class NullDateTime(DateTime):
@@ -101,20 +105,17 @@ class NullDateTime(DateTime):
             listfilter.django.single.select.NullDateTime(
                 slug='banned_datetime', label='Banned time')
     """
+
     def null_enabled(self):
         return True
 
     def filter_is_null(self, queryobject):
         modelfield = self.get_modelfield()
-        return queryobject.filter(**{
-            '{}__isnull'.format(modelfield): True
-        })
+        return queryobject.filter(**{"{}__isnull".format(modelfield): True})
 
     def filter_is_not_null(self, queryobject):
         modelfield = self.get_modelfield()
-        return queryobject.filter(**{
-            '{}__isnull'.format(modelfield): False
-        })
+        return queryobject.filter(**{"{}__isnull".format(modelfield): False})
 
 
 class AbstractOrderBy(abstractselect.AbstractOrderBy, DjangoOrmFilterMixin):
@@ -150,9 +151,10 @@ class AbstractOrderBy(abstractselect.AbstractOrderBy, DjangoOrmFilterMixin):
 
             OrderPersonsFilter(slug='orderby', label='Order by')
     """
+
     def filter(self, queryobject):
-        cleaned_value = self.get_cleaned_value() or ''
+        cleaned_value = self.get_cleaned_value() or ""
         if cleaned_value in self.ordering_options_dict:
-            order_by = self.ordering_options_dict[cleaned_value]['order_by']
+            order_by = self.ordering_options_dict[cleaned_value]["order_by"]
             queryobject = queryobject.order_by(*order_by)
         return queryobject

@@ -14,7 +14,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
     """
 
     #: The template used to render this selected item.
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2/selected_item_renderer/selected-item.django.html'
+    template_name = "cradmin_legacy/viewhelpers/multiselect2/selected_item_renderer/selected-item.django.html"
 
     #: If this is specified, we will add an attribute with this name
     #: for the value as an attribute of the object.
@@ -36,7 +36,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
             setattr(self, self.valuealias, self.value)
 
     def get_base_css_classes_list(self):
-        return ['cradmin-legacy-multiselect2-selected-item']
+        return ["cradmin-legacy-multiselect2-selected-item"]
 
     def get_title(self):
         """
@@ -63,7 +63,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
             Defaults to the ``deselectbutton_text`` parameter for ``__init__``,
             falling back on ``"Deselect"`` (translatable).
         """
-        return pgettext_lazy('multiselect2 deselect button', 'Deselect')
+        return pgettext_lazy("multiselect2 deselect button", "Deselect")
 
     def get_deselectbutton_aria_label(self):
         """
@@ -72,9 +72,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
 
             Defaults to ``"Deselect <self.get_title()>"`` (translatable).
         """
-        return pgettext_lazy('multiselect2 deselect button', 'Deselect "%(title)s"') % {
-            'title': self.get_title()
-        }
+        return pgettext_lazy("multiselect2 deselect button", 'Deselect "%(title)s"') % {"title": self.get_title()}
 
     def get_deselect_button_base_cssclasses_list(self):
         """
@@ -82,9 +80,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
         You normally do not want to override this. Override
         :meth:`.get_deselect_button_extra_cssclasses_list` instead.
         """
-        return [
-            'cradmin-legacy-multiselect2-target-selected-item-deselectbutton'
-        ]
+        return ["cradmin-legacy-multiselect2-target-selected-item-deselectbutton"]
 
     def get_deselect_button_extra_cssclasses_list(self):
         """
@@ -94,8 +90,8 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
         Override this to provide your own css classes.
         """
         return [
-            'btn',
-            'btn-default',
+            "btn",
+            "btn-default",
         ]
 
     def get_deselect_button_cssclasses_list(self):
@@ -105,16 +101,11 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
         You normally do not want to override this. Override
         :meth:`.get_deselect_button_extra_cssclasses_list` instead.
         """
-        return [
-            'btn',
-            'btn-default',
-            'cradmin-legacy-multiselect2-target-selected-item-deselectbutton'
-        ]
+        return ["btn", "btn-default", "cradmin-legacy-multiselect2-target-selected-item-deselectbutton"]
 
     def get_deselect_button_cssclasses_string(self):
-        css_classes = self.get_deselect_button_base_cssclasses_list() + \
-                      self.get_deselect_button_extra_cssclasses_list()
-        return ' '.join(css_classes)
+        css_classes = self.get_deselect_button_base_cssclasses_list() + self.get_deselect_button_extra_cssclasses_list()
+        return " ".join(css_classes)
 
     def get_inputfield_name(self):
         """
@@ -124,7 +115,7 @@ class SelectedItem(renderable.AbstractRenderableWithCss):
             Defaults to the ``inputfield_name`` parameter for ``__init__``, falling
             back on ``selected_items``.
         """
-        return 'selected_items'
+        return "selected_items"
 
     def get_inputfield_value(self):
         """

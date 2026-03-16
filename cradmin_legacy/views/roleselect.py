@@ -8,11 +8,11 @@ from cradmin_legacy.registry import cradmin_instance_registry
 
 class RoleSelectView(ListView):
     paginate_by = 30
-    template_name = 'cradmin_legacy/roleselect.django.html'
-    context_object_name = 'roles'
-    pagetitle = gettext_lazy('What would you like to edit?')
+    template_name = "cradmin_legacy/roleselect.django.html"
+    context_object_name = "roles"
+    pagetitle = gettext_lazy("What would you like to edit?")
     autoredirect_if_single_role = True
-    list_cssclass = 'cradmin-legacy-roleselect-list cradmin-legacy-roleselect-list-flat'
+    list_cssclass = "cradmin-legacy-roleselect-list cradmin-legacy-roleselect-list-flat"
 
     def get_queryset(self):
         cradmin_instance = cradmin_instance_registry.get_current_instance(self.request)
@@ -22,8 +22,7 @@ class RoleSelectView(ListView):
         cradmin_instance = cradmin_instance_registry.get_current_instance(self.request)
         if self.get_autoredirect_if_single_role() and self.get_queryset().count() == 1:
             only_role = self.get_queryset().first()
-            return HttpResponseRedirect(str(cradmin_instance.rolefrontpage_url(
-                cradmin_instance.get_roleid(only_role))))
+            return HttpResponseRedirect(str(cradmin_instance.rolefrontpage_url(cradmin_instance.get_roleid(only_role))))
         else:
             # Add cradmin_instance to request just like cradmin_legacy.decorators.cradminview.
             # Convenient when overriding standalone-base.django.html and using the current
@@ -42,6 +41,6 @@ class RoleSelectView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(RoleSelectView, self).get_context_data(**kwargs)
-        context['pagetitle'] = self.get_pagetitle()
-        context['list_cssclass'] = self.get_list_cssclass()
+        context["pagetitle"] = self.get_pagetitle()
+        context["list_cssclass"] = self.get_list_cssclass()
         return context

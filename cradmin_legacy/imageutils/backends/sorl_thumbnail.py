@@ -13,42 +13,39 @@ class SorlThumbnail(backendinterface.Interface):
     """
 
     def transform_image(self, imageurl, **options):
-        width = options.get('width', None)
-        height = options.get('height', None)
-        quality = options.get('quality', 100)
-        crop = options.get('crop', 'limit')
+        width = options.get("width", None)
+        height = options.get("height", None)
+        quality = options.get("quality", 100)
+        crop = options.get("crop", "limit")
 
         if not width and not height:
-            raise ValueError('At least one of width and height must be specified')
-        width = width or ''
-        height = height or ''
-        size = '{}x{}'.format(width, height)
+            raise ValueError("At least one of width and height must be specified")
+        width = width or ""
+        height = height or ""
+        size = "{}x{}".format(width, height)
 
-        if crop == 'limit':
+        if crop == "limit":
             upscale = False
             sorl_crop = None
         else:
             upscale = True
-            sorl_crop = 'center'
+            sorl_crop = "center"
 
         mimetype = mimetypes.guess_type(imageurl)[0]
-        if mimetype == 'image/jpeg':
-            imageformat = 'JPEG'
-        elif mimetype == 'image/png':
-            imageformat = 'PNG'
-        elif mimetype == 'image/gif':
-            imageformat = 'GIF'
+        if mimetype == "image/jpeg":
+            imageformat = "JPEG"
+        elif mimetype == "image/png":
+            imageformat = "PNG"
+        elif mimetype == "image/gif":
+            imageformat = "GIF"
         else:
-            imageformat = 'JPEG'
+            imageformat = "JPEG"
 
         try:
             thumbnail = get_thumbnail(
-                imageurl, size,
-                upscale=upscale,
-                quality=quality,
-                crop=sorl_crop,
-                format=imageformat)
+                imageurl, size, upscale=upscale, quality=quality, crop=sorl_crop, format=imageformat
+            )
             return thumbnail.url
         except Exception as e:
             logger.exception(e)
-            return ''
+            return ""

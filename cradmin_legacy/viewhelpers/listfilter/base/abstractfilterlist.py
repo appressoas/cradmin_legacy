@@ -22,7 +22,8 @@ class AbstractFilterList(AbstractRenderableWithCss):
        or :meth:`~cradmin_legacy.renderable.AbstractRenderableWithCss.get_extra_css_classes_list`
        (see their docs for their intended use cases).
     """
-    template_name = 'cradmin_legacy/viewhelpers/listfilter/base/filterlist.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listfilter/base/filterlist.django.html"
 
     def __init__(self, urlbuilder, target_dom_id, label_is_screenreader_only_by_default=False):
         """
@@ -77,7 +78,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
 
         You can return ``None`` to not show a load spinner at all.
         """
-        return cradmin_icon('loadspinner')
+        return cradmin_icon("loadspinner")
 
     def get_loaderror_message(self):
         """
@@ -86,7 +87,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
 
         Must return a string (can not use ugettext_lazy, use ugettext instead).
         """
-        return gettext('An error occurred. Please try to reload the page.')
+        return gettext("An error occurred. Please try to reload the page.")
 
     def get_loadingmessage_delay_milliseconds(self):
         """
@@ -100,10 +101,10 @@ class AbstractFilterList(AbstractRenderableWithCss):
 
     def get_angularjs_options_dict(self):
         return {
-            'loadspinner_css_class': self.get_loadspinner_css_class(),
-            'target_dom_id': self.get_target_dom_id(),
-            'loaderror_message': self.get_loaderror_message(),
-            'loadingmessage_delay_milliseconds': self.get_loadingmessage_delay_milliseconds(),
+            "loadspinner_css_class": self.get_loadspinner_css_class(),
+            "target_dom_id": self.get_target_dom_id(),
+            "loaderror_message": self.get_loaderror_message(),
+            "loadingmessage_delay_milliseconds": self.get_loadingmessage_delay_milliseconds(),
         }
 
     def get_angularjs_options_json(self):
@@ -122,7 +123,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
 
         Defaults to ``cradmin-legacy-listfilter-``.
         """
-        return 'cradmin_legacy_listfilter'
+        return "cradmin_legacy_listfilter"
 
     def append(self, child):
         """
@@ -140,7 +141,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
             self.filtershandler.add_filter(child)
 
     def get_base_css_classes_list(self):
-        return ['cradmin-legacy-listfilter-filterlist']
+        return ["cradmin-legacy-listfilter-filterlist"]
 
     def iter_renderables(self):
         """

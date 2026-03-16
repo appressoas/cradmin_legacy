@@ -9,7 +9,8 @@ class AbstractFilter(AbstractFilterListChild):
     """
     Abstract base class for all filters.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listfilter/base/abstractfilter.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listfilter/base/abstractfilter.django.html"
 
     def __init__(self, slug=None, label=None, label_is_screenreader_only=None):
         """
@@ -48,7 +49,7 @@ class AbstractFilter(AbstractFilterListChild):
         if self.slug:
             return self.slug
         else:
-            raise NotImplementedError('You must override get_slug(), or send a slug to __init__().')
+            raise NotImplementedError("You must override get_slug(), or send a slug to __init__().")
 
     def get_label(self):
         """
@@ -203,7 +204,7 @@ class AbstractFilter(AbstractFilterListChild):
         return self.filterlist.filtershandler.build_filter_url(changed_filterobject=copy)
 
     def get_base_css_classes_list(self):
-        return ['cradmin-legacy-listfilter-filter']
+        return ["cradmin-legacy-listfilter-filter"]
 
     def filter(self, queryobject):
         """
@@ -230,13 +231,13 @@ class AbstractFilter(AbstractFilterListChild):
         but you can also use this if you need DOM IDs for components of a filter
         (E.g.: Field ID to attach a labels to a form field).
         """
-        return '{}_{}'.format(self.filterlist.get_dom_id_prefix(), self.get_slug())
+        return "{}_{}".format(self.filterlist.get_dom_id_prefix(), self.get_slug())
 
     def get_label_dom_id(self):
         """
         Get the DOM ID of the label for this filter.
         """
-        return '{}_label'.format(self.get_dom_id())
+        return "{}_label".format(self.get_dom_id())
 
     def get_inputfield_dom_id(self):
         """
@@ -244,7 +245,7 @@ class AbstractFilter(AbstractFilterListChild):
         this will most likely not be used, or it may be used as the ID of the
         first field to make the label focus on the first field when it is clicked.
         """
-        return '{}_input'.format(self.get_dom_id())
+        return "{}_input".format(self.get_dom_id())
 
     def get_target_dom_id(self):
         """
@@ -259,7 +260,7 @@ class AbstractFilter(AbstractFilterListChild):
         Get the loading message to show when the filter loads
         the updated target element content.
         """
-        return pgettext('listfilter loading message', 'Loading')
+        return pgettext("listfilter loading message", "Loading")
 
     def get_angularjs_options_dict(self):
         """
@@ -268,9 +269,7 @@ class AbstractFilter(AbstractFilterListChild):
         You can override this in your filters, but you should
         call ``super`` to get the default options.
         """
-        return {
-            'loadingmessage': self.get_loadingmessage()
-        }
+        return {"loadingmessage": self.get_loadingmessage()}
 
     def get_angularjs_options_json(self):
         """

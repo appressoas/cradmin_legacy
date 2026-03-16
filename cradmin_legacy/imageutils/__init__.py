@@ -14,7 +14,10 @@ def get_backend():
     """
     global _backend
     if not _backend:
-        backendclasspath = getattr(settings, 'CRADMIN_LEGACY_IMAGEUTILS_BACKEND',
-                                   'cradmin_legacy.imageutils.backends.sorl_thumbnail.SorlThumbnail')
+        backendclasspath = getattr(
+            settings,
+            "CRADMIN_LEGACY_IMAGEUTILS_BACKEND",
+            "cradmin_legacy.imageutils.backends.sorl_thumbnail.SorlThumbnail",
+        )
         _backend = import_string(backendclasspath)()
     return _backend

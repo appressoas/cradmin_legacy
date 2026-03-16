@@ -5,10 +5,8 @@ from cradmin_legacy import crapp
 
 
 class DashboardView(TemplateView):
-    template_name = 'webdemo/dashboard.django.html'
+    template_name = "webdemo/dashboard.django.html"
 
 
 class App(crapp.App):
-    appurls = [
-        crapp.Url(r'^$', DashboardView.as_view(), name=crapp.INDEXVIEW_NAME)
-    ]
+    appurls = [crapp.Url(r"^$", DashboardView.as_view(), name=crapp.INDEXVIEW_NAME)]

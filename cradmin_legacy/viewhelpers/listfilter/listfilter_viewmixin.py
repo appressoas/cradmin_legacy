@@ -10,6 +10,7 @@ class ViewMixin(object):
     and :class:`cradmin_legacy.viewhelpers.objecttable.FilterListMixin`
     for implementation examples.
     """
+
     #: The :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`
     #: subclass to use.
     #: Defaults to :class:`cradmin_legacy.viewhelpers.listfilter.lists.Vertical`.
@@ -53,7 +54,7 @@ class ViewMixin(object):
         url = self.get_filterlist_url(filters_string)
         querystring = querydict.urlencode()
         if querystring:
-            url = '{}?{}'.format(url, querystring)
+            url = "{}?{}".format(url, querystring)
         return url
 
     def get_filters_string(self):
@@ -66,7 +67,7 @@ class ViewMixin(object):
 
             r'^filter/(?P<filters_string>.+)?$'
         """
-        return self.kwargs.get('filters_string', '')
+        return self.kwargs.get("filters_string", "")
 
     def get_filterlist_target_dom_id(self):
         """
@@ -133,9 +134,9 @@ class ViewMixin(object):
         :meth:`.get_filterlist_url` as documented in :meth:`.filterlist_urlbuilder`.
         """
         return {
-            'urlbuilder': self.filterlist_urlbuilder,
-            'target_dom_id': self.get_filterlist_target_dom_id(),
-            'label_is_screenreader_only_by_default': self.get_label_is_screenreader_only_by_default()
+            "urlbuilder": self.filterlist_urlbuilder,
+            "target_dom_id": self.get_filterlist_target_dom_id(),
+            "label_is_screenreader_only_by_default": self.get_label_is_screenreader_only_by_default(),
         }
 
     def make_empty_filterlist(self):
@@ -187,7 +188,7 @@ class ViewMixin(object):
         This means that you should override :meth:`.build_filterlist`,
         but when you need to use it, you should call this method instead.
         """
-        if not hasattr(self, '_filterlist'):
+        if not hasattr(self, "_filterlist"):
             self._filterlist = self.build_filterlist()
         return self._filterlist
 
@@ -226,11 +227,11 @@ class ViewMixin(object):
         where get_context_data() is not called for all superclasses
         of your view.
         """
-        context_data['filterlist'] = self.get_filterlist()
+        context_data["filterlist"] = self.get_filterlist()
 
     def get_context_data(self, **kwargs):
         context = super(ViewMixin, self).get_context_data(**kwargs)
-        context['filterlist'] = self.get_filterlist()
+        context["filterlist"] = self.get_filterlist()
         return context
 
     def get_unfiltered_queryset_for_role(self, role):

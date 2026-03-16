@@ -16,174 +16,174 @@ class TestAbstractCheckboxFilter(TestCase):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('first', 'First choice'),
-                    ('second', 'Second choice'),
-                    ('third', 'Third choice'),
+                    ("first", "First choice"),
+                    ("second", "Second choice"),
+                    ("third", "Third choice"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        testfilter = MyChecboxFilter(slug="test")
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertTrue(selector.exists('#cradmin_legacy_listfilter_test.cradmin-legacy-listfilter-filter'))
-        self.assertTrue(selector.exists('#cradmin_legacy_listfilter_test_input'))
+        self.assertTrue(selector.exists("#cradmin_legacy_listfilter_test.cradmin-legacy-listfilter-filter"))
+        self.assertTrue(selector.exists("#cradmin_legacy_listfilter_test_input"))
         self.assertEqual(3, selector.count('input[type="checkbox"]'))
 
     def test_render_add_value_first(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('first', 'First choice'),
+                    ("first", "First choice"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
+        testfilter = MyChecboxFilter(slug="test")
         testfilter.set_values(values=[])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: '/test/{}'.format(filters_string),
-            target_dom_id='testdomid')
+            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+        )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertEqual('/test/test-first', selector.one('input[type="checkbox"]')['data-url'])
+        self.assertEqual("/test/test-first", selector.one('input[type="checkbox"]')["data-url"])
 
     def test_render_add_value_multiple(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('first', 'First choice'),
-                    ('second', 'Second choice'),
-                    ('third', 'Third choice'),
+                    ("first", "First choice"),
+                    ("second", "Second choice"),
+                    ("third", "Third choice"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        testfilter.set_values(values=['first', 'second'])
+        testfilter = MyChecboxFilter(slug="test")
+        testfilter.set_values(values=["first", "second"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: '/test/{}'.format(filters_string),
-            target_dom_id='testdomid')
+            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+        )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertEqual('/test/test-first%2Csecond%2Cthird',
-                         selector.one('input#cradmin_legacy_listfilter_test_input_third')['data-url'])
+        self.assertEqual(
+            "/test/test-first%2Csecond%2Cthird",
+            selector.one("input#cradmin_legacy_listfilter_test_input_third")["data-url"],
+        )
 
     def test_render_remove_value_first(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('first', 'First choice'),
+                    ("first", "First choice"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        testfilter.set_values(values=['first'])
+        testfilter = MyChecboxFilter(slug="test")
+        testfilter.set_values(values=["first"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: '/test/{}'.format(filters_string),
-            target_dom_id='testdomid')
+            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+        )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertEqual('/test/', selector.one('input[type="checkbox"]')['data-url'])
+        self.assertEqual("/test/", selector.one('input[type="checkbox"]')["data-url"])
 
     def test_render_remove_value_multiple(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('first', 'First choice'),
-                    ('second', 'Second choice'),
-                    ('third', 'Third choice'),
+                    ("first", "First choice"),
+                    ("second", "Second choice"),
+                    ("third", "Third choice"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        testfilter.set_values(values=['first', 'second', 'third'])
+        testfilter = MyChecboxFilter(slug="test")
+        testfilter.set_values(values=["first", "second", "third"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: '/test/{}'.format(filters_string),
-            target_dom_id='testdomid')
+            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+        )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertEqual('/test/test-first%2Cthird',
-                         selector.one('input#cradmin_legacy_listfilter_test_input_second')['data-url'])
+        self.assertEqual(
+            "/test/test-first%2Cthird", selector.one("input#cradmin_legacy_listfilter_test_input_second")["data-url"]
+        )
 
     def test_render_checkbox_label(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('somevalue', 'Test'),
+                    ("somevalue", "Test"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        testfilter = MyChecboxFilter(slug="test")
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
         self.assertEqual(
-            'Test',
-            selector.one('#cradmin_legacy_listfilter_test_input_somevalue_wrapper').alltext_normalized)
+            "Test", selector.one("#cradmin_legacy_listfilter_test_input_somevalue_wrapper").alltext_normalized
+        )
 
     def test_render_checkbox_unchecked(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('somevalue', 'Test'),
+                    ("somevalue", "Test"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
+        testfilter = MyChecboxFilter(slug="test")
         testfilter.set_values(values=[])
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertFalse(
-            selector.one('input[type="checkbox"]').hasattribute('checked'))
+        self.assertFalse(selector.one('input[type="checkbox"]').hasattribute("checked"))
 
     def test_render_checkbox_checked(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('somevalue', 'Test'),
+                    ("somevalue", "Test"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        testfilter.set_values(values=['somevalue'])
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        testfilter = MyChecboxFilter(slug="test")
+        testfilter.set_values(values=["somevalue"])
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertTrue(
-            selector.one('input[type="checkbox"]').hasattribute('checked'))
+        self.assertTrue(selector.one('input[type="checkbox"]').hasattribute("checked"))
 
     def test_render_label_no_label(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('unused', 'unused'),
+                    ("unused", "unused"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test')
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        testfilter = MyChecboxFilter(slug="test")
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertFalse(selector.exists('label#cradmin_legacy_listfilter_test_label'))
+        self.assertFalse(selector.exists("label#cradmin_legacy_listfilter_test_label"))
 
     def test_render_label_has_label(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('unused', 'unused'),
+                    ("unused", "unused"),
                 ]
 
-        testfilter = MyChecboxFilter(slug='test', label='A label')
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        testfilter = MyChecboxFilter(slug="test", label="A label")
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertEqual('A label',
-                         selector.one('label#cradmin_legacy_listfilter_test_label').alltext_normalized)
+        self.assertEqual("A label", selector.one("label#cradmin_legacy_listfilter_test_label").alltext_normalized)
 
     def test_render_label_get_label_is_screenreader_only_true(self):
         class MyChecboxFilter(AbstractCheckboxFilter):
             def get_choices(self):
                 return [
-                    ('unused', 'unused'),
+                    ("unused", "unused"),
                 ]
 
             def get_label_is_screenreader_only(self):
                 return True
 
-        testfilter = MyChecboxFilter(slug='test', label='A label')
-        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id='testdomid')
+        testfilter = MyChecboxFilter(slug="test", label="A label")
+        filterlist = AbstractFilterList(urlbuilder=mock.MagicMock(), target_dom_id="testdomid")
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
-        self.assertTrue(selector.exists('label#cradmin_legacy_listfilter_test_label'))
-        self.assertTrue(selector.one('label#cradmin_legacy_listfilter_test_label').hasclass('sr-only'))
+        self.assertTrue(selector.exists("label#cradmin_legacy_listfilter_test_label"))
+        self.assertTrue(selector.one("label#cradmin_legacy_listfilter_test_label").hasclass("sr-only"))

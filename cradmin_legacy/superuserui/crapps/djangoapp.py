@@ -19,9 +19,4 @@ class DjangoAppCrApp(crapp.App):
 
     @classmethod
     def get_appurls(cls):
-        return [
-            crapp.Url(
-                r'^$',
-                cls.get_appdashboardview_class().as_view(),
-                name=crapp.INDEXVIEW_NAME)
-        ]
+        return [crapp.Url(r"^$", cls.get_appdashboardview_class().as_view(), name=crapp.INDEXVIEW_NAME)]

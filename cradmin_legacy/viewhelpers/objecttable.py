@@ -25,7 +25,6 @@ logger = logging.getLogger(__name__)
 
 
 class Column(object):
-
     #: The model field rendered in this column. It is not required,
     #: but if you do not, you have to override :meth:`.get_header`
     #: and :meth:`.render_value`.
@@ -101,9 +100,9 @@ class Column(object):
         """
         column_width = self.get_column_width()
         if column_width:
-            return 'width: {}'.format(column_width)
+            return "width: {}".format(column_width)
         else:
-            return ''
+            return ""
 
     def get_headercell_css_classes(self):
         """
@@ -122,8 +121,8 @@ class Column(object):
         """
         css_classes = self.get_headercell_css_classes() + self.get_allcells_css_classes()
         if self.is_sortable():
-            css_classes.append('objecttableview-sortable-header')
-        return ' '.join(css_classes)
+            css_classes.append("objecttableview-sortable-header")
+        return " ".join(css_classes)
 
     def get_normalcells_css_classes(self):
         """
@@ -142,7 +141,7 @@ class Column(object):
         :meth:`.get_normalcells_css_classes` instead.
         """
         css_classes = self.get_normalcells_css_classes() + self.get_allcells_css_classes()
-        return ' '.join(css_classes)
+        return " ".join(css_classes)
 
     def get_normalcell_css_style(self):
         """
@@ -155,9 +154,9 @@ class Column(object):
         """
         column_width = self.get_column_width()
         if column_width:
-            return 'width: {}'.format(column_width)
+            return "width: {}".format(column_width)
         else:
-            return ''
+            return ""
 
     def get_allcells_css_classes(self):
         """
@@ -183,10 +182,7 @@ class Column(object):
         Get context data for rendering the cell (see :meth:`.render_cell_content`.
         """
         value = self.render_value(obj)
-        context = {
-            'value': value,
-            'object': obj
-        }
+        context = {"value": value, "object": obj}
         if self.context_object_name:
             context[self.context_object_name] = obj
         if self.context_value_name:
@@ -223,7 +219,7 @@ class Column(object):
 
     @property
     def orderinginfo(self):
-        if not hasattr(self, '_orderinginfo'):
+        if not hasattr(self, "_orderinginfo"):
             if self.is_sortable():
                 self._orderinginfo = self.view._get_orderinginfo_for_column(self.columnindex)
             else:
@@ -254,14 +250,14 @@ class Column(object):
             order_ascending (bool): ``True`` if we should return the orderby arguments
                 for ascending ordering, and ``False`` for descending ordering.
         """
-        sortprefix = ''
+        sortprefix = ""
         if not order_ascending:
-            sortprefix = '-'
+            sortprefix = "-"
         orderingfield = self.orderingfield or self.modelfield
         if orderingfield:
-            return ['{}{}'.format(sortprefix, orderingfield)]
+            return ["{}{}".format(sortprefix, orderingfield)]
         else:
-            raise NotImplementedError('You must override get_orderby_args, set orderingfield or set modelfield.')
+            raise NotImplementedError("You must override get_orderby_args, set orderingfield or set modelfield.")
 
     def get_default_order_is_ascending(self):
         """
@@ -277,8 +273,7 @@ class Column(object):
             ``False`` if the default ordering is descending.
             ``None`` if no default ordering is configured for this column.
         """
-        raise NotImplementedError('get_default_order_is_ascending() has been '
-                                  'replaced by get_default_ordering().')
+        raise NotImplementedError("get_default_order_is_ascending() has been replaced by get_default_ordering().")
 
     def get_default_ordering(self):
         """
@@ -305,17 +300,18 @@ class Column(object):
         orderingfield = self.orderingfield or self.modelfield
         if orderingfield:
             default_ordering = self.view.model._meta.ordering
-            descending_orderingfield = '-{}'.format(orderingfield)
+            descending_orderingfield = "-{}".format(orderingfield)
             if orderingfield in default_ordering:
-                return 'asc'
+                return "asc"
             elif descending_orderingfield in default_ordering:
-                return 'desc'
+                return "desc"
             else:
                 return None
         else:
             raise NotImplementedError(
-                'You must return False from is_sortable(), override '
-                'get_default_ordering(), set orderingfield or set modelfield.')
+                "You must return False from is_sortable(), override "
+                "get_default_ordering(), set orderingfield or set modelfield."
+            )
 
     def get_and_validate_default_ordering(self):
         """
@@ -323,29 +319,30 @@ class Column(object):
         """
         try:
             default_ordering = self.get_default_ordering()
-            if default_ordering in ('asc', 'desc', None):
+            if default_ordering in ("asc", "desc", None):
                 return default_ordering
             else:
                 raise ValueError('get_default_ordering() must return one of: "asc", "desc", None.')
         except NotImplementedError:
             # Temporary fallback for the deprecated get_default_order_is_ascending() method.
-            warnings.warn("get_default_order_is_ascending() has been replaced by get_default_ordering().",
-                          DeprecationWarning)
+            warnings.warn(
+                "get_default_order_is_ascending() has been replaced by get_default_ordering().", DeprecationWarning
+            )
             order_ascending = self.get_default_order_is_ascending()
             if order_ascending is None:
                 return None
             elif order_ascending is True:
-                return 'asc'
+                return "asc"
             else:
-                return 'desc'
+                return "desc"
 
 
 class PlainTextColumn(Column):
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/plaintextcolumn-cell.django.html'
+    template_name = "cradmin_legacy/viewhelpers/objecttable/plaintextcolumn-cell.django.html"
 
 
 class DatetimeColumn(PlainTextColumn):
-    datetime_format = 'SHORT_DATETIME_FORMAT'
+    datetime_format = "SHORT_DATETIME_FORMAT"
 
     def render_value(self, obj):
         value = super(DatetimeColumn, self).render_value(obj)
@@ -384,14 +381,15 @@ class SingleActionColumn(Column):
 
     See also: :class:`.MultiActionColumn`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/singleactioncolumn-cell.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/objecttable/singleactioncolumn-cell.django.html"
 
     def get_actionurl(self, obj):
         raise NotImplementedError()
 
     def get_context_data(self, obj):
         context = super(SingleActionColumn, self).get_context_data(obj=obj)
-        context['action_url'] = self.get_actionurl(obj)
+        context["action_url"] = self.get_actionurl(obj)
         return context
 
 
@@ -407,7 +405,8 @@ class SingleButtonColumn(Column):
 
     See also: :class:`.MultiActionColumn`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/singlebuttoncolumn-cell.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/objecttable/singlebuttoncolumn-cell.django.html"
 
     def render_value(self, obj):
         return None
@@ -417,12 +416,12 @@ class SingleButtonColumn(Column):
 
     def get_context_data(self, obj):
         context = super(SingleButtonColumn, self).get_context_data(obj=obj)
-        context['button'] = self.get_button(obj).render()
+        context["button"] = self.get_button(obj).render()
         return context
 
 
 class ImagePreviewColumn(Column):
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/imagepreviewcolumn-cell.django.html'
+    template_name = "cradmin_legacy/viewhelpers/objecttable/imagepreviewcolumn-cell.django.html"
 
     #: See :meth:`.ImagePreviewColumn.get_preview_imagetype`.
     preview_imagetype = None
@@ -444,19 +443,18 @@ class ImagePreviewColumn(Column):
         imageurl = None
         if imagefieldfile:
             imageurl = imagefieldfile.url
-        context.update({
-            'imageurl': imageurl,
-            'preview_imagetype': self.get_preview_imagetype(),
-            'preview_fallbackoptions': {
-                'width': 100,
-                'height': 60
+        context.update(
+            {
+                "imageurl": imageurl,
+                "preview_imagetype": self.get_preview_imagetype(),
+                "preview_fallbackoptions": {"width": 100, "height": 60},
             }
-        })
+        )
         return context
 
 
 class MultiActionColumn(Column):
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/multiactioncolumn-cell.django.html'
+    template_name = "cradmin_legacy/viewhelpers/objecttable/multiactioncolumn-cell.django.html"
 
     def __init__(self, **kwargs):
         super(MultiActionColumn, self).__init__(**kwargs)
@@ -472,12 +470,12 @@ class MultiActionColumn(Column):
 
     def get_context_data(self, obj):
         context = super(MultiActionColumn, self).get_context_data(obj=obj)
-        context['buttons'] = self.get_buttons(obj)
+        context["buttons"] = self.get_buttons(obj)
         return context
 
 
 class UseThisActionColumn(Column):
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/usethisactioncolumn-cell.django.html'
+    template_name = "cradmin_legacy/viewhelpers/objecttable/usethisactioncolumn-cell.django.html"
 
     def __init__(self, **kwargs):
         super(UseThisActionColumn, self).__init__(**kwargs)
@@ -493,7 +491,7 @@ class UseThisActionColumn(Column):
 
     def get_context_data(self, obj):
         context = super(UseThisActionColumn, self).get_context_data(obj=obj)
-        context['buttons'] = self.get_buttons(obj)
+        context["buttons"] = self.get_buttons(obj)
         return context
 
 
@@ -503,12 +501,12 @@ class AbstractButton(object):
     """
 
     #: The django template name/path.
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/button.django.html'
+    template_name = "cradmin_legacy/viewhelpers/objecttable/button.django.html"
 
     #: The HTML element to use for the button.
-    button_element = 'a'
+    button_element = "a"
 
-    def __init__(self, label, buttonclass='btn btn-default btn-sm', icon=None, dom_id=None):
+    def __init__(self, label, buttonclass="btn btn-default btn-sm", icon=None, dom_id=None):
         """
         Parameters:
             label (unicode): The label of the button.
@@ -549,19 +547,19 @@ class AbstractButton(object):
         """
         attributes = {}
         if self.buttonclass:
-            attributes['class'] = self.buttonclass
+            attributes["class"] = self.buttonclass
         if self.dom_id:
-            attributes['id'] = self.dom_id
+            attributes["id"] = self.dom_id
         return attributes
 
     def __iter_attributes(self):
         for attrname, value in list(self.get_html_attributes().items()):
             attrvalue = quoteattr(value)
-            yield u'{}={}'.format(attrname, attrvalue)
+            yield "{}={}".format(attrname, attrvalue)
         for key, value in list(self.get_data_attributes().items()):
-            attrname = u'data-{}'.format(key)
+            attrname = "data-{}".format(key)
             attrvalue = quoteattr(value)
-            yield u'{}={}'.format(attrname, attrvalue)
+            yield "{}={}".format(attrname, attrvalue)
 
     def get_context_data(self):
         """
@@ -571,12 +569,12 @@ class AbstractButton(object):
         own template context data.
         """
         return {
-            'label': self.label,
-            'icon': self.icon,
-            'buttonclass': self.buttonclass,
-            'dom_id': self.dom_id,
-            'attributes': self.__iter_attributes(),
-            'button_element': self.button_element,
+            "label": self.label,
+            "icon": self.icon,
+            "buttonclass": self.buttonclass,
+            "dom_id": self.dom_id,
+            "attributes": self.__iter_attributes(),
+            "button_element": self.button_element,
         }
 
     def render(self):
@@ -592,7 +590,8 @@ class Button(AbstractButton):
     - :meth:`.ObjectTableView.get_buttons`.
     - :meth:`.MultiActionColumn.get_buttons`
     """
-    def __init__(self, url='#', **kwargs):
+
+    def __init__(self, url="#", **kwargs):
         """
         Parameters:
             url (unicode): The url/href attribute of the button.
@@ -603,9 +602,11 @@ class Button(AbstractButton):
 
     def get_html_attributes(self):
         attributes = super(Button, self).get_html_attributes()
-        attributes.update({
-            'href': self.url,
-        })
+        attributes.update(
+            {
+                "href": self.url,
+            }
+        )
         return attributes
 
 
@@ -613,8 +614,9 @@ class NonSubmitButton(AbstractButton):
     """
     A pythonic interface for creating a HTML ``<button type="button">``
     """
-    button_type = 'button'
-    button_element = 'button'
+
+    button_type = "button"
+    button_element = "button"
 
     def __init__(self, value=None, name=None, **kwargs):
         self.value = value
@@ -623,13 +625,15 @@ class NonSubmitButton(AbstractButton):
 
     def get_html_attributes(self):
         attributes = super(NonSubmitButton, self).get_html_attributes()
-        attributes.update({
-            'type': self.button_type,
-        })
+        attributes.update(
+            {
+                "type": self.button_type,
+            }
+        )
         if self.value is not None:
-            attributes['value'] = self.value
+            attributes["value"] = self.value
         if self.name is not None:
-            attributes['name'] = self.name
+            attributes["name"] = self.name
         return attributes
 
 
@@ -637,7 +641,8 @@ class SubmitButton(NonSubmitButton):
     """
     A pythonic interface for creating a HTML ``<button type="submit">``
     """
-    button_type = 'submit'
+
+    button_type = "submit"
 
 
 class PagePreviewsButton(AbstractButton):
@@ -652,7 +657,8 @@ class PagePreviewsButton(AbstractButton):
     For this to work, you need to set :obj:`.ObjectTableView.enable_previews` to ``True``
     (or override :meth:`.ObjectTableView.get_enable_previews`).
     """
-    button_element = 'button'
+
+    button_element = "button"
 
     def __init__(self, urls, **kwargs):
         """
@@ -677,11 +683,7 @@ class PagePreviewsButton(AbstractButton):
 
     def get_data_attributes(self):
         attributes = super(PagePreviewsButton, self).get_data_attributes()
-        attributes.update({
-            'cradmin-legacy-page-preview-open-on-click': json.dumps({
-                'urls': self.urls
-            })
-        })
+        attributes.update({"cradmin-legacy-page-preview-open-on-click": json.dumps({"urls": self.urls})})
         return attributes
 
 
@@ -697,10 +699,12 @@ class PagePreviewButton(PagePreviewsButton):
     """
 
     def __init__(self, url, **kwargs):
-        urls = [{
-            'label': 'Unused',  # Never shown because the navbar is hidden when we only have one URL.
-            'url': url
-        }]
+        urls = [
+            {
+                "label": "Unused",  # Never shown because the navbar is hidden when we only have one URL.
+                "url": url,
+            }
+        ]
         super(PagePreviewButton, self).__init__(urls=urls, **kwargs)
 
 
@@ -708,18 +712,21 @@ class UseThisButton(Button):
     """
     Button for :class:`.UseThisActionColumn`.
     """
-    def __init__(self, view, label, obj, buttonclass='btn btn-default btn-sm'):
+
+    def __init__(self, view, label, obj, buttonclass="btn btn-default btn-sm"):
         self.view = view
         self.obj = obj
         super(UseThisButton, self).__init__(label=label, buttonclass=buttonclass)
 
     def get_data_attributes(self):
         attributes = {
-            'cradmin-legacy-use-this': json.dumps({
-                'value': self.obj.pk,
-                'fieldid': self.view.request.GET['foreignkey_select_fieldid'],
-                'preview': self.view.make_foreignkey_preview_for(self.obj)
-            })
+            "cradmin-legacy-use-this": json.dumps(
+                {
+                    "value": self.obj.pk,
+                    "fieldid": self.view.request.GET["foreignkey_select_fieldid"],
+                    "preview": self.view.make_foreignkey_preview_for(self.obj),
+                }
+            )
         }
         return attributes
 
@@ -731,13 +738,13 @@ class ForeignKeySelectButton(Button):
     It is just like a normal :class:`.Button`, except that it requires a request
     object, and uses that to set success_url to the current URL.
     """
+
     def __init__(self, *args, **kwargs):
-        request = kwargs.pop('request')
+        request = kwargs.pop("request")
         super(ForeignKeySelectButton, self).__init__(*args, **kwargs)
-        self.url = '{}?{}'.format(self.url, urlencode({
-            'foreignkey_select_mode': '1',
-            'success_url': request.get_full_path()
-        }))
+        self.url = "{}?{}".format(
+            self.url, urlencode({"foreignkey_select_mode": "1", "success_url": request.get_full_path()})
+        )
 
 
 class MultiSelectAction(object):
@@ -745,34 +752,29 @@ class MultiSelectAction(object):
     Used to define multiselect actions for
     :meth:`.ObjectTableView.get_multiselect_actions`.
     """
+
     def __init__(self, label, url):
         self.label = label
         self.url = url
 
     def serialize(self):
-        return {
-            'label': textstr(self.label),
-            'url': self.url
-        }
+        return {"label": textstr(self.label), "url": self.url}
 
 
 class ColumnOrderingInfo(object):
     @classmethod
     def from_orderingstringentry(cls, orderingstringindex, orderingstringentry):
-        order_ascending = orderingstringentry.startswith('a')
+        order_ascending = orderingstringentry.startswith("a")
         columnindex = int(orderingstringentry[1:])
-        return cls(
-            orderingstringindex=orderingstringindex,
-            columnindex=columnindex,
-            order_ascending=order_ascending)
+        return cls(orderingstringindex=orderingstringindex, columnindex=columnindex, order_ascending=order_ascending)
 
     @classmethod
     def create_orderingstringentry(cls, columnindex, order_ascending):
         if order_ascending:
-            prefix = 'a'
+            prefix = "a"
         else:
-            prefix = 'd'
-        return '{}{}'.format(prefix, columnindex)
+            prefix = "d"
+        return "{}{}".format(prefix, columnindex)
 
     def __init__(self, orderingstringindex, columnindex, order_ascending):
         self.orderingstringindex = orderingstringindex
@@ -783,7 +785,7 @@ class ColumnOrderingInfo(object):
         return self.__class__.create_orderingstringentry(self.columnindex, self.order_ascending)
 
     def __str__(self):
-        return '{}:{}'.format(self.orderingstringindex, self.to_orderingstringentry())
+        return "{}:{}".format(self.orderingstringindex, self.to_orderingstringentry())
 
 
 class OrderingStringParser(object):
@@ -803,18 +805,19 @@ class OrderingStringParser(object):
             Note that the OrderingStringParser only describes what columns to
             order and in what direction, not by what fields each column is ordered.
     """
+
     def __init__(self, orderingstring):
         self.orderingstring = orderingstring
         self.orderingdict = OrderedDict()
         if self.orderingstring:
-            if re.match('^([ad]\d+\.)*([ad]\d+)$', self.orderingstring):
-                for orderingstringindex, orderingstringentry in enumerate(self.orderingstring.split('.')):
+            if re.match("^([ad]\d+\.)*([ad]\d+)$", self.orderingstring):
+                for orderingstringindex, orderingstringentry in enumerate(self.orderingstring.split(".")):
                     orderinginfo = ColumnOrderingInfo.from_orderingstringentry(
-                        orderingstringindex=orderingstringindex,
-                        orderingstringentry=orderingstringentry)
+                        orderingstringindex=orderingstringindex, orderingstringentry=orderingstringentry
+                    )
                     self.orderingdict[orderinginfo.columnindex] = orderinginfo
             else:
-                logger.debug('Invalid value for ordering: %r', self.orderingstring)
+                logger.debug("Invalid value for ordering: %r", self.orderingstring)
 
     def remove_column(self, columnindex):
         """
@@ -825,7 +828,7 @@ class OrderingStringParser(object):
         for index, orderinginfo in list(self.orderingdict.items()):
             if index != columnindex:
                 out.append(orderinginfo.to_orderingstringentry())
-        return '.'.join(out)
+        return ".".join(out)
 
     def flip_column(self, columnindex):
         """
@@ -840,14 +843,16 @@ class OrderingStringParser(object):
             if index == columnindex:
                 found = True
                 order_ascending = not orderinginfo.order_ascending
-                out.append(ColumnOrderingInfo.create_orderingstringentry(
-                    columnindex=columnindex, order_ascending=order_ascending))
+                out.append(
+                    ColumnOrderingInfo.create_orderingstringentry(
+                        columnindex=columnindex, order_ascending=order_ascending
+                    )
+                )
             else:
                 out.append(orderinginfo.to_orderingstringentry())
         if not found:
-            out.append(ColumnOrderingInfo.create_orderingstringentry(
-                columnindex=columnindex, order_ascending=True))
-        return '.'.join(out)
+            out.append(ColumnOrderingInfo.create_orderingstringentry(columnindex=columnindex, order_ascending=True))
+        return ".".join(out)
 
     def get(self, columnindex):
         return self.orderingdict.get(columnindex, None)
@@ -880,24 +885,26 @@ class ObjectTableView(ListView):
                     company=company)
 
     """
+
     #: Paginate by this number of items. You can safely override this.
     paginate_by = 30
 
     #: The template used to render the view. You can override this,
     #: but if you override it, you should extend the default template
     #: (cradmin_legacy/viewhelpers/objecttable/objecttable.django.html).
-    template_name = 'cradmin_legacy/viewhelpers/objecttable/objecttable.django.html'
+    template_name = "cradmin_legacy/viewhelpers/objecttable/objecttable.django.html"
 
     #: The template used to render the no items message.
     #: See :meth:`.get_no_items_message_template_name` and
     #: :meth:`.get_no_items_message`
-    no_items_message_template_name = 'cradmin_legacy/viewhelpers/objecttable/no-items-message.django.html'
+    no_items_message_template_name = "cradmin_legacy/viewhelpers/objecttable/no-items-message.django.html"
 
     #: The template used to render the no searchresults message.
     #: See :meth:`.get_no_searchresults_message_template_name` and
     #: :meth:`.get_no_searchresults_message`
-    no_searchresults_message_template_name = 'cradmin_legacy/viewhelpers/objecttable/' \
-                                             'no-searchresults-message.django.html'
+    no_searchresults_message_template_name = (
+        "cradmin_legacy/viewhelpers/objecttable/no-searchresults-message.django.html"
+    )
 
     #: Set this to ``True`` to make the template not render the menu.
     #: Very useful when creating foreign-key select views, and other views
@@ -923,10 +930,10 @@ class ObjectTableView(ListView):
 
     #: The default implementation of :meth:`.filter_search` uses this comparator
     #: when searching the given :obj:`.searchfields`.
-    search_comparator = 'icontains'
+    search_comparator = "icontains"
 
     #: The search placeholder text. See :meth:`.get_search_placeholder_text`. Defaults to "Search...".
-    search_placeholder_text = gettext_lazy('Search...')
+    search_placeholder_text = gettext_lazy("Search...")
 
     #: Enable previews? See :meth:`.get_enable_previews`. Defaults to ``False``.
     enable_previews = False
@@ -954,7 +961,7 @@ class ObjectTableView(ListView):
         You can override this, or set :obj:`.hide_page_header`, or hide the page header
         in all listing views with the ``CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTINGVIEWS`` setting.
         """
-        return self.hide_page_header or getattr(settings, 'CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTINGVIEWS', False)
+        return self.hide_page_header or getattr(settings, "CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTINGVIEWS", False)
 
     def get_no_items_message_template_name(self):
         """
@@ -969,8 +976,8 @@ class ObjectTableView(ListView):
         Get the context data for :meth:`.get_no_items_message_template_name`.
         """
         return {
-            'modelname_plural': self.get_model_class()._meta.verbose_name_plural.lower(),
-            'request': self.request,
+            "modelname_plural": self.get_model_class()._meta.verbose_name_plural.lower(),
+            "request": self.request,
         }
 
     def get_no_items_message(self):
@@ -980,8 +987,7 @@ class ObjectTableView(ListView):
         Renders the :meth:`.get_no_items_message_template_name` template with
         :meth:`.get_no_items_message_context_data` as context data.
         """
-        return render_to_string(self.get_no_items_message_template_name(),
-                                self.get_no_items_message_context_data())
+        return render_to_string(self.get_no_items_message_template_name(), self.get_no_items_message_context_data())
 
     def get_no_searchresults_message_template_name(self):
         """
@@ -996,7 +1002,7 @@ class ObjectTableView(ListView):
         Get the context data for :meth:`.get_no_searchresults_message_template_name`.
         """
         return {
-            'request': self.request,
+            "request": self.request,
         }
 
     def get_no_searchresults_message(self):
@@ -1006,8 +1012,9 @@ class ObjectTableView(ListView):
         Renders the :meth:`.get_no_searchresults_message_template_name` template with
         :meth:`.get_no_searchresults_message_context_data` as context data.
         """
-        return render_to_string(self.get_no_searchresults_message_template_name(),
-                                self.get_no_searchresults_message_context_data())
+        return render_to_string(
+            self.get_no_searchresults_message_template_name(), self.get_no_searchresults_message_context_data()
+        )
 
     def get_search_placeholder_text(self):
         """
@@ -1096,9 +1103,9 @@ class ObjectTableView(ListView):
             queryset = queryset.order_by(*orderby)
         if self.enable_search():
             searchform = SearchForm(self.request.GET)
-            self.current_search = ''
+            self.current_search = ""
             if searchform.is_valid():
-                self.current_search = searchform.cleaned_data['search']
+                self.current_search = searchform.cleaned_data["search"]
                 queryset = self.filter_search(searchstring=self.current_search, queryset=queryset)
                 self.current_search_matchcount = queryset.count()
         return queryset
@@ -1107,11 +1114,11 @@ class ObjectTableView(ListView):
         """
         Build the :obj:`.columns` list into a list of :class:`Column` objects.
         """
-        if not hasattr(self, '__columns'):
+        if not hasattr(self, "__columns"):
             self.__columns = []
             for columnindex, columnclass in enumerate(self.get_columns()):
                 if isinstance(columnclass, textstr):
-                    columnclass = type(str('SimpleColumn'), (PlainTextColumn,), dict(modelfield=columnclass))
+                    columnclass = type(str("SimpleColumn"), (PlainTextColumn,), dict(modelfield=columnclass))
                 self.__columns.append(columnclass(view=self, columnindex=columnindex))
         return self.__columns
 
@@ -1132,13 +1139,13 @@ class ObjectTableView(ListView):
         return []
 
     def __get_row_css_classes_string_for_object(self, obj):
-        return ' '.join(self.get_row_css_classes_for_object(obj))
+        return " ".join(self.get_row_css_classes_for_object(obj))
 
     def __create_row(self, obj):
         return {
-            'object': obj,
-            'css_classes': self.__get_row_css_classes_string_for_object(obj),
-            'cells': [(column, column.render_cell_content(obj)) for column in self._get_columnobjects()]
+            "object": obj,
+            "css_classes": self.__get_row_css_classes_string_for_object(obj),
+            "cells": [(column, column.render_cell_content(obj)) for column in self._get_columnobjects()],
         }
 
     def __iter_table(self, object_list):
@@ -1146,7 +1153,7 @@ class ObjectTableView(ListView):
             yield self.__create_row(obj)
 
     def queryset_contains_items(self):
-        if not hasattr(self, '_queryset_contains_items'):
+        if not hasattr(self, "_queryset_contains_items"):
             self._queryset_contains_items = self.get_queryset_for_role(self.request.cradmin_role).exists()
         return self._queryset_contains_items
 
@@ -1169,14 +1176,14 @@ class ObjectTableView(ListView):
 
     def _get_search_hidden_fields(self):
         for key, value in list(self.request.GET.items()):
-            if key not in ('search', 'page'):
+            if key not in ("search", "page"):
                 yield key, value
 
     def _get_pager_extra_querystring(self):
         querystring_dict = self.request.GET.copy()
 
-        if 'page' in querystring_dict:
-            del querystring_dict['page']
+        if "page" in querystring_dict:
+            del querystring_dict["page"]
 
         if querystring_dict:
             querystring = {}
@@ -1184,61 +1191,64 @@ class ObjectTableView(ListView):
                 querystring[k] = v
             return urlencode(querystring)
         else:
-            return ''
+            return ""
 
     def make_foreignkey_preview_for(self, obj):
         return textstr(obj)
 
     def _get_use_this_hidden_attribute(self):
-        pk = self.request.GET['foreignkey_selected_value']
+        pk = self.request.GET["foreignkey_selected_value"]
         obj = get_object_or_404(self.get_queryset_for_role(self.request.cradmin_role), pk=pk)
-        data = json.dumps({
-            'value': obj.pk,
-            'fieldid': self.request.GET['foreignkey_select_fieldid'],
-            'preview': self.make_foreignkey_preview_for(obj)
-        })
+        data = json.dumps(
+            {
+                "value": obj.pk,
+                "fieldid": self.request.GET["foreignkey_select_fieldid"],
+                "preview": self.make_foreignkey_preview_for(obj),
+            }
+        )
         return quoteattr(data)
 
     def get_context_data(self, **kwargs):
         context = super(ObjectTableView, self).get_context_data(**kwargs)
-        object_list = context['object_list']
+        object_list = context["object_list"]
 
         multiselect_actions = self.get_multiselect_actions()
         form_action = self.get_form_action()
         if form_action and multiselect_actions:
-            raise ValueError('You can not configure both a form action '
-                             '(get_form_action) and enable multiselect '
-                             '(via get_multiselect_actions) at the same time.')
+            raise ValueError(
+                "You can not configure both a form action "
+                "(get_form_action) and enable multiselect "
+                "(via get_multiselect_actions) at the same time."
+            )
         if multiselect_actions:
-            context['multiselect_actions'] = json.dumps(
-                [action.serialize() for action in multiselect_actions])
+            context["multiselect_actions"] = json.dumps([action.serialize() for action in multiselect_actions])
         if form_action:
-            context['form_action'] = form_action
+            context["form_action"] = form_action
 
-        context['pagetitle'] = self.get_pagetitle()
-        context['pageheading'] = self.get_pageheading()
-        context['columns'] = self._get_columnobjects()
-        context['table'] = list(self.__iter_table(object_list))
-        context['buttons'] = self.get_buttons()
-        context['enable_search'] = self.enable_search()
-        context['enable_previews'] = self.get_enable_previews()
-        context['cradmin_hide_menu'] = self.hide_menu
-        context['hide_column_headers'] = self.hide_column_headers
+        context["pagetitle"] = self.get_pagetitle()
+        context["pageheading"] = self.get_pageheading()
+        context["columns"] = self._get_columnobjects()
+        context["table"] = list(self.__iter_table(object_list))
+        context["buttons"] = self.get_buttons()
+        context["enable_search"] = self.enable_search()
+        context["enable_previews"] = self.get_enable_previews()
+        context["cradmin_hide_menu"] = self.hide_menu
+        context["hide_column_headers"] = self.hide_column_headers
         if self.enable_search():
-            context['current_search'] = self.current_search
-            context['search_hidden_fields'] = self._get_search_hidden_fields()
-            context['focus_on_searchfield'] = self.focus_on_searchfield()
-            context['current_search_matchcount'] = self.current_search_matchcount
-            context['no_searchresults_message'] = self.get_no_searchresults_message()
-        context['pager_extra_querystring'] = self._get_pager_extra_querystring()
-        context['multicolumn_ordering'] = len(self.__parse_orderingstring()) > 1
-        context['queryset_contains_items'] = self.queryset_contains_items()
-        context['no_items_message'] = self.get_no_items_message()
-        context['hide_pageheader'] = self.get_hide_page_header()
+            context["current_search"] = self.current_search
+            context["search_hidden_fields"] = self._get_search_hidden_fields()
+            context["focus_on_searchfield"] = self.focus_on_searchfield()
+            context["current_search_matchcount"] = self.current_search_matchcount
+            context["no_searchresults_message"] = self.get_no_searchresults_message()
+        context["pager_extra_querystring"] = self._get_pager_extra_querystring()
+        context["multicolumn_ordering"] = len(self.__parse_orderingstring()) > 1
+        context["queryset_contains_items"] = self.queryset_contains_items()
+        context["no_items_message"] = self.get_no_items_message()
+        context["hide_pageheader"] = self.get_hide_page_header()
 
         # Handle foreignkey selection
-        if 'foreignkey_selected_value' in self.request.GET:
-            context['use_this_hidden_attribute'] = self._get_use_this_hidden_attribute()
+        if "foreignkey_selected_value" in self.request.GET:
+            context["use_this_hidden_attribute"] = self._get_use_this_hidden_attribute()
 
         return context
 
@@ -1248,15 +1258,16 @@ class ObjectTableView(ListView):
             if columnobject.is_sortable():
                 default_ordering = columnobject.get_and_validate_default_ordering()
                 if default_ordering:
-                    orderinglist.append(ColumnOrderingInfo.create_orderingstringentry(
-                        columnindex=columnindex,
-                        order_ascending=default_ordering == 'asc'
-                    ))
-        return '.'.join(orderinglist)
+                    orderinglist.append(
+                        ColumnOrderingInfo.create_orderingstringentry(
+                            columnindex=columnindex, order_ascending=default_ordering == "asc"
+                        )
+                    )
+        return ".".join(orderinglist)
 
     def __parse_orderingstring(self):
-        if not hasattr(self, '__orderingstringparser'):
-            orderingstring = self.request.GET.get('ordering', None)
+        if not hasattr(self, "__orderingstringparser"):
+            orderingstring = self.request.GET.get("ordering", None)
             if orderingstring is None:
                 orderingstring = self.__create_orderingstring_from_default_ordering()
             self.__orderingstringparser = OrderingStringParser(orderingstring)
@@ -1265,17 +1276,17 @@ class ObjectTableView(ListView):
     def _url_with_querystringarg_changed(self, querystringarg, newvalue):
         querystring = self.request.GET.copy()
         querystring[querystringarg] = newvalue
-        return '{}?{}'.format(self.request.path, querystring.urlencode())
+        return "{}?{}".format(self.request.path, querystring.urlencode())
 
     def _get_flip_ordering_url_for_column(self, columnindex):
         return self._url_with_querystringarg_changed(
-            querystringarg='ordering',
-            newvalue=self.__parse_orderingstring().flip_column(columnindex))
+            querystringarg="ordering", newvalue=self.__parse_orderingstring().flip_column(columnindex)
+        )
 
     def _get_remove_ordering_url_for_column(self, columnindex):
         return self._url_with_querystringarg_changed(
-            querystringarg='ordering',
-            newvalue=self.__parse_orderingstring().remove_column(columnindex))
+            querystringarg="ordering", newvalue=self.__parse_orderingstring().remove_column(columnindex)
+        )
 
     def _get_orderinginfo_for_column(self, columnindex):
         return self.__parse_orderingstring().get(columnindex)
@@ -1313,9 +1324,7 @@ class ObjectTableView(ListView):
         if self.searchfields:
             query = None
             for fieldname in self.searchfields:
-                kwargs = {
-                    '{}__{}'.format(fieldname, self.search_comparator): searchstring
-                }
+                kwargs = {"{}__{}".format(fieldname, self.search_comparator): searchstring}
                 fieldquery = models.Q(**kwargs)
                 if query:
                     query |= fieldquery
@@ -1354,6 +1363,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
 
     Must be mixed in before :class:`.ObjectTableView`.
     """
+
     def get_filterlist_position(self):
         """
         Get the position where you want to place the filterlist.
@@ -1370,9 +1380,9 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         """
         filterlist_class = self.get_filterlist_class()
         if issubclass(filterlist_class, listfilter.lists.Horizontal):
-            return 'top'
+            return "top"
         else:
-            return 'right'
+            return "right"
 
     def get_filterlist_template_name(self):
         """
@@ -1384,7 +1394,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         for details on how to use this method.
         """
         position = self.get_filterlist_position()
-        template_name = 'cradmin_legacy/viewhelpers/objecttable/objecttable-filterlist-{}.django.html'.format(position)
+        template_name = "cradmin_legacy/viewhelpers/objecttable/objecttable-filterlist-{}.django.html".format(position)
         return template_name
 
     def get_filter_unprotected_querystring_arguments(self):
@@ -1395,7 +1405,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         See :class:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
         for more details.
         """
-        return {'page'}
+        return {"page"}
 
     def get_filterlist_target_dom_id(self):
         """
@@ -1406,4 +1416,4 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         You should not need to override this unless you create a completely custom
         template for your view.
         """
-        return 'cradmin_legacy_objecttableview_tablewrapper'
+        return "cradmin_legacy_objecttableview_tablewrapper"

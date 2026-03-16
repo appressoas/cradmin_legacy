@@ -11,18 +11,20 @@ from cradmin_legacy.demo.webdemo.models import Site
 class Menu(crmenu.Menu):
     def build_menu(self):
         self.add_menuitem(
-            label=gettext_lazy('Dashboard'), url=self.appindex_url('dashboard'),
-            active=self.request.cradmin_app.appname == 'dashboard')
+            label=gettext_lazy("Dashboard"),
+            url=self.appindex_url("dashboard"),
+            active=self.request.cradmin_app.appname == "dashboard",
+        )
 
 
 class LoginNotRequiredCrAdminInstance(crinstance.BaseCrAdminInstance):
-    id = 'login_not_required_demo'
+    id = "login_not_required_demo"
     menuclass = Menu
     roleclass = Site
-    rolefrontpage_appname = 'dashboard'
+    rolefrontpage_appname = "dashboard"
 
     apps = [
-        ('dashboard', dashboard.App),
+        ("dashboard", dashboard.App),
     ]
 
     def get_rolequeryset(self):
@@ -59,4 +61,4 @@ class LoginNotRequiredCrAdminInstance(crinstance.BaseCrAdminInstance):
         We only need this because we have multiple cradmin UIs
         in the same project.
         """
-        return urlpath.startswith('/login_not_required_demo')
+        return urlpath.startswith("/login_not_required_demo")

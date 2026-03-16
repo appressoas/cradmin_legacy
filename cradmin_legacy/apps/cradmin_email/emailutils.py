@@ -78,55 +78,55 @@ class AbstractEmail(object):
     #: Fallback value of the CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA setting
     #: is not set.
     DEFAULT_CONTEXT_DATA = {
-        'body_style': 'background-color: #fff;',
-        'common_td_style': 'font-family: Arial, sans-serif; '
-                           'font-size: 16px; '
-                           'line-height: 1.42857143; '
-                           'margin: 0; '
-                           'letter-spacing: 0.5px; ',
-        'header_td_style': '',
-        'logo_style': '',
-        'contents_td_style': 'padding-top: 20px; padding-bottom: 28px;',
-        'footer_td_style': 'border-top: 3px solid #eee; '
-                           'font-size: 13px; '
-                           'color: #777; '
-                           'text-align: center; '
-                           'padding-top: 20px; '
-                           'padding-bottom: 20px; ',
-        'footer_link_style': 'color: #777; text-decoration: underline;',
-        'link_style': 'color: #377CA8; text-decoration: underline;',
-        'secondary_button_link_style': 'font-size: 16px; '
-                                       'font-family: Arial, sans-serif; '
-                                       'color: #fff; '
-                                       'text-decoration: none; '
-                                       'font-weight: bold; '
-                                       'text-transform: uppercase; '
-                                       'letter-spacing: 1px; '
-                                       'background-color: #999999; '
-                                       'border-top: 10px solid #999999; '
-                                       'border-bottom: 10px solid #999999; '
-                                       'border-right: 16px solid #999999; '
-                                       'border-left: 16px solid #999999; '
-                                       'border-radius: 3px; '
-                                       '-webkit-border-radius: 3px; '
-                                       '-moz-border-radius: 3px; '
-                                       'display: inline-block;',
-        'primary_button_link_style': 'font-size: 16px; '
-                                     'font-family: Arial, sans-serif; '
-                                     'color: #fff; '
-                                     'text-decoration: none; '
-                                     'font-weight: bold; '
-                                     'text-transform: uppercase; '
-                                     'letter-spacing: 1px; '
-                                     'background-color: #377CA8; '
-                                     'border-top: 10px solid #377CA8; '
-                                     'border-bottom: 10px solid #377CA8; '
-                                     'border-right: 16px solid #377CA8; '
-                                     'border-left: 16px solid #377CA8; '
-                                     'border-radius: 3px; '
-                                     '-webkit-border-radius: 3px; '
-                                     '-moz-border-radius: 3px; '
-                                     'display: inline-block;',
+        "body_style": "background-color: #fff;",
+        "common_td_style": "font-family: Arial, sans-serif; "
+        "font-size: 16px; "
+        "line-height: 1.42857143; "
+        "margin: 0; "
+        "letter-spacing: 0.5px; ",
+        "header_td_style": "",
+        "logo_style": "",
+        "contents_td_style": "padding-top: 20px; padding-bottom: 28px;",
+        "footer_td_style": "border-top: 3px solid #eee; "
+        "font-size: 13px; "
+        "color: #777; "
+        "text-align: center; "
+        "padding-top: 20px; "
+        "padding-bottom: 20px; ",
+        "footer_link_style": "color: #777; text-decoration: underline;",
+        "link_style": "color: #377CA8; text-decoration: underline;",
+        "secondary_button_link_style": "font-size: 16px; "
+        "font-family: Arial, sans-serif; "
+        "color: #fff; "
+        "text-decoration: none; "
+        "font-weight: bold; "
+        "text-transform: uppercase; "
+        "letter-spacing: 1px; "
+        "background-color: #999999; "
+        "border-top: 10px solid #999999; "
+        "border-bottom: 10px solid #999999; "
+        "border-right: 16px solid #999999; "
+        "border-left: 16px solid #999999; "
+        "border-radius: 3px; "
+        "-webkit-border-radius: 3px; "
+        "-moz-border-radius: 3px; "
+        "display: inline-block;",
+        "primary_button_link_style": "font-size: 16px; "
+        "font-family: Arial, sans-serif; "
+        "color: #fff; "
+        "text-decoration: none; "
+        "font-weight: bold; "
+        "text-transform: uppercase; "
+        "letter-spacing: 1px; "
+        "background-color: #377CA8; "
+        "border-top: 10px solid #377CA8; "
+        "border-bottom: 10px solid #377CA8; "
+        "border-right: 16px solid #377CA8; "
+        "border-left: 16px solid #377CA8; "
+        "border-radius: 3px; "
+        "-webkit-border-radius: 3px; "
+        "-moz-border-radius: 3px; "
+        "display: inline-block;",
     }
 
     def get_subject_template(self):
@@ -137,7 +137,7 @@ class AbstractEmail(object):
         if self.subject_template:
             return self.subject_template
         else:
-            raise NotImplementedError('You must override subject_template or get_subject_template')
+            raise NotImplementedError("You must override subject_template or get_subject_template")
 
     def get_html_message_template(self):
         """
@@ -147,7 +147,7 @@ class AbstractEmail(object):
         if self.html_message_template:
             return self.html_message_template
         else:
-            raise NotImplementedError('You must override html_message_template or get_html_message_template')
+            raise NotImplementedError("You must override html_message_template or get_html_message_template")
 
     def get_plaintext_message_template(self):
         """
@@ -166,10 +166,10 @@ class AbstractEmail(object):
         If your privide a prefix, you should most likely include an empty
         space at the end of it.
         """
-        if hasattr(settings, 'CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX'):
+        if hasattr(settings, "CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX"):
             return settings.CRADMIN_LEGACY_EMAIL_SUBJECT_PREFIX
         else:
-            return ''
+            return ""
 
     def render_subject(self):
         """
@@ -177,7 +177,7 @@ class AbstractEmail(object):
         adjust template rendering or avoid using a template.
         """
         subject = render_to_string(self.get_subject_template(), self.get_context_data()).strip()
-        return '{}{}'.format(self.get_subject_prefix(), subject)
+        return "{}{}".format(self.get_subject_prefix(), subject)
 
     def render_html_message(self):
         """
@@ -192,7 +192,7 @@ class AbstractEmail(object):
         twice for the default case where the plaintext message is
         created from the HTML message.
         """
-        if not hasattr(self, '_rendered_html_message'):
+        if not hasattr(self, "_rendered_html_message"):
             self._rendered_html_message = self.render_html_message().strip()
         return self._rendered_html_message
 
@@ -220,11 +220,11 @@ class AbstractEmail(object):
         is not a suitable solution.
         """
         context_data = {
-            'from_email': self.from_email,
-            'CRADMIN_LEGACY_SITENAME': getattr(settings, 'CRADMIN_LEGACY_SITENAME', ''),
-            'CRADMIN_LEGACY_EMAIL_LOGO_HTML': getattr(settings, 'CRADMIN_LEGACY_EMAIL_LOGO_HTML', '')
+            "from_email": self.from_email,
+            "CRADMIN_LEGACY_SITENAME": getattr(settings, "CRADMIN_LEGACY_SITENAME", ""),
+            "CRADMIN_LEGACY_EMAIL_LOGO_HTML": getattr(settings, "CRADMIN_LEGACY_EMAIL_LOGO_HTML", ""),
         }
-        if hasattr(settings, 'CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA'):
+        if hasattr(settings, "CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA"):
             context_data.update(settings.CRADMIN_LEGACY_EMAIL_DEFAULT_CONTEXT_DATA)
         else:
             context_data.update(self.DEFAULT_CONTEXT_DATA)
@@ -256,7 +256,7 @@ class AbstractEmail(object):
         if self.from_email:
             return self.from_email
         else:
-            raise NotImplementedError('You must send from_email as argument to __init__, or override get_from_email().')
+            raise NotImplementedError("You must send from_email as argument to __init__, or override get_from_email().")
 
     def get_recipient_list(self):
         """
@@ -267,8 +267,9 @@ class AbstractEmail(object):
         if self.recipient_list:
             return self.recipient_list
         else:
-            raise NotImplementedError('You must send recipient_list or recipient as argument to __init__, '
-                                      'or override get_recipient_list().')
+            raise NotImplementedError(
+                "You must send recipient_list or recipient as argument to __init__, or override get_recipient_list()."
+            )
 
     def get_send_mail_kwargs(self):
         """
@@ -278,11 +279,11 @@ class AbstractEmail(object):
         but you can override this to adjust the kwargs.
         """
         return {
-            'subject': self.render_subject(),
-            'message': self.render_plaintext_message(),
-            'html_message': self.__get_rendered_html_message(),
-            'from_email': self.get_from_email(),
-            'recipient_list': self.get_recipient_list()
+            "subject": self.render_subject(),
+            "message": self.render_plaintext_message(),
+            "html_message": self.__get_rendered_html_message(),
+            "from_email": self.get_from_email(),
+            "recipient_list": self.get_recipient_list(),
         }
 
     def send(self):
@@ -311,7 +312,7 @@ class AbstractEmail(object):
                 Defaults to :meth:`.get_default_from_email`.
         """
         if recipient and recipient_list:
-            raise ValueError('You can only specify one of recipient or recipient_list.')
+            raise ValueError("You can only specify one of recipient or recipient_list.")
         if recipient:
             self.recipient_list = [recipient]
         else:

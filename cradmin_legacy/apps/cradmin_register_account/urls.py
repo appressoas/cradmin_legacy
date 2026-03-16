@@ -6,6 +6,6 @@ from cradmin_legacy.apps.cradmin_register_account.views.begin import BeginRegist
 from cradmin_legacy.apps.cradmin_register_account.views.email_sent import EmailSentView
 
 urlpatterns = [
-    path('begin', BeginRegisterAccountView.as_view(), name="cradmin-register-account-begin"),
-    path('email-sent', EmailSentView.as_view(), name="cradmin-register-account-email-sent"),
+    path("begin", BeginRegisterAccountView.as_view(), name="cradmin-register-account-begin"),
+    path("email-sent", EmailSentView.as_view(), name="cradmin-register-account-email-sent"),
 ]

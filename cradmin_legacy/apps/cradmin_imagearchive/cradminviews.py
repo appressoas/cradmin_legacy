@@ -27,59 +27,53 @@ logger = logging.getLogger(__name__)
 
 
 class DescriptionColumn(objecttable.MultiActionColumn):
-    modelfield = 'description'
+    modelfield = "description"
 
     def render_value(self, obj):
         return obj.screenreader_text
 
     def get_buttons(self, obj):
-        edit_description_label = gettext_lazy('Set a description')
+        edit_description_label = gettext_lazy("Set a description")
         if obj.description:
-            edit_description_label = gettext_lazy('Edit description')
+            edit_description_label = gettext_lazy("Edit description")
         return [
+            objecttable.Button(label=edit_description_label, url=self.reverse_appurl("edit", args=[obj.id])),
             objecttable.Button(
-                label=edit_description_label,
-                url=self.reverse_appurl('edit', args=[obj.id])),
-            objecttable.Button(
-                label=gettext_lazy('Delete'),
-                url=self.reverse_appurl('delete', args=[obj.id]),
-                buttonclass="btn btn-danger btn-sm"),
+                label=gettext_lazy("Delete"),
+                url=self.reverse_appurl("delete", args=[obj.id]),
+                buttonclass="btn btn-danger btn-sm",
+            ),
         ]
 
 
 class DescriptionSelectColumn(objecttable.UseThisActionColumn):
-    modelfield = 'description'
+    modelfield = "description"
 
     def render_value(self, obj):
         return obj.screenreader_text
 
     def get_buttons(self, obj):
-        return [
-            objecttable.UseThisButton(
-                view=self.view,
-                label=gettext_lazy('Use this'),
-                obj=obj)
-        ]
+        return [objecttable.UseThisButton(view=self.view, label=gettext_lazy("Use this"), obj=obj)]
 
 
 class ImageColumn(objecttable.ImagePreviewColumn):
-    modelfield = 'image'
+    modelfield = "image"
     column_width = None
 
     preview_fallbackoptions = {
-        'width': 100,
-        'height': 65,
+        "width": 100,
+        "height": 65,
     }
 
     def get_column_width(self):
         if self.column_width:
             return self.column_width
         else:
-            width = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGEWIDTH', 100)
-            return '{}px'.format(width)
+            width = crsettings.get_setting("CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGEWIDTH", 100)
+            return "{}px".format(width)
 
     def get_preview_imagetype(self):
-        imagetype_from_settings = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGETYPE')
+        imagetype_from_settings = crsettings.get_setting("CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGETYPE")
         if self.preview_imagetype:
             return self.preview_imagetype
         elif imagetype_from_settings:
@@ -88,7 +82,7 @@ class ImageColumn(objecttable.ImagePreviewColumn):
             return None
 
     def get_header(self):
-        return gettext_lazy('Preview')
+        return gettext_lazy("Preview")
 
 
 class ArchiveImagesQuerySetForRoleMixin(object):
@@ -97,18 +91,18 @@ class ArchiveImagesQuerySetForRoleMixin(object):
     that only images that the current role has access to
     is available.
     """
+
     def get_queryset_for_role(self, role):
-        return ArchiveImage.objects.filter_owned_by_role(role)\
-            .order_by('-created_datetime')
+        return ArchiveImage.objects.filter_owned_by_role(role).order_by("-created_datetime")
 
 
 def get_bulkupload_apiparameters():
     apiparameters = {
-        'accept': 'image/png,image/jpeg,image/gif',
+        "accept": "image/png,image/jpeg,image/gif",
     }
-    max_filesize_bytes = crsettings.get_setting('CRADMIN_LEGACY_IMAGEARCHIVE_MAX_FILESIZE', None)
+    max_filesize_bytes = crsettings.get_setting("CRADMIN_LEGACY_IMAGEARCHIVE_MAX_FILESIZE", None)
     if max_filesize_bytes is not None:
-        apiparameters['max_filesize_bytes'] = crhumanize.dehumanize_readable_filesize(max_filesize_bytes)
+        apiparameters["max_filesize_bytes"] = crhumanize.dehumanize_readable_filesize(max_filesize_bytes)
     return apiparameters
 
 
@@ -117,18 +111,17 @@ class BulkAddForm(forms.Form):
         required=True,
         widget=BulkFileUploadWidget(
             autosubmit=True,
-            accept='image/*',
+            accept="image/*",
             # accept='image/png,image/jpeg,image/gif',  # NOTE: Does not work with the fileselector in firefox
             apiparameters=get_bulkupload_apiparameters(),
-            dropbox_text=gettext_lazy('Upload images by dragging and dropping them here'),
-            invalid_filetype_message=gettext_lazy('Invalid filetype. You can only upload images.'),
-            advanced_fileselectbutton_text=gettext_lazy('... or select images'),
-            simple_fileselectbutton_text=gettext_lazy('Select images ...')
+            dropbox_text=gettext_lazy("Upload images by dragging and dropping them here"),
+            invalid_filetype_message=gettext_lazy("Invalid filetype. You can only upload images."),
+            advanced_fileselectbutton_text=gettext_lazy("... or select images"),
+            simple_fileselectbutton_text=gettext_lazy("Select images ..."),
         ),
-        label=gettext_lazy('Upload at least one image'),
-        error_messages={
-            'required': gettext_lazy('You must upload at least one image.')
-        })
+        label=gettext_lazy("Upload at least one image"),
+        error_messages={"required": gettext_lazy("You must upload at least one image.")},
+    )
 
 
 class SingleAddForm(forms.Form):
@@ -136,71 +129,66 @@ class SingleAddForm(forms.Form):
         required=True,
         widget=SingleFileUploadWidget(
             autosubmit=True,
-            accept='image/*',
+            accept="image/*",
             apiparameters=get_bulkupload_apiparameters(),
-            dropbox_text=gettext_lazy('Upload an image by dragging and dropping it here'),
-            advanced_fileselectbutton_text=gettext_lazy('... or select an image'),
-            invalid_filetype_message=gettext_lazy('Invalid filetype. You can only upload images.'),
-            simple_fileselectbutton_text=gettext_lazy('Select an image ...')
+            dropbox_text=gettext_lazy("Upload an image by dragging and dropping it here"),
+            advanced_fileselectbutton_text=gettext_lazy("... or select an image"),
+            invalid_filetype_message=gettext_lazy("Invalid filetype. You can only upload images."),
+            simple_fileselectbutton_text=gettext_lazy("Select an image ..."),
         ),
-        label=gettext_lazy('Upload an image'),
-        error_messages={
-            'required': gettext_lazy('You must upload an image.')
-        })
+        label=gettext_lazy("Upload an image"),
+        error_messages={"required": gettext_lazy("You must upload an image.")},
+    )
 
     def clean(self):
         cleaned_data = super(SingleAddForm, self).clean()
-        filecollectionid = cleaned_data.get('filecollectionid', None)
+        filecollectionid = cleaned_data.get("filecollectionid", None)
         if filecollectionid is not None:
             collection = TemporaryFileCollection.objects.get(id=filecollectionid)
             filecount = collection.files.count()
             if filecount < 1:
-                raise forms.ValidationError({
-                    'filecollectionid': gettext_lazy('You must upload an image.')
-                })
+                raise forms.ValidationError({"filecollectionid": gettext_lazy("You must upload an image.")})
             elif filecount > 1:
-                raise forms.ValidationError({
-                    'filecollectionid': gettext_lazy('You must upload exactly one image.')
-                })
+                raise forms.ValidationError({"filecollectionid": gettext_lazy("You must upload exactly one image.")})
 
 
 class AddImageOverlayButton(objecttable.NonSubmitButton):
     def get_html_attributes(self):
         attributes = super(AddImageOverlayButton, self).get_html_attributes()
-        attributes['cradmin-legacy-bulkfileupload-show-overlay'] = 'filecollectionid'
+        attributes["cradmin-legacy-bulkfileupload-show-overlay"] = "filecollectionid"
         return attributes
 
 
-class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTableView,
-                         formbase.FormViewMixin, FormMixin):
-    searchfields = ['name', 'description', 'file_extension']
+class BaseImagesListView(
+    ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTableView, formbase.FormViewMixin, FormMixin
+):
+    searchfields = ["name", "description", "file_extension"]
     hide_column_headers = True
     model = ArchiveImage
     paginate_by = 15
 
-    form_id = 'cradmin_legacy_imagearchive_bulkadd_form'
-    extra_form_css_classes = ['cradmin-legacy-form-noasterisk', 'cradmin-legacy-bulkfileupload-form-overlay']
-    template_name = 'cradmin_legacy/apps/cradmin_imagearchive/listview.django.html'
+    form_id = "cradmin_legacy_imagearchive_bulkadd_form"
+    extra_form_css_classes = ["cradmin-legacy-form-noasterisk", "cradmin-legacy-bulkfileupload-form-overlay"]
+    template_name = "cradmin_legacy/apps/cradmin_imagearchive/listview.django.html"
 
     def get_form_attributes(self):
         return {
-            'cradmin-legacy-bulkfileupload-form': '',
-            'cradmin-legacy-bulkfileupload-form-overlay': 'true',
-            'cradmin-legacy-bulkfileupload-form-open-overlay-on-window-dragdrop': 'true'
+            "cradmin-legacy-bulkfileupload-form": "",
+            "cradmin-legacy-bulkfileupload-form-overlay": "true",
+            "cradmin-legacy-bulkfileupload-form-open-overlay-on-window-dragdrop": "true",
         }
 
     def get_field_layout(self):
         return [
             layout.Div(
-                'filecollectionid',
+                "filecollectionid",
                 # css_class="cradmin-globalfields"),
-                css_class="cradmin-focusfield"),
+                css_class="cradmin-focusfield",
+            ),
         ]
 
     def get_buttons(self):
-        return [
-            AddImageOverlayButton(label=gettext_lazy('Add image'), buttonclass='btn btn-primary')
-        ]
+        return [AddImageOverlayButton(label=gettext_lazy("Add image"), buttonclass="btn btn-primary")]
 
     def get_button_layout(self):
         # Overridden because get_buttons from formbase.FormView and
@@ -213,9 +201,7 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
         return formhelper
 
     def upload_file_to_archive(self, temporaryfile):
-        archiveimage = ArchiveImage(
-            role=self.request.cradmin_role,
-            name=temporaryfile.filename)
+        archiveimage = ArchiveImage(role=self.request.cradmin_role, name=temporaryfile.filename)
         archiveimage.file_size = temporaryfile.file.size
         archiveimage.clean()
         archiveimage.save()
@@ -231,9 +217,7 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
         return uploaded_archiveimages
 
     def get_collectionqueryset(self):
-        return TemporaryFileCollection.objects\
-            .filter_for_user(self.request.user)\
-            .prefetch_related('files')
+        return TemporaryFileCollection.objects.filter_for_user(self.request.user).prefetch_related("files")
 
     def get_success_message(self, temporaryfilecollection):
         """
@@ -244,9 +228,7 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
         Used by :meth:`.add_success_messages`.
         """
         filenames = ['"{}"'.format(temporaryfile.filename) for temporaryfile in temporaryfilecollection.files.all()]
-        return gettext_lazy('Uploaded %(what)s.') % {
-            'what': ','.join(filenames)
-        }
+        return gettext_lazy("Uploaded %(what)s.") % {"what": ",".join(filenames)}
 
     def add_success_messages(self, temporaryfilecollection):
         """
@@ -264,7 +246,7 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
             messages.success(self.request, success_message)
 
     def form_valid(self, form):
-        collectionid = form.cleaned_data['filecollectionid']
+        collectionid = form.cleaned_data["filecollectionid"]
         try:
             temporaryfilecollection = self.get_collectionqueryset().get(id=collectionid)
         except TemporaryFileCollection.DoesNotExist:
@@ -291,10 +273,10 @@ class BaseImagesListView(ArchiveImagesQuerySetForRoleMixin, objecttable.ObjectTa
     def get_context_data(self, **kwargs):
         context = super(BaseImagesListView, self).get_context_data(**kwargs)
         self.add_context_data(context)
-        if 'form' not in context:
+        if "form" not in context:
             form_class = self.get_form_class()
             form = self.get_form(form_class)
-            context['form'] = form
+            context["form"] = form
         return context
 
 
@@ -302,6 +284,7 @@ class ArchiveImagesListView(BaseImagesListView):
     """
     The list view in the image achive app.
     """
+
     columns = [
         ImageColumn,
         DescriptionColumn,
@@ -319,13 +302,14 @@ class ArchiveImagesSingleSelectView(BaseImagesListView):
     """
     Used when selecting a single archive image as a foreign key.
     """
+
     columns = [
         ImageColumn,
         DescriptionSelectColumn,
     ]
     hide_menu = True
     form_class = SingleAddForm
-    listing_viewname = 'singleselect'
+    listing_viewname = "singleselect"
 
     def make_foreignkey_preview_for(self, obj):
         archiveimage = obj
@@ -344,21 +328,19 @@ class ArchiveImagesSingleSelectView(BaseImagesListView):
         return str(url)
 
 
-class ArchiveImageUpdateView(crudbase.OnlySaveButtonMixin,
-                             ArchiveImagesQuerySetForRoleMixin,
-                             update.UpdateView):
+class ArchiveImageUpdateView(crudbase.OnlySaveButtonMixin, ArchiveImagesQuerySetForRoleMixin, update.UpdateView):
     """
     View used to create edit existing images.
     """
+
     model = ArchiveImage
-    fields = ['description']
-    roleid_field = 'role'
+    fields = ["description"]
+    roleid_field = "role"
 
     def get_field_layout(self):
         return [
             layout.Div(
-                layout.Field('description', css_class='cradmin-textarea-small'),
-                css_class='cradmin-globalfields'
+                layout.Field("description", css_class="cradmin-textarea-small"), css_class="cradmin-globalfields"
             )
         ]
 
@@ -371,20 +353,8 @@ class ArchiveImageDeleteView(ArchiveImagesQuerySetForRoleMixin, delete.DeleteVie
 
 class App(crapp.App):
     appurls = [
-        crapp.Url(
-            r'^$',
-            ArchiveImagesListView.as_view(),
-            name=crapp.INDEXVIEW_NAME),
-        crapp.Url(
-            r'^singleselect$',
-            ArchiveImagesSingleSelectView.as_view(),
-            name='singleselect'),
-        crapp.Url(
-            r'^edit/(?P<pk>\d+)$',
-            ArchiveImageUpdateView.as_view(),
-            name="edit"),
-        crapp.Url(
-            r'^delete/(?P<pk>\d+)$',
-            ArchiveImageDeleteView.as_view(),
-            name="delete")
+        crapp.Url(r"^$", ArchiveImagesListView.as_view(), name=crapp.INDEXVIEW_NAME),
+        crapp.Url(r"^singleselect$", ArchiveImagesSingleSelectView.as_view(), name="singleselect"),
+        crapp.Url(r"^edit/(?P<pk>\d+)$", ArchiveImageUpdateView.as_view(), name="edit"),
+        crapp.Url(r"^delete/(?P<pk>\d+)$", ArchiveImageDeleteView.as_view(), name="delete"),
     ]

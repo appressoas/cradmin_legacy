@@ -33,9 +33,9 @@ def has_access_to_cradmin_instance(view_function, redirect_field_name=REDIRECT_F
         else:
             # Redirect to login just like login_required()
             from django.contrib.auth.views import redirect_to_login
+
             path = request.build_absolute_uri()
-            resolved_login_url = force_str(
-                resolve_url(login_url or settings.LOGIN_URL))
+            resolved_login_url = force_str(resolve_url(login_url or settings.LOGIN_URL))
             return redirect_to_login(path, resolved_login_url, redirect_field_name)
 
     return wrapper
@@ -57,7 +57,7 @@ def cradminview(view_function):
     @wraps(view_function)
     def wrapper(request, *args, **kwargs):
         if request.cradmin_instance.roleclass:
-            roleid = kwargs.pop('roleid')
+            roleid = kwargs.pop("roleid")
             role = request.cradmin_instance.get_role_from_roleid(roleid)
             if not role:
                 return request.cradmin_instance.invalid_roleid_response(roleid)

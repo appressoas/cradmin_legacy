@@ -8,14 +8,11 @@ def _cradmin_email_buttonlink(parser, token, linkstyle_context_variable):
     try:
         tag_name, url = token.split_contents()
     except ValueError:
-        raise template.TemplateSyntaxError(
-            "%r tag requires exactly one arguments" % token.contents.split()[0]
-        )
-    end_tag = 'end_{}'.format(tag_name)
+        raise template.TemplateSyntaxError("%r tag requires exactly one arguments" % token.contents.split()[0])
+    end_tag = "end_{}".format(tag_name)
     nodelist = parser.parse((end_tag,))
     parser.delete_first_token()
-    return CradminEmailButtonlinkNode(nodelist=nodelist, url=url,
-                                      linkstyle_context_variable=linkstyle_context_variable)
+    return CradminEmailButtonlinkNode(nodelist=nodelist, url=url, linkstyle_context_variable=linkstyle_context_variable)
 
 
 class CradminEmailButtonlinkNode(template.Node):
@@ -36,12 +33,11 @@ class CradminEmailButtonlinkNode(template.Node):
             url = self.url.resolve(context)
         else:
             url = self.url
-        linkstyle = context.get(self.linkstyle_context_variable, '')
-        return render_to_string('cradmin_email/templatetags/cradmin_email_buttonlink.django.html', {
-            'url': url,
-            'label': output,
-            'linkstyle': linkstyle
-        })
+        linkstyle = context.get(self.linkstyle_context_variable, "")
+        return render_to_string(
+            "cradmin_email/templatetags/cradmin_email_buttonlink.django.html",
+            {"url": url, "label": output, "linkstyle": linkstyle},
+        )
 
 
 @register.tag
@@ -69,8 +65,7 @@ def cradmin_email_primary_buttonlink(parser, token):
                 A primary button link
             {% end_cradmin_email_primary_buttonlink %}
     """
-    return _cradmin_email_buttonlink(parser, token,
-                                     linkstyle_context_variable='primary_button_link_style')
+    return _cradmin_email_buttonlink(parser, token, linkstyle_context_variable="primary_button_link_style")
 
 
 @register.tag
@@ -98,5 +93,4 @@ def cradmin_email_secondary_buttonlink(parser, token):
                 A secondary button link
             {% end_cradmin_email_primary_buttonlink %}
     """
-    return _cradmin_email_buttonlink(parser, token,
-                                     linkstyle_context_variable='secondary_button_link_style')
+    return _cradmin_email_buttonlink(parser, token, linkstyle_context_variable="secondary_button_link_style")

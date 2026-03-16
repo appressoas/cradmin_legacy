@@ -44,7 +44,7 @@ class AbstractCreateAccountForm(forms.ModelForm):
         helper = FormHelper()
         layoutargs = list(self.get_field_layout()) + list(self.get_button_layout()) + list(self.get_hidden_fields())
         helper.layout = layout.Layout(*layoutargs)
-        helper.form_action = '#'
+        helper.form_action = "#"
         form_id = self.get_form_id()
         if form_id:
             helper.form_id = form_id
@@ -57,14 +57,14 @@ class AbstractCreateAccountForm(forms.ModelForm):
 
         Override this to provide a custom label.
         """
-        return gettext_lazy('Sign up for %(sitename)s') % {'sitename': settings.CRADMIN_LEGACY_SITENAME}
+        return gettext_lazy("Sign up for %(sitename)s") % {"sitename": settings.CRADMIN_LEGACY_SITENAME}
 
     def get_button_layout(self):
         """
         Get the button layout. This is added to the crispy form layout.
         """
         return [
-            PrimarySubmitLg('submit-register', self.get_submit_button_label()),
+            PrimarySubmitLg("submit-register", self.get_submit_button_label()),
         ]
 
     def get_form_attributes(self):
@@ -88,7 +88,7 @@ class AbstractCreateAccountForm(forms.ModelForm):
 
         Defaults to `"cradmin_legacy_register_account_form"`.
         """
-        return 'cradmin_legacy_register_account_form'
+        return "cradmin_legacy_register_account_form"
 
     def get_field_layout(self):
         """
@@ -186,14 +186,10 @@ class AbstractCreateAccountWithPasswordForm(AbstractCreateAccountForm):
     """
 
     #: The first password.
-    password1 = forms.CharField(
-        label=gettext_lazy('Type your password'),
-        widget=forms.PasswordInput)
+    password1 = forms.CharField(label=gettext_lazy("Type your password"), widget=forms.PasswordInput)
 
     #: The repeat password fields.
-    password2 = forms.CharField(
-        label=gettext_lazy('Type your password one more time'),
-        widget=forms.PasswordInput)
+    password2 = forms.CharField(label=gettext_lazy("Type your password one more time"), widget=forms.PasswordInput)
 
     def set_password(self, user):
         """
@@ -201,7 +197,7 @@ class AbstractCreateAccountWithPasswordForm(AbstractCreateAccountForm):
 
         Does not save the user.
         """
-        raw_password = self.cleaned_data['password1']
+        raw_password = self.cleaned_data["password1"]
         user.set_password(raw_password)
 
     def clean(self):
@@ -227,6 +223,6 @@ class AbstractCreateAccountWithPasswordForm(AbstractCreateAccountForm):
         if password1 and password2:
             if password1 != password2:
                 raise forms.ValidationError(
-                    message=gettext_lazy('The passwords do not match.'),
-                    code='passwords_do_not_match')
+                    message=gettext_lazy("The passwords do not match."), code="passwords_do_not_match"
+                )
         return cleaned_data

@@ -44,8 +44,9 @@ class MultiSelectView(TemplateView):
     def _get_selected_objects_form_class(self):
         class MultiSelectForm(forms.Form):
             selected_objects = forms.ModelMultipleChoiceField(
-                widget=forms.MultipleHiddenInput,
-                queryset=self.get_queryset())
+                widget=forms.MultipleHiddenInput, queryset=self.get_queryset()
+            )
+
         return MultiSelectForm
 
     def _get_selected_objects_form(self):
@@ -59,7 +60,7 @@ class MultiSelectView(TemplateView):
         """
         self.selected_objects_form = self._get_selected_objects_form()
         if self.selected_objects_form.is_valid():
-            self.selected_objects = self.selected_objects_form.cleaned_data['selected_objects']
+            self.selected_objects = self.selected_objects_form.cleaned_data["selected_objects"]
             return self.object_selection_valid()
         else:
             return self.object_selection_invalid(self.selected_objects_form)
@@ -71,7 +72,7 @@ class MultiSelectView(TemplateView):
         the user submits the form where they selected what
         to perform the action for).
         """
-        return 'is_the_multiselect_form' in self.request.POST
+        return "is_the_multiselect_form" in self.request.POST
 
     def object_selection_valid(self):
         """
@@ -87,16 +88,21 @@ class MultiSelectView(TemplateView):
         Called if the form used to validate the selected objects is invalid.
         Must be overridden.
         """
-        return render(self.request, 'cradmin_legacy/error.django.html', {
-            'error': gettext_lazy(
-                'Invalid selection. This is usually caused by someone else changing '
-                'permissions while you where selecting items to edit.')
-        })
+        return render(
+            self.request,
+            "cradmin_legacy/error.django.html",
+            {
+                "error": gettext_lazy(
+                    "Invalid selection. This is usually caused by someone else changing "
+                    "permissions while you where selecting items to edit."
+                )
+            },
+        )
 
     def get_context_data(self, **kwargs):
         context = super(MultiSelectView, self).get_context_data(**kwargs)
-        context['selected_objects_form'] = self.selected_objects_form
-        context['selected_objects'] = self.selected_objects
+        context["selected_objects_form"] = self.selected_objects_form
+        context["selected_objects"] = self.selected_objects
         return context
 
     def get_success_url(self):
@@ -116,7 +122,7 @@ class MultiSelectView(TemplateView):
 
 
 class NoFormActionFormHelper(CradminFormHelper):
-    form_action = ''
+    form_action = ""
 
 
 class MultiSelectFormView(MultiSelectView, FormMixin):
@@ -135,7 +141,8 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
 
     You will most likely also want to override :meth:.get_buttons`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/multiselect/formview.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/multiselect/formview.django.html"
 
     #: The model class to edit. You do not have to specify
     #: this, but if you do not specify this, you have to override
@@ -156,15 +163,17 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
         :meth:`.MultiSelectView.is_first_load`.
         """
         kwargs = {
-            'initial': self.get_initial(),
-            'prefix': self.get_prefix(),
+            "initial": self.get_initial(),
+            "prefix": self.get_prefix(),
         }
 
-        if not self.is_first_load() and self.request.method in ('POST', 'PUT'):
-            kwargs.update({
-                'data': self.request.POST,
-                'files': self.request.FILES,
-            })
+        if not self.is_first_load() and self.request.method in ("POST", "PUT"):
+            kwargs.update(
+                {
+                    "data": self.request.POST,
+                    "files": self.request.FILES,
+                }
+            )
         return kwargs
 
     def object_selection_valid(self):
@@ -211,8 +220,8 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
 
     def get_context_data(self, **kwargs):
         context = super(MultiSelectFormView, self).get_context_data(**kwargs)
-        context['pagetitle'] = self.get_pagetitle()
-        context['formhelper'] = self.get_formhelper()
+        context["pagetitle"] = self.get_pagetitle()
+        context["formhelper"] = self.get_formhelper()
         return context
 
     def get_field_layout(self):
@@ -282,9 +291,7 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
         ``cradmin_legacy_submitrow`` containing all the buttons
         returned by :meth:`.get_buttons`.
         """
-        return [
-            layout.Div(*self.get_buttons(), css_class="cradmin_legacy_submitrow")
-        ]
+        return [layout.Div(*self.get_buttons(), css_class="cradmin_legacy_submitrow")]
 
     def get_formhelper(self):
         """

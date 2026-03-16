@@ -25,6 +25,7 @@ class Interface(object):
     is a singleton that only has one instance for the entire
     Django server process.
     """
+
     def transform_image(self, imageurl, **options):
         """
         Transforms the given ``imageurl`` by applying the
@@ -60,11 +61,13 @@ class Interface(object):
         Raises :exc:`.InvalidImageType` if the ``imagetype`` key is not defined in
         the :setting:`CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP` setting.
         """
-        if not hasattr(settings, 'CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP'):
-            raise ImageTypeMapSettingNotDefined('The CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP setting is not defined.')
+        if not hasattr(settings, "CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP"):
+            raise ImageTypeMapSettingNotDefined("The CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP setting is not defined.")
         try:
             options = settings.CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP[imagetype]
         except KeyError:
-            raise InvalidImageType('The requested imagetype, {}, is not specified in the '
-                                   'CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP setting.'.format(imagetype))
+            raise InvalidImageType(
+                "The requested imagetype, {}, is not specified in the "
+                "CRADMIN_LEGACY_IMAGEUTILS_IMAGETYPE_MAP setting.".format(imagetype)
+            )
         return self.transform_image(imageurl, **options)

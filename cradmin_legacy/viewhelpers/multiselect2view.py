@@ -16,6 +16,7 @@ class ViewMixin(FormMixin):
 
     This is typically used with a Django ListView or TemplateView.
     """
+
     def get_target_renderer_class(self):
         """
         Get the target renderer class.
@@ -35,9 +36,7 @@ class ViewMixin(FormMixin):
         You should call ``super()`` when overriding this method
         to get any default kwargs provided by this method.
         """
-        return {
-            'form': self.get_form(form_class=self.get_form_class())
-        }
+        return {"form": self.get_form(form_class=self.get_form_class())}
 
     def get_target_renderer(self):
         """
@@ -53,7 +52,7 @@ class ViewMixin(FormMixin):
         return self.get_target_renderer_class()(**self.get_target_renderer_kwargs())
 
     def __get_target_renderer(self):
-        if not hasattr(self, '_target_renderer'):
+        if not hasattr(self, "_target_renderer"):
             self._target_renderer = self.get_target_renderer()
         return self._target_renderer
 
@@ -66,7 +65,7 @@ class ViewMixin(FormMixin):
             dict: With options for the directive.
         """
         return {
-            'target_dom_id': self.__get_target_renderer().get_dom_id(),
+            "target_dom_id": self.__get_target_renderer().get_dom_id(),
         }
 
     def get_selectall_directive_json(self):
@@ -81,22 +80,22 @@ class ViewMixin(FormMixin):
         return len(self._get_selected_values_set()) > 0
 
     def __select_all_button_should_be_shown(self, context):
-        page_obj = context.get('page_obj', None)
+        page_obj = context.get("page_obj", None)
         if page_obj and page_obj.number != 1:
             return False
         return self.select_all_is_allowed()
 
     def get_context_data(self, **kwargs):
         context = super(ViewMixin, self).get_context_data(**kwargs)
-        context['target_renderer'] = self.__get_target_renderer()
-        context['selectall_directive_json'] = self.get_selectall_directive_json()
-        context['select_all_button_should_be_shown'] = self.__select_all_button_should_be_shown(context=context)
+        context["target_renderer"] = self.__get_target_renderer()
+        context["selectall_directive_json"] = self.get_selectall_directive_json()
+        context["select_all_button_should_be_shown"] = self.__select_all_button_should_be_shown(context=context)
 
         # When we have initial items, we reload page1 after selecting the initially
         # selected items. This is because we need to load the items to select them,
         # but we do not want the initial selection to affect any further paging
         # and filtering on the page.
-        context['must_reload_page1_on_load'] = self.__has_initially_selected_items()
+        context["must_reload_page1_on_load"] = self.__has_initially_selected_items()
         return context
 
     def is_initially_selected(self, value):
@@ -119,7 +118,7 @@ class ViewMixin(FormMixin):
         return value in self._get_selected_values_set()
 
     def __is_bgreplaced(self):
-        return self.request.GET.get('cradmin-bgreplaced', 'false') == 'true'
+        return self.request.GET.get("cradmin-bgreplaced", "false") == "true"
 
     def __value_is_selected(self, value):
         if self.__is_bgreplaced():
@@ -132,9 +131,7 @@ class ViewMixin(FormMixin):
         This method is called by :meth:`.get_listbuilder_list_kwargs` (below)
         to create kwargs for our value and frame renderers.
         """
-        return {
-            'is_selected': self.__value_is_selected(value=value)
-        }
+        return {"is_selected": self.__value_is_selected(value=value)}
 
     def get_value_and_frame_renderer_kwargs(self):
         """
@@ -150,10 +147,10 @@ class ViewMixin(FormMixin):
         Defaults to ``"selected_items"``, so you need to override this
         if you use something else in your form.
         """
-        return 'selected_items'
+        return "selected_items"
 
     def get_selectable_items_queryset(self):
-        if hasattr(self, 'get_unfiltered_queryset_for_role'):
+        if hasattr(self, "get_unfiltered_queryset_for_role"):
             queryset = self.get_unfiltered_queryset_for_role(role=self.request.cradmin_role)
         else:
             queryset = self.get_queryset_for_role(role=self.request.cradmin_role)
@@ -167,7 +164,7 @@ class ViewMixin(FormMixin):
             def __init__(self, *args, **kwargs):
                 super(SelectedItemsForm, self).__init__(*args, **kwargs)
                 self.fields[selected_items_form_attribute] = forms.ModelMultipleChoiceField(
-                        queryset=selectable_items_queryset
+                    queryset=selectable_items_queryset
                 )
 
         return SelectedItemsForm
@@ -202,7 +199,7 @@ class ViewMixin(FormMixin):
         return self.model.objects.none()
 
     def get_selected_values_queryset(self):
-        if self.request.method == 'POST':
+        if self.request.method == "POST":
             queryset = self.get_postrequest_selected_queryset()
         elif self.__is_bgreplaced():
             queryset = self.model.objects.none()
@@ -211,7 +208,7 @@ class ViewMixin(FormMixin):
         return queryset
 
     def _get_selected_values_set(self):
-        if not hasattr(self, '_selected_values_set'):
+        if not hasattr(self, "_selected_values_set"):
             self._selected_values_set = set(self.get_selected_values_queryset())
         return self._selected_values_set
 
@@ -282,7 +279,7 @@ class ViewMixin(FormMixin):
         The default implementation disables paging if ``disablePaging=true`` is
         in the querystring (in ``request.GET``).
         """
-        return self.request.GET.get('disablePaging', 'false') == 'true'
+        return self.request.GET.get("disablePaging", "false") == "true"
 
     def get_default_paginate_by(self, queryset):
         """
@@ -335,8 +332,7 @@ class ViewMixin(FormMixin):
         We do this by annotating the queryset with ``cradmin_multiselect2_ordering``,
         and inserting that as the first order_by argument.
         """
-        if self.get_paginate_by(queryset) and \
-                self.request.method == "POST" and self.__has_initially_selected_items():
+        if self.get_paginate_by(queryset) and self.request.method == "POST" and self.__has_initially_selected_items():
             current_order_by = list(queryset.query.order_by)
             whenqueries = []
             max_index = 0
@@ -345,12 +341,10 @@ class ViewMixin(FormMixin):
                 max_index = index
             queryset = queryset.annotate(
                 cradmin_multiselect2_ordering=models.Case(
-                    *whenqueries,
-                    default=max_index + 1,
-                    output_field=models.IntegerField()
+                    *whenqueries, default=max_index + 1, output_field=models.IntegerField()
                 )
             )
-            order_by = ['cradmin_multiselect2_ordering']
+            order_by = ["cradmin_multiselect2_ordering"]
             order_by.extend(current_order_by)
             queryset = queryset.order_by(*order_by)
         return queryset
@@ -369,7 +363,7 @@ class ViewMixin(FormMixin):
             first call, so calling this multiple times for a single request
             will only require one database query.
         """
-        if not hasattr(self, '_total_number_of_items_in_queryset'):
+        if not hasattr(self, "_total_number_of_items_in_queryset"):
             self._total_number_of_items_in_queryset = self.get_queryset().count()
         return self._total_number_of_items_in_queryset
 
@@ -403,7 +397,8 @@ class ListbuilderView(ViewMixin, listbuilderview.View):
     """
     Multiselect2 listbuilder view.
     """
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2view/listbuilderview.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/multiselect2view/listbuilderview.django.html"
     value_renderer_class = multiselect2.listbuilder_itemvalues.ItemValue
 
 
@@ -411,7 +406,8 @@ class ListbuilderFilterView(ViewMixin, listbuilderview.FilterListMixin, listbuil
     """
     Multiselect2 listbuilder view with filters.
     """
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2view/listbuilderfilterview.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/multiselect2view/listbuilderfilterview.django.html"
     value_renderer_class = multiselect2.listbuilder_itemvalues.ItemValue
 
     def get_filterlist_template_name(self):

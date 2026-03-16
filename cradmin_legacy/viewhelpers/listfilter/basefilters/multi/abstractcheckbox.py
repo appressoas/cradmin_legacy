@@ -8,7 +8,8 @@ class AbstractCheckboxFilter(AbstractFilter):
     You only have to override :meth:`~AbstractCheckboxFilter.get_choices` and
     :meth:`~AbstractCheckboxFilter.filter`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/multi/checkbox/base.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listfilter/django/multi/checkbox/base.django.html"
 
     def get_choices(self):
         """
@@ -17,7 +18,7 @@ class AbstractCheckboxFilter(AbstractFilter):
         raise NotImplementedError()
 
     def get_choices_cached(self):
-        if not hasattr(self, '_choices'):
+        if not hasattr(self, "_choices"):
             self._choices = self.get_choices()
         return self._choices
 
@@ -49,17 +50,19 @@ class AbstractCheckboxFilter(AbstractFilter):
                 url = self.build_remove_values_url(values=[value])
             else:
                 url = self.build_add_values_url(values=[value])
-            choicesdata.append({
-                'url': url,
-                'label': label,
-                'is_selected': is_selected,
-                'dom_id': '{}_{}'.format(self.get_inputfield_dom_id(), value)
-            })
+            choicesdata.append(
+                {
+                    "url": url,
+                    "label": label,
+                    "is_selected": is_selected,
+                    "dom_id": "{}_{}".format(self.get_inputfield_dom_id(), value),
+                }
+            )
         return choicesdata
 
     def get_context_data(self, request=None):
         context = super(AbstractCheckboxFilter, self).get_context_data(request=None)
-        context['choicesdata'] = self.get_choicesdata()
+        context["choicesdata"] = self.get_choicesdata()
         return context
 
     def get_cleaned_values(self):

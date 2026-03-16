@@ -1,2 +1,3 @@
 from __future__ import unicode_literals
-__author__ = 'bah'
+
+__author__ = "bah"

@@ -19,7 +19,7 @@ class FocusBox(base.ItemValueRenderer):
 
     def get_base_css_classes_list(self):
         css_classes = super(FocusBox, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-listbuilder-itemvalue-focusbox')
+        css_classes.append("cradmin-legacy-listbuilder-itemvalue-focusbox")
         return css_classes
 
 
@@ -32,7 +32,7 @@ class TitleDescription(FocusBox):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/titledescription.django.html'
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/itemvalue/titledescription.django.html"
 
     def get_base_css_classes_list(self):
         """
@@ -40,7 +40,7 @@ class TitleDescription(FocusBox):
         in addition to the classes added by the superclasses.
         """
         css_classes = super(TitleDescription, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-listbuilder-itemvalue-titledescription')
+        css_classes.append("cradmin-legacy-listbuilder-itemvalue-titledescription")
         return css_classes
 
     def get_title(self):
@@ -69,7 +69,7 @@ class UseThis(TitleDescription):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/use-this.django.html'
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/itemvalue/use-this.django.html"
 
     def get_base_css_classes_list(self):
         """
@@ -77,14 +77,14 @@ class UseThis(TitleDescription):
         in addition to the classes added by the superclasses.
         """
         css_classes = super(UseThis, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-listbuilder-itemvalue-usethis')
+        css_classes.append("cradmin-legacy-listbuilder-itemvalue-usethis")
         return css_classes
 
     def get_use_this_directive_options_dict(self, request):
         return {
-            'value': self.value.pk,
-            'fieldid': request.GET['foreignkey_select_fieldid'],
-            'preview': self.get_title()
+            "value": self.value.pk,
+            "fieldid": request.GET["foreignkey_select_fieldid"],
+            "preview": self.get_title(),
         }
 
     def get_use_this_directive_options_json(self, request):
@@ -92,7 +92,7 @@ class UseThis(TitleDescription):
 
     def get_context_data(self, request=None):
         context = super(UseThis, self).get_context_data(request=request)
-        context['use_this_directive_options_json'] = self.get_use_this_directive_options_json(request=request)
+        context["use_this_directive_options_json"] = self.get_use_this_directive_options_json(request=request)
         return context
 
 
@@ -108,7 +108,7 @@ class EditDelete(TitleDescription):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete.django.html'
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete.django.html"
 
     def get_base_css_classes_list(self):
         """
@@ -116,7 +116,7 @@ class EditDelete(TitleDescription):
         in addition to the classes added by the superclasses.
         """
         css_classes = super(EditDelete, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-listbuilder-itemvalue-editdelete')
+        css_classes.append("cradmin-legacy-listbuilder-itemvalue-editdelete")
         return css_classes
 
     def get_edit_viewname(self):
@@ -130,7 +130,7 @@ class EditDelete(TitleDescription):
         name the view for editing items this to keep things uniformly
         structured.
         """
-        return 'edit'
+        return "edit"
 
     def get_delete_viewname(self):
         """
@@ -143,7 +143,7 @@ class EditDelete(TitleDescription):
         name the view for deleting items this to keep things uniformly
         structured.
         """
-        return 'delete'
+        return "delete"
 
     def get_preview_viewname(self):
         """
@@ -178,12 +178,13 @@ class EditDeleteWithPreviewMixin(object):
 
             The example above is the same as using :class:`.EditDeleteWithPreviewMixin`.
     """
+
     def get_preview_viewname(self):
         """
         Overrides :meth:`.EditDelete.get_preview_viewname` to make it return
         ``"preview"`` by default instead of ``None``.
         """
-        return 'preview'
+        return "preview"
 
 
 class EditDeleteWithPreview(EditDeleteWithPreviewMixin, EditDelete):
@@ -202,7 +203,7 @@ class EditDeleteWithArchiveImage(EditDelete):
 
     #: The template used to render this itemvalue.
     #: The template has lots of blocks that you can override.
-    template_name = 'cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete-with-archive-image.django.html'
+    template_name = "cradmin_legacy/viewhelpers/listbuilder/itemvalue/edit-delete-with-archive-image.django.html"
 
     def get_archiveimage(self):
         """
@@ -242,10 +243,10 @@ class EditDeleteWithArchiveImage(EditDelete):
             }
         """
         return {
-            'width': 330,
-            'height': 400,
-            'crop': 'limit',
-            'quality': 70,
+            "width": 330,
+            "height": 400,
+            "crop": "limit",
+            "quality": 70,
         }
 
 

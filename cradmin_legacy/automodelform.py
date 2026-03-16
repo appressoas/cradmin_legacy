@@ -16,6 +16,7 @@ class ModelForm(forms.ModelForm):
     A subclass of :class:`django.form.ModelForm` that automatically sets
     up good default widgets and other things for the fields.
     """
+
     def __init__(self, *args, **kwargs):
         """
         Parameters:
@@ -24,7 +25,7 @@ class ModelForm(forms.ModelForm):
                 some widgets depend on data from the view (such
                 as ``view.request``).
         """
-        self.view = kwargs.pop('view', None)
+        self.view = kwargs.pop("view", None)
         super(ModelForm, self).__init__(*args, **kwargs)
         self.autosetup_fields()
 
@@ -39,9 +40,7 @@ class ModelForm(forms.ModelForm):
             fieldname: The name of the field.
             formfield: The form field object.
         """
-        self.fields[fieldname].widget = datetimepicker.DateTimePickerWidget(
-            required=formfield.required
-        )
+        self.fields[fieldname].widget = datetimepicker.DateTimePickerWidget(required=formfield.required)
 
     def setup_date_field(self, fieldname, formfield):
         """
@@ -54,9 +53,7 @@ class ModelForm(forms.ModelForm):
             fieldname: The name of the field.
             formfield: The form field object.
         """
-        self.fields[fieldname].widget = datetimepicker.DatePickerWidget(
-            required=formfield.required
-        )
+        self.fields[fieldname].widget = datetimepicker.DatePickerWidget(required=formfield.required)
 
     def setup_file_field(self, fieldname, formfield):
         """
@@ -69,9 +66,7 @@ class ModelForm(forms.ModelForm):
             fieldname: The name of the field.
             formfield: The form field object.
         """
-        self.fields[fieldname].widget = filewidgets.FileWidget(
-            clearable=not formfield.required
-        )
+        self.fields[fieldname].widget = filewidgets.FileWidget(clearable=not formfield.required)
 
     def setup_image_field(self, fieldname, formfield):
         """
@@ -109,7 +104,7 @@ class ModelForm(forms.ModelForm):
             relatedobject: The related model object.
         """
         if relatedobject is None:
-            return pgettext('automodelform modelchoice_field no value', '(Not selected)')
+            return pgettext("automodelform modelchoice_field no value", "(Not selected)")
         else:
             return str(relatedobject)
 
@@ -126,7 +121,7 @@ class ModelForm(forms.ModelForm):
             fieldname: The name of the field.
             formfield: The form field object.
         """
-        if not self.view or not hasattr(self.view.request, 'cradmin_instance'):
+        if not self.view or not hasattr(self.view.request, "cradmin_instance"):
             return
         model_class = formfield.queryset.model
         cradmin_instance = self.view.request.cradmin_instance
@@ -134,21 +129,20 @@ class ModelForm(forms.ModelForm):
         if not foreignkeyselectview_url:
             return
 
-        preview = ''
+        preview = ""
         if self.instance:
             try:
                 relatedobject = getattr(self.instance, fieldname)
             except model_class.DoesNotExist:
                 pass
             else:
-                preview = self.make_related_object_preview(fieldname=fieldname,
-                                                           formfield=formfield,
-                                                           relatedobject=relatedobject)
+                preview = self.make_related_object_preview(
+                    fieldname=fieldname, formfield=formfield, relatedobject=relatedobject
+                )
 
         self.fields[fieldname].widget = modelchoice.ModelChoiceWidget(
-            queryset=formfield.queryset,
-            preview=preview,
-            selectview_url=foreignkeyselectview_url)
+            queryset=formfield.queryset, preview=preview, selectview_url=foreignkeyselectview_url
+        )
 
     def setup_modelmultichoice_field(self, fieldname, formfield):
         """
@@ -163,7 +157,7 @@ class ModelForm(forms.ModelForm):
             fieldname: The name of the field.
             formfield: The form field object.
         """
-        if not self.view or not hasattr(self.view.request, 'cradmin_instance'):
+        if not self.view or not hasattr(self.view.request, "cradmin_instance"):
             return
         model_class = formfield.queryset.model
         cradmin_instance = self.view.request.cradmin_instance
@@ -172,9 +166,8 @@ class ModelForm(forms.ModelForm):
             return
 
         self.fields[fieldname].widget = manytomanywidget.Widget(
-            queryset=formfield.queryset,
-            selectview_url=manytomanyselectview_url,
-            required=formfield.required)
+            queryset=formfield.queryset, selectview_url=manytomanyselectview_url, required=formfield.required
+        )
 
     def setup_field(self, fieldname, formfield):
         """

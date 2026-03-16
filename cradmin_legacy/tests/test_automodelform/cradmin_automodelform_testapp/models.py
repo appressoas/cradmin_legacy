@@ -20,4 +20,4 @@ class AutoFormTestModel(models.Model):
     members = models.ManyToManyField(Member, blank=True)
 
     def __str__(self):
-        return 'MyModel#{}'.format(self.id)
+        return "MyModel#{}".format(self.id)

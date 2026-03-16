@@ -26,6 +26,7 @@ class MockRequestResponse(object):
         response as input. Only available when using
         :meth:`.TestCaseMixin.mock_http200_getrequest_htmls`.
     """
+
     def __init__(self, response, request):
         self.response = response
         self.request = request
@@ -119,22 +120,26 @@ class TestCaseMixin(object):
                         '')
 
     """
+
     #: The view class - must be set in subclasses
     viewclass = None
 
     def create_default_user_for_mock_request(self):
         return baker.make(settings.AUTH_USER_MODEL)
 
-    def mock_request(self, method,
-                     cradmin_role=None,
-                     cradmin_app=None,
-                     cradmin_instance=None,
-                     requestuser=None,
-                     messagesmock=None,
-                     sessionmock=None,
-                     requestattributes={},
-                     requestkwargs=None,
-                     viewkwargs=None):
+    def mock_request(
+        self,
+        method,
+        cradmin_role=None,
+        cradmin_app=None,
+        cradmin_instance=None,
+        requestuser=None,
+        messagesmock=None,
+        sessionmock=None,
+        requestattributes={},
+        requestkwargs=None,
+        viewkwargs=None,
+    ):
         """
         Create a mocked request using ``RequestFactory`` and ``mock.MagicMock``.
 
@@ -148,10 +153,8 @@ class TestCaseMixin(object):
             messagesmock: The request._messages to use. Defaults to mock.MagicMock().
         """
         if self.viewclass is None:
-            raise NotImplementedError('You must set the viewclass attribute on TestCase classes using TestCaseMixin.')
-        requestkwargs_full = {
-            'path': '/'
-        }
+            raise NotImplementedError("You must set the viewclass attribute on TestCase classes using TestCaseMixin.")
+        requestkwargs_full = {"path": "/"}
         if requestkwargs:
             requestkwargs_full.update(requestkwargs)
         viewkwargs = viewkwargs or {}
@@ -169,10 +172,10 @@ class TestCaseMixin(object):
         return MockRequestResponse(response=response, request=request)
 
     def mock_getrequest(self, **kwargs):
-        return self.mock_request(method='get', **kwargs)
+        return self.mock_request(method="get", **kwargs)
 
     def mock_http302_getrequest(self, **kwargs):
-        mockresponse = self.mock_request(method='get', **kwargs)
+        mockresponse = self.mock_request(method="get", **kwargs)
         self.assertEqual(mockresponse.response.status_code, 302)
         return mockresponse
 
@@ -185,7 +188,7 @@ class TestCaseMixin(object):
         return mockresponse
 
     def mock_postrequest(self, **kwargs):
-        return self.mock_request(method='post', **kwargs)
+        return self.mock_request(method="post", **kwargs)
 
     def mock_http200_postrequest_htmls(self, **kwargs):
         mockresponse = self.mock_postrequest(**kwargs)

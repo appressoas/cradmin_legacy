@@ -1,3 +1,3 @@
 from . import checkbox  # noqa
 
-__all__ = ['checkbox']
+__all__ = ["checkbox"]

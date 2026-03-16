@@ -4,8 +4,10 @@ from builtins import object
 from django.conf import settings
 
 from cradmin_legacy.apps.cradmin_email import emailutils
-from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata, \
-    get_expiration_datetime_for_app
+from django_cradmin.apps.cradmin_generic_token_with_metadata.models import (
+    GenericTokenWithMetadata,
+    get_expiration_datetime_for_app,
+)
 
 
 class InviteEmail(emailutils.AbstractEmail):
@@ -15,14 +17,13 @@ class InviteEmail(emailutils.AbstractEmail):
     You may want to provide your own and override
     :meth:`.InviteUrl.get_invite_email_class`.
     """
-    subject_template = 'cradmin_invite/email/subject.django.txt'
-    html_message_template = 'cradmin_invite/email/html_message.django.html'
+
+    subject_template = "cradmin_invite/email/subject.django.txt"
+    html_message_template = "cradmin_invite/email/html_message.django.html"
 
     def get_context_data(self):
         context = super(InviteEmail, self).get_context_data()
-        context.update({
-            'CRADMIN_LEGACY_SITENAME': settings.CRADMIN_LEGACY_SITENAME
-        })
+        context.update({"CRADMIN_LEGACY_SITENAME": settings.CRADMIN_LEGACY_SITENAME})
         return context
 
 
@@ -67,8 +68,8 @@ class InviteUrl(object):
         self.private = private
         self.content_object = content_object
         self.metadata = metadata
-        if 'expiration_datetime' in kwargs:
-            self.expiration_datetime = kwargs['expiration_datetime']
+        if "expiration_datetime" in kwargs:
+            self.expiration_datetime = kwargs["expiration_datetime"]
 
     def get_appname(self):
         """
@@ -102,7 +103,7 @@ class InviteUrl(object):
         Defaults to the ``CRADMIN_LEGACY_INVITE_FROM_EMAIL`` setting
         falling back on the ``DEFAULT_FROM_EMAIL`` setting.
         """
-        return getattr(settings, 'CRADMIN_LEGACY_INVITE_FROM_EMAIL', settings.DEFAULT_FROM_EMAIL)
+        return getattr(settings, "CRADMIN_LEGACY_INVITE_FROM_EMAIL", settings.DEFAULT_FROM_EMAIL)
 
     def get_expiration_datetime(self):
         """
@@ -113,7 +114,7 @@ class InviteUrl(object):
         and falls back to getting the configured expiration datetime for
         the app.
         """
-        if hasattr(self, 'expiration_datetime'):
+        if hasattr(self, "expiration_datetime"):
             return self.expiration_datetime
         else:
             return get_expiration_datetime_for_app(self.get_appname())
@@ -122,17 +123,17 @@ class InviteUrl(object):
         metadata = self.metadata
         if email:
             if self.metadata is None:
-                metadata = {'email': email}
+                metadata = {"email": email}
             elif isinstance(self.metadata, dict):
-                if 'email' not in self.metadata:
+                if "email" not in self.metadata:
                     metadata = self.metadata.copy()
-                    metadata['email'] = email
+                    metadata["email"] = email
 
         return GenericTokenWithMetadata.objects.generate(
             app=self.get_appname(),
             expiration_datetime=self.get_expiration_datetime(),
             content_object=self.content_object,
-            metadata=metadata
+            metadata=metadata,
         )
 
     def generate_generictoken(self, email=None):
@@ -141,7 +142,7 @@ class InviteUrl(object):
             return self._generate_generictoken(email=email)
         else:
             # If public, re-use the same token and ignore email argument
-            if hasattr(self, '_generictoken'):
+            if hasattr(self, "_generictoken"):
                 return self._generictoken
             else:
                 self._generictoken = self._generate_generictoken()
@@ -162,9 +163,7 @@ class InviteUrl(object):
 
         Make sure you call ``super`` and extend the returned dict.
         """
-        return {
-            'confirm_invite_url': self.__get_absolute_confirm_invite_url(generictoken)
-        }
+        return {"confirm_invite_url": self.__get_absolute_confirm_invite_url(generictoken)}
 
     def send_email(self, *emails):
         """
@@ -188,7 +187,7 @@ class InviteUrl(object):
             invite_email_class(
                 recipient=email,
                 from_email=self.get_from_email(),
-                extra_context_data=self.get_extra_invite_email_context_data(generictoken)
+                extra_context_data=self.get_extra_invite_email_context_data(generictoken),
             ).send()
 
     def get_share_url(self):

@@ -7,12 +7,13 @@ class AbstractInputFilter(AbstractFilter):
     """
     Abstract base class for any filter that uses a single text input field.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/single/textinput/base.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listfilter/django/single/textinput/base.django.html"
 
     #: The text used in URLs as placeholder for the value of this filter.
     #: The AngularJS directive replaces this with the actual value.
     #: You should not have to override this.
-    urlpattern_replace_text = '_-_TEXTINPUT_-_VALUE_-_'
+    urlpattern_replace_text = "_-_TEXTINPUT_-_VALUE_-_"
 
     def get_input_html_element_type(self):
         """
@@ -20,7 +21,7 @@ class AbstractInputFilter(AbstractFilter):
 
         Defaults to ``"text"``.
         """
-        return 'text'
+        return "text"
 
     def get_input_html_element_pattern(self):
         """
@@ -34,7 +35,7 @@ class AbstractInputFilter(AbstractFilter):
 
     def get_base_css_classes_list(self):
         css_classes = super(AbstractInputFilter, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-listfilter-filter-single-input')
+        css_classes.append("cradmin-legacy-listfilter-filter-single-input")
         return css_classes
 
     def get_placeholder(self):
@@ -43,10 +44,10 @@ class AbstractInputFilter(AbstractFilter):
 
         Defaults to empty string.
         """
-        return ''
+        return ""
 
     def get_inputfield_value(self):
-        return self.get_cleaned_value() or ''
+        return self.get_cleaned_value() or ""
 
     def get_urlpattern(self):
         """
@@ -77,8 +78,8 @@ class AbstractInputFilter(AbstractFilter):
 
     def get_angularjs_options_dict(self):
         options_dict = super(AbstractInputFilter, self).get_angularjs_options_dict()
-        options_dict['timeout_milliseconds'] = self.get_timeout_milliseconds()
-        options_dict['urlpattern_replace_text'] = self.urlpattern_replace_text
+        options_dict["timeout_milliseconds"] = self.get_timeout_milliseconds()
+        options_dict["urlpattern_replace_text"] = self.urlpattern_replace_text
         return options_dict
 
 
@@ -90,12 +91,13 @@ class IntInputFilterMixin(object):
 
     Must be mixed in **before** :class:`AbstractInputFilter`.
     """
+
     def get_cleaned_value(self):
         """
         Get the value as an ``int``, or ``None`` (if no value is provided).
         """
         cleaned_value = super(IntInputFilterMixin, self).get_cleaned_value()
-        if cleaned_value in (None, ''):
+        if cleaned_value in (None, ""):
             return None
         try:
             return int(cleaned_value)
@@ -103,7 +105,7 @@ class IntInputFilterMixin(object):
             return None
 
     def get_placeholder(self):
-        return pgettext_lazy('listfilter IntInputFilterMixin', 'Type a number ...')
+        return pgettext_lazy("listfilter IntInputFilterMixin", "Type a number ...")
 
 
 class AbstractSearch(AbstractInputFilter):
@@ -116,13 +118,14 @@ class AbstractSearch(AbstractInputFilter):
     See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.textinput.Search`
     for a Django ORM implementation.
     """
+
     def get_base_css_classes_list(self):
         css_classes = super(AbstractSearch, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-listfilter-filter-single-input-search')
+        css_classes.append("cradmin-legacy-listfilter-filter-single-input-search")
         return css_classes
 
     def get_placeholder(self):
-        return gettext_lazy('Search ...')
+        return gettext_lazy("Search ...")
 
     def get_loadingmessage(self):
-        return pgettext('listfilter loading message', 'Searching')
+        return pgettext("listfilter loading message", "Searching")

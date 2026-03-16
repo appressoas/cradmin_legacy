@@ -12,6 +12,7 @@ class ViewMixin(FormMixin):
     Base class for the mixin classes for views that is shown in an iframe
     by :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
     """
+
     hide_menu = True
 
     #: The default target renderer task. Should be a subclass of
@@ -26,7 +27,7 @@ class ViewMixin(FormMixin):
             list: json decodes ``request.GET['manytomany_select_current_value']``
             and returns the result.
         """
-        return json.loads(self.request.GET['manytomany_select_current_value'])
+        return json.loads(self.request.GET["manytomany_select_current_value"])
 
     def get_selected_objects(self):
         """
@@ -41,7 +42,7 @@ class ViewMixin(FormMixin):
             :meth:`.get_selected_values_list`. Defaults to filtering
             the values with ``pk__in=<get_selected_values_list()>``.
         """
-        if hasattr(self, 'get_unfiltered_queryset_for_role'):
+        if hasattr(self, "get_unfiltered_queryset_for_role"):
             queryset = self.get_unfiltered_queryset_for_role(self.request.cradmin_role)
         else:
             queryset = self.get_queryset_for_role(self.request.cradmin_role)
@@ -59,12 +60,12 @@ class ViewMixin(FormMixin):
         Returns:
             bool: Should we include previously selected values in the listbuilder list.
         """
-        if hasattr(self, 'get_filters_string') and self.get_filters_string():
+        if hasattr(self, "get_filters_string") and self.get_filters_string():
             return False
-        elif getattr(self, 'paginate_by', None):
+        elif getattr(self, "paginate_by", None):
             page_kwarg = self.page_kwarg
             page = self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1
-            return str(page) == '1'
+            return str(page) == "1"
         else:
             return True
 
@@ -90,9 +91,9 @@ class ViewMixin(FormMixin):
             dict: Keyword arguments for the constructor of :meth:`.get_target_renderer_class`.
         """
         return {
-            'target_formfield_id': self.request.GET['manytomany_select_fieldid'],
-            'empty_selection_allowed': self.request.GET['manytomany_select_required'] != 'True',
-            'form': self.get_form(form_class=self.get_form_class())
+            "target_formfield_id": self.request.GET["manytomany_select_fieldid"],
+            "empty_selection_allowed": self.request.GET["manytomany_select_required"] != "True",
+            "form": self.get_form(form_class=self.get_form_class()),
         }
 
     def get_target_renderer(self):
@@ -133,6 +134,7 @@ class ListBuilderViewMixin(ViewMixin):
                     context['target_renderer'] = self.get_target_renderer()
                     return context
     """
+
     value_renderer_class = listbuilder_itemvalues.ManyToManySelect
 
     def get_listbuilder_list(self, context):
@@ -144,9 +146,8 @@ class ListBuilderViewMixin(ViewMixin):
                 value_iterable=self.get_selected_objects(),
                 value_renderer_class=value_renderer_class,
                 frame_renderer_class=frame_renderer_class,
-                value_and_frame_renderer_kwargs={
-                    'is_selected': True
-                })
+                value_and_frame_renderer_kwargs={"is_selected": True},
+            )
         return listbuilder_list
 
 
@@ -174,6 +175,7 @@ class ListBuilderFilterListViewMixin(ListBuilderViewMixin):
                 def get_queryset_for_role(self, role):
                     ...
     """
+
     def get_filterlist_url(self, filters_string):
         """
         Implements :meth:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin#get_filterlist_url`
@@ -181,7 +183,8 @@ class ListBuilderFilterListViewMixin(ListBuilderViewMixin):
         that takes ``filters_string`` as kwarg.
         """
         return self.request.cradmin_app.reverse_appurl(
-            'manytomanyselect-filter', kwargs={'filters_string': filters_string})
+            "manytomanyselect-filter", kwargs={"filters_string": filters_string}
+        )
 
     def add_target_renderer_to_filterlist(self, filterlist):
         """

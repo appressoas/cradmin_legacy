@@ -35,7 +35,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     #: The name of the submit button used for preview.
     #: Only used when :meth:`.preview_url` is defined.
-    submit_preview_name = 'submit-preview'
+    submit_preview_name = "submit-preview"
 
     #: The field that should always be set to the current role.
     #: Removes the field from the form (see :meth:`.get_form`),
@@ -45,7 +45,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     #: The viewname within this app for the edit view.
     #: See :meth:`.get_editurl`.
-    editview_appurl_name = 'edit'
+    editview_appurl_name = "edit"
 
     def get_model_class(self):
         """
@@ -80,13 +80,13 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         kwargs = super(CreateUpdateViewMixin, self).get_form_kwargs()
         form_class = self.get_form_class()
         if issubclass(form_class, automodelform.ModelForm):
-            kwargs['view'] = self
+            kwargs["view"] = self
         return kwargs
 
     def add_preview_button_if_configured(self, buttons):
         preview_url = self.get_preview_url()
         if preview_url:
-            buttons.append(DefaultSubmit(self.submit_preview_name, gettext_lazy('Preview')))
+            buttons.append(DefaultSubmit(self.submit_preview_name, gettext_lazy("Preview")))
 
     def get_model_fields(self):
         """
@@ -135,7 +135,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
         """
         fields = self.get_model_fields()
-        return [layout.Div(*fields, css_class='cradmin-globalfields')]
+        return [layout.Div(*fields, css_class="cradmin-globalfields")]
 
     def get_form(self, form_class=None):
         """
@@ -160,7 +160,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     def get_context_data(self, **kwargs):
         context = super(CreateUpdateViewMixin, self).get_context_data(**kwargs)
-        context['model_verbose_name'] = self.get_model_class()._meta.verbose_name
+        context["model_verbose_name"] = self.get_model_class()._meta.verbose_name
         return context
 
     def get_editurl(self, obj):
@@ -175,10 +175,8 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     def _get_full_editurl(self, obj):
         url = self.get_editurl(obj)
-        if 'success_url' in self.request.GET:
-            url = '{}?{}'.format(
-                url, urllib.parse.urlencode({
-                    'success_url': self.request.GET['success_url']}))
+        if "success_url" in self.request.GET:
+            url = "{}?{}".format(url, urllib.parse.urlencode({"success_url": self.request.GET["success_url"]}))
         return url
 
     def get_success_url(self):
@@ -282,7 +280,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
         Used by :meth:`.add_form_invalid_messages`.
         """
-        return gettext_lazy('Please fix the errors in the form below.')
+        return gettext_lazy("Please fix the errors in the form below.")
 
     def add_form_invalid_messages(self, form):
         """
@@ -311,7 +309,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         You can safely override this, but you will also have to override
         :meth:`deserialize_preview`.
         """
-        return serializers.serialize('json', [self.save_object(form, commit=False)])
+        return serializers.serialize("json", [self.save_object(form, commit=False)])
 
     @classmethod
     def deserialize_preview(cls, serialized):
@@ -321,7 +319,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         You must override this and :meth:`.serialize_preview` - they work together
         to send the preview to the preview View.
         """
-        return list(serializers.deserialize('json', serialized))[0].object
+        return list(serializers.deserialize("json", serialized))[0].object
 
     @classmethod
     def get_preview_sessionkey(cls):
@@ -336,9 +334,9 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         you fetch preview data from create or update views
         for the same model (to simplify implementing preview views).
         """
-        sessionkey = 'cradmin_legacy__{module}.{classname}'.format(
-            module=cls.model.__module__,
-            classname=cls.model.__name__)
+        sessionkey = "cradmin_legacy__{module}.{classname}".format(
+            module=cls.model.__module__, classname=cls.model.__name__
+        )
         return sessionkey
 
 
@@ -350,8 +348,9 @@ class OnlySaveButtonMixin(object):
     You must mix this in **before** any :class:`.CreateUpdateViewMixin`
     subclass (like UpdateView or CreateView).
     """
+
     def get_buttons(self):
-        if hasattr(self, 'is_in_foreignkey_select_mode') and self.is_in_foreignkey_select_mode():
+        if hasattr(self, "is_in_foreignkey_select_mode") and self.is_in_foreignkey_select_mode():
             return super(OnlySaveButtonMixin, self).get_buttons()
         buttons = [
             PrimarySubmit(self.get_submit_save_button_name(), self.get_submit_save_label()),

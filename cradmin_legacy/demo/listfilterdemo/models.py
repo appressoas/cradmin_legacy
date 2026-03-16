@@ -8,9 +8,7 @@ from future.utils import python_2_unicode_compatible
 @python_2_unicode_compatible
 class Site(models.Model):
     name = models.CharField(max_length=100)
-    admins = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name='listfilterdemo_admins')
+    admins = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="listfilterdemo_admins")
 
 
 @python_2_unicode_compatible

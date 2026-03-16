@@ -9,8 +9,7 @@ from cradmin_legacy.crispylayouts import PrimarySubmitBlock, CradminFormHelper
 from cradmin_legacy.viewhelpers.listfilter.base import abstractfilterlistchild
 
 
-class Target(renderable.AbstractRenderableWithCss,
-             abstractfilterlistchild.FilterListChildMixin):
+class Target(renderable.AbstractRenderableWithCss, abstractfilterlistchild.FilterListChildMixin):
     """
     Renders a multiselect target form.
 
@@ -19,23 +18,26 @@ class Target(renderable.AbstractRenderableWithCss,
     """
 
     #: The template used to render this renderable.
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2/target_renderer/target.django.html'
+    template_name = "cradmin_legacy/viewhelpers/multiselect2/target_renderer/target.django.html"
 
     #: The default for :meth:`.~Target.get_dom_id`.
-    default_target_dom_id = 'cradmin_legacy_multiselect2_select_target'
+    default_target_dom_id = "cradmin_legacy_multiselect2_select_target"
 
     #: Used to add custom attributes like angularjs directives to the form.
     #: See :meth:`.get_form_attributes`.
     form_attributes = {}
 
-    def __init__(self, form,
-                 dom_id=None,
-                 without_items_text=None,
-                 with_items_title=None,
-                 no_items_selected_text=None,
-                 submit_button_text=None,
-                 form_action=None,
-                 empty_selection_allowed=False):
+    def __init__(
+        self,
+        form,
+        dom_id=None,
+        without_items_text=None,
+        with_items_title=None,
+        no_items_selected_text=None,
+        submit_button_text=None,
+        form_action=None,
+        empty_selection_allowed=False,
+    ):
         """
         Args:
             form: A django Form object.
@@ -79,7 +81,7 @@ class Target(renderable.AbstractRenderableWithCss,
         if self.with_items_title:
             return self.with_items_title
         else:
-            return pgettext_lazy('multiselect2 target renderer', 'Selected items')
+            return pgettext_lazy("multiselect2 target renderer", "Selected items")
 
     def get_submit_button_text(self):
         """
@@ -95,7 +97,7 @@ class Target(renderable.AbstractRenderableWithCss,
         if self.submit_button_text:
             return self.submit_button_text
         else:
-            return pgettext_lazy('multiselect2 target renderer', 'Submit selection')
+            return pgettext_lazy("multiselect2 target renderer", "Submit selection")
 
     def get_without_items_text(self):
         """
@@ -109,7 +111,7 @@ class Target(renderable.AbstractRenderableWithCss,
         if self.without_items_text:
             return self.without_items_text
         else:
-            return ''
+            return ""
 
     def get_empty_selection_allowed(self):
         """
@@ -132,7 +134,7 @@ class Target(renderable.AbstractRenderableWithCss,
         if self.no_items_selected_text:
             return self.no_items_selected_text
         else:
-            return pgettext_lazy('multiselect2 target renderer', '(None)')
+            return pgettext_lazy("multiselect2 target renderer", "(None)")
 
     def get_form_action(self, request):
         """
@@ -179,7 +181,7 @@ class Target(renderable.AbstractRenderableWithCss,
             dict: With options for the directive.
         """
         return {
-            'updateFormActionToWindowLocation': self.post_url_as_it_is_when_form_is_submitted(),
+            "updateFormActionToWindowLocation": self.post_url_as_it_is_when_form_is_submitted(),
         }
 
     def get_angularjs_directive_json(self):
@@ -194,8 +196,8 @@ class Target(renderable.AbstractRenderableWithCss,
 
     def get_context_data(self, request=None):
         context = super(Target, self).get_context_data(request=request)
-        context['form_action'] = self.get_form_action(request=request)
-        context['angularjs_directive_json'] = self.get_angularjs_directive_json()
+        context["form_action"] = self.get_form_action(request=request)
+        context["angularjs_directive_json"] = self.get_angularjs_directive_json()
         return context
 
     def get_field_layout(self):
@@ -249,7 +251,7 @@ class Target(renderable.AbstractRenderableWithCss,
             The default label is returned by :meth:`.get_submit_button_text`.
         """
         return [
-            PrimarySubmitBlock('save', self.get_submit_button_text()),
+            PrimarySubmitBlock("save", self.get_submit_button_text()),
         ]
 
     def get_button_layout(self):
@@ -263,10 +265,7 @@ class Target(renderable.AbstractRenderableWithCss,
         ``cradmin-legacy-multiselect2-target-submitbuttons`` containing all the buttons
         returned by :meth:`.get_buttons`.
         """
-        return [
-            layout.Div(*self.get_buttons(),
-                       css_class="cradmin-legacy-multiselect2-target-submitbuttons")
-        ]
+        return [layout.Div(*self.get_buttons(), css_class="cradmin-legacy-multiselect2-target-submitbuttons")]
 
     def get_formhelper_class(self):
         return CradminFormHelper
@@ -294,6 +293,7 @@ class ManyToManySelectTarget(Target):
     Renders a multiselect target form for
     :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
     """
+
     def __init__(self, target_formfield_id, *args, **kwargs):
         """
         Args:
@@ -303,15 +303,16 @@ class ManyToManySelectTarget(Target):
         super(ManyToManySelectTarget, self).__init__(*args, **kwargs)
 
     def get_usethis_directive_dict(self):
-        return {
-            'fieldid': self.target_formfield_id
-        }
+        return {"fieldid": self.target_formfield_id}
 
     def get_usethis_directive_json(self):
         return json.dumps(self.get_usethis_directive_dict())
 
     def get_buttons(self):
         return [
-            PrimarySubmitBlock('usethis', self.get_submit_button_text(),
-                               cradmin_legacy_multiselect2_use_this=self.get_usethis_directive_json()),
+            PrimarySubmitBlock(
+                "usethis",
+                self.get_submit_button_text(),
+                cradmin_legacy_multiselect2_use_this=self.get_usethis_directive_json(),
+            ),
         ]

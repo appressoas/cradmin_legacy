@@ -11,35 +11,35 @@ from .crapps import edit_user
 class Menu(crmenu.Menu):
     def build_menu(self):
         if self.request.cradmin_instance.get_rolequeryset().count() > 1:
-            self.add_headeritem(
-                label=gettext_lazy('Select user'),
-                url=self.roleselectview_url(),
-                icon='chevron-up')
+            self.add_headeritem(label=gettext_lazy("Select user"), url=self.roleselectview_url(), icon="chevron-up")
 
         self.add_menuitem(
-            label=gettext_lazy('Account overview'), url=self.appindex_url('overview'),
-            active=self.request.cradmin_app.appname == 'overview')
+            label=gettext_lazy("Account overview"),
+            url=self.appindex_url("overview"),
+            active=self.request.cradmin_app.appname == "overview",
+        )
         self.add_menuitem(
-            label=gettext_lazy('Edit profile'), url=self.appindex_url('edit_user'),
-            active=self.request.cradmin_app.appname == 'edit_user')
+            label=gettext_lazy("Edit profile"),
+            url=self.appindex_url("edit_user"),
+            active=self.request.cradmin_app.appname == "edit_user",
+        )
 
 
 class UsermanagerCrAdminInstance(crinstance.BaseCrAdminInstance):
-    id = 'usermanager'
+    id = "usermanager"
     menuclass = Menu
     roleclass = User
-    rolefrontpage_appname = 'overview'
+    rolefrontpage_appname = "overview"
 
     apps = [
-        ('overview', overview.App),
-        ('edit_user', edit_user.App),
+        ("overview", overview.App),
+        ("edit_user", edit_user.App),
     ]
 
     def get_rolequeryset(self):
         queryset = User.objects.all()
         if not self.request.user.is_superuser:
-            queryset = queryset.filter(id=self.request.user.id)\
-                .order_by('username')
+            queryset = queryset.filter(id=self.request.user.id).order_by("username")
         return queryset
 
     def get_titletext_for_role(self, role):
@@ -55,4 +55,4 @@ class UsermanagerCrAdminInstance(crinstance.BaseCrAdminInstance):
         We only need this because we have multiple cradmin UIs
         in the same project.
         """
-        return urlpath.startswith('/usermanagerdemo')
+        return urlpath.startswith("/usermanagerdemo")

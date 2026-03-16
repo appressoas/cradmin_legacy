@@ -14,7 +14,8 @@ class AbstractSelectFilter(AbstractFilter):
     You only have to override :meth:`~AbstractSelectFilter.get_choices` and
     :meth:`~AbstractCheckboxFilter.filter`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/listfilter/django/single/select/base.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listfilter/django/single/select/base.django.html"
 
     def get_choices(self):
         """
@@ -47,24 +48,19 @@ class AbstractSelectFilter(AbstractFilter):
                 optgroup_label = value
                 optgroup_choices = label
                 child_choicesdata, found_selected_value_in_child = self.__make_choicesdata_list(
-                    choices=optgroup_choices, selected_value=selected_value)
+                    choices=optgroup_choices, selected_value=selected_value
+                )
                 if found_selected_value_in_child:
                     found_selected_value = True
-                choicesdata.append({
-                    'is_optgroup': True,
-                    'label': optgroup_label,
-                    'child_choicesdata': child_choicesdata
-                })
+                choicesdata.append(
+                    {"is_optgroup": True, "label": optgroup_label, "child_choicesdata": child_choicesdata}
+                )
             else:
                 is_selected = value == selected_value
                 if is_selected:
                     found_selected_value = True
                 url = self.build_set_values_url(values=[value])
-                choicesdata.append({
-                    'url': url,
-                    'label': label,
-                    'is_selected': is_selected
-                })
+                choicesdata.append({"url": url, "label": label, "is_selected": is_selected})
         return choicesdata, found_selected_value
 
     def get_choicesdata(self):
@@ -100,16 +96,16 @@ class AbstractSelectFilter(AbstractFilter):
         #         'is_selected': is_selected
         #     })
         choicesdata, found_selected_value = self.__make_choicesdata_list(
-            choices=self.get_choices(),
-            selected_value=self.get_cleaned_value())
+            choices=self.get_choices(), selected_value=self.get_cleaned_value()
+        )
         if not found_selected_value and len(choicesdata) > 0:
             selected_index = self.get_default_is_selected_index(choicesdata=choicesdata)
-            choicesdata[selected_index]['is_selected'] = True
+            choicesdata[selected_index]["is_selected"] = True
         return choicesdata
 
     def get_context_data(self, request=None):
         context = super(AbstractSelectFilter, self).get_context_data(request=None)
-        context['choicesdata'] = self.get_choicesdata()
+        context["choicesdata"] = self.get_choicesdata()
         return context
 
 
@@ -123,30 +119,31 @@ class AbstractBoolean(AbstractSelectFilter):
     See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.select.Boolean`
     for a Django ORM implementation.
     """
+
     def get_do_not_apply_label(self):
         """
         Returns the label for the default "do not apply this filter"
         option. Defaults to empty string.
         """
-        return ''
+        return ""
 
     def get_true_label(self):
         """
         Get the label for the ``True`` option. Defaults to ``Yes`` (translatable).
         """
-        return gettext_lazy('Yes')
+        return gettext_lazy("Yes")
 
     def get_false_label(self):
         """
         Get the label for the ``False`` option. Defaults to ``No`` (translatable).
         """
-        return gettext_lazy('No')
+        return gettext_lazy("No")
 
     def get_choices(self):
         return [
-            ('', self.get_do_not_apply_label()),
-            ('true', self.get_true_label()),
-            ('false', self.get_false_label()),
+            ("", self.get_do_not_apply_label()),
+            ("true", self.get_true_label()),
+            ("false", self.get_false_label()),
         ]
 
 
@@ -160,12 +157,13 @@ class AbstractDateTime(AbstractSelectFilter):
     See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.select.DateTime`
     for a Django ORM implementation.
     """
+
     def get_do_not_apply_label(self):
         """
         Returns the label for the default "do not apply this filter"
         option. Defaults to empty string.
         """
-        return ''
+        return ""
 
     def get_today_label(self):
         """
@@ -173,7 +171,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Today`` (translatable).
         """
-        return gettext_lazy('Today')
+        return gettext_lazy("Today")
 
     def get_yesterday_label(self):
         """
@@ -181,7 +179,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Today`` (translatable).
         """
-        return gettext_lazy('Yesterday')
+        return gettext_lazy("Yesterday")
 
     def get_last_seven_days_label(self):
         """
@@ -189,7 +187,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Today`` (translatable).
         """
-        return gettext_lazy('Last seven days')
+        return gettext_lazy("Last seven days")
 
     def get_this_week_label(self):
         """
@@ -197,7 +195,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``This week`` (translatable).
         """
-        return gettext_lazy('This week')
+        return gettext_lazy("This week")
 
     def get_this_month_label(self):
         """
@@ -205,7 +203,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``This month`` (translatable).
         """
-        return gettext_lazy('This month')
+        return gettext_lazy("This month")
 
     def get_this_year_label(self):
         """
@@ -213,7 +211,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``This year`` (translatable).
         """
-        return gettext_lazy('This year')
+        return gettext_lazy("This year")
 
     def null_enabled(self):
         """
@@ -229,7 +227,7 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Has no value`` (translatable).
         """
-        return pgettext_lazy('listfilter AbstractDateTime', 'Has no value')
+        return pgettext_lazy("listfilter AbstractDateTime", "Has no value")
 
     def get_is_not_null_label(self):
         """
@@ -239,21 +237,21 @@ class AbstractDateTime(AbstractSelectFilter):
 
         Defaults to ``Has value`` (translatable).
         """
-        return pgettext_lazy('listfilter AbstractDateTime', 'Has value')
+        return pgettext_lazy("listfilter AbstractDateTime", "Has value")
 
     def get_choices(self):
         choices = [
-            ('', self.get_do_not_apply_label()),
-            ('today', self.get_today_label()),
-            ('yesterday', self.get_yesterday_label()),
-            ('last_seven_days', self.get_last_seven_days_label()),
-            ('this_week', self.get_this_week_label()),
-            ('this_month', self.get_this_month_label()),
-            ('this_year', self.get_this_year_label()),
+            ("", self.get_do_not_apply_label()),
+            ("today", self.get_today_label()),
+            ("yesterday", self.get_yesterday_label()),
+            ("last_seven_days", self.get_last_seven_days_label()),
+            ("this_week", self.get_this_week_label()),
+            ("this_month", self.get_this_month_label()),
+            ("this_year", self.get_this_year_label()),
         ]
         if self.null_enabled():
-            choices.insert(1, ('is_not_null', self.get_is_not_null_label()))
-            choices.insert(1, ('is_null', self.get_is_null_label()))
+            choices.insert(1, ("is_not_null", self.get_is_not_null_label()))
+            choices.insert(1, ("is_null", self.get_is_null_label()))
         return choices
 
     def filter_datetime_range(self, queryobject, start_datetime, end_datetime):
@@ -271,28 +269,24 @@ class AbstractDateTime(AbstractSelectFilter):
         next_day_dateobject = dateobject + datetime.timedelta(days=1)
         day_start = datetime.datetime.combine(dateobject, datetime.time())
         day_end = datetime.datetime.combine(next_day_dateobject, datetime.time())
-        return self.filter_datetime_range(queryobject=queryobject,
-                                          start_datetime=day_start,
-                                          end_datetime=day_end)
+        return self.filter_datetime_range(queryobject=queryobject, start_datetime=day_start, end_datetime=day_end)
 
     def filter_today(self, queryobject):
         today = timezone.now().date()
-        return self.filter_within_date(queryobject=queryobject,
-                                       dateobject=today)
+        return self.filter_within_date(queryobject=queryobject, dateobject=today)
 
     def filter_yesterday(self, queryobject):
         yesterday = timezone.now().date() - datetime.timedelta(days=1)
-        return self.filter_within_date(queryobject=queryobject,
-                                       dateobject=yesterday)
+        return self.filter_within_date(queryobject=queryobject, dateobject=yesterday)
 
     def filter_last_seven_days(self, queryobject):
         now = timezone.now()
         today = now.date()
         seven_days_ago = today - datetime.timedelta(days=7)
         seven_days_ago_day_start = datetime.datetime.combine(seven_days_ago, datetime.time())
-        return self.filter_datetime_range(queryobject=queryobject,
-                                          start_datetime=seven_days_ago_day_start,
-                                          end_datetime=now)
+        return self.filter_datetime_range(
+            queryobject=queryobject, start_datetime=seven_days_ago_day_start, end_datetime=now
+        )
 
     def filter_this_week(self, queryobject):
         today = timezone.now().date()
@@ -300,9 +294,9 @@ class AbstractDateTime(AbstractSelectFilter):
         first_date_of_next_of_week = first_date_of_week + datetime.timedelta(days=7)
         start_of_week = datetime.datetime.combine(first_date_of_week, datetime.time())
         end_of_week = datetime.datetime.combine(first_date_of_next_of_week, datetime.time())
-        return self.filter_datetime_range(queryobject=queryobject,
-                                          start_datetime=start_of_week,
-                                          end_datetime=end_of_week)
+        return self.filter_datetime_range(
+            queryobject=queryobject, start_datetime=start_of_week, end_datetime=end_of_week
+        )
 
     def filter_this_month(self, queryobject):
         today = timezone.now().date()
@@ -311,9 +305,9 @@ class AbstractDateTime(AbstractSelectFilter):
         first_date_of_next_month = first_date_of_month + datetime.timedelta(days=days_in_month)
         start_of_month = datetime.datetime.combine(first_date_of_month, datetime.time())
         end_of_month = datetime.datetime.combine(first_date_of_next_month, datetime.time())
-        return self.filter_datetime_range(queryobject=queryobject,
-                                          start_datetime=start_of_month,
-                                          end_datetime=end_of_month)
+        return self.filter_datetime_range(
+            queryobject=queryobject, start_datetime=start_of_month, end_datetime=end_of_month
+        )
 
     def filter_this_year(self, queryobject):
         today = timezone.now().date()
@@ -321,9 +315,9 @@ class AbstractDateTime(AbstractSelectFilter):
         first_date_of_next_year = first_date_of_year.replace(year=today.year + 1)
         start_of_year = datetime.datetime.combine(first_date_of_year, datetime.time())
         end_of_year = datetime.datetime.combine(first_date_of_next_year, datetime.time())
-        return self.filter_datetime_range(queryobject=queryobject,
-                                          start_datetime=start_of_year,
-                                          end_datetime=end_of_year)
+        return self.filter_datetime_range(
+            queryobject=queryobject, start_datetime=start_of_year, end_datetime=end_of_year
+        )
 
     def filter_is_null(self, queryobject):
         """
@@ -343,21 +337,21 @@ class AbstractDateTime(AbstractSelectFilter):
 
     def filter(self, queryobject):
         cleaned_value = self.get_cleaned_value()
-        if cleaned_value == 'today':
+        if cleaned_value == "today":
             return self.filter_today(queryobject=queryobject)
-        elif cleaned_value == 'yesterday':
+        elif cleaned_value == "yesterday":
             return self.filter_yesterday(queryobject=queryobject)
-        elif cleaned_value == 'last_seven_days':
+        elif cleaned_value == "last_seven_days":
             return self.filter_last_seven_days(queryobject=queryobject)
-        elif cleaned_value == 'this_week':
+        elif cleaned_value == "this_week":
             return self.filter_this_week(queryobject=queryobject)
-        elif cleaned_value == 'this_month':
+        elif cleaned_value == "this_month":
             return self.filter_this_month(queryobject=queryobject)
-        elif cleaned_value == 'this_year':
+        elif cleaned_value == "this_year":
             return self.filter_this_year(queryobject=queryobject)
-        elif cleaned_value == 'is_null' and self.null_enabled():
+        elif cleaned_value == "is_null" and self.null_enabled():
             return self.filter_is_null(queryobject=queryobject)
-        elif cleaned_value == 'is_not_null' and self.null_enabled():
+        elif cleaned_value == "is_not_null" and self.null_enabled():
             return self.filter_is_not_null(queryobject=queryobject)
         return queryobject
 
@@ -372,6 +366,7 @@ class AbstractOrderBy(AbstractSelectFilter):
     See :class:`cradmin_legacy.viewhelpers.listfilter.django.single.select.AbstractOrderBy`
     for a Django ORM implementation.
     """
+
     def __init__(self, *args, **kwargs):
         super(AbstractOrderBy, self).__init__(*args, **kwargs)
         self.ordering_options = self.get_ordering_options()
@@ -382,8 +377,7 @@ class AbstractOrderBy(AbstractSelectFilter):
         for value, option in ordering_options:
             if isinstance(option, (list, tuple)):
                 optgroup_options_list = option
-                ordering_options_dict.update(
-                    self.__make_ordering_options_dict(optgroup_options_list))
+                ordering_options_dict.update(self.__make_ordering_options_dict(optgroup_options_list))
             else:
                 ordering_options_dict[value] = option
         return ordering_options_dict
@@ -434,7 +428,7 @@ class AbstractOrderBy(AbstractSelectFilter):
                 optgroup_options_list = option
                 choices.append((optgroup_label, self.__make_choices(optgroup_options_list)))
             else:
-                choices.append((value, option['label']))
+                choices.append((value, option["label"]))
         return choices
 
     def get_choices(self):

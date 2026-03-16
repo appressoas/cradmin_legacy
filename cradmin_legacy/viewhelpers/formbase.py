@@ -73,7 +73,7 @@ class PreviewMixin(object):
     """
 
     #: The name of the submit button used for preview.
-    submit_preview_name = 'submit-preview'
+    submit_preview_name = "submit-preview"
 
     def preview_requested(self):
         """
@@ -115,9 +115,7 @@ class PreviewMixin(object):
         Get the session key used for preview. You should not
         need to override this.
         """
-        sessionkey = 'cradmin_legacy__{module}.{classname}'.format(
-            module=cls.__module__,
-            classname=cls.__name__)
+        sessionkey = "cradmin_legacy__{module}.{classname}".format(module=cls.__module__, classname=cls.__name__)
         return sessionkey
 
     @classmethod
@@ -141,9 +139,9 @@ class PreviewMixin(object):
         return None
 
     def add_context_data(self, context):
-        if context.get('show_preview', False):
-            context['preview_url'] = self.get_preview_url()
-            context['show_preview'] = True
+        if context.get("show_preview", False):
+            context["preview_url"] = self.get_preview_url()
+            context["show_preview"] = True
 
 
 class FormViewMixin(PreviewMixin):
@@ -180,22 +178,22 @@ class FormViewMixin(PreviewMixin):
     hide_page_header = False
 
     #: The save submit label. See :meth:`~.FormViewMixin.get_submit_save_label`.
-    submit_save_label = gettext_lazy('Save')
+    submit_save_label = gettext_lazy("Save")
 
     #: The save submit label. See :meth:`~.FormViewMixin.get_submit_save_and_continue_edititing_label`.
-    submit_save_and_continue_edititing_label = gettext_lazy('Save and continue editing')
+    submit_save_and_continue_edititing_label = gettext_lazy("Save and continue editing")
 
     #: See :meth:`~.FormViewMixin.get_submit_save_button_name`.
-    submit_save_button_name = 'submit-save'
+    submit_save_button_name = "submit-save"
 
     #: See :meth:`~.FormViewMixin.get_submit_save_and_continue_edititing_button_name`.
-    submit_save_and_continue_edititing_button_name = 'submit-save-and-continue-editing'
+    submit_save_and_continue_edititing_button_name = "submit-save-and-continue-editing"
 
     def get_pagetitle(self):
         """
         Get the page title (the title tag).
         """
-        return ''
+        return ""
 
     def get_pageheading(self):
         """
@@ -248,7 +246,7 @@ class FormViewMixin(PreviewMixin):
         You can override this, or set :obj:`.hide_page_header`, or hide the page header
         in all form views with the ``CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_FORMVIEWS`` setting.
         """
-        return self.hide_page_header or getattr(settings, 'CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_FORMVIEWS', False)
+        return self.hide_page_header or getattr(settings, "CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_FORMVIEWS", False)
 
     def get_field_layout(self):
         """
@@ -319,9 +317,7 @@ class FormViewMixin(PreviewMixin):
         ``cradmin_legacy_submitrow`` containing all the buttons
         returned by :meth:`.get_buttons`.
         """
-        return [
-            layout.Div(*self.get_buttons(), css_class="cradmin_legacy_submitrow")
-        ]
+        return [layout.Div(*self.get_buttons(), css_class="cradmin_legacy_submitrow")]
 
     def get_form_attributes(self):
         """
@@ -345,9 +341,7 @@ class FormViewMixin(PreviewMixin):
         of this method unless you want to provide completely custom
         form styles.
         """
-        form_css_classes = [
-            'cradmin-legacy-form'
-        ]
+        form_css_classes = ["cradmin-legacy-form"]
         form_css_classes.extend(self.get_extra_form_css_classes())
         return form_css_classes
 
@@ -383,7 +377,7 @@ class FormViewMixin(PreviewMixin):
         - :meth:`.get_buttons` (or perhaps :meth:`.get_button_layout`)
         """
         helper = self.get_formhelper_class()()
-        helper.form_class = ' '.join(self.get_form_css_classes())
+        helper.form_class = " ".join(self.get_form_css_classes())
         layoutargs = list(self.get_field_layout()) + list(self.get_button_layout()) + list(self.get_hidden_fields())
         helper.layout = layout.Layout(*layoutargs)
         helper.form_action = self.request.get_full_path()
@@ -411,11 +405,11 @@ class FormViewMixin(PreviewMixin):
         to add the context data required for the form.
         """
         super(FormViewMixin, self).add_context_data(context)
-        context['formhelper'] = self.get_formhelper()
-        context['enable_modelchoicefield_support'] = self.enable_modelchoicefield_support
-        context['hide_pageheader'] = self.get_hide_page_header()
-        context['pagetitle'] = self.get_pagetitle()
-        context['pageheading'] = self.get_pageheading()
+        context["formhelper"] = self.get_formhelper()
+        context["enable_modelchoicefield_support"] = self.enable_modelchoicefield_support
+        context["hide_pageheader"] = self.get_hide_page_header()
+        context["pagetitle"] = self.get_pagetitle()
+        context["pageheading"] = self.get_pageheading()
 
     def get_context_data(self, **kwargs):
         """
@@ -435,8 +429,8 @@ class FormViewMixin(PreviewMixin):
         return self.request.cradmin_app.reverse_appurl(self.listing_viewname)
 
     def get_default_save_success_url(self):
-        if 'success_url' in self.request.GET:
-            return self.request.GET['success_url']
+        if "success_url" in self.request.GET:
+            return self.request.GET["success_url"]
         else:
             return self.get_listing_url()
 
@@ -479,4 +473,5 @@ class FormView(FormViewMixin, DjangoFormView):
                     # ... do something with the form ...
                     return HttpResponseRedirect('/some/view')
     """
-    template_name = 'cradmin_legacy/viewhelpers/formview_base.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/formview_base.django.html"

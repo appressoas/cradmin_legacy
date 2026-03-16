@@ -14,6 +14,7 @@ class FilterListChildMixin(object):
     can make renderables that can be used both in a filterlist and
     on its own.
     """
+
     def set_filterlist(self, filterlist):
         """
         Set ``self.filterlist = filterlist``.
@@ -30,5 +31,6 @@ class AbstractFilterListChild(AbstractRenderableWithCss, FilterListChildMixin):
     Base class for anything that can be added as a child of
     :class:`~cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist.AbstractFilterList`.
     """
+
     def __init__(self):
         self.filterlist = None

@@ -57,6 +57,7 @@ class RelatedModelOrFilter(abstractcheckbox.AbstractCheckboxFilter, DjangoOrmFil
         only get tags actually in use or by some other query, but this should
         be a good starting point.
     """
+
     def get_filter_attribute(self):
         """
         Get the attribute to filter on.
@@ -74,6 +75,5 @@ class RelatedModelOrFilter(abstractcheckbox.AbstractCheckboxFilter, DjangoOrmFil
     def filter(self, queryobject):
         cleaned_values = self.get_cleaned_values()
         if cleaned_values:
-            queryobject = queryobject.filter(
-                **{'{}__in'.format(self.get_filter_attribute()): cleaned_values})
+            queryobject = queryobject.filter(**{"{}__in".format(self.get_filter_attribute()): cleaned_values})
         return queryobject

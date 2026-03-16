@@ -6,13 +6,11 @@ class List(listbuilder.lists.RowList):
     Renders a list for previewing selection in
     :class:`cradmin_legacy.viewhelpers.multiselect2.manytomanywidget.Widget`.
     """
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/preview-list.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/preview-list.django.html"
 
     @classmethod
-    def from_value_iterable(cls, value_iterable,
-                            value_renderer_class=None,
-                            frame_renderer_class=None,
-                            **listkwargs):
+    def from_value_iterable(cls, value_iterable, value_renderer_class=None, frame_renderer_class=None, **listkwargs):
         """
         Overrides :meth:`.cradmin_legacy.viewhelpers.listbuilder.base.List.from_value_iterable`
         to set :class:`.Value` as the default ``value_renderer_class``.
@@ -23,7 +21,8 @@ class List(listbuilder.lists.RowList):
             value_iterable=value_iterable,
             value_renderer_class=value_renderer_class,
             frame_renderer_class=frame_renderer_class,
-            **listkwargs)
+            **listkwargs,
+        )
 
     def get_base_css_classes_list(self):
         """
@@ -31,7 +30,7 @@ class List(listbuilder.lists.RowList):
         to the css classes added by the superclasses.
         """
         css_classes = super(List, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-multiselect2-preview-list')
+        css_classes.append("cradmin-legacy-multiselect2-preview-list")
         return css_classes
 
 
@@ -41,7 +40,8 @@ class Value(listbuilder.base.ItemValueRenderer):
     by the ``get_manytomanyfield_preview_renderer_class`` method in
     :class:`~cradmin_legacy.viewhelpers.multiselect2.listbuilder_itemvalues.ManyToManySelect`
     """
-    template_name = 'cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/preview-value.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/multiselect2/manytomanywidget/preview-value.django.html"
 
     def __init__(self, value, wrap_in_li_element=False):
         """
@@ -63,5 +63,5 @@ class Value(listbuilder.base.ItemValueRenderer):
         to the css classes added by the superclasses.
         """
         css_classes = super(Value, self).get_base_css_classes_list()
-        css_classes.append('cradmin-legacy-multiselect2-preview-list-value')
+        css_classes.append("cradmin-legacy-multiselect2-preview-list-value")
         return css_classes

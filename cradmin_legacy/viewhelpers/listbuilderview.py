@@ -25,7 +25,8 @@ class ViewMixin(object):
     - :meth:`.get_listbuilder_list_value_iterable`
     - :meth:`.get_no_items_message`
     """
-    template_name = 'cradmin_legacy/viewhelpers/listbuilderview/default.django.html'
+
+    template_name = "cradmin_legacy/viewhelpers/listbuilderview/default.django.html"
 
     #: See :meth:`~ViewMixin.get_listbuilder_class`.
     listbuilder_class = listbuilder.lists.RowList
@@ -65,7 +66,7 @@ class ViewMixin(object):
         You can override this, or set :obj:`.hide_page_header`, or hide the page header
         in all form views with the ``CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTVIEWS`` setting.
         """
-        return self.hide_page_header or getattr(settings, 'CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTVIEWS', False)
+        return self.hide_page_header or getattr(settings, "CRADMIN_LEGACY_HIDE_PAGEHEADER_IN_LISTVIEWS", False)
 
     def get_enable_previews(self):
         """
@@ -157,7 +158,8 @@ class ViewMixin(object):
             value_renderer_class=self.get_value_renderer_class(),
             frame_renderer_class=self.get_frame_renderer_class(),
             value_and_frame_renderer_kwargs=self.get_value_and_frame_renderer_kwargs(),
-            **self.get_listbuilder_list_kwargs())
+            **self.get_listbuilder_list_kwargs(),
+        )
 
     def get_no_items_message(self):
         """
@@ -168,15 +170,15 @@ class ViewMixin(object):
         raise NotImplementedError()
 
     def add_listview_context_data(self, context):
-        context['listbuilder_list'] = self.get_listbuilder_list(context)
-        context['pagetitle'] = self.get_pagetitle()
-        context['hide_pageheader'] = self.get_hide_page_header()
-        context['pageheading'] = self.get_pageheading()
-        context['no_items_message'] = self.get_no_items_message()
-        context['enable_previews'] = self.get_enable_previews()
-        context['pre_include_template'] = self.get_pre_include_template()
-        context['buttons_include_template'] = self.get_buttons_include_template()
-        context['post_include_template'] = self.get_post_include_template()
+        context["listbuilder_list"] = self.get_listbuilder_list(context)
+        context["pagetitle"] = self.get_pagetitle()
+        context["hide_pageheader"] = self.get_hide_page_header()
+        context["pageheading"] = self.get_pageheading()
+        context["no_items_message"] = self.get_no_items_message()
+        context["enable_previews"] = self.get_enable_previews()
+        context["pre_include_template"] = self.get_pre_include_template()
+        context["buttons_include_template"] = self.get_buttons_include_template()
+        context["post_include_template"] = self.get_post_include_template()
 
     def get_pre_include_template(self):
         """
@@ -211,6 +213,7 @@ class ViewCreateButtonMixin(object):
     with a template that renders a create button that assumes the
     create view is named ``"create"``.
     """
+
     def get_buttons_include_template(self):
         return "cradmin_legacy/viewhelpers/listbuilderview/includes/create-button.django.html"
 
@@ -261,7 +264,7 @@ class View(ViewMixin, ListView):
         return defaultfilters.capfirst(self.get_model_class()._meta.verbose_name_plural)
 
     def get_listbuilder_list_value_iterable(self, context):
-        return context['object_list']
+        return context["object_list"]
 
     def get_queryset_for_role(self, role):
         """
@@ -282,8 +285,8 @@ class View(ViewMixin, ListView):
         """
         Get the message to show when there are no items.
         """
-        return gettext_lazy('No %(modelname_plural)s') % {
-            'modelname_plural': self.get_model_class()._meta.verbose_name_plural.lower(),
+        return gettext_lazy("No %(modelname_plural)s") % {
+            "modelname_plural": self.get_model_class()._meta.verbose_name_plural.lower(),
         }
 
     def disable_paging_requested(self):
@@ -293,16 +296,16 @@ class View(ViewMixin, ListView):
         The default implementation disables paging if ``disablePaging=true`` is
         in the querystring (in ``request.GET``).
 
-        When pagination is enabled for the listbuilder-view, disabling pagination 
+        When pagination is enabled for the listbuilder-view, disabling pagination
         will also be supported to be able to load all instead of just the next page.
         """
-        return self.request.GET.get('disablePaging', 'false') == 'true'
+        return self.request.GET.get("disablePaging", "false") == "true"
 
     def get_paginate_by(self, queryset):
         """
         Built-in support for pagination.
 
-        Will return the set pagination (paginate_by), or disable pagination 
+        Will return the set pagination (paginate_by), or disable pagination
         if `self.disable_paging_requested` returns `True`.
         """
         if self.disable_paging_requested():
@@ -311,22 +314,22 @@ class View(ViewMixin, ListView):
 
     def use_pagination_load_all(self):
         """
-        If pagination is enabled, requesting the next page 
+        If pagination is enabled, requesting the next page
         will load all, not only the next page.
 
-        This is used to tell the UI that the pagination should load 
-        all elements, not just the next page setting the javasscript 
+        This is used to tell the UI that the pagination should load
+        all elements, not just the next page setting the javasscript
         pagination-handling mode to "loadAllOnClick".
-        
-        If `True`, the page-load will load all elements, and the 
+
+        If `True`, the page-load will load all elements, and the
         button will also show "Load all" intead of "Load more".
         """
         return False
 
     def get_context_data(self, **kwargs):
         context = super(View, self).get_context_data(**kwargs)
-        context['cradmin_hide_menu'] = self.hide_menu
-        context['pagination_mode_load_all'] = self.use_pagination_load_all()
+        context["cradmin_hide_menu"] = self.hide_menu
+        context["pagination_mode_load_all"] = self.use_pagination_load_all()
         return context
 
 
@@ -337,6 +340,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
 
     Must be mixed in before any TemplateView subclass.
     """
+
     template_name = None
 
     def get_filterlist_position(self):
@@ -355,9 +359,9 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         """
         filterlist_class = self.get_filterlist_class()
         if issubclass(filterlist_class, listfilter.lists.Horizontal):
-            return 'top'
+            return "top"
         else:
-            return 'right'
+            return "right"
 
     def get_filterlist_template_name(self):
         """
@@ -368,11 +372,11 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         various modules (such as :class:`cradmin_legacy.viewhelpers.listbuilderview.FilterListMixin`)
         for details on how to use this method.
         """
-        if getattr(self, 'template_name', None):
+        if getattr(self, "template_name", None):
             return self.template_name
         else:
             position = self.get_filterlist_position()
-            template_name = 'cradmin_legacy/viewhelpers/listbuilderview/filterlist-{}.django.html'.format(position)
+            template_name = "cradmin_legacy/viewhelpers/listbuilderview/filterlist-{}.django.html".format(position)
             return template_name
 
     def get_filter_unprotected_querystring_arguments(self):
@@ -383,7 +387,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         See :class:`cradmin_legacy.viewhelpers.listfilter.listfilter_viewmixin.ViewMixin`
         for more details.
         """
-        return {'page'}
+        return {"page"}
 
     def get_filterlist_target_dom_id(self):
         """
@@ -394,4 +398,4 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         You should not need to override this unless you create a completely custom
         template for your view.
         """
-        return 'cradmin_legacy_listbuilderview_listwrapper'
+        return "cradmin_legacy_listbuilderview_listwrapper"

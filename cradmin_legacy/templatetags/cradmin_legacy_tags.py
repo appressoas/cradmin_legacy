@@ -20,7 +20,7 @@ def cradmin_titletext_for_role(context, role):
     Template tag implementation of
     :meth:`cradmin_legacy.crinstance.BaseCrAdminInstance.get_titletext_for_role`.
     """
-    request = context['request']
+    request = context["request"]
     cradmin_instance = cradmin_instance_registry.get_current_instance(request)
     return cradmin_instance.get_titletext_for_role(role)
 
@@ -31,7 +31,7 @@ def cradmin_descriptionhtml_for_role(context, role):
     Template tag implementation of
     :meth:`cradmin_legacy.crinstance.BaseCrAdminInstance.get_titletext_for_role`.
     """
-    request = context['request']
+    request = context["request"]
     cradmin_instance = cradmin_instance_registry.get_current_instance(request)
     return cradmin_instance.get_descriptionhtml_for_role(role)
 
@@ -42,7 +42,7 @@ def cradmin_rolefrontpage_url(context, role):
     Template tag implementation of
     :meth:`cradmin_legacy.crinstance.BaseCrAdminInstance.rolefrontpage_url`.
     """
-    request = context['request']
+    request = context["request"]
     cradmin_instance = cradmin_instance_registry.get_current_instance(request)
     return cradmin_instance.rolefrontpage_url(cradmin_instance.get_roleid(role))
 
@@ -72,7 +72,7 @@ def cradmin_appurl(context, viewname, *args, **kwargs):
                 Show advanced listing ordered by name
             </a>
     """
-    request = context['request']
+    request = context["request"]
     return request.cradmin_app.reverse_appurl(viewname, args=args, kwargs=kwargs)
 
 
@@ -103,9 +103,8 @@ def cradmin_appindex_url(context, *args, **kwargs):
                 Show advanced listing ordered by name
             </a>
     """
-    request = context['request']
-    return request.cradmin_app.reverse_appurl(
-        viewname=crapp.INDEXVIEW_NAME, args=args, kwargs=kwargs)
+    request = context["request"]
+    return request.cradmin_app.reverse_appurl(viewname=crapp.INDEXVIEW_NAME, args=args, kwargs=kwargs)
 
 
 @register.simple_tag(takes_context=True)
@@ -135,15 +134,17 @@ def cradmin_instance_appindex_url(context, appname, *args, **kwargs):
                 Show advanced listing ordered by name
             </a>
     """
-    request = context['request']
+    request = context["request"]
     return request.cradmin_instance.reverse_url(
-        appname=appname, viewname=crapp.INDEXVIEW_NAME, args=args, kwargs=kwargs)
+        appname=appname, viewname=crapp.INDEXVIEW_NAME, args=args, kwargs=kwargs
+    )
 
 
 @register.simple_tag(takes_context=True)
 def cradmin_instanceindex_url(context, appname):
-    warnings.warn("cradmin_instanceindex_url is deprecated. Use cradmin_instance_appindex_url instead.",
-                  DeprecationWarning)
+    warnings.warn(
+        "cradmin_instanceindex_url is deprecated. Use cradmin_instance_appindex_url instead.", DeprecationWarning
+    )
     return cradmin_instance_appindex_url(context, appname)
 
 
@@ -174,9 +175,8 @@ def cradmin_instance_url(context, appname, viewname, *args, **kwargs):
                 Show advanced pages listing ordered by name
             </a>
     """
-    request = context['request']
-    return request.cradmin_instance.reverse_url(
-        appname=appname, viewname=viewname, args=args, kwargs=kwargs)
+    request = context["request"]
+    return request.cradmin_instance.reverse_url(appname=appname, viewname=viewname, args=args, kwargs=kwargs)
 
 
 @register.simple_tag(takes_context=True)
@@ -210,10 +210,8 @@ def cradmin_url(context, instanceid, appname, roleid, viewname, *args, **kwargs)
             </a>
     """
     return reverse_cradmin_url(
-        instanceid=instanceid,
-        appname=appname,
-        roleid=roleid,
-        viewname=viewname, args=args, kwargs=kwargs)
+        instanceid=instanceid, appname=appname, roleid=roleid, viewname=viewname, args=args, kwargs=kwargs
+    )
 
 
 @register.simple_tag(takes_context=True)
@@ -224,10 +222,10 @@ def cradmin_render_menu(context):
     We use this instead of an include tag to handle some issues
     with mocking tests.
     """
-    request = context['request']
-    if hasattr(request, 'cradmin_instance'):
+    request = context["request"]
+    if hasattr(request, "cradmin_instance"):
         return request.cradmin_instance.get_menu().render(context.flatten())
-    return ''
+    return ""
 
 
 @register.filter
@@ -241,22 +239,22 @@ def cradmin_jsonencode(json_serializable_pythonobject):
 
 @register.simple_tag(takes_context=True)
 def cradmin_theme_staticpath(context):
-    """
-    """
-    if 'request' in context:
-        request = context['request']
+    """ """
+    if "request" in context:
+        request = context["request"]
         theme_path = None
-        if hasattr(request, 'cradmin_instance'):
+        if hasattr(request, "cradmin_instance"):
             theme_path = request.cradmin_instance.get_cradmin_theme_path()
             if theme_path:
                 theme_path = str(theme_path)
         if not theme_path:
-            theme_path = getattr(settings,
-                                 'CRADMIN_LEGACY_THEME_PATH',
-                                 'cradmin_legacy/dist/css/cradmin_theme_default/theme.css')
+            theme_path = getattr(
+                settings, "CRADMIN_LEGACY_THEME_PATH", "cradmin_legacy/dist/css/cradmin_theme_default/theme.css"
+            )
         return static(theme_path)
     else:
-        return ''
+        return ""
+
 
 @register.simple_tag(takes_context=True)
 def cradmin_render_renderable(context, renderable):
@@ -277,5 +275,5 @@ def cradmin_render_renderable(context, renderable):
 
             {% cradmin_render_renderable renderable %}
     """
-    request = context.get('request', None)
+    request = context.get("request", None)
     return renderable.render(request=request)

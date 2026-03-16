@@ -33,18 +33,16 @@ class AbstractLoginForm(forms.Form):
 
     #: The placeholder text for the password field.
     #: Must be set in subclasses
-    password_field_placeholder = gettext_lazy('Password')
+    password_field_placeholder = gettext_lazy("Password")
 
     #: Error message to show if username and password do not match
     error_message_invalid_login = None
 
     #: Error message to show if the account is inactive.
-    error_message_inactive = gettext_lazy('This account is inactive.')
+    error_message_inactive = gettext_lazy("This account is inactive.")
 
     #: The password field
-    password = forms.CharField(
-        label=gettext_lazy('Password'),
-        widget=forms.PasswordInput)
+    password = forms.CharField(label=gettext_lazy("Password"), widget=forms.PasswordInput)
 
     def model_sanity_check(self):
         pass
@@ -65,12 +63,9 @@ class AbstractLoginForm(forms.Form):
         validate the form, and execute :func:`django.contrib.auth.authenticate` to login the user if form is valid.
         """
         username = self.cleaned_data.get(self.username_field)
-        password = self.cleaned_data.get('password')
+        password = self.cleaned_data.get("password")
         if username and password:
-            authenticated_user = self.authenticate(**{
-                self.username_field: username,
-                'password': password
-            })
+            authenticated_user = self.authenticate(**{self.username_field: username, "password": password})
 
             if authenticated_user is None:
                 raise forms.ValidationError(self.error_message_invalid_login)
@@ -90,17 +85,19 @@ class UsernameLoginForm(AbstractLoginForm):
     Using this form in its default state requires the `User`-models ``USERNAME_FIELD`` to be ``username``.
     This is set in the field ``username_field`` in this class.
     """
-    username_field = 'username'
-    username_field_placeholder = gettext_lazy('Username')
-    username = forms.CharField(
-        label=gettext_lazy('Username'))
-    error_message_invalid_login = gettext_lazy('Your username and password didn\'t match. Please try again.')
+
+    username_field = "username"
+    username_field_placeholder = gettext_lazy("Username")
+    username = forms.CharField(label=gettext_lazy("Username"))
+    error_message_invalid_login = gettext_lazy("Your username and password didn't match. Please try again.")
 
     def model_sanity_check(self):
         user_model = get_user_model()
         if user_model.USERNAME_FIELD != self.username_field:
-            raise ValueError('The username_field attribute of the login form must match the USERNAME_FIELD '
-                             'attribute of the User model.')
+            raise ValueError(
+                "The username_field attribute of the login form must match the USERNAME_FIELD "
+                "attribute of the User model."
+            )
 
 
 class EmailLoginForm(AbstractLoginForm):
@@ -118,15 +115,15 @@ class EmailLoginForm(AbstractLoginForm):
     If you want to use this class without the :class:`EmailAuthBackend`, you should rather use the
     :class:`.EmailLoginFormNoSanityCheck`.
     """
-    username_field = 'email'
-    username_field_placeholder = gettext_lazy('Email')
-    email = forms.CharField(
-        label=gettext_lazy('Email'))
-    error_message_invalid_login = gettext_lazy('Your email and password didn\'t match. Please try again.')
+
+    username_field = "email"
+    username_field_placeholder = gettext_lazy("Email")
+    email = forms.CharField(label=gettext_lazy("Email"))
+    error_message_invalid_login = gettext_lazy("Your email and password didn't match. Please try again.")
 
     def model_sanity_check(self):
-        if not getattr(settings, 'CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND', False):
-            raise ValueError('The CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND must be set to use the EmailLoginForm.')
+        if not getattr(settings, "CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND", False):
+            raise ValueError("The CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND must be set to use the EmailLoginForm.")
 
 
 class EmailLoginFormNoSanityCheck(EmailLoginForm):
@@ -134,6 +131,7 @@ class EmailLoginFormNoSanityCheck(EmailLoginForm):
     This works exactly like :class:`.EmailLoginForm`, but does not require
     ``CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND`` to be set.
     """
+
     def model_sanity_check(self):
         pass
 
@@ -143,7 +141,8 @@ class LoginView(FormView):
     View for handling login.
     By default, a "forgot password" link is read from ``CRADMIN_LEGACY_FORGOTPASSWORD_URL`` to your ``settings.py``.
     """
-    template_name = 'cradmin_authenticate/login.django.html'
+
+    template_name = "cradmin_authenticate/login.django.html"
 
     def get_form_class(self):
         """
@@ -156,11 +155,11 @@ class LoginView(FormView):
         Override this function to add your own login-form.
         """
         user_model = get_user_model()
-        if getattr(settings, 'CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND', False):
+        if getattr(settings, "CRADMIN_LEGACY_USE_EMAIL_AUTH_BACKEND", False):
             return EmailLoginForm
-        elif user_model.USERNAME_FIELD == 'email':
+        elif user_model.USERNAME_FIELD == "email":
             return EmailLoginFormNoSanityCheck
-        elif user_model.USERNAME_FIELD == 'username':
+        elif user_model.USERNAME_FIELD == "username":
             return UsernameLoginForm
 
         else:
@@ -206,7 +205,7 @@ class LoginView(FormView):
         only run once (like request.session.pop) without worrying
         about it.
         """
-        if not hasattr(self, '_inital_email_value'):
+        if not hasattr(self, "_inital_email_value"):
             self._inital_email_value = self.get_initial_email_value()
         return self._inital_email_value
 
@@ -215,20 +214,22 @@ class LoginView(FormView):
         if self.initial_email_value:
             return [
                 layout.Hidden(form_class.username_field, self.initial_email_value),
-                layout.Field('password',
-                             placeholder=form_class.password_field_placeholder,
-                             focusonme='focusonme',
-                             css_class='input-lg'),
+                layout.Field(
+                    "password",
+                    placeholder=form_class.password_field_placeholder,
+                    focusonme="focusonme",
+                    css_class="input-lg",
+                ),
             ]
         else:
             return [
-                layout.Field(form_class.username_field,
-                             placeholder=form_class.username_field_placeholder,
-                             css_class='input-lg',
-                             focusonme='focusonme'),
-                layout.Field('password',
-                             placeholder=form_class.password_field_placeholder,
-                             css_class='input-lg'),
+                layout.Field(
+                    form_class.username_field,
+                    placeholder=form_class.username_field_placeholder,
+                    css_class="input-lg",
+                    focusonme="focusonme",
+                ),
+                layout.Field("password", placeholder=form_class.password_field_placeholder, css_class="input-lg"),
             ]
 
     def get_form_helper(self):
@@ -237,10 +238,10 @@ class LoginView(FormView):
         """
         formhelper = FormHelper()
         formhelper.form_action = self.request.get_full_path()
-        formhelper.form_id = 'cradmin_authenticate_login_form'
-        formhelper.label_class = 'sr-only'
+        formhelper.form_id = "cradmin_authenticate_login_form"
+        formhelper.label_class = "sr-only"
 
-        layoutargs = self.get_field_layout() + [PrimarySubmitLg('login', gettext_lazy('Sign in'))]
+        layoutargs = self.get_field_layout() + [PrimarySubmitLg("login", gettext_lazy("Sign in"))]
         formhelper.layout = layout.Layout(*layoutargs)
         return formhelper
 
@@ -249,8 +250,8 @@ class LoginView(FormView):
         Returns the redirect-url after login-success. This will either be the ``next`` field in ``request.GET``
         if present, or ``settings.LOGIN_REDIRECT_URL`` if not.
         """
-        if 'next' in self.request.GET:
-            return str(self.request.GET['next'])
+        if "next" in self.request.GET:
+            return str(self.request.GET["next"])
         else:
             return str(settings.LOGIN_REDIRECT_URL)
 
@@ -268,7 +269,6 @@ class LoginView(FormView):
         template-context.
         """
         context = super(LoginView, self).get_context_data(**kwargs)
-        context['formhelper'] = self.get_form_helper()
-        context['CRADMIN_LEGACY_FORGOTPASSWORD_URL'] = getattr(
-            settings, 'CRADMIN_LEGACY_FORGOTPASSWORD_URL', None)
+        context["formhelper"] = self.get_form_helper()
+        context["CRADMIN_LEGACY_FORGOTPASSWORD_URL"] = getattr(settings, "CRADMIN_LEGACY_FORGOTPASSWORD_URL", None)
         return context

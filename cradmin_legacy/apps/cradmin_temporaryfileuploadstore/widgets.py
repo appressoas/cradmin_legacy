@@ -9,17 +9,19 @@ from cradmin_legacy.utils import crhumanize
 
 
 class BulkFileUploadWidget(forms.Widget):
-    template_name = 'cradmin_legacy/apps/cradmin_temporaryfileuploadstore/bulkfileupload-widget.django.html'
+    template_name = "cradmin_legacy/apps/cradmin_temporaryfileuploadstore/bulkfileupload-widget.django.html"
 
-    def __init__(self,
-                 accept=None,
-                 apiparameters=None,
-                 dropbox_text=None,
-                 invalid_filetype_message=None,
-                 advanced_fileselectbutton_text=None,
-                 simple_fileselectbutton_text=None,
-                 autosubmit=False,
-                 overlaymode_autosubmit_uploading_message=None):
+    def __init__(
+        self,
+        accept=None,
+        apiparameters=None,
+        dropbox_text=None,
+        invalid_filetype_message=None,
+        advanced_fileselectbutton_text=None,
+        simple_fileselectbutton_text=None,
+        autosubmit=False,
+        overlaymode_autosubmit_uploading_message=None,
+    ):
         """
         Parameters:
             accept (str): Comma separated string of filetypes that we should accept.
@@ -69,14 +71,14 @@ class BulkFileUploadWidget(forms.Widget):
         super(BulkFileUploadWidget, self).__init__(attrs=None)
 
     def get_max_filesize_bytes(self):
-        max_filesize_bytes = self.apiparameters.get('max_filesize_bytes', None)
+        max_filesize_bytes = self.apiparameters.get("max_filesize_bytes", None)
         return max_filesize_bytes
 
     def get_max_filesize_bytes_exceeded_errormessage(self):
         max_filesize_bytes = self.get_max_filesize_bytes()
         if max_filesize_bytes is not None:
-            return gettext('Can not upload files larger than %(max_filesize)s.') % {
-                'max_filesize': crhumanize.human_readable_filesize(max_filesize_bytes)
+            return gettext("Can not upload files larger than %(max_filesize)s.") % {
+                "max_filesize": crhumanize.human_readable_filesize(max_filesize_bytes)
             }
 
     def get_uploadapiurl(self):
@@ -85,14 +87,15 @@ class BulkFileUploadWidget(forms.Widget):
 
         You can override this if you provide your own upload API.
         """
-        return reverse('cradmin_temporary_file_upload_api')
+        return reverse("cradmin_temporary_file_upload_api")
 
     def get_errormessage503(self):
         """
         Get the error message to show on 503 server errors.
         """
-        return gettext('Server timeout while uploading the file. This may be caused '
-                       'by a poor upload link and/or a too large file.')
+        return gettext(
+            "Server timeout while uploading the file. This may be caused by a poor upload link and/or a too large file."
+        )
 
     def get_use_singlemode(self):
         """
@@ -107,7 +110,7 @@ class BulkFileUploadWidget(forms.Widget):
         Get parameters for the upload API.
         """
         apiparameters = self.apiparameters.copy()
-        apiparameters['singlemode'] = self.get_use_singlemode()
+        apiparameters["singlemode"] = self.get_use_singlemode()
         return apiparameters
 
     def get_angularjs_directive_options(self):
@@ -118,43 +121,41 @@ class BulkFileUploadWidget(forms.Widget):
         Must return a JSON encodable dict.
         """
         return {
-            'uploadapiurl': self.get_uploadapiurl(),
-            'apiparameters': self.get_apiparameters(),
-            'errormessage503': self.get_errormessage503(),
-            'autosubmit': self.autosubmit,
-            'close_errormessage_label': gettext('Close'),
-            'remove_file_label': gettext('Remove'),
-            'removing_file_message': gettext('Removing ...'),
+            "uploadapiurl": self.get_uploadapiurl(),
+            "apiparameters": self.get_apiparameters(),
+            "errormessage503": self.get_errormessage503(),
+            "autosubmit": self.autosubmit,
+            "close_errormessage_label": gettext("Close"),
+            "remove_file_label": gettext("Remove"),
+            "removing_file_message": gettext("Removing ..."),
         }
 
     def __get_rejected_files_errormessage_map(self):
         return {
-            'invalid_filetype': str(self.invalid_filetype_message),
-            'max_filesize_bytes_exceeded': self.get_max_filesize_bytes_exceeded_errormessage(),
+            "invalid_filetype": str(self.invalid_filetype_message),
+            "max_filesize_bytes_exceeded": self.get_max_filesize_bytes_exceeded_errormessage(),
         }
 
     def get_template_context_data(self, **context):
         """
         Can be overridden to adjust the template context data.
         """
-        context['accept'] = self.accept
-        context['dropbox_text'] = self.dropbox_text
-        context['rejected_files_errormessage_map'] = quoteattr(json.dumps(
-            self.__get_rejected_files_errormessage_map()))
-        context['advanced_fileselectbutton_text'] = self.advanced_fileselectbutton_text
-        context['simple_fileselectbutton_text'] = self.simple_fileselectbutton_text
-        context['angularjs_directive_options'] = quoteattr(json.dumps(
-            self.get_angularjs_directive_options()))
-        context['singlemode'] = self.get_use_singlemode()
-        context['overlaymode_autosubmit_uploading_message'] = self.overlaymode_autosubmit_uploading_message
+        context["accept"] = self.accept
+        context["dropbox_text"] = self.dropbox_text
+        context["rejected_files_errormessage_map"] = quoteattr(json.dumps(self.__get_rejected_files_errormessage_map()))
+        context["advanced_fileselectbutton_text"] = self.advanced_fileselectbutton_text
+        context["simple_fileselectbutton_text"] = self.simple_fileselectbutton_text
+        context["angularjs_directive_options"] = quoteattr(json.dumps(self.get_angularjs_directive_options()))
+        context["singlemode"] = self.get_use_singlemode()
+        context["overlaymode_autosubmit_uploading_message"] = self.overlaymode_autosubmit_uploading_message
         return context
 
     def render(self, name, value, attrs=None, renderer=None):
         if value is None:
-            value = ''
-        return render_to_string(self.template_name, self.get_template_context_data(
-            hiddenfieldname=name,
-            fieldvalue=value))
+            value = ""
+        return render_to_string(
+            self.template_name, self.get_template_context_data(hiddenfieldname=name, fieldvalue=value)
+        )
 
 
 class SingleFileUploadWidget(BulkFileUploadWidget):

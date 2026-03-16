@@ -9,7 +9,7 @@ from cradmin_legacy.apps.cradmin_activate_account.utils import ActivationEmail
 
 
 class BeginRegisterAccountView(FormView):
-    template_name = 'cradmin_register_account/begin.django.html'
+    template_name = "cradmin_register_account/begin.django.html"
 
     def get_form_class(self):
         if self.form_class:
@@ -19,11 +19,11 @@ class BeginRegisterAccountView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(BeginRegisterAccountView, self).get_context_data(**kwargs)
-        context['CRADMIN_LEGACY_SITENAME'] = settings.CRADMIN_LEGACY_SITENAME
+        context["CRADMIN_LEGACY_SITENAME"] = settings.CRADMIN_LEGACY_SITENAME
         return context
 
     def get_success_url(self):
-        return str(reverse('cradmin-register-account-email-sent'))
+        return str(reverse("cradmin-register-account-email-sent"))
 
     def get_next_url(self):
         """
@@ -32,16 +32,13 @@ class BeginRegisterAccountView(FormView):
         Defaults to the ``CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL``, falling back to
         the ``LOGIN_URL`` setting.
         """
-        if 'next' in self.request.GET:
-            return self.request.GET['next']
+        if "next" in self.request.GET:
+            return self.request.GET["next"]
         else:
-            return getattr(settings, 'CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL', settings.LOGIN_URL)
+            return getattr(settings, "CRADMIN_LEGACY_REGISTER_ACCOUNT_REDIRECT_URL", settings.LOGIN_URL)
 
     def send_activation_email(self, user):
-        activation_email = ActivationEmail(
-            request=self.request,
-            user=user,
-            next_url=self.get_next_url())
+        activation_email = ActivationEmail(request=self.request, user=user, next_url=self.get_next_url())
         activation_email.send()
 
     def form_valid(self, form):

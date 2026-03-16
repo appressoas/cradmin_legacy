@@ -16,7 +16,7 @@ class TestSortableItem(test.TestCase):
         pass
 
     def _create_container(self):
-        container = ItemContainer(name='test container')
+        container = ItemContainer(name="test container")
         container.save()
         return container
 
@@ -24,52 +24,49 @@ class TestSortableItem(test.TestCase):
         container = container or self._create_container()
         items = []
         for i in range(0, num_items, 1):
-            items.append(SortableItem(
-                container=container,
-                name='test{}'.format(i),
-                sort_index=i))
+            items.append(SortableItem(container=container, name="test{}".format(i), sort_index=i))
         SortableItem.objects.bulk_create(items)
         return SortableItem.objects.all()
 
     def test_has_sort_index_field(self):
         item = self._create_items(1)[0]
-        self.assertTrue(hasattr(item, 'sort_index'))
+        self.assertTrue(hasattr(item, "sort_index"))
         self.assertEqual(item.sort_index, 0)
 
     def test_sort_item_last(self):
         i1, i2, i3, i4, i5, i6 = self._create_items(6)
         SortableItem.objects.sort_last(i1)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i2.id, i3.id, i4.id, i5.id, i6.id, i1.id])
 
     def test_sort_item_3_last(self):
         i1, i2, i3, i4, i5, i6 = self._create_items(6)
         SortableItem.objects.sort_last(i3)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i1.id, i2.id, i4.id, i5.id, i6.id, i3.id])
 
     def test_sort_last_item_first(self):
         i1, i2, i3, i4, i5, i6 = self._create_items(6)
         SortableItem.objects.sort_before(i6, i1.id)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i6.id, i1.id, i2.id, i3.id, i4.id, i5.id])
 
     def test_sort_item_3_first(self):
         i1, i2, i3, i4, i5, i6 = self._create_items(6)
         SortableItem.objects.sort_before(i3, i1.id)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i3.id, i1.id, i2.id, i4.id, i5.id, i6.id])
 
     def test_sort_item_move_first_before_id_4(self):
         i1, i2, i3, i4, i5, i6 = self._create_items(6)
         SortableItem.objects.sort_before(i1, i4.id)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i2.id, i3.id, i1.id, i4.id, i5.id, i6.id])
 
     def test_sort_item_move_second_before_id_4(self):
         i1, i2, i3, i4, i5, i6 = self._create_items(6)
         SortableItem.objects.sort_before(i2, i4.id)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i1.id, i3.id, i2.id, i4.id, i5.id, i6.id])
 
     def test_sort_item_move_second_before_id_4_in_allready_reordered_list(self):
@@ -77,12 +74,12 @@ class TestSortableItem(test.TestCase):
         SortableItem.objects.sort_last(i1)
         # now list is [i2,i3,i4,i5,i6,i1]
         SortableItem.objects.sort_before(i2, i4.id)
-        reordered = [si.id for si in SortableItem.objects.all().order_by('sort_index')]
+        reordered = [si.id for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(reordered, [i3.id, i2.id, i4.id, i5.id, i6.id, i1.id])
 
     def test_set_sort_index_to_last_no_siblings(self):
         container = self._create_container()
-        item = SortableItem(container=container, name='My test')
+        item = SortableItem(container=container, name="My test")
         SortableItem.objects.set_newitem_sort_index_to_last(item)
         self.assertEqual(item.sort_index, 0)
         self.assertIsNone(item.pk)  # The item was not saved
@@ -90,20 +87,20 @@ class TestSortableItem(test.TestCase):
     def test_set_sort_index_to_last_has_siblings(self):
         container = self._create_container()
         self._create_items(2, container=container)
-        item = SortableItem(container=container, name='My test')
+        item = SortableItem(container=container, name="My test")
         SortableItem.objects.set_newitem_sort_index_to_last(item)
         self.assertEqual(item.sort_index, 2)
         self.assertIsNone(item.pk)  # The item was not saved
 
     def test_set_sort_index_to_last_refuse_with_sort_index(self):
         container = self._create_container()
-        item = SortableItem(container=container, name='My test', sort_index=1)
+        item = SortableItem(container=container, name="My test", sort_index=1)
         with self.assertRaises(ValueError):
             SortableItem.objects.set_newitem_sort_index_to_last(item)
 
     def test_set_sort_index_to_last_refuse_existing(self):
         container = self._create_container()
-        item = SortableItem(container=container, name='My test', sort_index=1)
+        item = SortableItem(container=container, name="My test", sort_index=1)
         item.save()
         item.sort_index = None
         with self.assertRaises(ValueError):
@@ -197,7 +194,7 @@ class TestRepairSortable(test.TestCase):
         pass
 
     def _create_container(self):
-        container = ItemContainer(name='test container')
+        container = ItemContainer(name="test container")
         container.save()
         return container
 
@@ -209,10 +206,7 @@ class TestRepairSortable(test.TestCase):
         return items
 
     def _create_item(self, container, sort_index):
-        si = SortableItem.objects.create(
-            container=container,
-            name='test{}'.format(sort_index),
-            sort_index=sort_index)
+        si = SortableItem.objects.create(container=container, name="test{}".format(sort_index), sort_index=sort_index)
         return si
 
     def test_repairs_empty_hole(self):
@@ -222,7 +216,7 @@ class TestRepairSortable(test.TestCase):
 
         SortableItem.objects.sort_before(items[1], items[0].id)
 
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2])
 
     def test_repairs_duplicate_index(self):
@@ -232,7 +226,7 @@ class TestRepairSortable(test.TestCase):
 
         SortableItem.objects.sort_before(items[1], items[0].id)
 
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2])
 
     def test_repair_multiple_duplicate_indexes(self):
@@ -245,7 +239,7 @@ class TestRepairSortable(test.TestCase):
 
         SortableItem.objects.sort_before(items[1], items[0].id)
 
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2, 3, 4, 5])
 
     def test_repair_multiple_holes_in_indexes(self):
@@ -258,7 +252,7 @@ class TestRepairSortable(test.TestCase):
 
         SortableItem.objects.sort_before(items[1], items[0].id)
 
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2, 3, 4, 5])
 
     def test_repair_holes_and_duplicates_in_indexes(self):
@@ -270,7 +264,7 @@ class TestRepairSortable(test.TestCase):
 
         SortableItem.objects.sort_before(items[1], items[0].id)
 
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2, 3, 4])
 
     def test_repair_several_indexes_hole(self):
@@ -280,7 +274,7 @@ class TestRepairSortable(test.TestCase):
 
         SortableItem.objects.sort_before(items[1], items[0].id)
 
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2])
 
     def test_repair_hole_at_beginning(self):
@@ -289,7 +283,7 @@ class TestRepairSortable(test.TestCase):
         i2 = self._create_item(container, 2)
 
         SortableItem.objects.sort_before(i2, i1.id)
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1])
 
     def test_repair_duplicate_at_beginning(self):
@@ -299,7 +293,7 @@ class TestRepairSortable(test.TestCase):
         self._create_item(container, 1)
 
         SortableItem.objects.sort_before(i2, i1.id)
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2])
 
     def test_repair_duplicate_at_end(self):
@@ -309,5 +303,5 @@ class TestRepairSortable(test.TestCase):
         self._create_item(container, 1)
 
         SortableItem.objects.sort_before(i2, i1.id)
-        indexes = [si.sort_index for si in SortableItem.objects.all().order_by('sort_index')]
+        indexes = [si.sort_index for si in SortableItem.objects.all().order_by("sort_index")]
         self.assertEqual(indexes, [0, 1, 2])

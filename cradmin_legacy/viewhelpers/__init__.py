@@ -10,14 +10,14 @@ from . import multiselect  # noqa
 from . import objecttable  # noqa
 
 __all__ = [
-    'mixins',
-    'crudbase',
-    'create',
-    'update',
-    'delete',
-    'detail',
-    'formbase',
-    'listbuilderview',
-    'multiselect',
-    'objecttable',
+    "mixins",
+    "crudbase",
+    "create",
+    "update",
+    "delete",
+    "detail",
+    "formbase",
+    "listbuilderview",
+    "multiselect",
+    "objecttable",
 ]

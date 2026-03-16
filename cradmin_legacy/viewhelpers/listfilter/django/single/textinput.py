@@ -22,6 +22,7 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
                 slug='search', label='Search',
                 modelfields=['name', 'title'])
     """
+
     def __init__(self, *args, **kwargs):
         """
         Parameters are the same as for
@@ -30,7 +31,7 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
 
             - modelfields: List of model fields to search on.
         """
-        self.modelfields = kwargs.pop('modelfields', None)
+        self.modelfields = kwargs.pop("modelfields", None)
         super(Search, self).__init__(*args, **kwargs)
 
     def get_modelfields(self):
@@ -42,13 +43,13 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
         if self.modelfields:
             return self.modelfields
         else:
-            raise NotImplementedError('You must override get_modelfields() or use the modelfields parameter.')
+            raise NotImplementedError("You must override get_modelfields() or use the modelfields parameter.")
 
     def get_lookup_suffix(self):
         """
         Get the query lookup suffix. Defaults to ``"__icontains"``.
         """
-        return '__icontains'
+        return "__icontains"
 
     def make_q_object_for_value(self, modelfield, cleaned_value):
         """
@@ -63,14 +64,13 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
             django.db.models.Q: A Q object.
         """
         comparison_operator = self.get_lookup_suffix()
-        kwargs = {'{}{}'.format(modelfield, comparison_operator): cleaned_value}
+        kwargs = {"{}{}".format(modelfield, comparison_operator): cleaned_value}
         return models.Q(**kwargs)
 
     def build_query(self, modelfields, cleaned_value):
         full_query = None
         for modelfield in modelfields:
-            query = self.make_q_object_for_value(modelfield=modelfield,
-                                                 cleaned_value=cleaned_value)
+            query = self.make_q_object_for_value(modelfield=modelfield, cleaned_value=cleaned_value)
             if full_query:
                 full_query |= query
             else:
@@ -80,9 +80,8 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
     def filter(self, queryobject):
         modelfields = self.get_modelfields()
         cleaned_value = self.get_cleaned_value()
-        if cleaned_value not in ('', None):
-            queryobject = queryobject.filter(self.build_query(
-                modelfields=modelfields, cleaned_value=cleaned_value))
+        if cleaned_value not in ("", None):
+            queryobject = queryobject.filter(self.build_query(modelfields=modelfields, cleaned_value=cleaned_value))
         return queryobject
 
 
@@ -108,5 +107,6 @@ class IntSearch(abstracttextinput.IntInputFilterMixin, Search):
                 modelfields=['age', 'height'])
 
     """
+
     def get_lookup_suffix(self):
-        return '__exact'
+        return "__exact"

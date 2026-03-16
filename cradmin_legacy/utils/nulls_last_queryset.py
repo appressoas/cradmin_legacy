@@ -6,6 +6,7 @@ class NullsLastQuery(models.sql.query.Query):
     Query that uses custom compiler,
     to utilize PostgreSQL feature of setting position of NULL records
     """
+
     def get_compiler(self, using=None, connection=None):
         if using is None and connection is None:
             raise ValueError("Need either using or connection")
@@ -18,7 +19,7 @@ class NullsLastQuery(models.sql.query.Query):
         class NullsLastSQLCompiler(SQLCompiler):
             def get_ordering(self):
                 result, group_by = super(NullsLastSQLCompiler, self).get_ordering()
-                if self.connection.vendor == 'postgresql' and result:
+                if self.connection.vendor == "postgresql" and result:
                     result = [line + " NULLS LAST" for line in result]
                 return result, group_by
 
