@@ -4,7 +4,7 @@
 
 Requires:
 
-- https://github.com/pyenv/pyenv
+- https://docs.astral.sh/uv/ or (deprecated) https://github.com/pyenv/pyenv
 
 ### Use conventional commits for GIT commit messages
 
@@ -42,7 +42,7 @@ needed, but we really recommend using pipx since that is isolated.
 
 ### Install development dependencies
 
-#### Install a local python version with pyenv:
+#### (deprecated - use UV) Install a local python version with pyenv:
 
 ```bash
 pyenv install $(pyenv latest -k 3.12)
@@ -51,23 +51,23 @@ pyenv local 3.12
 
 #### Install dependencies in a virtualenv:
 
-```bash
-./tools/recreate-virtualenv.sh
-```
-
 Alternatively, create virtualenv manually (this does the same as recreate-virtualenv.sh):
 
 ```bash
+# With UV:
+uv venv
+# With pip:
 python -m venv .venv
 ```
 
-the ./recreate-virtualenv.sh script is just here to make creating virtualenvs more uniform
-across different repos because some repos will require extra setup in the virtualenv
-for package authentication etc.
 
 #### Install dependencies in a virtualenv:
 
 ```bash
+# with uv:
+uv pip install -e ".[dev,test]"
+
+# with pip:
 source .venv/bin/activate   # enable virtualenv
 .venv/bin/pip install -e ".[dev,test]"
 ```
@@ -78,6 +78,12 @@ This will upgrade all local packages according to the constraints
 set in pyproject.toml:
 
 ```bash
+# with uv:
+rm -r .venv
+uv venv
+uv pip install -e ".[dev,test]"
+
+# with pip:
 .venv/bin/pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
 ```
 
@@ -103,6 +109,14 @@ The devserver is now running at `127.0.0.1:8000`
 ```bash
 source .venv/bin/activate   # enable virtualenvbash
 pytest cradmin_legacy
+```
+
+
+### Autoformat code with ruff
+
+```bash
+source .venv/bin/activate   # enable virtualenvbash
+ruff format .
 ```
 
 ## Documentation
