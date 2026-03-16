@@ -114,6 +114,9 @@ pytest cradmin_legacy
 
 ### Autoformat code with ruff
 
+If you have not configured your editor to autoformat with ruff, you can run the
+following command to autoformat all code in the repo:
+
 ```bash
 source .venv/bin/activate   # enable virtualenvbash
 ruff format .
