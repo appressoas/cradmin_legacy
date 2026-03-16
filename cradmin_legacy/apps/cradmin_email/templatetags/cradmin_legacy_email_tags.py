@@ -9,7 +9,7 @@ def _cradmin_email_buttonlink(parser, token, linkstyle_context_variable):
         tag_name, url = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("%r tag requires exactly one arguments" % token.contents.split()[0])
-    end_tag = "end_{}".format(tag_name)
+    end_tag = f"end_{tag_name}"
     nodelist = parser.parse((end_tag,))
     parser.delete_first_token()
     return CradminEmailButtonlinkNode(nodelist=nodelist, url=url, linkstyle_context_variable=linkstyle_context_variable)

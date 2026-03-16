@@ -1,8 +1,7 @@
-from __future__ import unicode_literals
 from cradmin_legacy.viewhelpers import listfilter
 
 
-class ViewMixin(object):
+class ViewMixin:
     """
     Mixin class for views using filterlist.
 
@@ -54,7 +53,7 @@ class ViewMixin(object):
         url = self.get_filterlist_url(filters_string)
         querystring = querydict.urlencode()
         if querystring:
-            url = "{}?{}".format(url, querystring)
+            url = f"{url}?{querystring}"
         return url
 
     def get_filters_string(self):
@@ -230,7 +229,7 @@ class ViewMixin(object):
         context_data["filterlist"] = self.get_filterlist()
 
     def get_context_data(self, **kwargs):
-        context = super(ViewMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["filterlist"] = self.get_filterlist()
         return context
 

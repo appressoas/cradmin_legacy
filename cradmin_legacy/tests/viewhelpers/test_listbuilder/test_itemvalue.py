@@ -37,7 +37,7 @@ class TestTitleDescription(test.TestCase):
 
 
 @python_2_unicode_compatible
-class MockValue(object):
+class MockValue:
     def __init__(self, value_str, pk):
         self.value_str = value_str
         self.pk = pk

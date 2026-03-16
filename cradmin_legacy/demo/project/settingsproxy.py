@@ -19,4 +19,4 @@ if DJANGOENV == "develop":  # Used for local development
 elif DJANGOENV == "test":  # Used when running the Django tests
     from cradmin_legacy.demo.project.test.settings import *  # noqa
 else:
-    raise ValueError("Invalid value for the DJANGOENV environment variable: {}".format(DJANGOENV))
+    raise ValueError(f"Invalid value for the DJANGOENV environment variable: {DJANGOENV}")

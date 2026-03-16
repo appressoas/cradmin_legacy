@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from cradmin_legacy.python2_compatibility import mock
 import htmls
 from django.test import TestCase
@@ -20,10 +19,7 @@ class TestDelete(TestCase):
 
             def get_object(self, queryset=None):
                 obj = mock.MagicMock()
-                if six.PY2:
-                    obj.__unicode__.return_value = "Simple Test Item"
-                else:
-                    obj.__str__.return_value = "Simple Test Item"
+                obj.__str__.return_value = "Simple Test Item"
                 obj._meta = mock.MagicMock()
                 obj._meta.verbose_name = "TestModel"
                 return obj

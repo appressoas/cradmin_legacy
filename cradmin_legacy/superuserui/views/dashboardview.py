@@ -26,7 +26,7 @@ class View(TemplateView):
         )
 
     def get_context_data(self, **kwargs):
-        context = super(View, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["djangoapps_list"] = self.get_djangoapps_listbuilder_list()
         context["pagetitle"] = self.request.cradmin_instance.get_superuserui_registry().get_title()
         return context

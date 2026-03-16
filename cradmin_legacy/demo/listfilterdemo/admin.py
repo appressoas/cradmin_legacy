@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.contrib import admin
 from cradmin_legacy.demo.listfilterdemo.models import Site, Person
 
@@ -23,7 +22,7 @@ class PersonAdmin(admin.ModelAdmin):
     ]
 
     def get_queryset(self, request):
-        return super(PersonAdmin, self).get_queryset(request).select_related("site")
+        return super().get_queryset(request).select_related("site")
 
 
 admin.site.register(Person, PersonAdmin)

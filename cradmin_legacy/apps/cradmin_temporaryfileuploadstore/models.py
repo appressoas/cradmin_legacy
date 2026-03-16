@@ -1,6 +1,3 @@
-from __future__ import division
-from __future__ import unicode_literals
-from builtins import str
 from past.utils import old_div
 import fnmatch
 import mimetypes
@@ -55,7 +52,7 @@ def truncate_filename(filename, maxlength, ellipsis="..."):
         endlength = int(math.ceil(old_div(max_length_noellipsis, 2.0)))
         start = filename[0:startlength]
         end = filename[-endlength:]
-        return "{}{}{}".format(start, ellipsis, end)
+        return f"{start}{ellipsis}{end}"
 
 
 def _make_unique_filename(filename_set, wanted_filename, generated_filename, max_filename_length, ellipsis):
@@ -67,7 +64,7 @@ def _make_unique_filename(filename_set, wanted_filename, generated_filename, max
             )
         else:
             filename = wanted_filename
-        generated_filename = "{}-{}".format(generated_uuid, filename)
+        generated_filename = f"{generated_uuid}-{filename}"
         return _make_unique_filename(
             filename_set,
             wanted_filename=wanted_filename,

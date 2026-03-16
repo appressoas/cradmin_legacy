@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Django CRadmin documentation build configuration file, created by
 # sphinx-quickstart on Thu Jun 19 11:41:08 2014.

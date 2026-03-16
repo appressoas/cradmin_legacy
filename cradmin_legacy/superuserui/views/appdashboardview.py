@@ -26,7 +26,7 @@ class View(TemplateView):
         )
 
     def get_context_data(self, **kwargs):
-        context = super(View, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["models_list"] = self.get_models_listbuilder_list()
         context["djangoappconfig"] = self.request.cradmin_app.djangoappconfig
         return context

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import range
 from django.utils.html import format_html
 import htmls
 from cradmin_legacy.python2_compatibility import mock
@@ -40,7 +38,7 @@ class TestRoleSelectView(TestCase):
         cradmin_instance.get_titletext_for_role = lambda role: role.title
         cradmin_instance.get_descriptionhtml_for_role = lambda role: format_html("<p>{}<p>", role.description)
         cradmin_instance.get_roleid = lambda role: role.id
-        cradmin_instance.rolefrontpage_url = lambda roleid: "/role/{}".format(roleid)
+        cradmin_instance.rolefrontpage_url = lambda roleid: f"/role/{roleid}"
         cradmin_instance.get_rolequeryset.return_value = QuerySetMock(None, *roles)
         return cradmin_instance
 
@@ -157,7 +155,7 @@ class TestRoleSelectView(TestCase):
         for index in range(CustomRoleSelectView.paginate_by + 2):
             role = mock.MagicMock()
             role.id = index
-            role.title = "Role {}".format(index)
+            role.title = f"Role {index}"
             roles.append(role)
         cradmin_instance = self.__mock_cradmin_instance(roles=roles)
 
@@ -197,7 +195,7 @@ class TestRoleSelectView(TestCase):
         for index in range(CustomRoleSelectView.paginate_by):
             role = mock.MagicMock()
             role.id = index
-            role.title = "Role {}".format(index)
+            role.title = f"Role {index}"
             roles.append(role)
         cradmin_instance = self.__mock_cradmin_instance(roles=roles)
 

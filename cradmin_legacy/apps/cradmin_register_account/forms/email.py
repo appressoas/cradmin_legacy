@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from cradmin_legacy.apps.cradmin_register_account.forms.base import AbstractCreateAccountWithPasswordForm
 
 

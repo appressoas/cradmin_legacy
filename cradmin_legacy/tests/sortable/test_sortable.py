@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import range
 from django import test
 from model_bakery import baker
 
@@ -24,7 +22,7 @@ class TestSortableItem(test.TestCase):
         container = container or self._create_container()
         items = []
         for i in range(0, num_items, 1):
-            items.append(SortableItem(container=container, name="test{}".format(i), sort_index=i))
+            items.append(SortableItem(container=container, name=f"test{i}", sort_index=i))
         SortableItem.objects.bulk_create(items)
         return SortableItem.objects.all()
 
@@ -206,7 +204,7 @@ class TestRepairSortable(test.TestCase):
         return items
 
     def _create_item(self, container, sort_index):
-        si = SortableItem.objects.create(container=container, name="test{}".format(sort_index), sort_index=sort_index)
+        si = SortableItem.objects.create(container=container, name=f"test{sort_index}", sort_index=sort_index)
         return si
 
     def test_repairs_empty_hole(self):

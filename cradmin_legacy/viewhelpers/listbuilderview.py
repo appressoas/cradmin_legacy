@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.conf import settings
 from django.template import defaultfilters
 from django.views.generic import ListView
@@ -8,7 +7,7 @@ from cradmin_legacy.viewhelpers.listfilter import listfilter_viewmixin
 from cradmin_legacy.viewhelpers import listfilter
 
 
-class ViewMixin(object):
+class ViewMixin:
     """
     Listbuilder view mixin. Must be mixin in before any Django View subclass.
 
@@ -202,12 +201,12 @@ class ViewMixin(object):
         return None
 
     def get_context_data(self, **kwargs):
-        context = super(ViewMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         self.add_listview_context_data(context)
         return context
 
 
-class ViewCreateButtonMixin(object):
+class ViewCreateButtonMixin:
     """
     Mixin class that overrides :meth:`.View.get_buttons_include_template`
     with a template that renders a create button that assumes the
@@ -327,7 +326,7 @@ class View(ViewMixin, ListView):
         return False
 
     def get_context_data(self, **kwargs):
-        context = super(View, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["cradmin_hide_menu"] = self.hide_menu
         context["pagination_mode_load_all"] = self.use_pagination_load_all()
         return context
@@ -376,7 +375,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
             return self.template_name
         else:
             position = self.get_filterlist_position()
-            template_name = "cradmin_legacy/viewhelpers/listbuilderview/filterlist-{}.django.html".format(position)
+            template_name = f"cradmin_legacy/viewhelpers/listbuilderview/filterlist-{position}.django.html"
             return template_name
 
     def get_filter_unprotected_querystring_arguments(self):

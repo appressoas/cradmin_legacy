@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from builtins import range
-from builtins import object
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -201,5 +198,5 @@ class SortableBase(models.Model):
         blank=True, null=True, default=None, verbose_name="index", validators=[validate_sort_index]
     )
 
-    class Meta(object):
+    class Meta:
         abstract = True

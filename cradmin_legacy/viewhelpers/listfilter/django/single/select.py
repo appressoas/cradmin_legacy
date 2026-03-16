@@ -24,7 +24,7 @@ class Boolean(abstractselect.AbstractBoolean, DjangoOrmFilterMixin):
     """
 
     def get_query(self, modelfield):
-        return models.Q(**{modelfield: False}) | models.Q(**{"{}__isnull".format(modelfield): True})
+        return models.Q(**{modelfield: False}) | models.Q(**{f"{modelfield}__isnull": True})
 
     def filter(self, queryobject):
         modelfield = self.get_modelfield()
@@ -57,7 +57,7 @@ class IsNotNull(Boolean, DjangoOrmFilterMixin):
     """
 
     def get_query(self, modelfield):
-        return models.Q(**{"{}__isnull".format(modelfield): True})
+        return models.Q(**{f"{modelfield}__isnull": True})
 
 
 class DateTime(abstractselect.AbstractDateTime, DjangoOrmFilterMixin):
@@ -83,8 +83,8 @@ class DateTime(abstractselect.AbstractDateTime, DjangoOrmFilterMixin):
         end_datetime = datetimeutils.make_aware_in_default_timezone(end_datetime)
         return queryobject.filter(
             **{
-                "{}__gte".format(modelfield): start_datetime,
-                "{}__lt".format(modelfield): end_datetime,
+                f"{modelfield}__gte": start_datetime,
+                f"{modelfield}__lt": end_datetime,
             }
         )
 
@@ -111,11 +111,11 @@ class NullDateTime(DateTime):
 
     def filter_is_null(self, queryobject):
         modelfield = self.get_modelfield()
-        return queryobject.filter(**{"{}__isnull".format(modelfield): True})
+        return queryobject.filter(**{f"{modelfield}__isnull": True})
 
     def filter_is_not_null(self, queryobject):
         modelfield = self.get_modelfield()
-        return queryobject.filter(**{"{}__isnull".format(modelfield): False})
+        return queryobject.filter(**{f"{modelfield}__isnull": False})
 
 
 class AbstractOrderBy(abstractselect.AbstractOrderBy, DjangoOrmFilterMixin):

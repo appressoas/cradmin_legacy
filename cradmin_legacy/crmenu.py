@@ -1,10 +1,8 @@
-from __future__ import unicode_literals
-from builtins import object
 from django.template.loader import render_to_string
 import warnings
 
 
-class MenuItem(object):
+class MenuItem:
     """
     A  menu item. Basically a pythonic interface to
     create a HTML element.
@@ -122,7 +120,7 @@ class MenuItem(object):
         return ""
 
 
-class Menu(object):
+class Menu:
     """
     Base class for the menu.
 

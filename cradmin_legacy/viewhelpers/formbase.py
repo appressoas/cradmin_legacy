@@ -1,7 +1,3 @@
-from __future__ import unicode_literals
-
-from builtins import object
-
 from crispy_forms import layout
 from django.conf import settings
 from django.utils.translation import gettext_lazy
@@ -11,7 +7,7 @@ from cradmin_legacy import crapp
 from cradmin_legacy.crispylayouts import CradminFormHelper
 
 
-class PreviewMixin(object):
+class PreviewMixin:
     """
     Mixin class to provide a preview view for your views.
 
@@ -115,7 +111,7 @@ class PreviewMixin(object):
         Get the session key used for preview. You should not
         need to override this.
         """
-        sessionkey = "cradmin_legacy__{module}.{classname}".format(module=cls.__module__, classname=cls.__name__)
+        sessionkey = f"cradmin_legacy__{cls.__module__}.{cls.__name__}"
         return sessionkey
 
     @classmethod
@@ -404,7 +400,7 @@ class FormViewMixin(PreviewMixin):
 
         to add the context data required for the form.
         """
-        super(FormViewMixin, self).add_context_data(context)
+        super().add_context_data(context)
         context["formhelper"] = self.get_formhelper()
         context["enable_modelchoicefield_support"] = self.enable_modelchoicefield_support
         context["hide_pageheader"] = self.get_hide_page_header()
@@ -415,7 +411,7 @@ class FormViewMixin(PreviewMixin):
         """
         Get the context data required to render the form view.
         """
-        context = super(FormViewMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         self.add_context_data(context)
         return context
 

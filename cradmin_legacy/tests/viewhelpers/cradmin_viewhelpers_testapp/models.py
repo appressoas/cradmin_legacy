@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
@@ -16,4 +15,4 @@ class FilterTestModel(models.Model):
     mynulldatetimefield = models.DateTimeField(null=True, blank=True, default=None)
 
     def __str__(self):
-        return "FilterTestModel(mycharfield={!r}, mybooleanfield={})".format(self.mycharfield, self.mybooleanfield)
+        return f"FilterTestModel(mycharfield={self.mycharfield!r}, mybooleanfield={self.mybooleanfield})"

@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import json
 import os
 
@@ -32,7 +31,7 @@ class TestUploadTemporaryFilesView(TestCase):
         uploadedfile = collection.files.first()
         self.assertEqual(uploadedfile.filename, "testfile1.txt")
         self.assertNotIn("testfile1.txt", uploadedfile.file.name)
-        self.assertTrue(uploadedfile.file.name.startswith("cradmin_temporaryfileuploadstore/{}/".format(collection.id)))
+        self.assertTrue(uploadedfile.file.name.startswith(f"cradmin_temporaryfileuploadstore/{collection.id}/"))
         self.assertEqual(uploadedfile.file.read(), b"Test1")
 
         self.assertEqual(len(responsedata["temporaryfiles"]), 1)

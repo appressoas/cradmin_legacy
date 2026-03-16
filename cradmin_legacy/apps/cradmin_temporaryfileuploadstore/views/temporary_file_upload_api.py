@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import json
 import mimetypes
 from django.conf import settings
@@ -174,7 +173,7 @@ class UploadTemporaryFilesView(FormView):
                 {
                     "collectionid": [
                         {
-                            "message": "Collection with id={} does not exist.".format(collectionid),
+                            "message": f"Collection with id={collectionid} does not exist.",
                             "code": "doesnotexist",
                         }
                     ]
@@ -189,7 +188,7 @@ class UploadTemporaryFilesView(FormView):
                 {
                     "temporaryfileid": [
                         {
-                            "message": "Temporary file with id={} does not exist.".format(temporaryfileid),
+                            "message": f"Temporary file with id={temporaryfileid} does not exist.",
                             "code": "doesnotexist",
                         }
                     ]

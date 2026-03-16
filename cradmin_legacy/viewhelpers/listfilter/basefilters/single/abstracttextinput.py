@@ -34,7 +34,7 @@ class AbstractInputFilter(AbstractFilter):
         return None
 
     def get_base_css_classes_list(self):
-        css_classes = super(AbstractInputFilter, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listfilter-filter-single-input")
         return css_classes
 
@@ -77,13 +77,13 @@ class AbstractInputFilter(AbstractFilter):
         return 500
 
     def get_angularjs_options_dict(self):
-        options_dict = super(AbstractInputFilter, self).get_angularjs_options_dict()
+        options_dict = super().get_angularjs_options_dict()
         options_dict["timeout_milliseconds"] = self.get_timeout_milliseconds()
         options_dict["urlpattern_replace_text"] = self.urlpattern_replace_text
         return options_dict
 
 
-class IntInputFilterMixin(object):
+class IntInputFilterMixin:
     """
     Mixin class that can be used with a subclass of
     :class:`.AbstractInputFilter` to provide int input
@@ -96,7 +96,7 @@ class IntInputFilterMixin(object):
         """
         Get the value as an ``int``, or ``None`` (if no value is provided).
         """
-        cleaned_value = super(IntInputFilterMixin, self).get_cleaned_value()
+        cleaned_value = super().get_cleaned_value()
         if cleaned_value in (None, ""):
             return None
         try:
@@ -120,7 +120,7 @@ class AbstractSearch(AbstractInputFilter):
     """
 
     def get_base_css_classes_list(self):
-        css_classes = super(AbstractSearch, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listfilter-filter-single-input-search")
         return css_classes
 

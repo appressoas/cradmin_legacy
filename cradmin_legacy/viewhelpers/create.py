@@ -1,10 +1,7 @@
-from __future__ import unicode_literals
-
 import sys
 from future import standard_library
 
 standard_library.install_aliases()
-from builtins import str
 import urllib.request
 import urllib.parse
 import urllib.error
@@ -94,13 +91,13 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
         return url
 
     def get_default_save_success_url(self):
-        url = super(CreateView, self).get_default_save_success_url()
+        url = super().get_default_save_success_url()
         if self.is_in_foreignkey_select_mode():
             url = self.__class__.add_foreignkey_selected_value_to_url_querystring(url, self.object.pk)
         return url
 
     def get_formhelper(self):
-        helper = super(CreateView, self).get_formhelper()
+        helper = super().get_formhelper()
         helper.form_id = "cradmin_legacy_createform"
         return helper
 
@@ -108,7 +105,7 @@ class CreateView(CreateUpdateViewMixin, DjangoCreateView):
         return self.allow_foreignkey_select and self.request.GET.get("foreignkey_select_mode") == "1"
 
     def get_context_data(self, **kwargs):
-        context = super(CreateView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["cradmin_hide_menu"] = self.is_in_foreignkey_select_mode()
         context["is_foreignkey_select_mode"] = self.is_in_foreignkey_select_mode()
         context["foreignkey_select_mode_backbutton_url"] = self.__get_foreignkey_select_mode_backbutton_url()

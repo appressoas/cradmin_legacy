@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy
 from django.views.generic import ListView
 from django.http import HttpResponseRedirect
@@ -28,7 +27,7 @@ class RoleSelectView(ListView):
             # Convenient when overriding standalone-base.django.html and using the current
             # CrInstance to distinguish multiple crinstances.
             self.request.cradmin_instance = cradmin_instance
-            return super(RoleSelectView, self).get(*args, **kwargs)
+            return super().get(*args, **kwargs)
 
     def get_autoredirect_if_single_role(self):
         return self.autoredirect_if_single_role
@@ -40,7 +39,7 @@ class RoleSelectView(ListView):
         return self.list_cssclass
 
     def get_context_data(self, **kwargs):
-        context = super(RoleSelectView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["pagetitle"] = self.get_pagetitle()
         context["list_cssclass"] = self.get_list_cssclass()
         return context

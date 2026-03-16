@@ -1,7 +1,3 @@
-from __future__ import unicode_literals
-
-from builtins import str
-
 from django import forms
 from django.utils.translation import pgettext
 
@@ -26,7 +22,7 @@ class ModelForm(forms.ModelForm):
                 as ``view.request``).
         """
         self.view = kwargs.pop("view", None)
-        super(ModelForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.autosetup_fields()
 
     def setup_datetime_field(self, fieldname, formfield):

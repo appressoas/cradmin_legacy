@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy
 from django import forms
 from django.views.generic import TemplateView
@@ -100,7 +99,7 @@ class MultiSelectView(TemplateView):
         )
 
     def get_context_data(self, **kwargs):
-        context = super(MultiSelectView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["selected_objects_form"] = self.selected_objects_form
         context["selected_objects"] = self.selected_objects
         return context
@@ -219,7 +218,7 @@ class MultiSelectFormView(MultiSelectView, FormMixin):
         return self.model._meta.verbose_name_plural
 
     def get_context_data(self, **kwargs):
-        context = super(MultiSelectFormView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["pagetitle"] = self.get_pagetitle()
         context["formhelper"] = self.get_formhelper()
         return context

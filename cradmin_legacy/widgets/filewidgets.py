@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import posixpath
 
 from django import forms
@@ -31,7 +29,7 @@ class ImageWidget(forms.ClearableFileInput):
         self.preview_imagetype = preview_imagetype
         self.preview_fallback_options = {"width": 300, "height": 300}
 
-        super(ImageWidget, self).__init__(attrs)
+        super().__init__(attrs)
 
     def get_preview_css_styles(self):
         if self.preview_imagetype:
@@ -95,7 +93,7 @@ class FileWidget(forms.ClearableFileInput):
         self.clearable = clearable
         if template_name:
             self.template_name = template_name
-        super(FileWidget, self).__init__(attrs)
+        super().__init__(attrs)
 
     def render(self, name, value, attrs=None, renderer=None):
         attrs = attrs or {}

@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 from django.utils.translation import pgettext
@@ -24,7 +23,7 @@ class AbstractFilter(AbstractFilterListChild):
         self.slug = slug
         self.label = label
         self.label_is_screenreader_only = label_is_screenreader_only
-        super(AbstractFilter, self).__init__()
+        super().__init__()
 
     def copy(self):
         """
@@ -231,13 +230,13 @@ class AbstractFilter(AbstractFilterListChild):
         but you can also use this if you need DOM IDs for components of a filter
         (E.g.: Field ID to attach a labels to a form field).
         """
-        return "{}_{}".format(self.filterlist.get_dom_id_prefix(), self.get_slug())
+        return f"{self.filterlist.get_dom_id_prefix()}_{self.get_slug()}"
 
     def get_label_dom_id(self):
         """
         Get the DOM ID of the label for this filter.
         """
-        return "{}_label".format(self.get_dom_id())
+        return f"{self.get_dom_id()}_label"
 
     def get_inputfield_dom_id(self):
         """
@@ -245,7 +244,7 @@ class AbstractFilter(AbstractFilterListChild):
         this will most likely not be used, or it may be used as the ID of the
         first field to make the label focus on the first field when it is clicked.
         """
-        return "{}_input".format(self.get_dom_id())
+        return f"{self.get_dom_id()}_input"
 
     def get_target_dom_id(self):
         """

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.db import models
 from future.utils import python_2_unicode_compatible
 

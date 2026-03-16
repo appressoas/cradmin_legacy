@@ -1,4 +1,4 @@
-class QuerySetForRoleMixin(object):
+class QuerySetForRoleMixin:
     def get_model_class(self):
         return self.request.cradmin_app.modelconfig.get_model_class()
         # return self.modelconfig.get_modelclass()
@@ -7,7 +7,7 @@ class QuerySetForRoleMixin(object):
         return self.get_model_class().objects.all()
 
 
-class ListFilterQuerySetForRoleMixin(object):
+class ListFilterQuerySetForRoleMixin:
     def get_model_class(self):
         return self.request.cradmin_app.modelconfig.get_model_class()
         # return self.modelconfig.get_modelclass()

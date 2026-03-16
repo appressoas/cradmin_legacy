@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import TestCase
@@ -70,7 +69,7 @@ class TestBeginRegisterAccountView(TestCase):
     def test_post_next_url_as_querystring_argument(self):
         self.assertEqual(get_user_model().objects.count(), 0)
         self.client.post(
-            "{}?next=/next".format(self.url),
+            f"{self.url}?next=/next",
             {"username": "test", "password1": "test", "password2": "test", "email": "test@example.com"},
         )
         token = GenericTokenWithMetadata.objects.first()

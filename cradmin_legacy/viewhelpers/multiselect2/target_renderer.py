@@ -195,7 +195,7 @@ class Target(renderable.AbstractRenderableWithCss, abstractfilterlistchild.Filte
         return quoteattr(json.dumps(self.get_angularjs_directive_dict()))
 
     def get_context_data(self, request=None):
-        context = super(Target, self).get_context_data(request=request)
+        context = super().get_context_data(request=request)
         context["form_action"] = self.get_form_action(request=request)
         context["angularjs_directive_json"] = self.get_angularjs_directive_json()
         return context
@@ -300,7 +300,7 @@ class ManyToManySelectTarget(Target):
             target_formfield_id: The DOM ID of the target form field.
         """
         self.target_formfield_id = target_formfield_id
-        super(ManyToManySelectTarget, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_usethis_directive_dict(self):
         return {"fieldid": self.target_formfield_id}

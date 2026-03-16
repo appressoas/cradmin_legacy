@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy
 from django import forms
 from django.contrib.auth import get_user_model
@@ -43,7 +42,7 @@ class AuthUserCreateAccountForm(AbstractCreateAccountWithPasswordForm):
         fields = ["email", "username"]
 
     def __init__(self, *args, **kwargs):
-        super(AuthUserCreateAccountForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["email"].required = True
         # self.fields['username'].required = True
 

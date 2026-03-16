@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.contrib import admin
 from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
 
@@ -28,7 +27,7 @@ class TemporaryFileCollectionAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         if request.user.is_superuser:
-            return super(TemporaryFileCollectionAdmin, self).get_queryset(request)
+            return super().get_queryset(request)
         else:
             return TemporaryFile.objects.none()
 

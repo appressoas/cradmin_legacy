@@ -1,4 +1,4 @@
-class DjangoOrmFilterMixin(object):
+class DjangoOrmFilterMixin:
     """
     Mixin class for Django ORM filters.
     """

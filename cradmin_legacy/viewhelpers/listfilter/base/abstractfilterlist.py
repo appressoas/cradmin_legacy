@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 
@@ -35,7 +34,7 @@ class AbstractFilterList(AbstractRenderableWithCss):
                 ``label_is_screenreader_only`` for all filters within the list.
                 See :class:`cradmin_legacy.viewhelpers.listfilter.base.abstractfilter.AbstractFilter`
         """
-        super(AbstractFilterList, self).__init__()
+        super().__init__()
         self.children = []
         self.set_filters_string_called = False
         self.filtershandler = self.get_filters_handler_class()(urlbuilder=urlbuilder)

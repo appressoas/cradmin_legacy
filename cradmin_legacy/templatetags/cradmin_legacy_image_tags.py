@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.template import Library
 from cradmin_legacy import imageutils
 import logging

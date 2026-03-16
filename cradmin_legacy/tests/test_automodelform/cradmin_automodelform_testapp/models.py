@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import datetime
 
 from django.db import models
@@ -20,4 +18,4 @@ class AutoFormTestModel(models.Model):
     members = models.ManyToManyField(Member, blank=True)
 
     def __str__(self):
-        return "MyModel#{}".format(self.id)
+        return f"MyModel#{self.id}"

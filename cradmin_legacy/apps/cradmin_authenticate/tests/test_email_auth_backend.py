@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.test import TestCase
 from cradmin_legacy.apps.cradmin_authenticate import backends
 from unittest import mock

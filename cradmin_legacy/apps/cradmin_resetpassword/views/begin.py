@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from crispy_forms import layout
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -24,7 +22,7 @@ class PasswordResetEmail(emailutils.AbstractEmail):
     html_message_template = "cradmin_resetpassword/email/html_message.django.html"
 
     def get_context_data(self):
-        context = super(PasswordResetEmail, self).get_context_data()
+        context = super().get_context_data()
         context.update({"CRADMIN_LEGACY_SITENAME": settings.CRADMIN_LEGACY_SITENAME})
         return context
 
@@ -56,7 +54,7 @@ class BeginPasswordResetView(FormView):
         return helper
 
     def get_context_data(self, **kwargs):
-        context = super(BeginPasswordResetView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["formhelper"] = self.get_formhelper()
         return context
 
@@ -90,4 +88,4 @@ class BeginPasswordResetView(FormView):
         user = self.get_user(email)
         reset_url = self.__generate_reset_url(user=user)
         self.__send_email(user=user, reset_url=reset_url)
-        return super(BeginPasswordResetView, self).form_valid(form)
+        return super().form_valid(form)

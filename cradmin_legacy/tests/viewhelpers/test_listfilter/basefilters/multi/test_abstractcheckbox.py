@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.test import TestCase
 from future import standard_library
 import htmls
@@ -39,7 +37,7 @@ class TestAbstractCheckboxFilter(TestCase):
         testfilter = MyChecboxFilter(slug="test")
         testfilter.set_values(values=[])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
@@ -57,7 +55,7 @@ class TestAbstractCheckboxFilter(TestCase):
         testfilter = MyChecboxFilter(slug="test")
         testfilter.set_values(values=["first", "second"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
@@ -76,7 +74,7 @@ class TestAbstractCheckboxFilter(TestCase):
         testfilter = MyChecboxFilter(slug="test")
         testfilter.set_values(values=["first"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
@@ -94,7 +92,7 @@ class TestAbstractCheckboxFilter(TestCase):
         testfilter = MyChecboxFilter(slug="test")
         testfilter.set_values(values=["first", "second", "third"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())

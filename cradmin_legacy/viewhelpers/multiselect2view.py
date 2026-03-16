@@ -86,7 +86,7 @@ class ViewMixin(FormMixin):
         return self.select_all_is_allowed()
 
     def get_context_data(self, **kwargs):
-        context = super(ViewMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["target_renderer"] = self.__get_target_renderer()
         context["selectall_directive_json"] = self.get_selectall_directive_json()
         context["select_all_button_should_be_shown"] = self.__select_all_button_should_be_shown(context=context)
@@ -162,7 +162,7 @@ class ViewMixin(FormMixin):
 
         class SelectedItemsForm(forms.Form):
             def __init__(self, *args, **kwargs):
-                super(SelectedItemsForm, self).__init__(*args, **kwargs)
+                super().__init__(*args, **kwargs)
                 self.fields[selected_items_form_attribute] = forms.ModelMultipleChoiceField(
                     queryset=selectable_items_queryset
                 )
@@ -350,7 +350,7 @@ class ViewMixin(FormMixin):
         return queryset
 
     def get_queryset(self):
-        queryset = super(ViewMixin, self).get_queryset().distinct()
+        queryset = super().get_queryset().distinct()
         queryset = self.get_selected_values_queryset().distinct() | queryset
         queryset = queryset.distinct()
         return self.__order_queryset(queryset)

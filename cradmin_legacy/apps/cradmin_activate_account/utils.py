@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.conf import settings
 
 from django.urls import reverse
@@ -48,7 +46,7 @@ class ActivationEmail(emailutils.AbstractEmail):
             settings, "CRADMIN_LEGACY_ACTIVATE_ACCOUNT_DEFAULT_NEXT_URL", settings.LOGIN_URL
         )
         self.token = self.generate_token()
-        super(ActivationEmail, self).__init__(recipient=self.user.email)
+        super().__init__(recipient=self.user.email)
 
     def get_activate_url(self, token):
         """
@@ -60,7 +58,7 @@ class ActivationEmail(emailutils.AbstractEmail):
         """
         Get the context data of the email templates.
         """
-        context = super(ActivationEmail, self).get_context_data()
+        context = super().get_context_data()
         context.update(
             {"user": self.user, "activate_url": self.request.build_absolute_uri(self.get_activate_url(self.token))}
         )

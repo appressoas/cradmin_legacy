@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import str
 from django.contrib import messages
 from django.views.generic import DeleteView as DjangoDeleteView
 from django.utils.translation import gettext_lazy
@@ -60,7 +58,7 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
         return str(self.request.cradmin_app.reverse_appindexurl())
 
     def get_context_data(self, **kwargs):
-        context = super(DeleteView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         obj = context["object"]
         context["model_verbose_name"] = obj._meta.verbose_name
         context["success_url"] = self.get_success_url()
@@ -93,6 +91,6 @@ class DeleteView(QuerysetForRoleMixin, DjangoDeleteView):
 
     def delete(self, request, *args, **kwargs):
         object_preview = self.get_object_preview()
-        response = super(DeleteView, self).delete(request, *args, **kwargs)
+        response = super().delete(request, *args, **kwargs)
         self.add_success_messages(object_preview)
         return response

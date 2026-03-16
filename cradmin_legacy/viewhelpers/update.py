@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy
 from django.views.generic import UpdateView as DjangoUpdateView
@@ -33,7 +31,7 @@ class UpdateView(QuerysetForRoleMixin, CreateUpdateViewMixin, DjangoUpdateView):
         return buttons
 
     def get_formhelper(self):
-        helper = super(UpdateView, self).get_formhelper()
+        helper = super().get_formhelper()
         helper.form_id = "cradmin_legacy_updateform"
         return helper
 
@@ -58,7 +56,7 @@ class UpdateRoleView(UpdateView):
         return self.get_model_class().objects.filter(pk=role.pk)
 
 
-class RedirectToCreateIfDoesNotExistMixin(object):
+class RedirectToCreateIfDoesNotExistMixin:
     """
     An update view mixin that redirects to a create view when the
     object requested does not exist.

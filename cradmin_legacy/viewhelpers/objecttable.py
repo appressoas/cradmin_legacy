@@ -1,6 +1,4 @@
-from __future__ import unicode_literals
 from builtins import str as textstr
-from builtins import object
 from collections import OrderedDict
 import json
 import re
@@ -24,7 +22,7 @@ from cradmin_legacy.viewhelpers.listfilter import listfilter_viewmixin
 logger = logging.getLogger(__name__)
 
 
-class Column(object):
+class Column:
     #: The model field rendered in this column. It is not required,
     #: but if you do not, you have to override :meth:`.get_header`
     #: and :meth:`.render_value`.
@@ -100,7 +98,7 @@ class Column(object):
         """
         column_width = self.get_column_width()
         if column_width:
-            return "width: {}".format(column_width)
+            return f"width: {column_width}"
         else:
             return ""
 
@@ -154,7 +152,7 @@ class Column(object):
         """
         column_width = self.get_column_width()
         if column_width:
-            return "width: {}".format(column_width)
+            return f"width: {column_width}"
         else:
             return ""
 
@@ -255,7 +253,7 @@ class Column(object):
             sortprefix = "-"
         orderingfield = self.orderingfield or self.modelfield
         if orderingfield:
-            return ["{}{}".format(sortprefix, orderingfield)]
+            return [f"{sortprefix}{orderingfield}"]
         else:
             raise NotImplementedError("You must override get_orderby_args, set orderingfield or set modelfield.")
 
@@ -300,7 +298,7 @@ class Column(object):
         orderingfield = self.orderingfield or self.modelfield
         if orderingfield:
             default_ordering = self.view.model._meta.ordering
-            descending_orderingfield = "-{}".format(orderingfield)
+            descending_orderingfield = f"-{orderingfield}"
             if orderingfield in default_ordering:
                 return "asc"
             elif descending_orderingfield in default_ordering:
@@ -345,7 +343,7 @@ class DatetimeColumn(PlainTextColumn):
     datetime_format = "SHORT_DATETIME_FORMAT"
 
     def render_value(self, obj):
-        value = super(DatetimeColumn, self).render_value(obj)
+        value = super().render_value(obj)
         if value is None:
             return None
         else:
@@ -362,7 +360,7 @@ class TruncatecharsPlainTextColumn(PlainTextColumn):
     maxlength = 30
 
     def render_value(self, obj):
-        value = super(TruncatecharsPlainTextColumn, self).render_value(obj)
+        value = super().render_value(obj)
         if value is None:
             return None
         else:
@@ -388,7 +386,7 @@ class SingleActionColumn(Column):
         raise NotImplementedError()
 
     def get_context_data(self, obj):
-        context = super(SingleActionColumn, self).get_context_data(obj=obj)
+        context = super().get_context_data(obj=obj)
         context["action_url"] = self.get_actionurl(obj)
         return context
 
@@ -415,7 +413,7 @@ class SingleButtonColumn(Column):
         raise NotImplementedError()
 
     def get_context_data(self, obj):
-        context = super(SingleButtonColumn, self).get_context_data(obj=obj)
+        context = super().get_context_data(obj=obj)
         context["button"] = self.get_button(obj).render()
         return context
 
@@ -438,7 +436,7 @@ class ImagePreviewColumn(Column):
         return self.preview_imagetype
 
     def get_context_data(self, obj):
-        context = super(ImagePreviewColumn, self).get_context_data(obj=obj)
+        context = super().get_context_data(obj=obj)
         imagefieldfile = self.render_value(obj)
         imageurl = None
         if imagefieldfile:
@@ -457,7 +455,7 @@ class MultiActionColumn(Column):
     template_name = "cradmin_legacy/viewhelpers/objecttable/multiactioncolumn-cell.django.html"
 
     def __init__(self, **kwargs):
-        super(MultiActionColumn, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_buttons(self, obj):
         """
@@ -469,7 +467,7 @@ class MultiActionColumn(Column):
         raise NotImplementedError()
 
     def get_context_data(self, obj):
-        context = super(MultiActionColumn, self).get_context_data(obj=obj)
+        context = super().get_context_data(obj=obj)
         context["buttons"] = self.get_buttons(obj)
         return context
 
@@ -478,7 +476,7 @@ class UseThisActionColumn(Column):
     template_name = "cradmin_legacy/viewhelpers/objecttable/usethisactioncolumn-cell.django.html"
 
     def __init__(self, **kwargs):
-        super(UseThisActionColumn, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_buttons(self, obj):
         """
@@ -490,12 +488,12 @@ class UseThisActionColumn(Column):
         raise NotImplementedError()
 
     def get_context_data(self, obj):
-        context = super(UseThisActionColumn, self).get_context_data(obj=obj)
+        context = super().get_context_data(obj=obj)
         context["buttons"] = self.get_buttons(obj)
         return context
 
 
-class AbstractButton(object):
+class AbstractButton:
     """
     Abstract base class for buttons.
     """
@@ -555,11 +553,11 @@ class AbstractButton(object):
     def __iter_attributes(self):
         for attrname, value in list(self.get_html_attributes().items()):
             attrvalue = quoteattr(value)
-            yield "{}={}".format(attrname, attrvalue)
+            yield f"{attrname}={attrvalue}"
         for key, value in list(self.get_data_attributes().items()):
-            attrname = "data-{}".format(key)
+            attrname = f"data-{key}"
             attrvalue = quoteattr(value)
-            yield "{}={}".format(attrname, attrvalue)
+            yield f"{attrname}={attrvalue}"
 
     def get_context_data(self):
         """
@@ -598,10 +596,10 @@ class Button(AbstractButton):
             kwargs: See :class:`.AbstractButton`.
         """
         self.url = url
-        super(Button, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_html_attributes(self):
-        attributes = super(Button, self).get_html_attributes()
+        attributes = super().get_html_attributes()
         attributes.update(
             {
                 "href": self.url,
@@ -621,10 +619,10 @@ class NonSubmitButton(AbstractButton):
     def __init__(self, value=None, name=None, **kwargs):
         self.value = value
         self.name = name
-        super(NonSubmitButton, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_html_attributes(self):
-        attributes = super(NonSubmitButton, self).get_html_attributes()
+        attributes = super().get_html_attributes()
         attributes.update(
             {
                 "type": self.button_type,
@@ -679,10 +677,10 @@ class PagePreviewsButton(AbstractButton):
             kwargs: See :class:`.AbstractButton`.
         """
         self.urls = urls
-        super(PagePreviewsButton, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
     def get_data_attributes(self):
-        attributes = super(PagePreviewsButton, self).get_data_attributes()
+        attributes = super().get_data_attributes()
         attributes.update({"cradmin-legacy-page-preview-open-on-click": json.dumps({"urls": self.urls})})
         return attributes
 
@@ -705,7 +703,7 @@ class PagePreviewButton(PagePreviewsButton):
                 "url": url,
             }
         ]
-        super(PagePreviewButton, self).__init__(urls=urls, **kwargs)
+        super().__init__(urls=urls, **kwargs)
 
 
 class UseThisButton(Button):
@@ -716,7 +714,7 @@ class UseThisButton(Button):
     def __init__(self, view, label, obj, buttonclass="btn btn-default btn-sm"):
         self.view = view
         self.obj = obj
-        super(UseThisButton, self).__init__(label=label, buttonclass=buttonclass)
+        super().__init__(label=label, buttonclass=buttonclass)
 
     def get_data_attributes(self):
         attributes = {
@@ -741,13 +739,13 @@ class ForeignKeySelectButton(Button):
 
     def __init__(self, *args, **kwargs):
         request = kwargs.pop("request")
-        super(ForeignKeySelectButton, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.url = "{}?{}".format(
             self.url, urlencode({"foreignkey_select_mode": "1", "success_url": request.get_full_path()})
         )
 
 
-class MultiSelectAction(object):
+class MultiSelectAction:
     """
     Used to define multiselect actions for
     :meth:`.ObjectTableView.get_multiselect_actions`.
@@ -761,7 +759,7 @@ class MultiSelectAction(object):
         return {"label": textstr(self.label), "url": self.url}
 
 
-class ColumnOrderingInfo(object):
+class ColumnOrderingInfo:
     @classmethod
     def from_orderingstringentry(cls, orderingstringindex, orderingstringentry):
         order_ascending = orderingstringentry.startswith("a")
@@ -774,7 +772,7 @@ class ColumnOrderingInfo(object):
             prefix = "a"
         else:
             prefix = "d"
-        return "{}{}".format(prefix, columnindex)
+        return f"{prefix}{columnindex}"
 
     def __init__(self, orderingstringindex, columnindex, order_ascending):
         self.orderingstringindex = orderingstringindex
@@ -785,10 +783,10 @@ class ColumnOrderingInfo(object):
         return self.__class__.create_orderingstringentry(self.columnindex, self.order_ascending)
 
     def __str__(self):
-        return "{}:{}".format(self.orderingstringindex, self.to_orderingstringentry())
+        return f"{self.orderingstringindex}:{self.to_orderingstringentry()}"
 
 
-class OrderingStringParser(object):
+class OrderingStringParser:
     """
     Parses an ordering string (the ordering querystring argument for objecttable).
 
@@ -810,7 +808,7 @@ class OrderingStringParser(object):
         self.orderingstring = orderingstring
         self.orderingdict = OrderedDict()
         if self.orderingstring:
-            if re.match("^([ad]\d+\.)*([ad]\d+)$", self.orderingstring):
+            if re.match(r"^([ad]\d+\.)*([ad]\d+)$", self.orderingstring):
                 for orderingstringindex, orderingstringentry in enumerate(self.orderingstring.split(".")):
                     orderinginfo = ColumnOrderingInfo.from_orderingstringentry(
                         orderingstringindex=orderingstringindex, orderingstringentry=orderingstringentry
@@ -1118,7 +1116,7 @@ class ObjectTableView(ListView):
             self.__columns = []
             for columnindex, columnclass in enumerate(self.get_columns()):
                 if isinstance(columnclass, textstr):
-                    columnclass = type(str("SimpleColumn"), (PlainTextColumn,), dict(modelfield=columnclass))
+                    columnclass = type("SimpleColumn", (PlainTextColumn,), dict(modelfield=columnclass))
                 self.__columns.append(columnclass(view=self, columnindex=columnindex))
         return self.__columns
 
@@ -1209,7 +1207,7 @@ class ObjectTableView(ListView):
         return quoteattr(data)
 
     def get_context_data(self, **kwargs):
-        context = super(ObjectTableView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         object_list = context["object_list"]
 
         multiselect_actions = self.get_multiselect_actions()
@@ -1276,7 +1274,7 @@ class ObjectTableView(ListView):
     def _url_with_querystringarg_changed(self, querystringarg, newvalue):
         querystring = self.request.GET.copy()
         querystring[querystringarg] = newvalue
-        return "{}?{}".format(self.request.path, querystring.urlencode())
+        return f"{self.request.path}?{querystring.urlencode()}"
 
     def _get_flip_ordering_url_for_column(self, columnindex):
         return self._url_with_querystringarg_changed(
@@ -1324,7 +1322,7 @@ class ObjectTableView(ListView):
         if self.searchfields:
             query = None
             for fieldname in self.searchfields:
-                kwargs = {"{}__{}".format(fieldname, self.search_comparator): searchstring}
+                kwargs = {f"{fieldname}__{self.search_comparator}": searchstring}
                 fieldquery = models.Q(**kwargs)
                 if query:
                     query |= fieldquery
@@ -1394,7 +1392,7 @@ class FilterListMixin(listfilter_viewmixin.ViewMixin):
         for details on how to use this method.
         """
         position = self.get_filterlist_position()
-        template_name = "cradmin_legacy/viewhelpers/objecttable/objecttable-filterlist-{}.django.html".format(position)
+        template_name = f"cradmin_legacy/viewhelpers/objecttable/objecttable-filterlist-{position}.django.html"
         return template_name
 
     def get_filter_unprotected_querystring_arguments(self):

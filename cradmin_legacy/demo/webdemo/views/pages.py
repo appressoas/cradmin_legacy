@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
-
 from datetime import datetime
 from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy
@@ -38,7 +35,7 @@ class TitleColumn(objecttable.MultiActionColumn):
         ]
 
 
-class PagesQuerySetForRoleMixin(object):
+class PagesQuerySetForRoleMixin:
     """
     Used by listing, update and delete view to ensure
     that only pages that the current role has access to
@@ -110,7 +107,7 @@ class PagesListView(objecttable.FilterListMixin, PagesQuerySetForRoleMixin, obje
         return PagesQuerySetForRoleMixin.get_queryset_for_role(self, site=site)
 
 
-class PageCreateUpdateMixin(object):
+class PageCreateUpdateMixin:
     model = Page
     roleid_field = "site"
     enable_modelchoicefield_support = True
@@ -140,7 +137,7 @@ class PageCreateUpdateMixin(object):
         ]
 
     def get_form(self, form_class=None):
-        form = super(PageCreateUpdateMixin, self).get_form(form_class=form_class)
+        form = super().get_form(form_class=form_class)
         # form.fields['body'].widget = WysiHtmlTextArea(attrs={})
         form.fields["body"].widget = AceMarkdownWidget()
         preview = '<p class="text-muted">(No image selected)</p>'
@@ -189,7 +186,7 @@ class PreviewPageView(TemplateView):
             return get_object_or_404(Page.objects.filter(site=site), pk=self.kwargs["pk"])
 
     def get_context_data(self, **kwargs):
-        context = super(PreviewPageView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["page"] = self.__get_page()
         return context
 

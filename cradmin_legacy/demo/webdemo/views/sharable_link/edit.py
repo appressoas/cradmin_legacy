@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django import forms
 from crispy_forms import layout
 from django.urls import reverse
@@ -39,7 +38,7 @@ class CreateOrEditSharableLinkView(FormView, QuerysetForRoleMixin):
 
     def dispatch(self, request, *args, **kwargs):
         self.generictoken = self.get_queryset_for_role(self.request.cradmin_role).first()
-        return super(CreateOrEditSharableLinkView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_initial(self):
         if self.generictoken:

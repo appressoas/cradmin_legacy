@@ -1,8 +1,7 @@
-from __future__ import unicode_literals
 from cradmin_legacy.renderable import AbstractRenderableWithCss
 
 
-class FilterListChildMixin(object):
+class FilterListChildMixin:
     """
     Mixin class for adding the methods in addition to
     the methods in :class:`cradmin_legacy.renderable.AbstractRenderableWithCss`

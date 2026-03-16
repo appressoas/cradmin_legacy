@@ -18,7 +18,7 @@ class NullsLastQuery(models.sql.query.Query):
 
         class NullsLastSQLCompiler(SQLCompiler):
             def get_ordering(self):
-                result, group_by = super(NullsLastSQLCompiler, self).get_ordering()
+                result, group_by = super().get_ordering()
                 if self.connection.vendor == "postgresql" and result:
                     result = [line + " NULLS LAST" for line in result]
                 return result, group_by
@@ -28,7 +28,7 @@ class NullsLastQuery(models.sql.query.Query):
 
 class NullsLastQuerySet(models.query.QuerySet):
     def __init__(self, model=None, query=None, using=None):
-        super(NullsLastQuerySet, self).__init__(model, query, using)
+        super().__init__(model, query, using)
         self.query = query or NullsLastQuery(self.model)
 
 

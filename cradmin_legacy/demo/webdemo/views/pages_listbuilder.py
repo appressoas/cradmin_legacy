@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib.auth import get_user_model
 from future import standard_library
 
@@ -19,7 +17,6 @@ from cradmin_legacy.viewhelpers.listfilter.basefilters.single import abstractrad
 
 standard_library.install_aliases()
 
-from builtins import str
 
 
 class PageListItemValue(listbuilder.itemvalue.EditDeleteWithArchiveImageAndPreview):

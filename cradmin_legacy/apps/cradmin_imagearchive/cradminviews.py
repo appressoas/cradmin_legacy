@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
 import logging
 
 from django import http
@@ -70,7 +68,7 @@ class ImageColumn(objecttable.ImagePreviewColumn):
             return self.column_width
         else:
             width = crsettings.get_setting("CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGEWIDTH", 100)
-            return "{}px".format(width)
+            return f"{width}px"
 
     def get_preview_imagetype(self):
         imagetype_from_settings = crsettings.get_setting("CRADMIN_LEGACY_IMAGEARCHIVE_LISTING_IMAGETYPE")
@@ -85,7 +83,7 @@ class ImageColumn(objecttable.ImagePreviewColumn):
         return gettext_lazy("Preview")
 
 
-class ArchiveImagesQuerySetForRoleMixin(object):
+class ArchiveImagesQuerySetForRoleMixin:
     """
     Used by listing, update and delete view to ensure
     that only images that the current role has access to
@@ -141,7 +139,7 @@ class SingleAddForm(forms.Form):
     )
 
     def clean(self):
-        cleaned_data = super(SingleAddForm, self).clean()
+        cleaned_data = super().clean()
         filecollectionid = cleaned_data.get("filecollectionid", None)
         if filecollectionid is not None:
             collection = TemporaryFileCollection.objects.get(id=filecollectionid)
@@ -154,7 +152,7 @@ class SingleAddForm(forms.Form):
 
 class AddImageOverlayButton(objecttable.NonSubmitButton):
     def get_html_attributes(self):
-        attributes = super(AddImageOverlayButton, self).get_html_attributes()
+        attributes = super().get_html_attributes()
         attributes["cradmin-legacy-bulkfileupload-show-overlay"] = "filecollectionid"
         return attributes
 
@@ -196,7 +194,7 @@ class BaseImagesListView(
         return []
 
     def get_formhelper(self):
-        formhelper = super(BaseImagesListView, self).get_formhelper()
+        formhelper = super().get_formhelper()
         formhelper.form_show_labels = False
         return formhelper
 
@@ -227,7 +225,7 @@ class BaseImagesListView(
 
         Used by :meth:`.add_success_messages`.
         """
-        filenames = ['"{}"'.format(temporaryfile.filename) for temporaryfile in temporaryfilecollection.files.all()]
+        filenames = [f'"{temporaryfile.filename}"' for temporaryfile in temporaryfilecollection.files.all()]
         return gettext_lazy("Uploaded %(what)s.") % {"what": ",".join(filenames)}
 
     def add_success_messages(self, temporaryfilecollection):
@@ -260,7 +258,7 @@ class BaseImagesListView(
 
     def form_invalid(self, form):
         self.object_list = self.get_queryset()
-        return super(BaseImagesListView, self).form_invalid(form)
+        return super().form_invalid(form)
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -271,7 +269,7 @@ class BaseImagesListView(
             return self.form_invalid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(BaseImagesListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         self.add_context_data(context)
         if "form" not in context:
             form_class = self.get_form_class()

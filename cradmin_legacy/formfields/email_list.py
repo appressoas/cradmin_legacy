@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from future.builtins import str
 import re
 from django import forms
@@ -36,7 +35,7 @@ class EmailListField(forms.Field):
         extra_help_text = kwargs.pop("extra_help_text", None)
         if extra_help_text:
             kwargs["help_text"] = "{} {}".format(kwargs["help_text"], extra_help_text)
-        super(EmailListField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def string_to_list(self, value):
         value = value.strip()
@@ -55,7 +54,7 @@ class EmailListField(forms.Field):
         elif isinstance(value, str):
             return self.string_to_list(value)
         else:
-            raise TypeError("Invalid type for EmailListField: {}".format(type(value)))
+            raise TypeError(f"Invalid type for EmailListField: {type(value)}")
 
     def validate_list_of_emails(self, list_of_emails):
         for email in list_of_emails:

@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.test import TestCase, RequestFactory
 from django.core import mail
 import htmls

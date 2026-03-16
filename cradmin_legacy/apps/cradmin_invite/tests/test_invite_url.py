@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from builtins import next
-
 from django.core import mail
 
 from django.test import TestCase
@@ -15,7 +12,7 @@ class InviteUrlMock(InviteUrl):
         return "testapp"
 
     def get_confirm_invite_url(self, token):
-        return "/invite/accept/{}".format(token.token)
+        return f"/invite/accept/{token.token}"
 
 
 class InviteUrlWithStaticTokenMock(InviteUrlMock):
@@ -28,7 +25,7 @@ class InviteUrlWithStaticTokenMock(InviteUrlMock):
 class InviteUrlWithTokenIteratorMock(InviteUrlMock):
     def __init__(self, *args, **kwargs):
         self.tokens = iter(["token1", "token2", "token3"])
-        super(InviteUrlWithTokenIteratorMock, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def _generate_generictoken(self, email=None):
         testtoken = mock.MagicMock()
@@ -74,7 +71,7 @@ class TestSendActivationEmail(TestCase):
 
     def test_send_email(self):
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
 
         with self.settings(CRADMIN_LEGACY_SITENAME="Testsite"):
             InviteUrlWithStaticTokenMock(
@@ -87,7 +84,7 @@ class TestSendActivationEmail(TestCase):
 
     def test_send_email_private(self):
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
 
         with self.settings(CRADMIN_LEGACY_SITENAME="Testsite"):
             inviteurl = InviteUrlWithTokenIteratorMock(
@@ -100,7 +97,7 @@ class TestSendActivationEmail(TestCase):
 
     def test_send_email_public(self):
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
 
         with self.settings(CRADMIN_LEGACY_SITENAME="Testsite"):
             inviteurl = InviteUrlWithTokenIteratorMock(
@@ -113,7 +110,7 @@ class TestSendActivationEmail(TestCase):
 
     def test_get_share_url(self):
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
         self.assertEqual(
             InviteUrlWithStaticTokenMock(
                 request=testrequest, private=True, content_object=self.invite_target
@@ -123,7 +120,7 @@ class TestSendActivationEmail(TestCase):
 
     def test_get_share_url_private(self):
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
         inviteurl = InviteUrlWithTokenIteratorMock(request=testrequest, private=True, content_object=self.invite_target)
         self.assertEqual(inviteurl.get_share_url(), "http://testserver/invite/accept/token1")
         self.assertEqual(inviteurl.get_share_url(), "http://testserver/invite/accept/token2")
@@ -131,7 +128,7 @@ class TestSendActivationEmail(TestCase):
 
     def test_get_share_url_public(self):
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
         inviteurl = InviteUrlWithTokenIteratorMock(
             request=testrequest, private=False, content_object=self.invite_target
         )

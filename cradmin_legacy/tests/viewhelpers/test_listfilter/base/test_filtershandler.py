@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 
 from django.test import TestCase
@@ -128,7 +126,7 @@ class TestFiltersHandler(TestCase):
 
     def test_build_filter_url(self):
         def urlbuilder(filters_string):
-            return "/the/prefix/{}?a=querystring".format(filters_string)
+            return f"/the/prefix/{filters_string}?a=querystring"
 
         filtershandler = FiltersHandler(urlbuilder=urlbuilder)
         intfilter = MinimalIntFilter()

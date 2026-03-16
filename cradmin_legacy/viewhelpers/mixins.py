@@ -1,8 +1,4 @@
-from __future__ import unicode_literals
-from builtins import object
-
-
-class QuerysetForRoleMixin(object):
+class QuerysetForRoleMixin:
     def get_queryset_for_role(self, role):
         """
         Get a queryset with all objects of ``self.model``  that

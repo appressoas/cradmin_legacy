@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from crispy_forms import layout
 from django.contrib import auth
 from django.contrib.auth import authenticate, get_user_model
@@ -49,7 +47,7 @@ class AbstractLoginForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.model_sanity_check()
-        super(AbstractLoginForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def authenticate(self, **kwargs):
         """
@@ -172,7 +170,7 @@ class LoginView(FormView):
         if self.request.user.is_authenticated:
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
         else:
-            return super(LoginView, self).get(*args, **kwargs)
+            return super().get(*args, **kwargs)
 
     def get_initial_email_value(self):
         """
@@ -261,14 +259,14 @@ class LoginView(FormView):
         """
         authenticated_user = form.get_user()
         auth.login(self.request, authenticated_user)
-        return super(LoginView, self).form_valid(form)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         """
         adds form from :func:`get_form_helper`, and (if set) ``settings.CRADMIN_LEGACY_FORGOTPASSWORD_URL`` to
         template-context.
         """
-        context = super(LoginView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["formhelper"] = self.get_form_helper()
         context["CRADMIN_LEGACY_FORGOTPASSWORD_URL"] = getattr(settings, "CRADMIN_LEGACY_FORGOTPASSWORD_URL", None)
         return context

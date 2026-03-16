@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.conf import settings
 from django.urls import reverse
 from django.utils.module_loading import import_string
@@ -18,7 +17,7 @@ class BeginRegisterAccountView(FormView):
             return import_string(settings.CRADMIN_LEGACY_REGISTER_ACCOUNT_FORM_CLASS)
 
     def get_context_data(self, **kwargs):
-        context = super(BeginRegisterAccountView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["CRADMIN_LEGACY_SITENAME"] = settings.CRADMIN_LEGACY_SITENAME
         return context
 
@@ -44,4 +43,4 @@ class BeginRegisterAccountView(FormView):
     def form_valid(self, form):
         user = form.save()
         self.send_activation_email(user)
-        return super(BeginRegisterAccountView, self).form_valid(form)
+        return super().form_valid(form)

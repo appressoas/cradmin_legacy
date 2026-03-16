@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
-
 from django.conf import settings
 
 from cradmin_legacy.apps.cradmin_email import emailutils
@@ -22,12 +19,12 @@ class InviteEmail(emailutils.AbstractEmail):
     html_message_template = "cradmin_invite/email/html_message.django.html"
 
     def get_context_data(self):
-        context = super(InviteEmail, self).get_context_data()
+        context = super().get_context_data()
         context.update({"CRADMIN_LEGACY_SITENAME": settings.CRADMIN_LEGACY_SITENAME})
         return context
 
 
-class InviteUrl(object):
+class InviteUrl:
     """
     Sends an email with a link that the user clicks to accept an invite.
 

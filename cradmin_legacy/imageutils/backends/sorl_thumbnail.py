@@ -22,7 +22,7 @@ class SorlThumbnail(backendinterface.Interface):
             raise ValueError("At least one of width and height must be specified")
         width = width or ""
         height = height or ""
-        size = "{}x{}".format(width, height)
+        size = f"{width}x{height}"
 
         if crop == "limit":
             upscale = False

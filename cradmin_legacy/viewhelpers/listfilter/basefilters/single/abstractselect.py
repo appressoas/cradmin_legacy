@@ -104,7 +104,7 @@ class AbstractSelectFilter(AbstractFilter):
         return choicesdata
 
     def get_context_data(self, request=None):
-        context = super(AbstractSelectFilter, self).get_context_data(request=None)
+        context = super().get_context_data(request=None)
         context["choicesdata"] = self.get_choicesdata()
         return context
 
@@ -368,7 +368,7 @@ class AbstractOrderBy(AbstractSelectFilter):
     """
 
     def __init__(self, *args, **kwargs):
-        super(AbstractOrderBy, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.ordering_options = self.get_ordering_options()
         self.ordering_options_dict = self.__make_ordering_options_dict(self.ordering_options)
 

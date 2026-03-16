@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import htmls
 from django.core.files.base import ContentFile
 from django.test import RequestFactory, TestCase
@@ -355,7 +353,7 @@ class TestArchiveImagesSingleSelectView(TestCase, cradmin_testhelpers.TestCaseMi
         self.assertEqual(ArchiveImage.objects.count(), 1)
         created_image = ArchiveImage.objects.first()
         self.assertTrue(
-            mockresponse.response["Location"].endswith("?foreignkey_selected_value={}".format(created_image.pk))
+            mockresponse.response["Location"].endswith(f"?foreignkey_selected_value={created_image.pk}")
         )
         created_image.image.open()
         self.assertEqual(created_image.image.read(), testimage)

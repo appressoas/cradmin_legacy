@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse
@@ -103,7 +102,7 @@ class AbstractAcceptInviteView(TemplateView):
             return self.token_error_response(token_expired=True)
         else:
             self.generictoken = generictoken
-            return super(AbstractAcceptInviteView, self).dispatch(request, *args, **kwargs)
+            return super().dispatch(request, *args, **kwargs)
 
     def token_error_response(self, token_does_not_exist=False, token_expired=False):
         """
@@ -168,7 +167,7 @@ class AbstractAcceptInviteView(TemplateView):
         return self.add_next_argument_to_url(url=reverse("cradmin-authenticate-logout"), next_url=self.get_login_url())
 
     def get_context_data(self, **kwargs):
-        context = super(AbstractAcceptInviteView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["pagetitle"] = self.get_pagetitle()
         context["description_template_name"] = self.get_description_template_name()
 

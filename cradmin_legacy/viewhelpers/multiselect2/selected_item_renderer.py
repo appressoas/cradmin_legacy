@@ -1,5 +1,3 @@
-from builtins import str
-
 from django.utils.translation import pgettext_lazy
 
 from cradmin_legacy import renderable

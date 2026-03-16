@@ -38,7 +38,7 @@ class SelectedProductsForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         selectable_items_queryset = kwargs.pop("selectable_items_queryset")
-        super(SelectedProductsForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.fields["selected_items"].queryset = selectable_items_queryset
 
 
@@ -155,12 +155,12 @@ class ProductListView(multiselect2view.ListbuilderView):
         return SelectedProductsForm
 
     def get_form_kwargs(self):
-        kwargs = super(ProductListView, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs["selectable_items_queryset"] = Product.objects.all()
         return kwargs
 
     def form_valid(self, form):
-        productnames = ['"{}"'.format(product.name) for product in form.cleaned_data["selected_items"]]
+        productnames = [f'"{product.name}"' for product in form.cleaned_data["selected_items"]]
         messages.success(self.request, "POST OK. Selected: {}".format(", ".join(productnames)))
         return redirect(self.request.get_full_path())
 
@@ -209,12 +209,12 @@ class FilteredProductListView(multiselect2view.ListbuilderFilterView):
         return SelectedProductsForm
 
     def get_form_kwargs(self):
-        kwargs = super(FilteredProductListView, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs["selectable_items_queryset"] = Product.objects.all()
         return kwargs
 
     def form_valid(self, form):
-        productnames = ['"{}"'.format(product.name) for product in form.cleaned_data["selected_items"]]
+        productnames = [f'"{product.name}"' for product in form.cleaned_data["selected_items"]]
         messages.success(self.request, "POST OK. Selected: {}".format(", ".join(productnames)))
         return redirect(self.request.get_full_path())
 
@@ -301,7 +301,7 @@ class ProductListViewWithExtraFormData(FilteredProductListView):
     #     return Product.objects.filter(name__icontains='sock')
 
     def form_valid(self, form):
-        messages.success(self.request, "POST OK. Data: {!r}".format(form.cleaned_data))
+        messages.success(self.request, f"POST OK. Data: {form.cleaned_data!r}")
         return redirect(self.request.get_full_path())
 
 

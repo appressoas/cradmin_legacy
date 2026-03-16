@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from cradmin_legacy import crinstance, crmenu, crapp
 from cradmin_legacy.demo.multiselect2demo.views import productlist
 

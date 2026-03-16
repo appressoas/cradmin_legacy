@@ -24,7 +24,7 @@ class BaseView(mixins.ListFilterQuerySetForRoleMixin, listbuilderview.FilterList
         return fields
 
     def add_filterlist_items(self, filterlist):
-        super(BaseView, self).add_filterlist_items(filterlist=filterlist)
+        super().add_filterlist_items(filterlist=filterlist)
         search_fields = self.get_search_fields()
         if search_fields:
             filterlist.append(
@@ -52,7 +52,7 @@ class View(listbuilderview.ViewCreateButtonMixin, BaseView):
             filterlist.append(listfilter.django.single.select.DateTime(slug=field.name, label=field.verbose_name))
 
     def add_filterlist_items(self, filterlist):
-        super(View, self).add_filterlist_items(filterlist=filterlist)
+        super().add_filterlist_items(filterlist=filterlist)
         self.add_datetime_filters(filterlist=filterlist)
 
 

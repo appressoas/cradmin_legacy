@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-
-from builtins import object
 from functools import update_wrapper
 
 from django.urls import re_path
@@ -13,7 +10,7 @@ from .decorators import cradminview, has_access_to_cradmin_instance
 INDEXVIEW_NAME = "INDEX"
 
 
-class Url(object):
+class Url:
     """
     Url is mostly the same as func:`django.urls.re_path`.
     You use Url to add urls to an app.
@@ -35,7 +32,7 @@ class Url(object):
         self.name = name
 
 
-class App(object):
+class App:
     """
     A cradmin App.
 
@@ -104,7 +101,7 @@ class App(object):
                 re_path(
                     pattern.regex,
                     cls._wrap_view(appname, pattern.view, pattern.name),
-                    name="{}-{}-{}".format(cradmin_instance_id, appname, pattern.name),
+                    name=f"{cradmin_instance_id}-{appname}-{pattern.name}",
                     kwargs=pattern.kwargs,
                 )
             )

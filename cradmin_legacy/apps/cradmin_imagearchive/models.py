@@ -1,9 +1,6 @@
-from __future__ import unicode_literals
-
 import os
 import posixpath
 import uuid
-from builtins import object
 
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -103,7 +100,7 @@ class ArchiveImage(models.Model):
     #: Create datetime.
     created_datetime = models.DateTimeField(editable=False, auto_now_add=True)
 
-    class Meta(object):
+    class Meta:
         verbose_name = gettext_lazy("archive image")
         verbose_name_plural = gettext_lazy("archive images")
 

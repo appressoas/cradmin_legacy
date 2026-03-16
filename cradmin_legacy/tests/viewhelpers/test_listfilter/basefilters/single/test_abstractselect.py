@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from cradmin_legacy.python2_compatibility import mock
 
 from django.test import TestCase
@@ -39,7 +37,7 @@ class TestAbstractSelectFilter(TestCase):
 
         testfilter = MySelectFilter(slug="test")
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())
@@ -54,7 +52,7 @@ class TestAbstractSelectFilter(TestCase):
 
         testfilter = MySelectFilter(slug="test")
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())

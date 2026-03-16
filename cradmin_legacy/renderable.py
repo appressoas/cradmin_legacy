@@ -3,7 +3,7 @@ from django.template.loader import render_to_string
 0
 
 
-class AbstractRenderable(object):
+class AbstractRenderable:
     """
     An abstract class that implements an interface for
     rendering something.

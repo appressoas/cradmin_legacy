@@ -11,7 +11,7 @@ def convert_html_to_plaintext(html):
     return html2text.html2text(html)
 
 
-class AbstractEmail(object):
+class AbstractEmail:
     """
     Abstract class for sending email.
 
@@ -177,7 +177,7 @@ class AbstractEmail(object):
         adjust template rendering or avoid using a template.
         """
         subject = render_to_string(self.get_subject_template(), self.get_context_data()).strip()
-        return "{}{}".format(self.get_subject_prefix(), subject)
+        return f"{self.get_subject_prefix()}{subject}"
 
     def render_html_message(self):
         """

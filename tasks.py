@@ -11,7 +11,7 @@ def _manage(args, echo=True, cwd=None, **kwargs):
     if cwd:
         cwd = os.path.abspath(cwd)
         management_script = os.path.relpath(os.path.abspath(management_script), cwd)
-    command = "python {} {} --traceback".format(management_script, args)
+    command = f"python {management_script} {args} --traceback"
     if cwd:
         with cd(cwd):
             result = run(command, echo=echo, **kwargs)
@@ -24,7 +24,7 @@ def _manage(args, echo=True, cwd=None, **kwargs):
 def makemessages(context):
     for languagecode in LANGUAGE_CODES:
         _manage(
-            'makemessages -l {} -i "node_modules/*" -i "demo/*" -i "static/*"'.format(languagecode),
+            f'makemessages -l {languagecode} -i "node_modules/*" -i "demo/*" -i "static/*"',
             cwd="cradmin_legacy",
         )
 

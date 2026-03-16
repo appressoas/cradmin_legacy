@@ -17,7 +17,7 @@ class List(listbuilder.lists.RowList):
         """
         if value_renderer_class is None:
             value_renderer_class = Value
-        return super(List, cls).from_value_iterable(
+        return super().from_value_iterable(
             value_iterable=value_iterable,
             value_renderer_class=value_renderer_class,
             frame_renderer_class=frame_renderer_class,
@@ -29,7 +29,7 @@ class List(listbuilder.lists.RowList):
         Adds the ``cradmin-legacy-multiselect2-preview-list`` css class
         to the css classes added by the superclasses.
         """
-        css_classes = super(List, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-multiselect2-preview-list")
         return css_classes
 
@@ -55,13 +55,13 @@ class Value(listbuilder.base.ItemValueRenderer):
                 to render items that can be dynamically added to a :class:`.List`.
         """
         self.wrap_in_li_element = wrap_in_li_element
-        super(Value, self).__init__(value=value)
+        super().__init__(value=value)
 
     def get_base_css_classes_list(self):
         """
         Adds the ``cradmin-legacy-multiselect2-preview-list-value`` css class
         to the css classes added by the superclasses.
         """
-        css_classes = super(Value, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-multiselect2-preview-list-value")
         return css_classes

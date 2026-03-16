@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.urls import path
 
 from cradmin_legacy.apps.cradmin_register_account.views.begin import BeginRegisterAccountView

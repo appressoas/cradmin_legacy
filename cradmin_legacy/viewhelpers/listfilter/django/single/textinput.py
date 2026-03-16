@@ -32,7 +32,7 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
             - modelfields: List of model fields to search on.
         """
         self.modelfields = kwargs.pop("modelfields", None)
-        super(Search, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_modelfields(self):
         """
@@ -64,7 +64,7 @@ class Search(abstracttextinput.AbstractSearch, DjangoOrmFilterMixin):
             django.db.models.Q: A Q object.
         """
         comparison_operator = self.get_lookup_suffix()
-        kwargs = {"{}{}".format(modelfield, comparison_operator): cleaned_value}
+        kwargs = {f"{modelfield}{comparison_operator}": cleaned_value}
         return models.Q(**kwargs)
 
     def build_query(self, modelfields, cleaned_value):

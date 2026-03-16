@@ -1,10 +1,7 @@
-from __future__ import unicode_literals
-
 import json
 from xml.sax.saxutils import quoteattr
 
 from cradmin_legacy.viewhelpers.listbuilder import base
-from builtins import str
 
 
 class FocusBox(base.ItemValueRenderer):
@@ -18,7 +15,7 @@ class FocusBox(base.ItemValueRenderer):
     """
 
     def get_base_css_classes_list(self):
-        css_classes = super(FocusBox, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listbuilder-itemvalue-focusbox")
         return css_classes
 
@@ -39,7 +36,7 @@ class TitleDescription(FocusBox):
         Adds the ``cradmin-legacy-listbuilder-itemvalue-titledescription`` css class
         in addition to the classes added by the superclasses.
         """
-        css_classes = super(TitleDescription, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listbuilder-itemvalue-titledescription")
         return css_classes
 
@@ -76,7 +73,7 @@ class UseThis(TitleDescription):
         Adds the ``cradmin-legacy-listbuilder-itemvalue-usethis`` css class
         in addition to the classes added by the superclasses.
         """
-        css_classes = super(UseThis, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listbuilder-itemvalue-usethis")
         return css_classes
 
@@ -91,7 +88,7 @@ class UseThis(TitleDescription):
         return quoteattr(json.dumps(self.get_use_this_directive_options_dict(request=request)))
 
     def get_context_data(self, request=None):
-        context = super(UseThis, self).get_context_data(request=request)
+        context = super().get_context_data(request=request)
         context["use_this_directive_options_json"] = self.get_use_this_directive_options_json(request=request)
         return context
 
@@ -115,7 +112,7 @@ class EditDelete(TitleDescription):
         Adds the ``cradmin-legacy-listbuilder-itemvalue-titleeditdelete`` css class
         in addition to the classes added by the superclasses.
         """
-        css_classes = super(EditDelete, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listbuilder-itemvalue-editdelete")
         return css_classes
 
@@ -160,7 +157,7 @@ class EditDelete(TitleDescription):
         return None
 
 
-class EditDeleteWithPreviewMixin(object):
+class EditDeleteWithPreviewMixin:
     """
     Mixin class for :class:`.EditDelete` that adds a view button that
     shows a preview via the view named ``"preview"`` in the current app

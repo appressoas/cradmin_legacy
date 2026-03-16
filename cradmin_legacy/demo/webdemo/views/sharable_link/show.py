@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.urls import reverse
 from cradmin_legacy.demo.webdemo.views.sharable_link.mixins import QuerysetForRoleMixin
 from cradmin_legacy.viewhelpers.detail import DetailView
@@ -12,7 +11,7 @@ class ShowView(QuerysetForRoleMixin, DetailView):
         return self.get_queryset().first()
 
     def get_context_data(self, **kwargs):
-        context = super(ShowView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         generictoken = context["object"]
         if generictoken:
             url = reverse("webdemo-inviteadmins-public-accept", kwargs={"token": generictoken.token})

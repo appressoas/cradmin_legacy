@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from builtins import str
-from builtins import range
 import htmls
 from cradmin_legacy.python2_compatibility import mock
 from django.test import TestCase, RequestFactory
@@ -16,7 +13,7 @@ class TestColumn(TestCase):
             modelfield = "testfield"
 
             def __init__(self, **kwargs):
-                super(TestColSubclass, self).__init__(**kwargs)
+                super().__init__(**kwargs)
 
         self.model_testobject = TestModel()
         view = mock.MagicMock()
@@ -57,7 +54,7 @@ class TestPlainTextColumn(TestCase):
             modelfield = "testfield"
 
             def __init__(self, **kwargs):
-                super(TestColSubclass, self).__init__(**kwargs)
+                super().__init__(**kwargs)
 
         self.model_testobject = TestModel()
         view = mock.MagicMock()
@@ -78,16 +75,16 @@ class TestSingleActionColumn(TestCase):
             modelfield = "testfield"
 
             def __init__(self, **kwargs):
-                super(TestIncompleteColSubclass, self).__init__(**kwargs)
+                super().__init__(**kwargs)
 
         class TestColSubclass(objecttable.SingleActionColumn):
             modelfield = "testfield"
 
             def __init__(self, **kwargs):
-                super(TestColSubclass, self).__init__(**kwargs)
+                super().__init__(**kwargs)
 
             def get_actionurl(self, obj):
-                return "www.example.com/{}".format(obj.testfield)
+                return f"www.example.com/{obj.testfield}"
 
         self.model_testobject = TestModel(testfield="test_value")
         view = mock.MagicMock()
@@ -114,13 +111,13 @@ class TestMultiActionColumn(TestCase):
             modelfield = "testfield"
 
             def __init__(self, **kwargs):
-                super(TestIncompleteColSubclass, self).__init__(**kwargs)
+                super().__init__(**kwargs)
 
         class TestColSubclass(objecttable.MultiActionColumn):
             modelfield = "testfield"
 
             def __init__(self, **kwargs):
-                super(TestColSubclass, self).__init__(**kwargs)
+                super().__init__(**kwargs)
 
             def get_buttons(self, obj):
                 return [

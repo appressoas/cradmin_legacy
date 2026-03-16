@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy
 
 from django_cradmin.apps.cradmin_generic_token_with_metadata.models import GenericTokenWithMetadata

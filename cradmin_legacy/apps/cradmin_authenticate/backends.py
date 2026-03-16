@@ -1,10 +1,8 @@
-from __future__ import unicode_literals
-from builtins import object
 from django.contrib import auth
 from django.contrib.auth.hashers import check_password
 
 
-class EmailAuthBackend(object):
+class EmailAuthBackend:
     """
     Custom Authentication backend for using `email` as your login-field on any ``User``-model. This will also work with
     the default django ``User``-model, as it does not require ``USERNAME_FIELD`` to be ``email``.

@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.test import TestCase
 from django.urls import reverse
 import htmls
@@ -54,7 +53,7 @@ class TestEmailLogin(TestCase):
 
     def test_login_next(self):
         response = self.client.post(
-            "{}?next=/next".format(self.url), {"email": "testuser@example.com", "password": "test"}
+            f"{self.url}?next=/next", {"email": "testuser@example.com", "password": "test"}
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response["location"], "/next")

@@ -16,7 +16,7 @@ class InvalidImageType(Exception):
     """
 
 
-class Interface(object):
+class Interface:
     """
     Imageutils backend interface.
 

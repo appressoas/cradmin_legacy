@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
 from cradmin_legacy import crapp
 from cradmin_legacy.viewhelpers import objecttable
 from cradmin_legacy.demo.polls_demo import models
@@ -26,7 +24,7 @@ class QuestionListView(objecttable.ObjectTableView):
         return models.Question.objects.all()
 
 
-class QuestionCRUDMixin(object):
+class QuestionCRUDMixin:
     model = models.Question
 
     def get_queryset_for_role(self, role):

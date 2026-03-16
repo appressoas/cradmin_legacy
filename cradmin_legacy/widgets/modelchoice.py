@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from future import standard_library
 
 standard_library.install_aliases()
@@ -39,7 +37,7 @@ class ModelChoiceWidget(widgets.TextInput):
         self.preview = preview
         self.selectview_url = selectview_url
         self.selectbutton_text = selectbutton_text or self.default_selectbutton_text
-        super(ModelChoiceWidget, self).__init__()
+        super().__init__()
 
     def __make_selectview_url(self, fieldid, current_value):
         return "{}?{}".format(

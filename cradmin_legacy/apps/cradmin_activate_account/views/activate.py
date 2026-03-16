@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
@@ -29,10 +28,10 @@ class ActivateAccountView(TemplateView):
             self.token_expired = True
         else:
             return self.token_is_valid(token)
-        return super(ActivateAccountView, self).get(*args, **kwargs)
+        return super().get(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(ActivateAccountView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["token_does_not_exist"] = self.token_does_not_exist
         context["token_expired"] = self.token_expired
         return context

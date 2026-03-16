@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from cradmin_legacy import crinstance, crmenu
 from cradmin_legacy.demo.listfilterdemo.models import Site
 from cradmin_legacy.demo.listfilterdemo.views import personlist

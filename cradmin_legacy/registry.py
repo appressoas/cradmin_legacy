@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
 import collections
 
 
@@ -10,7 +8,7 @@ class NoCrAdminInstanceFound(Exception):
     """
 
 
-class CrAdminInstanceRegistry(object):
+class CrAdminInstanceRegistry:
     """
     We want the _current_ CrAdmin instance to be available
     without having to add it to all the views within the
@@ -70,7 +68,7 @@ class CrAdminInstanceRegistry(object):
             for instanceclass in list(self._registry.values()):
                 if instanceclass.matches_urlpath(request.path):
                     return instanceclass(request)
-            raise NoCrAdminInstanceFound("No CrAdminInstance matching {path} found".format(path=request.path))
+            raise NoCrAdminInstanceFound(f"No CrAdminInstance matching {request.path} found")
 
     def add(self, cradmin_instance_class):
         """

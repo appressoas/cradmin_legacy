@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import json
 
 from django.utils.datastructures import MultiValueDict
@@ -53,7 +51,7 @@ class Widget(widgets.TextInput):
         self.selectview_url = selectview_url
         self.selectbutton_text = selectbutton_text or self.default_selectbutton_text
         self.required = required
-        super(Widget, self).__init__()
+        super().__init__()
 
     def __make_selectview_url(self, fieldid, fieldvalue):
         return "{}?{}".format(

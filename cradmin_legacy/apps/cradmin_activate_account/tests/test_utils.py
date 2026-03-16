@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.core import mail
 
 from django.test import TestCase
@@ -26,7 +24,7 @@ class TestSendActivationEmail(TestCase):
         testtoken = mock.MagicMock()
         testtoken.token = "test-token"
         testrequest = mock.MagicMock()
-        testrequest.build_absolute_uri = lambda path: "http://testserver{}".format(path)
+        testrequest.build_absolute_uri = lambda path: f"http://testserver{path}"
 
         with mock.patch.object(ActivationEmail, "generate_token", lambda s: testtoken):
             with self.settings(CRADMIN_LEGACY_SITENAME="Testsite"):

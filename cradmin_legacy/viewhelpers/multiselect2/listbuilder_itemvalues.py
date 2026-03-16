@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import json
 from xml.sax.saxutils import quoteattr
 
@@ -44,7 +42,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
             is_selected: Mark the item as selected on load.
         """
         self.target_dom_id = kwargs.pop("target_dom_id", None)
-        super(ItemValue, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.selected_item_renderer = self.make_selected_item_renderer()
 
     def get_target_dom_id(self):
@@ -70,14 +68,14 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
             If you have multiple lists with multiselect2 on the same page, you must
             make sure this is unique.
         """
-        return "cradmin_legacy_multiselect2_selectbutton_{}".format(self.value.pk)
+        return f"cradmin_legacy_multiselect2_selectbutton_{self.value.pk}"
 
     def get_base_css_classes_list(self):
         """
         Adds the ``cradmin-legacy-multiselect2-itemvalue`` css class
         in addition to the classes added by the superclasses.
         """
-        css_classes = super(ItemValue, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-multiselect2-itemvalue")
         return css_classes
 
@@ -164,7 +162,7 @@ class ItemValue(listbuilder.itemvalue.TitleDescription):
         return self.get_selected_item_renderer_class()(value=self.value)
 
     def get_context_data(self, request=None):
-        context = super(ItemValue, self).get_context_data(request=request)
+        context = super().get_context_data(request=request)
         context["select_directive_json"] = self.get_select_directive_json(request=request)
         return context
 

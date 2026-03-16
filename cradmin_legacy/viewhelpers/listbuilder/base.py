@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from cradmin_legacy.renderable import AbstractRenderableWithCss
 
 
@@ -70,7 +69,7 @@ class ItemFrameRenderer(AbstractItemRenderer):
     template_name = "cradmin_legacy/viewhelpers/listbuilder/base/itemframe.django.html"
 
     def __init__(self, inneritem, **kwargs):
-        super(ItemFrameRenderer, self).__init__(inneritem.value, **kwargs)
+        super().__init__(inneritem.value, **kwargs)
         self.inneritem = inneritem
 
     def get_base_css_classes_list(self):

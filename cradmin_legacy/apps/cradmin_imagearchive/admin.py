@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib import admin
 from django.template import defaultfilters
 
@@ -36,7 +34,7 @@ class ArchiveImageAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         if request.user.is_superuser:
-            return super(ArchiveImageAdmin, self).get_queryset(request)
+            return super().get_queryset(request)
         else:
             return ArchiveImage.objects.none()
 

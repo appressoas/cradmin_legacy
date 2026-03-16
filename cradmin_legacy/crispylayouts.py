@@ -2,7 +2,6 @@
 Custom django-crispy-forms layouts.
 """
 
-from __future__ import unicode_literals
 from django.utils.translation import gettext_lazy
 from crispy_forms import layout
 from crispy_forms.helper import FormHelper
@@ -22,7 +21,7 @@ class CradminSubmitButton(layout.Submit):
     def __init__(self, name, value, icon_cssclass=None, **kwargs):
         self.extra_button_attributes = flatatt(self.get_extra_button_attributes())
         self.icon_cssclass = icon_cssclass
-        super(CradminSubmitButton, self).__init__(name, value, **kwargs)
+        super().__init__(name, value, **kwargs)
         self.field_classes = self.button_css_classes
 
 
@@ -62,7 +61,7 @@ class CollapsedSectionLayout(layout.Div):
         self.hide_label = kwargs.pop("hide_label", gettext_lazy("Hide"))
         self.show_icon = kwargs.pop("show_icon", cradmin_icon("caret-down"))
         self.hide_icon = kwargs.pop("hide_icon", cradmin_icon("caret-up"))
-        super(CollapsedSectionLayout, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_wrapper_context_data(self):
         return {
@@ -73,7 +72,7 @@ class CollapsedSectionLayout(layout.Div):
         }
 
     def render(self, *args, **kwargs):
-        content = super(CollapsedSectionLayout, self).render(*args, **kwargs)
+        content = super().render(*args, **kwargs)
         context = {"content": content}
         context.update(self.get_wrapper_context_data())
         return render_to_string(self.wrapper_template_name, context)

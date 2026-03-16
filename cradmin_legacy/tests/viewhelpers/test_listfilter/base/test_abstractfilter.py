@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.test import TestCase
 import htmls
 from cradmin_legacy.python2_compatibility import mock
@@ -95,7 +93,7 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)
@@ -108,7 +106,7 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)
@@ -121,7 +119,7 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)
@@ -134,7 +132,7 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)

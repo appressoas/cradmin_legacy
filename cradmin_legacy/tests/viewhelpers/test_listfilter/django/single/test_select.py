@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from cradmin_legacy.python2_compatibility import mock
 
 from django.test import TestCase

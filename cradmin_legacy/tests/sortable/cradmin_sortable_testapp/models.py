@@ -2,7 +2,6 @@
 An example app using Sortable.
 """
 
-from __future__ import unicode_literals
 from django.db import models
 from future.utils import python_2_unicode_compatible
 from cradmin_legacy.sortable.models import SortableBase
@@ -20,7 +19,7 @@ class ItemContainer(models.Model):
     name = models.CharField(max_length=255, blank=True, null=False, default="")
 
     def __str__(self):
-        return "Item container {}, {}".format(self.id, self.name)
+        return f"Item container {self.id}, {self.name}"
 
 
 class SortableItemManager(SortableManagerBase):
@@ -45,4 +44,4 @@ class SortableItem(SortableBase):
     objects = SortableItemManager()
 
     def __str__(self):
-        return "Id: {}, Sort index: {}, Name: {}, {}".format(self.id, self.sort_index, self.name, self.container)
+        return f"Id: {self.id}, Sort index: {self.sort_index}, Name: {self.name}, {self.container}"

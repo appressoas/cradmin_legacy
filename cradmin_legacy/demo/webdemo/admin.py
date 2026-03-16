@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.contrib import admin
 from cradmin_legacy.demo.webdemo.models import Site, Page, PageTag
 
@@ -42,7 +41,7 @@ class PageAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return (
-            super(PageAdmin, self).get_queryset(request).select_related("site").prefetch_related("tags", "subscribers")
+            super().get_queryset(request).select_related("site").prefetch_related("tags", "subscribers")
         )
 
 

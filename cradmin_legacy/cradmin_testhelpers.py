@@ -6,7 +6,7 @@ from model_bakery import baker
 from unittest import mock
 
 
-class MockRequestResponse(object):
+class MockRequestResponse:
     """
     Return type of :meth:`.TestCaseMixin.mock_request`,
     :meth:`.TestCaseMixin.mock_http200_getrequest_htmls` and
@@ -33,7 +33,7 @@ class MockRequestResponse(object):
         self.selector = None
 
 
-class TestCaseMixin(object):
+class TestCaseMixin:
     """
     A mixin class that makes it easier to write tests for cradmin views.
 

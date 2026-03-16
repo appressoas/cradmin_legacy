@@ -52,19 +52,19 @@ class AbstractRadioFilter(AbstractFilter):
                     "url": url,
                     "label": label,
                     "is_selected": is_selected,
-                    "dom_id": "{}_{}".format(self.get_inputfield_dom_id(), value),
+                    "dom_id": f"{self.get_inputfield_dom_id()}_{value}",
                 }
             )
         return choicesdata
 
     def get_context_data(self, request=None):
-        context = super(AbstractRadioFilter, self).get_context_data(request=None)
+        context = super().get_context_data(request=None)
         context["choicesdata"] = self.get_choicesdata()
         return context
 
     def get_cleaned_value(self):
-        cleaned_value = super(AbstractRadioFilter, self).get_cleaned_value()
-        choices = set(value for value, label in self.get_choices_cached())
+        cleaned_value = super().get_cleaned_value()
+        choices = {value for value, label in self.get_choices_cached()}
         if cleaned_value in choices:
             return cleaned_value
         else:

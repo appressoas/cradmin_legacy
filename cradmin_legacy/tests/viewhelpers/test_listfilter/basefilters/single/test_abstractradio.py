@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.test import TestCase
 from future import standard_library
 import htmls
@@ -39,7 +37,7 @@ class TestAbstractRadioFilter(TestCase):
         testfilter = MyRadioFilter(slug="test")
         testfilter.set_values(values=[])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: "/test/{}".format(filters_string), target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(testfilter)
         selector = htmls.S(testfilter.render())

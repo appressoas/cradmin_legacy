@@ -17,7 +17,7 @@ from cradmin_legacy.superuserui.views import dashboardview
 
 
 @python_2_unicode_compatible
-class ModelConfig(object):
+class ModelConfig:
     def __init__(self, model_class=None, menulabel=None, crapp_class=None):
         self.model_class = model_class
         self.menulabel = menulabel
@@ -57,7 +57,7 @@ class ModelConfig(object):
         return self.get_view_url(viewname="manytomanyselect")
 
     def get_unique_identifier(self):
-        return "{}_{}".format(self.model_class._meta.app_label, self.model_class._meta.model_name)
+        return f"{self.model_class._meta.app_label}_{self.model_class._meta.model_name}"
 
     def get_crapp_class(self):
         if self.crapp_class:
@@ -77,7 +77,7 @@ class ModelConfig(object):
         return self.get_menulabel()
 
 
-class DjangoAppConfig(object):
+class DjangoAppConfig:
     def __init__(self, app_label=None, menulabel=None, crapp_class=None):
         self.app_label = app_label
         self.menulabel = menulabel
@@ -135,7 +135,7 @@ class DjangoAppConfig(object):
         return App
 
 
-class Registry(object):
+class Registry:
     def __init__(self, id, urlpath_regex=r"^/superuser.*$"):
         self.id = id
         self.urlpath_regex = urlpath_regex

@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from cradmin_legacy import crinstance
 from . import models
 from .views import cradmin_question

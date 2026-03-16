@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 import urllib
 from collections import OrderedDict
@@ -15,7 +13,7 @@ standard_library.install_aliases()
 logger = logging.getLogger(__name__)
 
 
-class FiltersHandler(object):
+class FiltersHandler:
     """
     Parser of the ``filters_string``. See :meth:`.AbstractFilterList.parse_filters_string`.
     """
@@ -81,7 +79,7 @@ class FiltersHandler(object):
         """
         if self.slug_and_value_separator not in filter_string:
             raise InvalidFiltersStringError(
-                '"{}" does not contain "{}".'.format(filter_string, self.slug_and_value_separator)
+                f'"{filter_string}" does not contain "{self.slug_and_value_separator}".'
             )
         slug, value = filter_string.split(self.slug_and_value_separator, 1)
         return slug, self.split_raw_filter_values(value)
@@ -106,7 +104,7 @@ class FiltersHandler(object):
             if slug in self.filtermap:
                 self.filtermap[slug].set_values(values)
             else:
-                logger.debug('"{}" is not a valid filter slug.'.format(slug))
+                logger.debug(f'"{slug}" is not a valid filter slug.')
 
     def add_filter(self, filterobject):
         """
@@ -114,10 +112,10 @@ class FiltersHandler(object):
         """
         slug = filterobject.get_slug()
         if slug in self.filtermap:
-            raise ValueError('Duplicate slug: "{}".'.format(slug))
+            raise ValueError(f'Duplicate slug: "{slug}".')
         if self.slug_and_value_separator in slug:
             raise ValueError(
-                'Invalid filter slug: "{}". Slugs can not contain "{}".'.format(slug, self.slug_and_value_separator)
+                f'Invalid filter slug: "{slug}". Slugs can not contain "{self.slug_and_value_separator}".'
             )
         self.filtermap[slug] = filterobject
 

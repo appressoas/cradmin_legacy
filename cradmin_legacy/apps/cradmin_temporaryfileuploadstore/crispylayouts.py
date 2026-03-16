@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from cradmin_legacy.crispylayouts import CradminSubmitButton
 
 
@@ -9,4 +8,4 @@ class BulkFileUploadSubmit(CradminSubmitButton):
     def __init__(self, name, value, uploading_text=None, uploading_icon_cssclass=None, **kwargs):
         self.uploading_text = uploading_text or value
         self.uploading_icon_cssclass = uploading_icon_cssclass
-        super(BulkFileUploadSubmit, self).__init__(name, value, **kwargs)
+        super().__init__(name, value, **kwargs)

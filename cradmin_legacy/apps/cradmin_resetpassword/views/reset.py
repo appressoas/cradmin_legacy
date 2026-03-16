@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from crispy_forms import layout
 from crispy_forms.helper import FormHelper
 from django.conf import settings
@@ -20,7 +19,7 @@ class RepeatPasswordForm(forms.Form):
     password2 = forms.CharField(label=gettext_lazy("Type your new password one more time"), widget=forms.PasswordInput)
 
     def clean(self):
-        cleaned_data = super(RepeatPasswordForm, self).clean()
+        cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 
@@ -45,7 +44,7 @@ class ResetPasswordView(FormView):
         return helper
 
     def get_context_data(self, **kwargs):
-        context = super(ResetPasswordView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["formhelper"] = self.get_formhelper()
         try:
             context["generic_token_with_metadata"] = GenericTokenWithMetadata.objects.get_and_validate(
@@ -74,4 +73,4 @@ class ResetPasswordView(FormView):
             user.set_password(raw_password)
             user.save()
             messages.success(self.request, self.__get_success_message())
-            return super(ResetPasswordView, self).form_valid(form)
+            return super().form_valid(form)

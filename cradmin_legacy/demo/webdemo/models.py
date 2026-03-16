@@ -1,6 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
-
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -70,7 +67,7 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta(object):
+    class Meta:
         verbose_name = gettext_lazy("Page")
         verbose_name_plural = gettext_lazy("Pages")
         ordering = ("title", "intro")

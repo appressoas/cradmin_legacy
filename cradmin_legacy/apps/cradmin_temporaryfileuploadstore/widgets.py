@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import json
 from xml.sax.saxutils import quoteattr
 from django import forms
@@ -68,7 +67,7 @@ class BulkFileUploadWidget(forms.Widget):
         self.autosubmit = autosubmit
         self.overlaymode_autosubmit_uploading_message = overlaymode_autosubmit_uploading_message
 
-        super(BulkFileUploadWidget, self).__init__(attrs=None)
+        super().__init__(attrs=None)
 
     def get_max_filesize_bytes(self):
         max_filesize_bytes = self.apiparameters.get("max_filesize_bytes", None)
@@ -160,11 +159,11 @@ class BulkFileUploadWidget(forms.Widget):
 
 class SingleFileUploadWidget(BulkFileUploadWidget):
     def __init__(self, *args, **kwargs):
-        super(SingleFileUploadWidget, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_use_singlemode(self):
         return True
 
     def get_template_context_data(self, **context):
-        context = super(SingleFileUploadWidget, self).get_template_context_data(**context)
+        context = super().get_template_context_data(**context)
         return context

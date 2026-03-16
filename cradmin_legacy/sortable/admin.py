@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from django.contrib import admin
 
 
@@ -21,14 +20,14 @@ class SortableModelAdmin(admin.ModelAdmin):
         if obj.sort_index is None:
             if obj.pk is None:
                 self.model.objects.set_newitem_sort_index_to_last(obj)
-        super(SortableModelAdmin, self).save_model(request, obj, form, change)
+        super().save_model(request, obj, form, change)
 
     def get_readonly_fields(self, request, obj=None):
         """
         Overridden to make the sortindex readonly if :obj:`.make_sort_index_readonly`
         is ``True``.
         """
-        readonly_fields = super(SortableModelAdmin, self).get_readonly_fields(request, obj=obj)
+        readonly_fields = super().get_readonly_fields(request, obj=obj)
         if self.make_sort_index_readonly:
             readonly_fields = list(readonly_fields)
             if "sort_index" not in readonly_fields:

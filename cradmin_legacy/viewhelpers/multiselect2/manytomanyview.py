@@ -70,7 +70,7 @@ class ViewMixin(FormMixin):
             return True
 
     def get_queryset_for_role(self, role=None):
-        queryset = super(ViewMixin, self).get_queryset_for_role(role=role)
+        queryset = super().get_queryset_for_role(role=role)
         if self.should_include_previously_selected():
             # We have to exclude the selected values because we add them
             # to the listbuilder list as selected items in :meth:`.get_listbuilder_list`.
@@ -138,7 +138,7 @@ class ListBuilderViewMixin(ViewMixin):
     value_renderer_class = listbuilder_itemvalues.ManyToManySelect
 
     def get_listbuilder_list(self, context):
-        listbuilder_list = super(ListBuilderViewMixin, self).get_listbuilder_list(context=context)
+        listbuilder_list = super().get_listbuilder_list(context=context)
         if self.should_include_previously_selected():
             value_renderer_class = self.get_value_renderer_class()
             frame_renderer_class = self.get_frame_renderer_class()
@@ -201,5 +201,5 @@ class ListBuilderFilterListViewMixin(ListBuilderViewMixin):
         so if you want to add the target renderer some other place, you
         can just override that method in a subclass.
         """
-        super(ListBuilderFilterListViewMixin, self).add_filterlist_items(filterlist=filterlist)
+        super().add_filterlist_items(filterlist=filterlist)
         self.add_target_renderer_to_filterlist(filterlist=filterlist)

@@ -1,7 +1,3 @@
-from __future__ import unicode_literals
-
-from builtins import object
-
 from django.conf.urls import include
 from django.urls import reverse, re_path
 from django.shortcuts import render
@@ -45,11 +41,11 @@ def reverse_cradmin_url(instanceid, appname, roleid=None, viewname=crapp.INDEXVI
             if not kwargs:
                 kwargs = {}
             kwargs["roleid"] = roleid
-    urlname = "{}-{}-{}".format(instanceid, appname, viewname)
+    urlname = f"{instanceid}-{appname}-{viewname}"
     return str(reverse(urlname, args=args, kwargs=kwargs))
 
 
-class BaseCrAdminInstance(object):
+class BaseCrAdminInstance:
     """
     Base class for a cradmin_legacy instance.
 
@@ -291,7 +287,7 @@ class BaseCrAdminInstance(object):
         if self.__class__.__no_role_and_flatten_rolefrontpage_url():
             return self.rolefrontpage_url()
         else:
-            return reverse("{}-frontpage".format(self.id))
+            return reverse(f"{self.id}-frontpage")
 
     def roleselectview_url(self):
         """
@@ -408,15 +404,15 @@ class BaseCrAdminInstance(object):
         flatten = cls.rolefrontpage_appname == appname and cls.flatten_rolefrontpage_url
         if cls.roleclass:
             if flatten:
-                return re_path(r"^(?P<roleid>{})/".format(cls.roleid_regex), include(appurlpatterns))
+                return re_path(fr"^(?P<roleid>{cls.roleid_regex})/", include(appurlpatterns))
             else:
-                return re_path(r"^(?P<roleid>{})/{}/".format(cls.roleid_regex, appname), include(appurlpatterns))
+                return re_path(fr"^(?P<roleid>{cls.roleid_regex})/{appname}/", include(appurlpatterns))
 
         else:
             if flatten:
                 return re_path(r"^", include(appurlpatterns))
             else:
-                return re_path(r"^{}/".format(appname), include(appurlpatterns))
+                return re_path(fr"^{appname}/", include(appurlpatterns))
 
     @classmethod
     def _get_app_urls(cls):
@@ -437,7 +433,7 @@ class BaseCrAdminInstance(object):
         cradmin_instance_registry.add(cls)
         urls = cls._get_app_urls()
         if not cls.__no_role_and_flatten_rolefrontpage_url():
-            urls.append(re_path("^$", cls.get_instance_frontpage_view(), name="{}-frontpage".format(cls.id)))
+            urls.append(re_path("^$", cls.get_instance_frontpage_view(), name=f"{cls.id}-frontpage"))
 
         return urls
 

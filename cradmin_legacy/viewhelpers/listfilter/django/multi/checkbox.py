@@ -75,5 +75,5 @@ class RelatedModelOrFilter(abstractcheckbox.AbstractCheckboxFilter, DjangoOrmFil
     def filter(self, queryobject):
         cleaned_values = self.get_cleaned_values()
         if cleaned_values:
-            queryobject = queryobject.filter(**{"{}__in".format(self.get_filter_attribute()): cleaned_values})
+            queryobject = queryobject.filter(**{f"{self.get_filter_attribute()}__in": cleaned_values})
         return queryobject

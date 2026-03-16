@@ -1,5 +1,5 @@
 import htmls
-import mock
+from unittest import mock
 from django import test
 from django.http import QueryDict
 
@@ -103,7 +103,7 @@ class TestViewMixin(test.TestCase):
     def test_get_queryset_for_role_should_include_previously_selected_false(self):
         mockqueryset = mock.MagicMock()
 
-        class SuperMyView(object):
+        class SuperMyView:
             def get_queryset_for_role(self, role):
                 return mockqueryset
 
@@ -119,7 +119,7 @@ class TestViewMixin(test.TestCase):
     def test_get_queryset_for_role_should_include_previously_selected_true(self):
         mockqueryset = mock.MagicMock()
 
-        class SuperMyView(object):
+        class SuperMyView:
             def get_queryset_for_role(self, role):
                 return mockqueryset
 
@@ -155,7 +155,7 @@ class TestViewMixin(test.TestCase):
 
 class TestListBuilderViewMixin(test.TestCase):
     def test_get_listbuilder_list_should_include_previously_selected_false(self):
-        class SuperMyView(object):
+        class SuperMyView:
             def get_listbuilder_list(self, context):
                 return listbuilder.base.List()
 
@@ -167,7 +167,7 @@ class TestListBuilderViewMixin(test.TestCase):
         self.assertFalse(view.get_listbuilder_list(context={}).has_items())
 
     def test_get_listbuilder_list_should_include_previously_selected_true(self):
-        class SuperMyView(object):
+        class SuperMyView:
             def get_listbuilder_list(self, context):
                 return listbuilder.base.List()
 
@@ -200,7 +200,7 @@ class ListBuilderFilterListViewMixin(test.TestCase):
         mockfilterlist.append.assert_called_once_with("testrenderer")
 
     def test_add_filterlist_items(self):
-        class SuperMyView(object):
+        class SuperMyView:
             def add_filterlist_items(self, filterlist):
                 pass
 

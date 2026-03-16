@@ -1,6 +1,4 @@
-from __future__ import unicode_literals
 import json
-from builtins import str
 from datetime import timedelta, datetime
 
 from django.forms import widgets
@@ -329,7 +327,7 @@ class DatePickerWidget(widgets.TextInput):
         self.time_label_text = kwargs.pop("time_label_text", self.default_time_label_text)
         self.default_now_time = kwargs.pop("default_now_time", None)
 
-        super(DatePickerWidget, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_datepicker_config(self, fieldid, triggerbuttonid, previewid, previewtemplateid):
         """
@@ -457,7 +455,7 @@ class DatePickerWidget(widgets.TextInput):
         to ensure the returned HTML has a root element (which is required by the
         angularjs ``$compile``-function).
         """
-        return "<span>{}</span>".format(self.get_preview_angularjs_template())
+        return f"<span>{self.get_preview_angularjs_template()}</span>"
 
     def get_template_name(self):
         """
@@ -486,9 +484,9 @@ class DatePickerWidget(widgets.TextInput):
 
         The template can be overridden in :meth:`.get_template_name`.
         """
-        triggerbuttonid = "{}_triggerbutton".format(fieldid)
-        previewid = "{}_preview".format(fieldid)
-        previewtemplateid = "{}_previewtemplate".format(fieldid)
+        triggerbuttonid = f"{fieldid}_triggerbutton"
+        previewid = f"{fieldid}_preview"
+        previewtemplateid = f"{fieldid}_previewtemplate"
         return {
             "classname_lower": self.__class__.__name__.lower(),
             "field": rendered_field,
@@ -529,8 +527,8 @@ class DatePickerWidget(widgets.TextInput):
         attrs = self.get_field_attributes(attrs)
         if "required" in attrs:
             attrs["required"] = False
-        rendered_field = super(DatePickerWidget, self).render(name, value, attrs)
-        fieldid = attrs.get("id", "id_{}".format(name))
+        rendered_field = super().render(name, value, attrs)
+        fieldid = attrs.get("id", f"id_{name}")
         return loader.render_to_string(
             self.get_template_name(),
             self.get_context_data(
@@ -703,7 +701,7 @@ class DateTimePickerWidget(DatePickerWidget):
     usebutton_arialabel_momentjs_format = "LLLL"
 
     def get_datepicker_config(self, *args, **kwargs):
-        config = super(DateTimePickerWidget, self).get_datepicker_config(*args, **kwargs)
+        config = super().get_datepicker_config(*args, **kwargs)
         config.update(
             {
                 "include_time": True,
@@ -725,10 +723,10 @@ class TimePickerWidget(widgets.TimeInput):
             attrs = {}
         if placeholder:
             attrs["placeholder"] = placeholder
-        super(TimePickerWidget, self).__init__(attrs=attrs, format=format)
+        super().__init__(attrs=attrs, format=format)
 
     def render(self, name, value, attrs=None, renderer=None):
-        inputfield = super(TimePickerWidget, self).render(name, value, attrs)
+        inputfield = super().render(name, value, attrs)
         return loader.render_to_string(self.template_name, {"inputfield": inputfield, "fieldname": name})
 
 
@@ -802,13 +800,13 @@ class SplitTimePickerWidget(widgets.MultiWidget):
                 attrs=attrs, choices=minute_choices, wrapper_css_class="cradmin-legacy-split-timepicker-minute"
             ),
         ]
-        super(SplitTimePickerWidget, self).__init__(_widgets, attrs)
+        super().__init__(_widgets, attrs)
 
     def format_hour_label(self, number):
-        return "{:02}".format(number)
+        return f"{number:02}"
 
     def format_minute_label(self, number):
-        return "{:02}".format(number)
+        return f"{number:02}"
 
     def format_hour_choice(self, number):
         return number, self.format_hour_label(number)
@@ -846,8 +844,8 @@ class SplitTimePickerWidget(widgets.MultiWidget):
         return '<div class="cradmin-legacy-split-timepicker">{}</div>'.format("".join(rendered_widgets))
 
     def value_from_datadict(self, data, files, name):
-        hourvalue = data.get("{}_0".format(name), "").strip()
-        minutevalue = data.get("{}_1".format(name), "").strip()
+        hourvalue = data.get(f"{name}_0", "").strip()
+        minutevalue = data.get(f"{name}_1", "").strip()
         values = []
         if hourvalue:
             values.append(hourvalue)

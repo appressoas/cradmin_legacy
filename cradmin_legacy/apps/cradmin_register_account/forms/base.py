@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-from builtins import object
 from crispy_forms import layout
 from crispy_forms.helper import FormHelper
 from django.conf import settings
@@ -23,12 +21,12 @@ class AbstractCreateAccountForm(forms.ModelForm):
     #: See :meth:`.get_form_attributes`.
     form_attributes = {}
 
-    class Meta(object):
+    class Meta:
         model = get_user_model()
         fields = []
 
     def __init__(self, *args, **kwargs):
-        super(AbstractCreateAccountForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.helper = self.get_formhelper()
 
     def get_formhelper(self):
@@ -164,7 +162,7 @@ class AbstractCreateAccountForm(forms.ModelForm):
         """
 
     def save(self, commit=True):
-        user = super(AbstractCreateAccountForm, self).save(commit=False)
+        user = super().save(commit=False)
         self.set_password(user)
         self.deactivate_user(user)
         self.set_extra_user_attributes(user)
@@ -216,7 +214,7 @@ class AbstractCreateAccountWithPasswordForm(AbstractCreateAccountForm):
                     # ...
                     return cleaned_data
         """
-        cleaned_data = super(AbstractCreateAccountWithPasswordForm, self).clean()
+        cleaned_data = super().clean()
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 

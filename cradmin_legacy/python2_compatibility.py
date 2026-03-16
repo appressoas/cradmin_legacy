@@ -3,7 +3,7 @@ import sys
 try:
     from unittest import mock  # noqa
 except ImportError:
-    import mock  # noqa
+    from unittest import mock
 
 
 def is_python2():

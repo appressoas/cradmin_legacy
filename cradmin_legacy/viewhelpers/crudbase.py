@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.contrib.contenttypes.fields import GenericForeignKey
 from future import standard_library
 
@@ -77,7 +75,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
             return self.make_default_form_class()
 
     def get_form_kwargs(self):
-        kwargs = super(CreateUpdateViewMixin, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         form_class = self.get_form_class()
         if issubclass(form_class, automodelform.ModelForm):
             kwargs["view"] = self
@@ -146,7 +144,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
             The :obj:`.roleid_field` handling also works for GenericForeignKey
             fields (removes the content type and object pk field from the form).
         """
-        form = super(CreateUpdateViewMixin, self).get_form(form_class)
+        form = super().get_form(form_class)
         if self.roleid_field:
             roleid_fieldobject = getattr(self.get_model_class(), self.roleid_field, None)
             if isinstance(roleid_fieldobject, GenericForeignKey):
@@ -159,7 +157,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         return form
 
     def get_context_data(self, **kwargs):
-        context = super(CreateUpdateViewMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context["model_verbose_name"] = self.get_model_class()._meta.verbose_name
         return context
 
@@ -299,7 +297,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
 
     def form_invalid(self, form):
         self.add_form_invalid_messages(form)
-        return super(CreateUpdateViewMixin, self).form_invalid(form)
+        return super().form_invalid(form)
 
     def serialize_preview(self, form):
         """
@@ -340,7 +338,7 @@ class CreateUpdateViewMixin(formbase.FormViewMixin):
         return sessionkey
 
 
-class OnlySaveButtonMixin(object):
+class OnlySaveButtonMixin:
     """
     Mixin class that overrides ``get_buttons()`` to just include
     the save button (no "Save and continue editing").
@@ -351,7 +349,7 @@ class OnlySaveButtonMixin(object):
 
     def get_buttons(self):
         if hasattr(self, "is_in_foreignkey_select_mode") and self.is_in_foreignkey_select_mode():
-            return super(OnlySaveButtonMixin, self).get_buttons()
+            return super().get_buttons()
         buttons = [
             PrimarySubmit(self.get_submit_save_button_name(), self.get_submit_save_label()),
         ]

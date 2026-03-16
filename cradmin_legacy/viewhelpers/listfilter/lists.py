@@ -8,7 +8,7 @@ class Vertical(AbstractFilterList):
     """
 
     def get_base_css_classes_list(self):
-        css_classes = super(Vertical, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listfilter-filterlist-vertical")
         return css_classes
 
@@ -20,6 +20,6 @@ class Horizontal(AbstractFilterList):
     """
 
     def get_base_css_classes_list(self):
-        css_classes = super(Horizontal, self).get_base_css_classes_list()
+        css_classes = super().get_base_css_classes_list()
         css_classes.append("cradmin-legacy-listfilter-filterlist-horizontal")
         return css_classes
