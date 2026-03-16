@@ -81,10 +81,10 @@ set in pyproject.toml:
 .venv/bin/pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
 ```
 
-### Create demo database
+### Create/reset demo database
 
 ```bash
-python manage.py dbdev_reinit
+rm devdb.sqlite3
 python manage.py migrate
 python manage.py createsuperuser
 ```

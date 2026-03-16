@@ -42,13 +42,14 @@ dev = [
     "tox",
     "model-bakery",
     "ipython",
-    "django-dbdev",
     "coverage",
     "Sphinx",
     "sphinxcontrib-napoleon",
     "sphinx-rtd-theme",
     "appresso_sphinx_extensions",
     "vitalstyles",
+    "ruff",
+    "django-types",  # Helps LSPs like pyright to understand the types of Django objects better, and thus provide better type checking and autocompletion
 ]
 test = [
     "htmls",
@@ -66,6 +67,10 @@ optionalprod = [
     "sorl-thumbnail",
     "Pillow",
 ]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["migrations", "node_modules", "static"]
 
 [tool.hatch.metadata]
 allow-direct-references = true
