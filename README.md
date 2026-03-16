@@ -79,9 +79,7 @@ set in pyproject.toml:
 
 ```bash
 # with uv:
-rm -r .venv
-uv venv
-uv pip install -e ".[dev,test]"
+uv venv --clear && uv pip install -e ".[dev,test]"
 
 # with pip:
 .venv/bin/pip install --upgrade --upgrade-strategy=eager ".[dev,test]"
