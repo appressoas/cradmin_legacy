@@ -1,3 +1,15 @@
+## 6.2.0 (2026-03-17)
+
+### Feat
+
+- Remove all code using the future library and modernize the code.
+
+### Fix
+
+- Update to django_cradmin>=12.1.0,<13.0.0
+- Remove the future dependency
+- Remove the future code that needed to be manually updated.
+
 ## 6.1.0 (2025-06-13)
 
 ### Feat
