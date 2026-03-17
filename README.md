@@ -120,9 +120,6 @@ source .venv/bin/activate   # enable virtualenvbash
 ruff format .
 ```
 
-## Documentation
-
-http://ievv-opensource.readthedocs.org/
 
 ## How to release cradmin_legacy
 
