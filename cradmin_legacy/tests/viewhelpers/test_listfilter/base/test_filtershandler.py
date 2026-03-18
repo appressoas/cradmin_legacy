@@ -87,17 +87,23 @@ class TestFiltersHandler(TestCase):
         filtershandler.parse("s-a,b,c")
         self.assertEqual(["a", "b", "c"], filtershandler.filtermap["s"].values)
 
-    def test_parse_simple_valid_filter_string_trailing_slash(self):
+    def test_parse_simple_valid_filter_string_trailing_filtersep(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalStringFilter())
         filtershandler.parse(f"s-test{filtersep}")
         self.assertEqual(["test"], filtershandler.filtermap["s"].values)
 
-    def test_parse_simple_valid_filter_string_leading_slash(self):
+    def test_parse_simple_valid_filter_string_leading_filtersep(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalStringFilter())
         filtershandler.parse(f"{filtersep}s-test")
         self.assertEqual(["test"], filtershandler.filtermap["s"].values)
+
+    def test_parse_simple_valid_filter_string_trailing_slug_and_value_separator(self):
+        filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
+        filtershandler.add_filter(MinimalStringFilter())
+        filtershandler.parse("s-")
+        self.assertEqual([""], filtershandler.filtermap["s"].values)
 
     def test_parse_complex_valid_filter_string(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())

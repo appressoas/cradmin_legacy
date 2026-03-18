@@ -92,7 +92,10 @@ class FiltersHandler:
         if not filters_string:
             return
 
-        filters_string = filters_string.strip(self.filter_separator)
+        if filters_string.startswith(self.filter_separator):
+            filters_string = filters_string[len(self.filter_separator) :]
+        if filters_string.endswith(self.filter_separator):
+            filters_string = filters_string[: -len(self.filter_separator)]
         for filter_string in filters_string.split(self.filter_separator):
             slug, values = self.parse_filter_string(filter_string)
             if slug in self.filtermap:
