@@ -1,5 +1,12 @@
+import typing
+
 from django.contrib import admin
-from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFileCollection, TemporaryFile
+
+from cradmin_legacy.apps.cradmin_temporaryfileuploadstore.models import TemporaryFile, TemporaryFileCollection
+from cradmin_legacy.utils.settingsutils import cradmin_legacy_djangoadmin_user_search_fields
+
+if typing.TYPE_CHECKING:
+    from django.http.request import HttpRequest
 
 
 class TemporaryFileInline(admin.StackedInline):
@@ -19,11 +26,13 @@ class TemporaryFileCollectionAdmin(admin.ModelAdmin):
     )
     readonly_fields = ["singlemode", "user", "accept", "created_datetime", "unique_filenames", "max_filename_length"]
     search_fields = [
-        "id",
-        "user__id",
-        "user__email",
+        "=id",
     ]
     date_hierarchy = "created_datetime"
+
+    def get_search_fields(self, request: "HttpRequest") -> list[str]:
+        user_search_fields = cradmin_legacy_djangoadmin_user_search_fields(lookup="user__")
+        return super().get_search_fields(request) + user_search_fields
 
     def get_queryset(self, request):
         if request.user.is_superuser:
