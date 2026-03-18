@@ -90,7 +90,7 @@ exclude = [
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "6.2.0"
+version = "6.2.1"
 version_files = [
     "cradmin_legacy/__init__.py:__version__"
 ]

@@ -1,3 +1,9 @@
+## 6.2.1 (2026-03-18)
+
+### Fix
+
+- Make search in TemporaryFileCollectionAdmin work and be configurable.
+
 ## 6.2.0 (2026-03-17)
 
 ### Feat
