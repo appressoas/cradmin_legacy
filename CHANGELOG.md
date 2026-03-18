@@ -1,3 +1,9 @@
+## 6.3.0 (2026-03-18)
+
+### Feat
+
+- add a much more unique FiltersHandler.filter_string.
+
 ## 6.2.1 (2026-03-18)
 
 ### Fix
