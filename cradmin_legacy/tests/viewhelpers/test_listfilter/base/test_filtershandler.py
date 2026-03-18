@@ -16,6 +16,8 @@ from cradmin_legacy.viewhelpers.listfilter.base.filtershandler import (
     logger,
 )
 
+filtersep = FiltersHandler.filter_separator
+
 
 class MinimalIntFilter(AbstractFilter):
     def get_slug(self):
@@ -88,20 +90,20 @@ class TestFiltersHandler(TestCase):
     def test_parse_simple_valid_filter_string_trailing_slash(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalStringFilter())
-        filtershandler.parse("s-test/")
+        filtershandler.parse(f"s-test{filtersep}")
         self.assertEqual(["test"], filtershandler.filtermap["s"].values)
 
     def test_parse_simple_valid_filter_string_leading_slash(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalStringFilter())
-        filtershandler.parse("/s-test")
+        filtershandler.parse(f"{filtersep}s-test")
         self.assertEqual(["test"], filtershandler.filtermap["s"].values)
 
     def test_parse_complex_valid_filter_string(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalStringFilter())
         filtershandler.add_filter(MinimalIntFilter())
-        filtershandler.parse("/i-10/s-jane,joe/")
+        filtershandler.parse(f"{filtersep}i-10{filtersep}s-jane,joe{filtersep}")
         self.assertEqual(2, len(filtershandler.filtermap))
         self.assertEqual(["10"], filtershandler.filtermap["i"].values)
         self.assertEqual(["jane", "joe"], filtershandler.filtermap["s"].values)
@@ -118,12 +120,12 @@ class TestFiltersHandler(TestCase):
         new_stringfilter = stringfilter.copy()
         new_stringfilter.set_values(values=["jack", "peter"])
         self.assertEqual(
-            "i-10/s-jack%2Cpeter", filtershandler.build_filters_string(changed_filterobject=new_stringfilter)
+            f"i-10{filtersep}s-jack%2Cpeter", filtershandler.build_filters_string(changed_filterobject=new_stringfilter)
         )
 
     def test_build_filter_url(self):
         def urlbuilder(filters_string):
-            return f"/the/prefix/{filters_string}?a=querystring"
+            return f"{filtersep}the{filtersep}prefix{filtersep}{filters_string}?a=querystring"
 
         filtershandler = FiltersHandler(urlbuilder=urlbuilder)
         intfilter = MinimalIntFilter()
@@ -136,7 +138,7 @@ class TestFiltersHandler(TestCase):
         new_stringfilter = stringfilter.copy()
         new_stringfilter.set_values(values=["jack", "peter"])
         self.assertEqual(
-            "/the/prefix/i-10/s-jack%2Cpeter?a=querystring",
+            f"{filtersep}the{filtersep}prefix{filtersep}i-10{filtersep}s-jack%2Cpeter?a=querystring",
             filtershandler.build_filter_url(changed_filterobject=new_stringfilter),
         )
 
@@ -189,11 +191,11 @@ class TestFiltersHandler(TestCase):
     def test_get_cleaned_value_for(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalIntFilter())
-        filtershandler.parse("/i-10")
+        filtershandler.parse(f"{filtersep}i-10")
         self.assertEqual(10, filtershandler.get_cleaned_value_for("i"))
 
     def test_get_cleaned_values_for(self):
         filtershandler = FiltersHandler(urlbuilder=mock.MagicMock())
         filtershandler.add_filter(MinimalIntFilter())
-        filtershandler.parse("/i-10")
+        filtershandler.parse(f"{filtersep}i-10")
         self.assertEqual([10], filtershandler.get_cleaned_values_for("i"))

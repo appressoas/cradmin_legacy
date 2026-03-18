@@ -4,6 +4,9 @@ from django.test import TestCase
 from cradmin_legacy.python2_compatibility import mock
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilter import AbstractFilter
 from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlist import AbstractFilterList
+from cradmin_legacy.viewhelpers.listfilter.base.filtershandler import FiltersHandler
+
+filtersep = FiltersHandler.filter_separator
 
 
 class MinimalIntFilter(AbstractFilter):
@@ -90,12 +93,14 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"{filtersep}test{filtersep}{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)
         stringfilter.set_filterlist(filterlist)
-        self.assertEqual("/test/s-a%2Cb%2Cc/i-10", stringfilter.build_add_values_url(values=["c"]))
+        self.assertEqual(
+            f"{filtersep}test{filtersep}s-a%2Cb%2Cc{filtersep}i-10", stringfilter.build_add_values_url(values=["c"])
+        )
 
     def test_build_clear_values_url(self):
         stringfilter = MinimalStringFilter()
@@ -116,12 +121,14 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"{filtersep}test{filtersep}{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)
         stringfilter.set_filterlist(filterlist)
-        self.assertEqual("/test/s-c/i-10", stringfilter.build_set_values_url(values=["c"]))
+        self.assertEqual(
+            f"{filtersep}test{filtersep}s-c{filtersep}i-10", stringfilter.build_set_values_url(values=["c"])
+        )
 
     def test_build_remove_values_url(self):
         stringfilter = MinimalStringFilter()
@@ -129,12 +136,14 @@ class TestAbstractFilter(TestCase):
         intfilter = MinimalIntFilter()
         intfilter.set_values(values=["10"])
         filterlist = AbstractFilterList(
-            urlbuilder=lambda filters_string: f"/test/{filters_string}", target_dom_id="testdomid"
+            urlbuilder=lambda filters_string: f"{filtersep}test{filtersep}{filters_string}", target_dom_id="testdomid"
         )
         filterlist.append(stringfilter)
         filterlist.append(intfilter)
         stringfilter.set_filterlist(filterlist)
-        self.assertEqual("/test/s-b/i-10", stringfilter.build_remove_values_url(values=["a"]))
+        self.assertEqual(
+            f"{filtersep}test{filtersep}s-b{filtersep}i-10", stringfilter.build_remove_values_url(values=["a"])
+        )
 
     def test_render(self):
         stringfilter = AbstractFilter(slug="test")

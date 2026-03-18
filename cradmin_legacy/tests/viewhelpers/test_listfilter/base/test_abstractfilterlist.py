@@ -17,6 +17,8 @@ from cradmin_legacy.viewhelpers.listfilter.base.abstractfilterlistchild import (
     AbstractFilterListChild,
 )
 
+filtersep = filtershandler.FiltersHandler.filter_separator
+
 
 class MinimalFilterGroupChild(AbstractFilterListChild):
     template_name = "cradmin_viewhelpers_testapp/listfilter/minimal-filtergroupchild.django.html"
@@ -70,7 +72,7 @@ class TestAbstractFilterList(TestCase):
         filterlist.append(intfilter)
         filterlist.append(stringfilter)
         with self.assertNoLogs(filtershandler.logger, level=logging.DEBUG):
-            filterlist.set_filters_string("i-10/s-test")
+            filterlist.set_filters_string(f"i-10{filtersep}s-test")
         self.assertEqual(["10"], intfilter.values)
         self.assertEqual(["test"], stringfilter.values)
 

@@ -14,8 +14,8 @@ class FiltersHandler:
     Parser of the ``filters_string``. See :meth:`.AbstractFilterList.parse_filters_string`.
     """
 
-    #: The string separating filters in the filters string. Defaults to ``"/"``.
-    filter_separator = "/"
+    #: The string separating filters in the filters string. Defaults to ``"/=/"``.
+    filter_separator = "$-/-$"
 
     #: The string used to separate filter slug and value.
     #: It does not matter if this also appears in the value,
