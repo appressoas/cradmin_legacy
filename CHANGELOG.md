@@ -1,3 +1,9 @@
+## 6.3.1 (2026-03-18)
+
+### Fix
+
+- **listfilter**: Slice off the start and ending filter_separator instead of strip()
+
 ## 6.3.0 (2026-03-18)
 
 ### Feat
