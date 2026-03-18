@@ -156,5 +156,6 @@ See _How to revert a bump_ in the [commitizen FAQ](https://commitizen-tools.gith
 ```bash
 hatch build -t sdist
 hatch publish -u __token__
-rm dist/*              # optional cleanup
+# optional cleanup
+rm dist/*
 ```
